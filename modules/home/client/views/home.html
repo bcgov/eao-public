@@ -1,0 +1,75 @@
+<div class="hero-banner landing-pg-banner">
+	<div class="container">
+		<div class="container-inner">
+			<div class="hb-txt">
+				<h1><sup>Environmental Assessment Office</sup>Project Information <span>& Collaboration</span><span class="badge" id="alpha" title="What is this?">BETA</span></h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div class="hb-btns">
+					<strong>Find Environmental Assessements in British Columbia...</strong>
+					<a class="btn slide-l-btn hero-btn inverted" ui-sref="projects"><i class="material-icons">list</i><span>View List</span></a>
+					<span>or</span>
+					<a class="btn slide-l-btn hero-btn inverted" ui-sref="maps" x-project="projects"><i class="material-icons">map</i><span>View Map</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<main id="anchor-point">
+	<div class="bg-default">
+		<section class="container">
+			<h2>News & Announcements</h2>
+			<p>The Ministry of Energy and Mines (MEM), the Ministry of Environment (ENV) and the Environmental Assessment Office (EAO) have collaborated to make information on the Province’s oversight of major mines in British Columbia more accessible than ever before.</p>
+			<p>This is the first time mine-related information from all three agencies has been made available online in one place, and more information will be added on an ongoing basis.</p>
+			<p>This site currently profiles 15 major mines across the province (7 operating metal mines, 6 operating coal mines, and 2 under construction metal mines). Information on these mines will be continually added to the website, and other permitted major mines in BC will be added in the coming months.</p>
+			<p class="mb-0">If you want to learn more about a major mine not yet included on this website, please visit <a href="https://mines.empr.gov.bc.ca" target="_blank">mines.empr.gov.bc.ca</a>.</p>
+		</section>
+	</div>
+	<div class="fb-container bg-faded">
+		<section class="container">
+			<h2>Learn about the Environmental Assessment Process in British Columbia...</h2>
+			<p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+			<div class="row feature-blocks">
+				<div class="col-md-4">
+					<div class="feature-block">
+						<h3>Legislation</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<a class="btn inverted" ui-sref="mining-lifecycle">Learn More</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="feature-block">
+						<h3>Process & Procedures</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<a class="btn inverted" ui-sref="topics">Learn More</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="feature-block">
+						<h3>Compliance Oversight</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<a class="btn inverted" ui-sref="maps">Learn More</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</main>
+
+<div class="welcome-alert-container alert alert-dismissable" role="alert" ng-if="!seenOnce">
+	<div class="notify-dialog">
+		<div class="notify-header">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button>
+		<h2>BC Mine Information</h2>
+		</div>
+		<div class="notify-body">
+			<p>Welcome to the new BC Mine Information website. This site builds upon and will eventually replace www.mines.empr.gov.bc.ca.</p>
+			<p class="mb-0">This new website is being launched as a “beta”—a fully functional starting point upon which to build continuous improvements. As such, we’re seeking your <a ui-sref="connect-with-us">feedback</a> on how to make it better. Going forward, additional information will be added on an ongoing basis, and the design will be refined based on user feedback.</p>
+		</div>
+		<div class="notify-footer">
+			<button class="ok-btn btn submit-btn slide-r-btn" data-dismiss="alert" aria-label="Close"><span>Continue to site</span> <i class="material-icons">arrow_forward</i></button>
+		</div>
+	</div>
+	<div class="backdrop"></div>
+</div>

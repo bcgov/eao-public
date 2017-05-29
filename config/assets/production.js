@@ -4,7 +4,7 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/bootstrap/dist/css/bootstrap.css',
+        //'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/angular-toastr/dist/angular-toastr.css',
         'public/lib/angular-bootstrap/ui-bootstrap-csp.css',
         'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
@@ -21,7 +21,7 @@ module.exports = {
         'public/lib/tinymce-dist/tinymce.js',
         'public/lib/angular-ui-tinymce/src/tinymce.js',
         'public/lib/jquery/dist/jquery.min.js',
-        'public/lib/bootstrap/dist/js/bootstrap.min.js',
+        //'public/lib/bootstrap/dist/js/bootstrap.min.js',
         'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',

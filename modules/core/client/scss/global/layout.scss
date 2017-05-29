@@ -1,151 +1,141 @@
-$view-panel-bg: #FFF;
-$view-panel-border: 1px solid #EEE;
 
-tmpl-header,
-tmpl-footer {
-    @include flex(0 0 auto);
-	display: block;
+a {
+    color: #1a5a96;
 }
 
-ui-view {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow-y: auto;
-}
-
-// Application
-.app-container {
-    @include flexbox();
-    @include flexflow(column nowrap);
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-}
-
-.app-header,
-.app-footer {
-    @include flex(0 0 auto);
-}
-
-.app-main {
-    @include flex(1 1 auto);
-    flex-direction: column;
-    position: relative;
+// Container
+.container {
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-right: 1.5rem;
+    padding-bottom: 2.25rem;
+    padding-left: 1.5rem;
     width: 100%;
+    max-width: 1100px;
 
-
-    .left-panel {
-        position: absolute;
-        z-index: 5;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        visibility: hidden;
-
-        .sidenav {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 22rem;
-            overflow-y: auto;
-            box-shadow: 0 0 1rem #999;
-            background-color: $view-panel-bg;
-            transform: translateX(-22rem);
-            transition: all 0.3s ease-out 0.1s;
-        }
-
-        .sidenav-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-        }
-
-        &.open {
-            visibility: visible;
-
-            .sidenav {
-                transform: translateX(0);
-            }
-        }
-    }
-
-    .main-panel {
-        @include flexbox();
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        overflow-y: auto;
-    }
-}
-
-@media (min-width: 1020px) {
-    .app-main {
-        @include flexbox();
-        flex-direction: row;
-
-        .main-panel,
-        .left-panel {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-        }
-
-        .main-panel {
-            right: 0;
-        }
-
-        .left-panel {
-            left: 0;
-            width: 22rem;
-            border-right: $view-panel-border;
-            visibility: visible;
-
-            .sidenav {
-                position: absolute;
-                transform: translateX(0);
-            }
-
-            .sidenav-overlay {
-                display: none;
-            }
-
-            + .main-panel {
-                left: 22rem;
-            }
+    section {
+        &.last {
+            margin-bottom: 0;
         }
     }
 }
 
-
-// Main Panel Layout
-ui-view {
-    @include flexbox();
-    @include flexdirection(column);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+@media (min-width: 760px) {
+    .container {
+        padding-top: 3rem;
+        padding-right: 2rem;
+        padding-bottom: 3.5rem;
+        padding-left: 2rem;
+    }
 }
 
-.main-panel {
-    @include flexbox();
-    @include flexdirection(column);
+// Main Element
+main {
+    h2 {
+        margin-bottom: 1.5rem;
+        line-height: 2rem;
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        margin-bottom: 1.5rem;
+        line-height: 1.75rem;
+        font-size: 1.5rem;
+
+        span {
+            display: block;
+            font-size: 1rem;
+            letter-spacing: 0;
+        }
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    // Named anchor helper
+    .pg-anchor[id]:before {
+        content:" ";
+        display:block;
+        height: 98px;
+        margin:-98px 0 0;
+    }
+
+    .main-footer {
+        padding: 1.5rem;
+        background-color: rgba(0, 51, 102, 0.8);
+        color: #FFF;
+
+        a {
+            color: #FFf;
+        }
+    }
 }
 
-// View Form
-.view-form {
-    @include flexbox();
-    @include flexdirection(column);
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+@media (min-width: 760px) {
+    main {
+        h2 {
+            margin-bottom: 2rem;
+            line-height: 2.25rem;
+            font-size: 2rem;
+
+            span {
+                display: block;
+            }
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+        }
+    }
+}
+
+main {
+    section {
+        margin-bottom: 2rem;
+
+        &.last {
+            margin-bottom: 0;
+        }
+
+        h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            margin-bottom: 1.5rem;
+            line-height: 1.9rem;
+        }
+
+        h5 {
+            line-height: 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        ul {
+            margin-bottom: 1.75rem;
+            list-style-type: square;
+        }
+    }
+
+    ul.content-external-links {
+        margin-bottom: 2rem;
+    }
+}
+
+hr {
+    margin-top: 2rem;
+    margin-bottom: 1.75rem;
+    border-width: 2px;
+}
+
+
+/* Modal Positioning Fix */
+.modal-open {
+    footer {
+        margin-right: -17px;
+        padding-right: 17px;
+    }
 }
