@@ -22,11 +22,13 @@
 
 </head>
 
-    <body class="ng-cloak" x-scroll>
+    <body class="ng-cloak" id="top" ng-cloak x-scroll>
 
         <tmpl-header class="header-container" ng-if="!isMapActive"></tmpl-header>
         {% block content %}{% endblock %}
         <tmpl-footer></tmpl-footer>
+
+        <a class="btn scroll-top-btn" href="#top" du-smooth-scroll><i class="material-icons">arrow_upward</i></a>
 
         <!-- Embedding The User Object-->
         <script type="text/javascript">

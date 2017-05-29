@@ -1,6 +1,10 @@
 
-a {
-    color: #1a5a96;
+
+// Fix non-standard elements
+ui-view,
+tmpl-header,
+tmpl-footer {
+	display: block;
 }
 
 // Container

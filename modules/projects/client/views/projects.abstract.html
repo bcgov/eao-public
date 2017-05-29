@@ -1,32 +1,30 @@
-
-<ui-view class="main-panel home-view" id="main-content-section">
-
-	<div ng-if="!seenOnce" class="welcome-alert alert alert-success alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h2>EAO Project Information &amp; Collaboration System</h2>
-		<p>Welcome to the BC Environmental Assessment Office’s new web-based Project Information and Collaboration System (EPIC), which is aimed at improving the efficiency and transparency of the provincial environmental assessment process by providing citizens and stakeholders with more intuitive access to project data and information.</p>
-		<p>EPIC is being launched as a “beta” – a fully-functional starting point upon which to build continuous improvements. As such, we’re seeking your feedback on how to make it better meet your needs. To do so, please send us an email at <a href="mailto:epicsupport.eao@gov.bc.ca">epicsupport.eao@gov.bc.ca</a> or <a href ui-sref="contact">click here</a> to learn more.</p>
-		<div class="clearfix">
-			<button class="btn btn-success pull-right" data-dismiss="alert" aria-label="Close">Get Started</button>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2>Environmental Assessments</h2>
-				</div>
-				<tmpl-projects-map id="anchor-map" x-projects='projects'></tmpl-projects-map>
+<div class="hero-banner">
+	<div class="container">
+		<div class="container-inner">
+			<div class="hb-txt">
+				<h1>Find EA Projects in British Columbia</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="panel panel-default no-margin">
-		<div class="panel-heading"><h2>List of Environmental Assessments</h2></div>
-		<tmpl-projects-list2 id="anchor-list" x-projects="projects"></tmpl-projects-list2>
+<div class="container">
+	<tmpl-projects-list2 id="anchor-list" x-projects="projects"></tmpl-projects-list2>
+</div>
+
+<!-- Leave for Map Dev -->
+<!--
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>Environmental Assessments</h2>
+			</div>
+			<tmpl-projects-map id="anchor-map" x-projects='projects'></tmpl-projects-map>
+		</div>
 	</div>
-
-</ui-view>
+</div>
+-->
 
 

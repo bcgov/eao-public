@@ -25,14 +25,17 @@ angular.module('core').config (
 		url: '/login',
 		template: '<tmpl-login></tmpl-login>'
 	})
+
 	.state('register', {
 		url: '/register',
 		template: '<tmpl-register></tmpl-register>'
 	})
+
 	.state('recover', {
 		url: '/recover',
 		template: '<tmpl-recover></tmpl-recover>'
 	})
+
 	// Home state routing
 	.state('not-found', {
 		url: '/not-found',
@@ -41,6 +44,7 @@ angular.module('core').config (
 			ignoreState: true
 		}
 	})
+
 	.state('bad-request', {
 		url: '/bad-request',
 		templateUrl: 'modules/core/client/views/400.client.view.html',
@@ -48,6 +52,7 @@ angular.module('core').config (
 			ignoreState: true
 		}
 	})
+
 	.state('forbidden', {
 		url: '/forbidden',
 		templateUrl: 'modules/core/client/views/403.client.view.html',
@@ -55,6 +60,22 @@ angular.module('core').config (
 			ignoreState: true
 		}
 	})
+
+	// Compliance Oversight
+	.state('compliance-oversight', {
+		url: '/compliance-oversight',
+		templateUrl: 'modules/compliance-oversight/client/views/compliance-oversight.html',
+		data: {}
+	})
+
+	// Legislation
+	.state('legislation', {
+		url: '/legislation',
+		templateUrl: 'modules/legislation/client/views/legislation.html',
+		data: {}
+	})
+
+
 	.state('smerr', {
 		url: '/smerr',
 		reloadOnSearch: false,
@@ -66,24 +87,6 @@ angular.module('core').config (
 		}
 	})
 	;
-
-	// $stateProvider.modalState = function (name, opts) {
-	// 	var modalInstance;
-	// 	$stateProvider.state (name, {
-	// 		url: opts.url,
-	// 		resolve: opts.resolve || {},
-	// 		onEnter: function ($modal, $state) {
-	// 			modalInstance = $modal.open (opts);
-	// 			modalInstance.result['finally'](function () {
-	// 				modalInstance = null;
-	// 				if ($state.$current.name === name) $state.go ('^');
-	// 			});
-	// 		},
-	// 		onExit: function () {
-	// 			if (modalInstance) modalInstance.close ();
-	// 		}
-	// 	});
-	// };
 
 }]);
 
