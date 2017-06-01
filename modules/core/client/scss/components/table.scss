@@ -1,214 +1,129 @@
-
-$table-bg: #fff;
-$table-header-bg: #f7f8fa;
-$table-row-border: 1px solid #EEE;
-$table-row-hover-bg: #f7f8fa;
-$table-pagination-bg: #fff;
-
-
-.table-container {
-    position: relative;
-
-    table {
+@media (max-width: 760px) {
+    .epic-table {
         width: 100%;
-        table-layout: fixed;
-        //background: $table-bg;
+        display: block;
+        font-size: 0.875rem;
 
         thead {
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: $table-header-bg;
-            z-index: 3;
+            display: none;
+        }
+
+        tbody, tr {
+            display: block;
+            width: 100%;
+        }
+
+        tr {
+            background: #f7f8fa;
+
+            &:nth-child(even){
+                background: #f1f1f1;
+            }
+        }
+
+        td {
+            display: block;
+            padding: 1rem;
+        }
+    }
+}
+
+@media (min-width: 760px) {
+    .epic-table {
+        width: 100%;
+        table-layout: fixed;
+
+        thead, tbody {
+            tr {
+                border-bottom: 0.25rem solid #FFF;  
+            }
+        }
+
+        thead {
+            background: #EEE;
+            font-size: 0.875rem;
 
             th {
-                cursor: default;
+                padding: 0.5rem;
+                font-weight: 400;
+
+                &:first-child {
+                    padding-left: 1rem;
+                }
+
+                &:last-child {
+                    padding-right: 1rem;
+                }
 
                 &.sortable {
+                    transition: background-color ease-out 0.2s;
                     cursor: pointer;
+                    user-select: none;
+                }
 
-                    &:hover {
-                        background-color: #EEE; 
+                .sort-icon {
+                    display: inline-block;
+                    margin-top: -2px;
+                    margin-left: 0.25rem;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 5px 5px 0 5px;
+                    border-color: #494949 transparent transparent transparent; 
+                    vertical-align: middle;
+                }
+
+                &.descending {
+                    .sort-icon {
+                        border-width: 0 5px 5px 5px;
+                        border-color: transparent transparent #494949 transparent;
                     }
                 }
-            }
 
-            tr.filter-row {
-                border-top: $table-row-border;
-            }
-        }
-
-        th, td {
-            &:first-child {
-                padding-left: 1rem;
-            }
-
-            &:last-child {
-                padding-right: 1rem;
-            }
-        }
-
-        th {
-            padding: 1rem 0.5rem;
-            background-color: $table-header-bg;
-            font-size: 1.2rem;
-            font-weight: bold;
-
-            .sort-icon {
-                display: none;
-                margin-top: -2px;
-                margin-left: 0.25rem;
-                width: 0;
-                height: 0;
-                border-style: solid;
-                vertical-align: middle;
-            }
-
-            &.st-sort-ascent {
-                .sort-icon {
-                    display: inline-block;
-                    border-width: 0 5px 5px 5px;
-                    border-color: transparent transparent #494949 transparent;
-                }
-            }
-
-            &.st-sort-descent {
-                .sort-icon {
-                    display: inline-block;
-                    border-width: 5px 5px 0 5px;
-                    border-color: #494949 transparent transparent transparent;
+                &.sortable {
+                    &:hover {
+                        background-color: #DDD;
+                    }
                 }
             }
         }
 
         tbody {
             tr {
-                border-bottom: $table-row-border;
+                border-bottom: 0.25rem solid #FFF;
+                background: #f7f8fa;
+
+                &:nth-child(even){
+                    background: #f1f1f1;
+                }
             }
 
             td {
-                padding: 1.5rem 0.5rem;
+                padding: 1.25rem 0.5rem;
                 vertical-align: top;
+                font-size: 0.875rem;
 
-                &.table-row-actions {
-                    padding-top: 0;
-                    padding-bottom: 0;
-                }
-            }
-        }
-    }
-
-    table.table-hover {
-        tr {
-            cursor: pointer;
-
-            tbody {
-                &:hover {
-                    background-color: $table-row-hover-bg;
+                &:first-child {
+                    padding-left: 1rem;
                 }
 
-                &.no-records:hover {
-                    cursor: default;
-                    background-color: $table-bg;   
-                }
-            }
-        }
-    }
-
-    .no-records {
-        padding: 1.5rem;
-        border-bottom: $table-row-border;
-        background-color: $table-bg;
-
-        td {
-            border: none;
-        }
-    }
-}
-
-.table-row-actions {
-    width: 5rem;
-    text-align: right;
-
-    .btn-group {
-        margin-top: 0.8rem;
-    }
-
-    .btn {
-        padding: 0;
-        width: 3.4rem;
-        height: 3.4rem;
-        text-align: center;
-        color: inherit;
-    }
-}
-
-@media (min-width: 1200px) {
-    .table-container {
-        tbody {
-            tr {
-                .table-row-actions {
-                    .btn-group {
-                        display: none;
-                    }
-                }
-
-                &:hover {
-                    .table-row-actions {
-                        .btn-group {
-                            display: block;
-                        }
-                    }
+                &:last-child {
+                    padding-right: 1rem;
                 }
             }
         }
     }
 }
 
-// Pagination Control
-$pgn-container-bg: #f7f8fa;
-$pgn-btn-active-bg: #5091cd;
-$pgn-btn-active-color: #fff;
-
-$pgn-btn-border: 1px solid #ccc;
-$pgn-btn-color: #000;
-
-
-.pagination-container {
-    padding: 1rem;
-    overflow: hidden;
-    border-top: none;
-    background: $pgn-container-bg;
-    font-size: 1.2rem;
-    font-weight: bold;
-
-    .pgn-btns {
-        button {
-            padding: 0.5rem;
-            min-width: 3.4rem;
-            min-height: 3.4rem;
-            border: $pgn-btn-border;
-            color: $pgn-btn-color;
-            text-align: center;
-
-            &:hover,
-            &:focus {
-                border-color: $pgn-btn-active-bg;
-                background-color: rgba($pgn-btn-active-bg, 0.8);
-                color: $pgn-btn-active-color;
-            }
-
-            &.active {
-                border-color: $pgn-btn-active-bg;
-                background-color: $pgn-btn-active-bg;
-                color: $pgn-btn-active-color;
-
-                &:hover,
-                &:focus {
-                    border-color: $pgn-btn-active-bg;
-                    background-color: rgba($pgn-btn-active-bg, 0.8);
-                    color: $pgn-btn-active-color;
-                }
-            }
-        }
+.ng-table {
+    th {
+        text-align: left;
     }
+}
+
+.ng-table-filters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
 }

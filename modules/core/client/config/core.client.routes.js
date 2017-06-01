@@ -14,29 +14,7 @@ angular.module('core').config (
 	});
 
 	$stateProvider
-	.state('configuration', {
-		url: '/configuration',
-		template: '<tmpl-configuration></tmpl-configuration>',
-		data: {
-			roles: ['admin']
-		}
-	})
-	.state('login', {
-		url: '/login',
-		template: '<tmpl-login></tmpl-login>'
-	})
 
-	.state('register', {
-		url: '/register',
-		template: '<tmpl-register></tmpl-register>'
-	})
-
-	.state('recover', {
-		url: '/recover',
-		template: '<tmpl-recover></tmpl-recover>'
-	})
-
-	// Home state routing
 	.state('not-found', {
 		url: '/not-found',
 		templateUrl: 'modules/core/client/views/404.client.view.html',
@@ -75,6 +53,12 @@ angular.module('core').config (
 		data: {}
 	})
 
+	// Legislation
+	.state('process-and-procedures', {
+		url: '/process-and-procedures',
+		templateUrl: 'modules/process-and-procedures/client/views/process-and-procedures.html',
+		data: {}
+	})
 
 	.state('smerr', {
 		url: '/smerr',

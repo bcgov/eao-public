@@ -1,0 +1,56 @@
+
+form {
+    padding-top: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+
+    label {
+        font-weight: 600;
+    }
+}
+
+.form-btns {
+    margin-top: 2rem;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 2px solid #EEE;
+    background: #eee;
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+
+.modal-dialog {
+    width: 22rem;
+}
+
+.modal-body {
+    padding: 2rem;
+    text-align: center;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    .ok-btn {
+        padding: 0.75rem 1rem;
+        width: 100%;
+    }
+}
+
+
+/* Temp Fix for Modals */
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}
+
+.modal.fade {
+    opacity: 1 !important;
+
+    .modal-dialog {
+        transform: none !important;
+    }
+}

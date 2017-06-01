@@ -21,7 +21,7 @@ angular.module('projects').config (
 			//
 			// =========================================================================
 			.state('projects', {
-				url: '/',
+				url: '/projects',
 				templateUrl: 'modules/projects/client/views/projects.abstract.html',
 				cache: false,
 				resolve: {

@@ -1,11 +1,13 @@
 
 
-<!-- SIDE NAVIGATION -->
+<!-- SIDE NAVIGATION
 <aside class="left-panel" id="main-side-section">
     <div class="sidenav-overlay" onclick="toggleSideNav();"></div>
     <tmpl-system-menu x-menu-context="'project'" x-project="project"></tmpl-system-menu>
 </aside>
+-->
 
 <!-- PROJECTS DETAILS -->
-<ui-view class="main-panel" id="main-content-section" ng-if="!authentication.user"></ui-view>
-<ui-view class="main-panel" id="main-content-section" ng-if="authentication.user"></ui-view>
+<ui-view class="main-panel" id="main-content-section"></ui-view>
+
+<tmpl-footer></tmpl-footer>

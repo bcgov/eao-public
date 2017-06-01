@@ -161,18 +161,13 @@ function controllerProjectsList($scope, Authentication, _, uiGmapGoogleMapApi, $
 				} else {
 					notFound = true;
 				}
-				if ( !newValue.memPermitID || (angular.lowercase(item.name).indexOf(angular.lowercase(newValue.memPermitID))) > -1 || item.memPermitID === "") {
-					// console.log("cur:",item.name);
-				} else {
-					notFound = true;
-				}
 				if ( !newValue.eacDecision || (angular.lowercase(item.eacDecision).indexOf(angular.lowercase(newValue.eacDecision))) > -1 || item.eacDecision === "") {
 					// console.log("cur:",item.eacDecision);
 				} else {
 					notFound = true;
 				}
 				if ( !newValue.openCommentPeriod || (item.openCommentPeriod === newValue.openCommentPeriod)) {
-					//console.log("cur:",item.openCommentPeriod);
+					console.log("cur:",item.openCommentPeriod);
 				} else {
 					notFound = true;
 				}
@@ -213,7 +208,6 @@ function controllerProjectsList2($scope, NgTableParams, Authentication, _, ENV, 
 	$scope.environment = ENV;
 
 	projectList.auth = Authentication;
-
 	projectList.regionArray = [];
 	projectList.statusArray = [];
 	projectList.eacDecisionArray = [];
@@ -271,44 +265,8 @@ function controllerProjectsList2($scope, NgTableParams, Authentication, _, ENV, 
 					count: 10,
 				}, {dataset: newValue});
 			}
-
 		}
 	});
-
-
 }
-
-// -----------------------------------------------------------------------------------
-//
-// CONTROLLER: User Activities
-//
-// -----------------------------------------------------------------------------------
-// controllerUserActivities.$inject = ['$scope', '$state', 'Authentication', 'ProjectModel', 'ActivityModel', '$rootScope', '_'];
-// /* @ngInject */
-// function controllerUserActivities($scope, $state, Authentication, ProjectModel, sActivityModel, $rootScope, _) {
-// 	var userActs = this;
-// 	userActs.projectNames = {};
-
-// 	userActs.refresh = function() {
-// 		sActivityModel.userActivities(undefined, 'read').then( function(data) {
-// 			userActs.activities = data;
-// 			$scope.$apply ();
-// 		}).catch( function(err) {
-// 			$scope.error = err;
-// 		});
-// 	};
-
-// 	ProjectModel.getCollection().then( function(data) {
-// 		userActs.projects = data;
-
-// 		// reference the ID and the name.
-// 		_.each(data, function(project) {
-// 			userActs.projectNames[project._id] = {'name': project.name, 'region': project.region};
-// 		});
-// 		$scope.$apply();
-// 	});
-
-// 	userActs.refresh();
-// }
 
 

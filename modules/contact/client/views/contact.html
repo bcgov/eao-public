@@ -1,0 +1,75 @@
+<div class="hero-banner hb-sm">
+    <div class="container">
+        <div class="container-inner">
+            <div class="hb-txt">
+                <h1>Connect With Us</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="anchor-point">
+    <div class="row">
+        <main class="col-lg-8">
+            <h2>Help us build a better service...</h2>
+            <p>This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information. If you are interested in providing us with feedback about your experience using this website, please feel free to send us your feedback.</p>
+            <form name="commentForm" >
+                <div class="form-group" x-show-errors>
+                    <label>Your Name</label>
+                    <input class="form-control" placeholder="Enter your Name" type="text" name="name" ng-model="comment.name" required/>
+                </div>
+                <div class="form-group" x-show-errors>
+                    <label>Email Address</label>
+                    <input class="form-control" placeholder="Enter your Email Address" type="email" name="email" ng-model="comment.email" required/>
+                </div>
+                <div class="form-group" x-show-errors>
+                    <label>Your Feedback</label>
+                    <textarea class="form-control" placeholder="Enter your message" rows="6" name="comment" ng-model="comment.comment" required></textarea>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label>Leave this field blank</label>
+                    <input type="text" name="subject">
+                </div>
+                <div ng-if="!busy" class="form-btns">
+                    <button class="btn slide-r-btn submit-btn" ng-click="save(commentForm.$valid)" >
+                        <span>Submit Feedback</span> <i class="material-icons">send</i>
+                    </button>
+                </div>
+                <div ng-if="busy">
+                    <button ng-disabled="busy" class="btn submit-btn"><span>Submitting...</span> <i class="material-icons">send</i></button>
+                </div>
+            </form>
+        </main>
+        <aside class="col-lg-4">
+            <section>
+                <h4>Contact Information</h4>
+                <div class="section-body">
+                    <h5>Environmental Assessment Office Staff</h5>
+                    <p>Please use the EAO B.C. Government Directory listing to find contact information for specific Environmental Assessment Office staff.</p>
+                    <hr>
+                    <h5>EAO Compliance & Enforcement</h5>
+                    <p>For questions relating to compliance for EA certified projects or if you have information about a suspected non-compliance with a condition of an environmental assessment certificate, please email eao.compliance@gov.bc.ca.</p>
+                    <hr>
+                    <h5>BC Government Natural Resource Sector Contacts</h5>
+                    <p class="mb-0">Visit our website at www.eao.gov.bc.ca for a list of contact information by sector.</p>
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+               <h2>Thank you for your Feedback!</h2>
+               <p>Your feedback has been sent.</p>
+               <div>
+                   <button class="ok-btn btn submit-btn" type="button" ng-click="userConfirmed()" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

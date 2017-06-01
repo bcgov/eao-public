@@ -13,19 +13,20 @@
 @import "global/footer.scss";
 
 // Components
-//@import "components/aside.scss";
+@import "components/aside.scss";
 //@import "components/authorizations-list.scss";
 @import "components/buttons.scss";
 @import "components/feature-block.scss";
+@import "components/filter-bar.scss";
 @import "components/hero-banner.scss";
 //@import "components/mmti-accord.scss";
-//@import "components/mmti-list.scss";
-//@import "components/mmti-table.scss";
+@import "components/mmti-list.scss";
+@import "components/table.scss";
 //@import "components/sort-header.scss";
 //@import "components/tab-nav.scss";
 
 // Pages
-//@import "modules/connect/client/scss/connect-with-us.scss";
+@import "modules/contact/client/scss/contact.scss";
 //@import "modules/authorizations/client/scss/project-authorizations.scss";
 @import "modules/home/client/scss/home.scss";
 //@import "modules/inspections/client/scss/project-inspections.scss";
