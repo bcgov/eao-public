@@ -82,11 +82,12 @@ $pgn-btn-color: #000;
 
 
 .ng-table-pager {
+    @include flex-box();
+    flex-direction: column;
     overflow: hidden;
 
     a, button {
         padding: 0.5rem;
-        min-width: 2.5rem;
         height: 2.5rem;
         border: 1px solid transparent;
         background: $pgn-btn-bg;
@@ -105,12 +106,15 @@ $pgn-btn-color: #000;
 }
 
 .ng-table-pagination {
-    float: left;
-    margin: 0;
+    @include flex(0 0 auto);
+    order: 1;
+    margin-bottom: 1rem;
 
     li {
+        @include flex(1 1 auto);
+
         a {
-            display: inline-block;
+            display: block;
             text-decoration: none;
         }
 
@@ -146,7 +150,9 @@ $pgn-btn-color: #000;
 }
 
 .ng-table-counts {
-    float: right;
+    @include flex(0 0 auto);
+    order: 2;
+    margin: 0 auto;
 
     button {
         &.active {
@@ -161,5 +167,21 @@ $pgn-btn-color: #000;
                 color: $pgn-btn-active-color;
             }
         }
+    }
+}
+
+@media (min-width: 760px) {
+    .ng-table-pager {
+        flex-direction: row;
+        justify-content: space-between;
+
+        a, button {
+            min-width: 2.5rem;
+        }
+    }
+
+    .ng-table-counts {
+        float: right;
+        margin: 0;
     }
 }
