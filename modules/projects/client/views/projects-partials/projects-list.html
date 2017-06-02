@@ -1,69 +1,96 @@
+<section class="projects-list-section">
+	<h2>Projects Directory</h2>
 
-<div class="filter-bar">
-	<div class="label-row">
-		<label>Project Name</label>
-		<label>Type</label>
-		<label>Comment Period</label>
-	</div>
-	<div class="input-row">
-		<input class="form-control" placeholder="Enter a Project Name" type="text" ng-model="projectList.tableParams.filter()['name']"/>
-		<select class="form-control" ng-model="projectList.tableParams.filter()['type']">
-			<option value="" selected>All</option>
-			<option>Energy-Electricity</option>
-			<option>Derp Project</option>
-		</select>
-		<select class="form-control" ng-model="projectList.tableParams.filter()['openCommentPeriod']">
-			<option value="" selected>All</option>
-			<option value="Open">Open</option>
-			<option value="Pending">Pending</option>
-		</select>
-	</div>
-	<!--
-	<button class="btn btn-default"
-		ng-disabled="!projectList.tableParams.hasFilter()"
-		ng-click="projectList.tableParams.filter({})">Clear filters
-	</button>
-	-->
-</div>
+	<div class="filter-bar">
+		<div class="filter-input-row filters-basic">
+			<div class="form-group">
+				<input class="form-control" placeholder="Type a Project Name" type="text" ng-model="projectList.tableParams.filter()['name']"/>
+			</div>
+			<button class="toggle-filter-btn btn btn-default btn-sm"
+				ng-click="toggleProjectListFilters()">
+				<span ng-if="showProjectListFilters == false"><span class="btn-txt">Show Filters</span><i class="material-icons">keyboard_arrow_down</i></span>
+				<span ng-if="showProjectListFilters == true"><span class="btn-txt">Hide Filters</span><i class="material-icons">keyboard_arrow_up</i></span>
+			</button>
+		</div>
+		<div class="filter-input-row filters-advanced" ng-show="showProjectListFilters == true">
+			<div class="form-group">
+				<label>Project Type</label>
+				<select class="form-control" ng-model="projectList.tableParams.filter()['type']">
+					<option value="" selected>All</option>
+					<option>Energy-Electricity</option>
+					<option>Derp Project</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Status</label>
+				<select class="form-control" ng-model="projectList.tableParams.filter()['eacDecision']">
+					<option value="" selected>All</option>
+					<option value="In Progress">In Progress</option>
+					<option value="Certificate Issued">Certificate Issued</option>
+					<option value="Certificate Not Required">Certificate Not Required</option>
+					<option value="Certificate Refused">Certificate Refused</option>
+					<option value="Open">Certificate Expired</option>
+					<option value="Further Assessment Required">Further Assessment Required</option>
+					<option value="Pre-EA Act Approval">Pre-EA Act Approval</option>
+					<option value="Terminated">Terminated</option>
+					<option value="Withdrawn">Withdrawn</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Public Comments Periods</label>
+				<select class="form-control" ng-model="projectList.tableParams.filter()['openCommentPeriod']">
+					<option value="" selected></option>
+					<option value="Open">Open</option>
+					<option value="Pending">Pending</option>
+				</select>
+			</div>
+		</div>
 
-<table class="epic-table" x-show-filter="true" ng-table="projectList.tableParams">
-	<tr ng-repeat="o in $data" ui-sref="p.detail({projectid: o.code})">
-		<td header-class="'name-col'" 
-			data-title="'Name'" 
-			filter="{'name':'text'}" 
-			sortable="'name'"><a ui-sref="p.detail({projectid: o.code})">{{o.name}}</a></td>
-		<td header-class="'type-col'" 
-			data-title="'Type'" 
-			filter="{type:'select'}" 
-			filter-data="projectList.typeArray" 
-			sortable="'type'">{{o.type}}</td>
-		<td header-class="'region-col'" 
-			data-title="'Region'" 
-			filter="{region:'select'}" 
-			filter-data="projectList.regionArray" 
-			sortable="'region'">{{o.region | regionName}}</td>
-		<td header-class="'decision-col'"
-			ng-if="environment === 'EAO'"
-			data-title="'Decision'"
-			filter="{eacDecision:'select'}"
-			filter-data="projectList.eacDecisionArray"
-			sortable="'eacDecision'">{{o.eacDecision}}</td>
-		<!--
-		<td header-class="'phase-col'"
-			data-title="'Phase'"
-			filter="{'currentPhase.name':'select'}"
-			filter-data="projectList.phaseArray"
-			sortable="'currentPhase.name'">{{o.currentPhase.name}}</td>
-		-->
-		<!--
-		<td header-class="'comment-col'" 
-			data-title="'Comment Period'" 
-			filter="{openCommentPeriod:'select'}" 
-			filter-data="projectList.openPCPArray" 
-			sortable="'openCommentPeriod'">{{o.openCommentPeriod}}</td>
-		-->
-	</tr>
-	<tr class="no-records" ng-show="!$data || !$data.length">
-		<td colspan="4">No results match your search.</td>
-	</tr>
-</table>
+		<div class="button-row" ng-show="projectList.tableParams.hasFilter()" ng-animate>
+			<button class="btn btn-default btn-sm"
+				ng-disabled="!projectList.tableParams.hasFilter()"
+				ng-click="projectList.tableParams.filter({})">Clear Filters
+			</button>
+		</div>
+	</div>
+
+	<table class="projects-table table" x-show-filter="false" ng-table="projectList.tableParams">
+		<tr ng-repeat="o in $data" ui-sref="p.detail({projectid: o.code})">
+			<td class="name-col" 
+				header-class="'name-col'" 
+				data-title="'Name'" 
+				sortable="'name'"><a ui-sref="p.detail({projectid: o.code})">{{o.name}}</a></td>
+			<td header-class="'type-col'" 
+				data-title="'Type'" 
+				sortable="'type'">{{o.type}}</td>
+			<td header-class="'decision-col'"
+				data-title="'Status'"
+				sortable="'eacDecision'">{{o.eacDecision}}</td>
+			<!--
+			<td header-class="'region-col'" 
+				data-title="'Region'" 
+				filter="{region:'select'}" 
+				filter-data="projectList.regionArray" 
+				sortable="'region'">{{o.region | regionName}}</td>
+			-->
+			<!--
+			<td header-class="'phase-col'"
+				data-title="'Phase'"
+				filter="{'currentPhase.name':'select'}"
+				filter-data="projectList.phaseArray"
+				sortable="'currentPhase.name'">{{o.currentPhase.name}}</td>
+			-->
+			<!--
+			<td header-class="'comment-col'" 
+				data-title="'Comment Period'" 
+				filter="{openCommentPeriod:'select'}" 
+				filter-data="projectList.openPCPArray" 
+				sortable="'openCommentPeriod'">{{o.openCommentPeriod}}</td>
+			-->
+		</tr>
+		<tr class="no-records" ng-show="!$data || !$data.length">
+			<td colspan="3">No results match your search.</td>
+		</tr>
+	</table>
+
+</section>

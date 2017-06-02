@@ -1,129 +1,165 @@
-@media (max-width: 760px) {
-    .epic-table {
-        width: 100%;
-        display: block;
-        font-size: 0.875rem;
+$table-header-bg: #fff;
+$table-header-hover-bg: #ddd;
+$table-header-sort-active: #5091cd;
+$table-row-bg: #f7f8fa;
+$table-row-border: 3px solid #FFF;
+$table-alt-row-bg: #f4f4f4;
 
-        thead {
-            display: none;
+.table {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 0.875rem;
+
+    tr {
+        border-top: $table-row-border;  
+    }
+
+    td, th {
+        text-align: left;
+
+        &:first-child {
+            padding-left: 1rem;
         }
 
-        tbody, tr {
-            display: block;
-            width: 100%;
+        &:last-child {
+            padding-right: 1rem;
         }
+    }
 
+    thead {
+        background: $table-header-bg;
+        border-bottom: 2px solid #fff;
+
+        th {
+            padding: 0.5rem;
+            border-bottom: 3px solid #eee;
+            text-shadow: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+
+            &.sortable {
+                transition: background-color ease-out 0.2s;
+                cursor: pointer;
+                user-select: none;
+
+                &:hover {
+                    border-bottom-color: $table-header-sort-active;
+                }
+
+                &.sort-asc,
+                &.sort-desc {
+                    color: #000;
+                    border-bottom-color: $table-header-sort-active;
+                    background: transparent;
+                    text-shadow: none;
+                }
+            }
+        }
+    }
+
+    tbody {
         tr {
-            background: #f7f8fa;
+            background: $table-row-bg;
 
             &:nth-child(even){
-                background: #f1f1f1;
+                background: $table-alt-row-bg;
             }
         }
 
         td {
-            display: block;
-            padding: 1rem;
+            padding: 1.25rem 0.5rem;
+            vertical-align: top;
         }
     }
 }
 
-@media (min-width: 760px) {
-    .epic-table {
-        width: 100%;
-        table-layout: fixed;
+// Pagination Control
+$pgn-btn-bg: #eee;
+$pgn-btn-active-bg: #5091cd;
+$pgn-btn-active-color: #fff;
+$pgn-btn-border: 1px solid #ccc;
+$pgn-btn-color: #000;
 
-        thead, tbody {
-            tr {
-                border-bottom: 0.25rem solid #FFF;  
-            }
+
+.ng-table-pager {
+    overflow: hidden;
+
+    a, button {
+        padding: 0.5rem;
+        min-width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid transparent;
+        background: $pgn-btn-bg;
+        text-align: center;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all linear 0.2s;
+
+        &:hover,
+        &:focus {
+            border-color: $pgn-btn-active-bg;
+            background-color: rgba($pgn-btn-active-bg, 0.8);
+            color: $pgn-btn-active-color;
+        }
+    }
+}
+
+.ng-table-pagination {
+    float: left;
+    margin: 0;
+
+    li {
+        a {
+            display: inline-block;
+            text-decoration: none;
         }
 
-        thead {
-            background: #EEE;
-            font-size: 0.875rem;
+        &.active {
+            a {
+                border-color: $pgn-btn-active-bg;
+                background-color: $pgn-btn-active-bg;
+                color: $pgn-btn-active-color;
 
-            th {
-                padding: 0.5rem;
-                font-weight: 400;
-
-                &:first-child {
-                    padding-left: 1rem;
-                }
-
-                &:last-child {
-                    padding-right: 1rem;
-                }
-
-                &.sortable {
-                    transition: background-color ease-out 0.2s;
-                    cursor: pointer;
-                    user-select: none;
-                }
-
-                .sort-icon {
-                    display: inline-block;
-                    margin-top: -2px;
-                    margin-left: 0.25rem;
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 5px 5px 0 5px;
-                    border-color: #494949 transparent transparent transparent; 
-                    vertical-align: middle;
-                }
-
-                &.descending {
-                    .sort-icon {
-                        border-width: 0 5px 5px 5px;
-                        border-color: transparent transparent #494949 transparent;
-                    }
-                }
-
-                &.sortable {
-                    &:hover {
-                        background-color: #DDD;
-                    }
+                &:hover,
+                &:focus {
+                    border-color: $pgn-btn-active-bg;
+                    background-color: rgba($pgn-btn-active-bg, 0.8);
+                    color: $pgn-btn-active-color;
                 }
             }
         }
 
-        tbody {
-            tr {
-                border-bottom: 0.25rem solid #FFF;
-                background: #f7f8fa;
-
-                &:nth-child(even){
-                    background: #f1f1f1;
-                }
+        &:first-child {
+            a {
+                border-top-left-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
             }
+        }
 
-            td {
-                padding: 1.25rem 0.5rem;
-                vertical-align: top;
-                font-size: 0.875rem;
-
-                &:first-child {
-                    padding-left: 1rem;
-                }
-
-                &:last-child {
-                    padding-right: 1rem;
-                }
+        &:last-child {
+            a {
+                border-top-right-radius: 0.25rem;
+                border-bottom-right-radius: 0.25rem;
             }
         }
     }
 }
 
-.ng-table {
-    th {
-        text-align: left;
-    }
-}
+.ng-table-counts {
+    float: right;
 
-.ng-table-filters {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
+    button {
+        &.active {
+            border-color: $pgn-btn-active-bg;
+            background-color: $pgn-btn-active-bg;
+            color: $pgn-btn-active-color;
+
+            &:hover,
+            &:focus {
+                border-color: $pgn-btn-active-bg;
+                background-color: rgba($pgn-btn-active-bg, 0.8);
+                color: $pgn-btn-active-color;
+            }
+        }
+    }
 }

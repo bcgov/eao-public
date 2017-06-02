@@ -1,6 +1,6 @@
 // Mixins
 @mixin clearfix() {
-  &::after {
+    &::after {
     display: block;
     content: "";
     clear: both;
@@ -8,31 +8,36 @@
 }
 
 @mixin list-reset() {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
 @mixin flex-box() {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 @mixin flex($values) {
-  -webkit-flex: $values;
-  -ms-flex: $values;
-  flex: $values;
+    -webkit-flex: $values;
+    -ms-flex: $values;
+    flex: $values;
 }
 
 @mixin flex-direction($values) {
-  -webkit-flex-direction: $values;
-  -ms-flex-direction: $values;
-  flex-direction: $values;
+    -webkit-flex-direction: $values;
+    -ms-flex-direction: $values;
+    flex-direction: $values;
 }
 
-
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder {@content}
+  	&::-moz-placeholder {@content}
+  	&:-ms-input-placeholder{@content}  
+}
 
 // Icon Sizing 
 .material-icons.md-18 { font-size: 18px; }

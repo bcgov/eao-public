@@ -44,22 +44,6 @@ angular.module('projects').config (
 						// console.log("Welcome back.");
 					}
 				}
-			})
-			// -------------------------------------------------------------------------
-			//
-			// the scheudle view for all projects
-			//
-			// -------------------------------------------------------------------------
-			.state('projects.schedule', {
-				data: {},
-				url: 'schedule',
-				templateUrl: 'modules/projects/client/views/projects-partials/projects-schedule.html',
-				controller: function ($scope, projects) {
-					$scope.projects = projects;
-					$scope.allPhases = _.sortBy(_.unique(_.flatten(_.map(projects, function(proj) {
-						return _.map(proj.phases, 'name');
-					}))));
-				}
 			});
 		}
 }]);

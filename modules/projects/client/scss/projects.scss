@@ -1,0 +1,20 @@
+
+.projects-list-section {
+    position: relative;
+
+    .filter-bar {
+        margin-top: 2rem;
+    }
+
+    .projects-table {
+        margin-top: 2rem;
+    }
+}
+
+.projects-table {
+    .name-col {
+        a {
+            font-weight: 600;
+        }
+    }
+}

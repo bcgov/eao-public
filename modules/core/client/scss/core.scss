@@ -6,6 +6,7 @@
 
 // Global
 @import "global/utilities.scss";
+@import "global/forms.scss";
 @import "global/helpers.scss";
 @import "global/layout.scss";
 @import "global/typography.scss";
@@ -14,7 +15,6 @@
 
 // Components
 @import "components/aside.scss";
-//@import "components/authorizations-list.scss";
 @import "components/buttons.scss";
 @import "components/feature-block.scss";
 @import "components/filter-bar.scss";
@@ -22,13 +22,13 @@
 //@import "components/mmti-accord.scss";
 @import "components/mmti-list.scss";
 @import "components/table.scss";
-//@import "components/sort-header.scss";
 //@import "components/tab-nav.scss";
 
 // Pages
 @import "modules/contact/client/scss/contact.scss";
 //@import "modules/authorizations/client/scss/project-authorizations.scss";
 @import "modules/home/client/scss/home.scss";
+@import "modules/projects/client/scss/projects.scss";
 //@import "modules/inspections/client/scss/project-inspections.scss";
 //@import "modules/maps/client/scss/map.scss";
 //@import "modules/other-documents/client/scss/other-documents.scss";
