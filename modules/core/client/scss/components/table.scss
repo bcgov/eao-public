@@ -38,7 +38,7 @@ $table-alt-row-bg: #f4f4f4;
             font-weight: 600;
 
             &.sortable {
-                transition: background-color ease-out 0.2s;
+                transition: border-color ease-out 0.2s;
                 cursor: pointer;
                 user-select: none;
 
@@ -178,6 +178,10 @@ $pgn-btn-color: #000;
         a, button {
             min-width: 2.5rem;
         }
+    }
+
+    .ng-table-pagination {
+        margin-bottom: 0;
     }
 
     .ng-table-counts {
