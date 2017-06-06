@@ -1,0 +1,47 @@
+
+// Pagination Control
+$pgn-container-bg: #f7f8fa;
+$pgn-btn-active-bg: #5091cd;
+$pgn-btn-active-color: #fff;
+
+$pgn-btn-border: 1px solid #ccc;
+$pgn-btn-color: #000;
+
+
+.ng-table-pager {
+    padding: 1rem;
+    overflow: hidden;
+    border-top: none;
+    background: $pgn-container-bg;
+
+    button {
+        padding: 0.5rem;
+        min-width: 4rem;
+        min-height: 3.4rem;
+
+        &:hover,
+        &:focus {
+            border-color: $pgn-btn-active-bg;
+            background-color: rgba($pgn-btn-active-bg, 0.8);
+            color: $pgn-btn-active-color;
+        }
+
+        &.active {
+            border-color: $pgn-btn-active-bg;
+            background-color: $pgn-btn-active-bg;
+            color: $pgn-btn-active-color;
+
+            &:hover,
+            &:focus {
+                border-color: $pgn-btn-active-bg;
+                background-color: rgba($pgn-btn-active-bg, 0.8);
+                color: $pgn-btn-active-color;
+            }
+        }
+    }
+}
+
+.pagination {
+    margin: 0;
+    vertical-align: bottom;
+}

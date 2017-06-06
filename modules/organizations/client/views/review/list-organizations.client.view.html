@@ -1,0 +1,49 @@
+<section class="row">
+  <div class='col-sm-10'>
+    <h1 class="page-title">
+      Admin
+    </h1>
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3 class="panel-title">Organizations</h3>
+      </div>
+
+      <div class="panel-body">
+
+        <div class="form-group">
+          <label for="searchOrganizations" class="control-label">Search Organizations</label>
+          <input id="searchOrganizations" class="form-control" type="text" ng-model="listOrganizations.search" placeholder="Search" ng-change="listOrganizations.figureOutItemsToDisplay()" />
+        </div>
+
+          <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+              <th>Company Name (DBA)</th>
+              <th>Company Legal Name</th>
+              <th>Registered In</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="org in listOrganizations.pagedItems" ui-sref="organization.view({organizationId: org._id})" class="clickable">
+              <td ng-bind="org.company"></td>
+              <td ng-bind="org.companyLegal"></td>
+              <td ng-bind="listOrganizations.provs[org.registeredIn]"></td>
+            </tr>
+          </table>
+
+        <div class="text-right">
+
+          <div class="form-group">
+            <input type="button" value="Add Organization" class="btn btn-default btn-sm" ui-sref="organization.new">
+          </div>
+
+          <pagination class="pagination-sm" boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class='col-sm-2'>
+    <tmpl-system-menu x-menu-context="'settings'"></tmpl-system-menu>
+  </div>
+</section>

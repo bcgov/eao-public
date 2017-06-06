@@ -1,0 +1,40 @@
+<div class="modal-header">
+	<h3 class="modal-title">Project Schedule</h3>
+</div>
+
+<table class='table table-condensed'>
+	<thead>
+		<tr class="small">
+			<th width="28%">Phases</th>
+			<th width="18%" class='text-center'>Estimated Start</th>
+			<th width="18%" class='text-center'>Estimated End</th>
+			<th width="18%" class='text-center'>Actual Start</th>
+			<th width="18%" class='text-center'>Actual End</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="phase in projSched.phases track by $index" ng-class="{'bg-success': phase === projSched.project.currentPhase}">
+			<td><p class="form-control-static">{{ phase.name }}</p></td>
+			<td class='text-center'>
+				<p class="form-control-static">{{ phase.dateStartedEst | amDateFormat:'MMM Do YYYY' }} <a x-modal-date-picker x-selected-date="phase.dateStartedEst" ng-if="!phase.dateStarted">&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></a></p>
+			</td>
+			<td class='text-center'>
+				<p class="form-control-static">{{ phase.dateCompletedEst | amDateFormat:'MMM Do YYYY' }} <a x-modal-date-picker x-selected-date="phase.dateCompletedEst" ng-if="!phase.dateCompleted">&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></a></p>
+			</div>
+			<td class='text-center'><p class="form-control-static">{{ phase.dateStarted | amDateFormat:'MMM Do YYYY' }}</p></td>
+			<td class='text-center'><p class="form-control-static">{{ phase.dateCompleted | amDateFormat:'MMM Do YYYY' }}</p></td>
+		</tr>
+
+		<tr ng-if="!projSched.phases">
+			<td colspan="6" class="text-center">This project has no phases.  Please contact the system administrator to structure the project.</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<div class="modal-footer">
+	<button class="btn btn-default" type="button" ng-click="projSched.cancel()">Cancel</button>
+	<button class="btn btn-primary" type="button" ng-click="projSched.ok()">Save</button>
+</div>

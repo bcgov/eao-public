@@ -1,0 +1,40 @@
+<div class="map-container">
+
+	<ui-gmap-google-map id='projects-map'
+		center='projectList.map.center'
+		zoom='projectList.map.zoom'
+		refresh='1'
+		options='projectList.map.options'>
+
+		<ui-gmap-window
+			show="projectList.map.window.show"
+			coords="projectList.map.window.model"
+			options="projectList.map.window.options"
+			closeClick="projectList.map.window.closeClick()"
+			templateUrl="'modules/projects/client/views/projects-partials/projects-map-window.html'"
+			templateParameter="projectList.map.window.model"
+			ng-cloak>
+		</ui-gmap-window>
+
+		<ui-gmap-markers
+			models="projectList.projectsFiltered"
+			idKey="'_id'"
+			coords="'self'"
+			type="'cluster'"
+			clusterOptions="projectList.map.clusterOptions"
+			events="projectList.map.markersEvents">
+		</ui-gmap-marker>
+
+	</ui-gmap-google-map>
+
+	<div class="row map-filter hidden">
+		<div class="col-sm-12">
+			<div class="form-inline">
+				<div class="form-group form-group-sm">
+					<span class="form-control-static">Projects Found: {{ projectList.projectsFiltered.length || 0}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

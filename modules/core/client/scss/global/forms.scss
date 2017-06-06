@@ -1,0 +1,38 @@
+
+textarea {
+	@include placeholder {
+		color: #ccc;
+	}
+	resize: vertical;
+	box-shadow: 0.1rem 0.1rem 0.1rem #EEE inset;
+}
+
+input[type="text"] {
+	@include placeholder {
+		color: #ccc;
+	}
+	box-shadow: 0.1rem 0.1rem 0.1rem #EEE inset;
+}
+
+input[type="email"] {
+	@include placeholder {
+		color: #ccc;
+	}
+}
+
+select.form-control:not([size]):not([multiple]) {
+	height: 2.75rem;
+	padding: 0 0.5rem;
+}
+
+.form-control {
+	height: 2.75rem;
+	padding: 0.75rem;
+	border-color: #ddd;
+    background: #fff;
+    font-size: 0.875rem;
+
+	&:focus {
+		border-color: #5091cd;
+	}
+}

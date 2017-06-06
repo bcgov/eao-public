@@ -1,0 +1,112 @@
+<form class="view-form" name="projectUpdateForm" novalidate>
+
+	<div class="view-title-container flex-row">
+		<h1>Add/Edit Updates &nbsp;&rsaquo;&nbsp; {{s.communication.name}} <span class="placeholder-value" ng-if="!s.communication.name">Untitled</span>
+		</h1>
+		<div class="actions">
+			<button ng-show="hasMailRecipients()"
+					ng-if="authentication.user"
+					class="btn btn-default btn-sm"
+					ng-click="s.downloadAddressList()">
+				<span class="glyphicon glyphicon-download-alt"></span><span>Download CSV</span></button>
+			<button type="button" class="btn btn-default btn-sm" ng-click="cancel()">Cancel</button>
+			<button class="btn btn-danger btn-sm" ng-if="canDelete" ng-click="delete(s.communication)">
+				<span class="glyphicon glyphicon-trash"></span><span>Delete</span>
+      		</button>
+			<button type="button" class="btn btn-primary btn-sm" ng-click="save(projectUpdateForm.$valid)">Save</button>
+			<button type="button" class="btn btn-success btn-sm" ng-if="mode === 'edit'" ng-disabled="projectUpdateForm.$invalid" ng-click="send(projectUpdateForm.$valid)">
+				<span class="glyphicon glyphicon-send"></span><span>Send</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="view-body-container">
+
+		<ul class="nav nav-tabs" ng-init="form.curTab = 'Update Details'">
+			<li role="presentation" ng-class="{'active':form.curTab === 'Update Details'}" class="form-group" x-show-errors>
+				<a ng-click="form.curTab = 'Update Details'" title="Edit Project Update Details" name="projectUpdateDetailsForm">
+					<span class="glyphicon glyphicon-exclamation-sign"></span>Update Details</a>
+			</li>
+			<li role="presentation" ng-class="{'active':form.curTab === 'recipients'}" class="form-group" x-show-errors>
+				<a ng-click="form.curTab = 'recipients'" title="Edit Project Recipients" name="recipientsForm">
+					<span class="glyphicon glyphicon-exclamation-sign"></span>Recipients ({{recipients.length}})</a>
+			</li>
+		</ul>
+
+		<div class="tab-pane active" ng-show="form.curTab === 'Update Details'" ng-form="projectUpdateDetailsForm">
+			<div class="form-group" x-show-errors>
+				<label class="control-label">Update Name<em class="required">(Required)</em></label>
+				<input class="form-control" ng-model="s.communication.name" id="name" name="name" title="Name" required/>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Related Content ({{documents.length}})</label>
+				<div class="tag-list-container form-control clearfix">
+					<ul class="tag-list">
+						<li class="tag" ng-repeat="doc in documents">
+							<span class="tag-name">{{doc.displayName}}</span>
+							<button class="btn" type="button" ng-click="removeDocument(doc._id)"><span aria-hidden="true">×</span></button>
+						</li><li class="add-tag">
+							<button class="btn btn-default btn-sm" title="Add Documents"
+								x-document-mgr-link-modal
+								x-project="project"
+								x-target-name="s.communication.name"
+								x-published-only="'false'"
+								x-on-ok="addDocuments"><span class="glyphicon glyphicon-plus"></span></button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-default btn-sm"
+					x-email-template-chooser
+					x-project="project"
+					x-current="emailTemplate"
+					x-group-restricted="'invitation'">Use Existing Template</button>
+			</div>
+			<div class="form-group" x-show-errors>
+				<label class="control-label">Subject<em class="required">(Required)</em></label>
+				<input class="form-control" ng-model="s.communication.templateSubject" id="subject" name="subject" title="Subject" required></input>
+			</div>
+			<div class="form-group" x-show-errors>
+				<label class="control-label">Message<em class="required">(Required)</em></label>
+				<textarea class="form-control" name="message"
+					id="message"
+					ui-tinymce="tinymceOptions"
+					ng-model="s.communication.templateContent"  
+					title="Message"
+							rows="10"
+					required ng-blur="activeItem = false"></textarea>
+			</div>
+		</div><!--/tab-pane-->
+
+		<div class="tab-pane" ng-show="form.curTab === 'recipients'" ng-form="recipientsForm">
+			<x-recipients-mgr
+				x-project="project"
+				x-recipients="recipients"
+				x-mode="'edit'"
+				x-enable-add-new="true"
+				x-enable-add-existing="true"
+				x-enable-cc="true"
+				x-enable-bcc="true"
+				x-show-mail="true">
+		</div>
+
+		<div class="form-footer">
+			<div class="pull-right">
+				<button ng-show="hasMailRecipients()"
+						ng-if="authentication.user"
+						class="btn btn-default btn-sm"
+						ng-click="s.downloadAddressList()">
+					<span class="glyphicon glyphicon-download-alt"></span><span>Download CSV</span></button>
+				<button type="button" class="btn btn-default btn-sm" ng-click="cancel()">Cancel</button>
+				<button class="btn btn-danger btn-sm" ng-if="canDelete" ng-click="delete(s.communication)">
+					<span class="glyphicon glyphicon-trash"></span><span>Delete</span></button>
+				<button type="button" class="btn btn-primary btn-sm" ng-click="save(projectUpdateForm.$valid)">
+					Save</button>
+				<button type="button" class="btn btn-success btn-sm" ng-if="mode === 'edit'" ng-disabled="projectUpdateForm.$invalid" ng-click="send(projectUpdateForm.$valid)">
+					<span class="glyphicon glyphicon-send"></span><span>Send</span></button>
+			</div>
+		</div>
+
+	</div>
+</form>

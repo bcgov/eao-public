@@ -1,0 +1,19 @@
+web:
+  image: ${ESM_IMAGE_NAME}
+  links:
+   - db
+  ports:
+   - "${ESM_HOST_PORT}:3000"
+  volumes:
+  - /data/${ESM_ENVIRONMENT_NAME}/esm-uploads:/uploads
+  environment:
+  - VIRTUAL_PORT=${ESM_HOST_PORT}
+  - VIRTUAL_HOST=${ESM_VIRTUAL_HOST}
+  - SEED_MEM=${SEED_MEM}
+  - MEM=${MEM}
+  - ESM_VARIANT=${ESM_VARIANT}
+
+db:
+  image: mongo
+  volumes:
+  - /data/${ESM_ENVIRONMENT_NAME}/db:/data/db

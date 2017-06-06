@@ -1,0 +1,80 @@
+
+aside {
+    margin-top: 2.5rem;
+
+    hr {
+        border-top-width: 1px;
+    }
+
+    section {
+        margin-bottom: 2.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-body {
+            padding: 1.25rem 1rem;
+            background: #f1f1f1;
+
+            h5, p {
+                margin-bottom: 0.875rem;
+            }
+
+            h5 {
+                font-size: 0.9375rem;
+                font-weight: 600;
+            }
+
+            p {
+                font-size: 0.85rem;
+                line-height: 1.4rem;
+            }
+        }
+
+        h4 {
+            margin: 0;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 51, 102, 0.80);
+            color: #FFF;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        &.inverted {
+            .section-body {
+                background-color: rgba(0, 51, 102, 0.75);
+                color: #FFF;
+            }
+        }
+
+        &:first-child {
+            margin-top: 0.75rem;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    hr {
+        margin-top: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: 1020px) {
+    aside {
+        margin-top: 0;
+
+        section {
+            margin-bottom: 1.5rem;
+        }
+    }
+}

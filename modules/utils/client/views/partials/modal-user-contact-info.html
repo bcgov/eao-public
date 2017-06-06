@@ -1,0 +1,28 @@
+<div class="modal-body">
+	<div class="text-center">
+		<h3>{{ ::utilUserContactInfo.user.displayName }}</h3>
+		<p>{{ ::utilUserContactInfo.user.address1 }} {{ ::utilUserContactInfo.user.address2 }}<br/>{{ ::utilUserContactInfo.user.city }} {{ ::utilUserContactInfo.user.province }} {{ ::utilUserContactInfo.user.postalCode }} </p>
+		<hr>
+		<p><a href="mailto:{{ ::utilUserContactInfo.user.email }}">{{ ::utilUserContactInfo.user.email }}</a></p>
+	</div>
+	<div ng-if="utilUserContactInfo.user.roles" class="text-center">
+		<hr>
+		<label class="control-label">Roles</label>
+		<p><span class="label label-primary" ng-repeat="role in ::utilUserContactInfo.user.roles">{{ role }}</span></p>
+	</div>
+	<hr>
+	<label class="control-label text-center">Notification Preferences</label>
+	<p>
+		<div class="pull-right" ng-if="utilUserContactInfo.user.viaEmail"><span class="glyphicon glyphicon-ok-circle text-success"></span></div>
+		<div class="pull-right" ng-if="!utilUserContactInfo.user.viaEmail"><span class="glyphicon glyphicon-remove-circle text-danger"></span></div>
+		Via Email
+	</p>
+		<p>
+		<div class="pull-right" ng-if="utilUserContactInfo.user.viaMail"><span class="glyphicon glyphicon-ok-circle text-success"></span></div>
+		<div class="pull-right" ng-if="!utilUserContactInfo.user.viaMail"><span class="glyphicon glyphicon-remove-circle text-danger"></span></div>
+		Via Mail
+	</p>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-default" type="button" ng-click="utilUserContactInfo.cancel()">Close</button>
+</div>

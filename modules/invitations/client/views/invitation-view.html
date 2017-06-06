@@ -1,0 +1,52 @@
+<div class="view-title-container flex-row">
+	<a ui-sref="p.invitation.list" class="btn icon-btn mobile-nav-btn"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	<h1>Invitations &nbsp;&rsaquo;&nbsp; {{s.communication.name}}</h1>
+	<div class="actions">
+		<button class="btn btn-default btn-sm" ui-sref="p.invitation.list">Cancel</button>
+		<button class="btn btn-default btn-sm" ng-if="s.communication.userCan.write" ng-click="$event.stopPropagation()" x-mode="'edit'"
+			ui-sref="p.invitation.edit({communicationId:s.communication._id})"><span class="glyphicon glyphicon-pencil"></span><span>Edit</span>
+      </button>
+	</div>
+</div>
+
+<div class="view-body-container">
+
+	<ul class="nav nav-tabs" ng-init="form.curTab = 'Update Details'">
+		<li role="presentation" ng-class="{'active':form.curTab === 'Update Details'}" class="form-group">
+			<a ng-click="form.curTab = 'Update Details'" title="Edit Project Update Details" name="detailsForm">
+				<span class="glyphicon glyphicon-exclamation-sign"></span>Invitation Details</a>
+		</li>
+		<li role="presentation" ng-class="{'active':form.curTab === 'recipients'}" class="form-group">
+			<a ng-click="form.curTab = 'recipients'" title="Edit Project Recipients" name="recipientsForm">
+				<span class="glyphicon glyphicon-exclamation-sign"></span>Recipients ({{recipients.length}})</a>
+		</li>
+	</ul>
+
+	<div class="tab-pane active" ng-show="form.curTab === 'Update Details'" ng-form="detailsForm">
+		<div class="detail-row">
+			<label>Invitation Name</label>
+			<span class="value">{{s.communication.name}}</span>
+		</div>
+		<div class="detail-row">
+			<label>Subject</label>
+			<span class="value">{{s.communication.templateSubject}}</span>
+		</div>
+		<div class="detail-row">
+			<label>Message</label>
+			<pre class="value wrap-text" ng-bind-html="s.communication.templateContent"></pre>
+		</div>
+	</div>
+
+	<div class="tab-pane" ng-show="form.curTab === 'recipients'" ng-form="recipientsForm">
+		<x-recipients-mgr
+			x-project="project"
+			x-recipients="recipients"
+			x-mode="'view'"
+			x-enable-add-new="false"
+			x-enable-add-existing="false"
+			x-show-cc="false"
+			x-show-bcc="false"
+			x-show-mail="false">
+	</div>
+	
+</div>

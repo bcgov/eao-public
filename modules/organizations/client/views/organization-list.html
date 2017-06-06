@@ -1,0 +1,44 @@
+
+<div class="view-title-container">
+	<h1>Organizations</h1>
+	<!-- <tmpl-permissions-gear class="permission-btn" x-context="menu.project" x-object="menu.project" x-permissions=""></tmpl-permissions-gear> -->
+</div>
+
+<div class="view-body-container">
+	<div class="button-bar clearfix">
+		<a class="btn btn-default btn-sm" ng-if="application.userCan.createOrganization" ui-sref="admin.organization.create()">
+			<span class="glyphicon glyphicon-plus"></span>
+			<span>Add Organization</span>
+		</a>
+	</div>
+	<div class="table-container">
+		<table class="table table-hover" ng-table="tableParams" x-show-filter="true">
+			<tr ng-repeat="o in $data" ui-sref="admin.organization.detail({orgId:o._id})" class="clickable">
+				<td data-title="'Name'"
+					filter="{'name':'text'}"
+					sortable="'name'">{{o.name}}</td>
+				<td data-title="'Display Name'"
+					filter="{'company':'text'}"
+					sortable="'company'">{{o.company}}</td>
+				<td data-title="'Type'"
+					filter="{'companyType':'text'}"
+					sortable="'companyType'">{{organizationTypes.display(o.companyType)}}</td>
+				<td data-title="'Company Legal'"
+					filter="{'companyLegal':'text'}"
+					sortable="'companyLegal'">{{o.companyLegal}}</td>
+				<td class="actions-col" header-class="'actions-col x1'">
+					<div class="btn-group">
+						<a class="btn icon-btn" title="Edit Organization" ng-if="application.userCan.createOrganization" ng-click="$event.stopPropagation()" ui-sref="admin.organization.edit({orgId:o._id})">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+					</div>
+				</td>
+			</tr>
+			<tr ng-if="!$data || $data.length === 0">
+				<td colspan="4">
+					No records found.
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

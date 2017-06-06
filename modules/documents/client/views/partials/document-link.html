@@ -1,0 +1,41 @@
+
+
+<p>Select a document below and click the <strong>Link</strong> button to associate.</p>
+
+<!-- DOCUMENT BROWSER -->
+<tmpl-documents-browser
+	x-approvals="false"
+	x-project="docLink.project"
+	x-artifact="docLink.artifact"
+	x-doc-location-code="{{docLink.docLocationCode}}"
+	x-allow-link='true'
+    x-documents-control="docLink.documentsControl">
+</tmpl-documents-browser>
+<!-- / DOCUMENT BROWSER -->
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Linked Documents</h2></div>
+	<ul class="list-group no-border">
+		<li class="list-group-item flex-row" ng-if="docLink.linkFiles.length == 0">
+			<div class="title">No linked documents.</div>
+		</li>
+		<li class="list-group-item flex-row" ng-repeat="file in docLink.linkFiles track by $index">
+			<div class="icon">
+				<span class='glyphicon glyphicon-file'></span>
+			</div>
+			<div class="title">
+				<span title="{{file.internalOriginalName}}">{{file.internalOriginalName}}</span>
+				<span class="file-details">
+					<small class="hidden">{{ file.projectFolderType }} / {{ file.projectFolderSubType }} / {{ file.projectFolderName }}</small>
+					<small>v.{{ file.documentVersion }}</small>
+					<small> &nbsp;|&nbsp; {{ file.dateUpdated | amDateFormat:'MMMM Do YYYY'}}</small>
+				</span>
+			</div>
+			<div class="actions">
+				<button class="btn btn-default btn-sm" ng-click="docLink.changeItem(file)" title="Remove Document">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+		</li>
+	</ul>
+</div>
