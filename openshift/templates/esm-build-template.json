@@ -47,7 +47,7 @@
             "from": {
               "kind": "ImageStreamTag",
               "namespace": "${S2I_NAMESPACE}",
-              "name": "nodejs:4"
+              "name": "nodejs:0.10"
             }
           }
         },
@@ -101,7 +101,7 @@
       "name": "SOURCE_REPOSITORY_URL",
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
-      "value": "https://github.com/bcgov/eao-public"
+      "value": "https://github.com/openshift/nodejs-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
