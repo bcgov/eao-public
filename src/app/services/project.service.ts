@@ -5,9 +5,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProjectService {
 
-	constructor(private http: Http) { }
-	getAll() {
-		return this.http.get('https://projects.eao.gov.bc.ca/api/project')
-		.map((res: Response) => res.json());
-	}
+  constructor(private http: Http) { }
+  getAll() {
+    return this.http.get('https://projects.eao.gov.bc.ca/api/project')
+      .map((res: Response) => res.json());
+  }
 }
