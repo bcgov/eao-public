@@ -1,6 +1,15 @@
-# eao-public
+# eao-public 
 
-# Prerequisites
+This project provides a baseline code base to help you kick start an Angular project that is based on BC Goverment themed Bootstrap styles, footers and headers.
+
+
+This application has a complete development environment set up, including build, test, deploy, routing, simple components, service, and directives as examples and templates.
+
+The goal is to help you start a project fast, enable you to focus on building actual business logics for your project.
+
+[Check out a running demo of just scaffold out of the box](https://eao-public-demo.pathfinder.gov.bc.ca)
+
+# Development Prerequisites
 
 ## Node and NPM 
 
@@ -92,7 +101,7 @@ Generate a module called admin and add routing feature to it.
 1. `ng test` by default to watch file changes
 
 ### End-to-end tests
-Set up with Protractor
+    Set up with Protractor
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
@@ -113,3 +122,8 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Regnerate a brand new project with routing and scss options
 
 `ng new my-app --routing --style scss`
+
+# Build and Deployment
+
+For dev, test, and production builds on OpenShift/Jenkins see `openshift/README.md` for detailed instructions
+on how to setup in an OpenShift environment using nginx.
