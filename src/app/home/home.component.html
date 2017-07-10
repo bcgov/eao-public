@@ -17,10 +17,33 @@
 
 <main id="anchor-point">
 	
-	<div class="bg-muted">
+	<div class="bg-dark">
 		<section class="container">
 			<h2>Project Activities & Updates</h2>
-			<span>Content Here...</span>
+
+			<div class="row">
+				<ng-container *ngFor="let item of results; let i=index">
+					<div class="col-md-6" *ngIf="i<4">
+						<div class="news-block">
+							<div class="news-block-title">
+								<h3>{{item.headline}}</h3>
+								<span class="news-date">{{item.dateAdded | date}}</span>
+								<p>{{item.content}}</p>
+								<div class="news-block-btns">
+									<a class="btn inverted" href="#" ng-if="activity.projectLink">View Project</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-container>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="news-block-more">
+						<a href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
+					</div>
+				</div>
+			</div>
 		</section>
 	</div>
 
