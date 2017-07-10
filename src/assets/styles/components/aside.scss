@@ -1,0 +1,33 @@
+
+$aside-section-head-color: #fff;
+$aside-section-head-bg: #38598a;
+
+aside {
+    section {
+        margin-bottom: 1.5rem;
+
+        h4 {
+            margin: 0;
+            padding: 0.65rem 1rem;
+            color: $aside-section-head-color;
+            background: $aside-section-head-bg;
+            text-transform: uppercase;
+            font-size: 0.9375rem;
+            font-weight: bold;
+        }
+
+        .aside-section-body {
+            padding: 1rem;
+            background: #f7f8fa;
+
+            p {
+                line-height: 1.45rem;
+                font-size: 0.9375rem;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+}

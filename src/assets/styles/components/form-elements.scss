@@ -9,9 +9,13 @@ $form-control-placeholder-color: #ccc;
 // Focus State
 $form-control-focus-border-color: #5091cd;
 
+.form-group {
+	margin-bottom: 2rem;
+}
+
 .form-control {
 	border-color: $form-control-border-color;
-    background: $form-control-bg;
+    background-color: $form-control-bg;
     font-size: 0.9375rem;
 
 	&:focus {
