@@ -1,6 +1,15 @@
-# eao-public
+# eao-public 
 
-# Prerequisites
+This project provides a baseline code base to help you kick start an Angular project that is based on BC Goverment themed Bootstrap styles, footers and headers.
+
+
+This application has a complete development environment set up, including build, test, deploy, routing, simple components, service, and directives as examples and templates.
+
+The goal is to help you start a project fast, enable you to focus on building actual business logics for your project.
+
+[Check out a running demo of just scaffold out of the box](https://eao-public-demo.pathfinder.gov.bc.ca)
+
+# Development Prerequisites
 
 ## Node and NPM
 
@@ -119,7 +128,10 @@ Set up via Karma, Jasmin
 1. Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ### End-to-end tests
+
 Set up with Protractor
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
 
 1. Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 1. Before running the tests make sure you are serving the app via `ng serve`.
@@ -164,3 +176,7 @@ Feel free to create pull requests from the default "master" branch, click here t
     See the License for the specific language governing permissions and
     limitations under the License.
 
+# Build and Deployment
+
+For dev, test, and production builds on OpenShift/Jenkins see `openshift/README.md` for detailed instructions
+on how to setup in an OpenShift environment using nginx.

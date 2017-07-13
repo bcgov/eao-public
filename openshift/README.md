@@ -34,7 +34,7 @@ OpenShift is responsible for:
 - Deployments
 
 Jenkins is responsible for:
-- Listing for pushes from GitHub SCM, i.e., GitHub hook -> Jenkins
+- Listening for pushes from GitHub SCM, i.e., GitHub hook -> Jenkins
 - Triggers the Build/Deploy Pipeline
 - Executing the `Jenkinsfile`
   - SCM checkout
@@ -86,7 +86,7 @@ new image based on `nginx-runtime` but with the output of `angular-builder`.
 
 To add this image to your OpenShift Project,
 1. Open OpenShift web console->Add to Project->Import YAML/JSON
-1. Paste `angular-on-nginx-build` into form -> Create
+1. Paste `angular-on-nginx-build.json` into form -> Create
 1. Change the `Name` to the name of your application
 1. Change the `Git Source Repo URL` to yours -> Create
 1. This should auto trigger a build
@@ -113,6 +113,7 @@ To add this image to your OpenShift Project,
 1. Open OpenShift web console->Add to Project->Import YAML/JSON
 1. Paste `angular-on-nginx-deploy` into form -> Create
 1. Change the `Name` to the name of your application
+1. Change the `Image Namespace` to the project of where it's built
 1. Change the `Env TAG name` to the name of your application
 1. Change the `APPLICATION_DOMAIN` to the domain name you would like
 1. This should auto trigger a build
@@ -142,5 +143,5 @@ Jenkins out-of-the-box needs some additional setup.
 1. Navigate to jenkins web site by looking in your Routes in made for Jenkins
 1. Upgrade all the plugins in Jenkins
 1. Add the `GitHub` plugin
-1. Add the `NodeJS` plugin
-1. After installing the plugin, go to the global jenkins configuration panel (JENKINS_URL/configure or JENKINS_URL/configureTools if using jenkins 2), and add new NodeJS installations.  See (https://wiki.jenkins.io/display/JENKINS/NodeJS+Plugin) for more information on what exactly to do.  Your Name of installed node must match the name in the Jenkins file where it declares the tools section.  EG: 'NodeJS-V8.x'
+
+

@@ -79,6 +79,10 @@ main {
             transform: translateX(0);
         }
     }
+
+    &:disabled {
+        pointer-events: none;
+    }
 }
 
 .slide-r-btn {

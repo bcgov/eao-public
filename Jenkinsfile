@@ -1,38 +1,36 @@
-pipeline {
-    agent any
-    tools {
-        nodejs 'NodeJS-V8.x'
-    }
-    stages {
-        stage('build eao-public-builder'){
-            steps {
-                openshiftBuild(bldCfg: 'eao-public-builder', showBuildLogs: 'true')
-            }
-        }
-        stage('tag eao-public-builder'){
-            steps {
-                openshiftTag(srcStream: 'eao-public-builder', srcTag: 'latest', destStream: 'eao-public-builder', destTag: 'dev')
-            }
-        }
-        stage('build eao-public-nginx'){
-            steps {
-                openshiftBuild(bldCfg: 'eao-public-nginx', showBuildLogs: 'true')
-            }
-        }
-        stage('tag eao-public-nginx'){
-            steps {
-                openshiftTag(srcStream: 'eao-public-nginx', srcTag: 'latest', destStream: 'eao-public-nginx', destTag: 'dev')
-            }
-        }
-       stage('build and package angular+nginx'){
-            steps {
-                openshiftBuild(bldCfg: 'eao-public-angular-on-nginx-build-build', showBuildLogs: 'true')
-            }
-        }
-        stage('tag and deploy to dev') {
-            steps {
-                openshiftTag(srcStream: 'eao-public-angular-on-nginx-build', srcTag: 'latest', destStream: 'eao-public-angular-on-nginx-build', destTag: 'dev')
-            }
-        }
-    }
+node {
+  // Edit your app's name below
+  def APP_NAME = 'eao-public'
+
+  // Edit your environment TAG names below
+  def TAG_NAMES = ['dev', 'test', 'prod']
+
+  // You shouldn't have to edit these if you're following the conventions
+  def NGINX_BUILD_CONFIG = 'nginx-runtime'
+  def BUILD_CONFIG = APP_NAME + '-build'
+  def IMAGESTREAM_NAME = APP_NAME
+
+  properties([[$class: 'BuildConfigProjectProperty', name: '', namespace: '', resourceVersion: '', uid: ''], pipelineTriggers([githubPush()])])
+
+  stage('build nginx runtime') {
+    echo "Building: " + NGINX_BUILD_CONFIG
+    openshiftBuild bldCfg: NGINX_BUILD_CONFIG, showBuildLogs: 'true'
+  }
+
+  stage('build ' + BUILD_CONFIG) {
+    echo "Building: " + BUILD_CONFIG
+    openshiftBuild bldCfg: BUILD_CONFIG, showBuildLogs: 'true'
+    openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: '$BUILD_ID', srcStream: IMAGESTREAM_NAME, srcTag: 'latest'
+  }
+  stage('deploy-' + TAG_NAMES[0]) {
+    openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[0], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
+  }
+  stage('deploy-' + TAG_NAMES[1]) {
+    input "Deploy to " + TAG_NAMES[1] + "?"
+    openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[1], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
+  }
+  stage('deploy-'  + TAG_NAMES[2]) {
+    input "Deploy to " + TAG_NAMES[2] + "?"
+    openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[2], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
+  }
 }
