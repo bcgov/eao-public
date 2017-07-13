@@ -11,7 +11,7 @@ The goal is to help you start a project fast, enable you to focus on building ac
 
 # Development Prerequisites
 
-## Node and NPM 
+## Node and NPM
 
 Node 6.x or greater must be installed.
 
@@ -19,18 +19,25 @@ Node 6.x or greater must be installed.
 
 **Note, use `angular/cli`, do not use `angular/angular-cli`**
 
-`npm i -g @angular/cli`
+```bash
+npm i -g @angular/cli`
+```
 
-`ng` is the CLI itself 
+`ng` is the CLI itself
 
-    Verify the installation
 
-    `npm list -g @angular/cli --depth=0`
-    `ng -v`
+**Verify the installation**
 
-### Install [yarn](https://yarnpkg.com/lang/en/docs/install/#alternatives-tab).
+```bash
+npm list -g @angular/cli --depth=0
+ng -v
+```
 
-`npm i -g yarn`
+## Install [yarn](https://yarnpkg.com/lang/en/docs/install/#alternatives-tab).
+
+```bash
+npm i -g yarn
+```
 
 ## Fork, Build and Deployment
 
@@ -38,12 +45,11 @@ Node 6.x or greater must be installed.
 1. First download all the dependencies with `yarn install`
 1. `npm start` to start the a webpack server to run the application on port 4300
 
-    Go to http://localhost:4300 to verify that the application is running
+    Navigate to `http://localhost:4300` to verify that the application is running
 
-    To change the default port, open `.angular-cli.json`, change the value on default.serve.port
+    To change the default port, open `.angular-cli.json`, change the value on `default.serve.port`
 1. Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build, like so: `ng serve --prod` to run in production mode.
-1. `npm run lint` to check styles
-
+1. Run `npm run lint` to check styles
 
 ## Code scaffolding
 
@@ -51,77 +57,124 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ### Example: Generate a customer component
 
-`ng g c customer -d`
+```bash
+ng g c customer
+```
 
-### Example: Generate a directive: search-bpx
-`ng g d search-box -d`
+### Example: Generate a directive: search-box
+
+```bash
+ng g d search-box
+```
 
 ### Example: Generate a service: general-data
 
-`ng g s general-data -d`
+```bash
+ng g s general-data
+```
 
-Angular will give out a warning line after this command, `
-WARNING Service is generated but not provided, it must be provided to be used
-`
+Angular will give out a warning line after this command,
+
+> WARNING Service is generated but not provided, it must be provided to be used
+
 After generating a service, we must go to its owning module and add the service to the `providers` array.
 
-### Example: Generate a service & include it in a module automatically
+### Example: Generate a service and include it in a module automatically
 
-`ng g s general-data2 -m app.module`
+```bash
+ng g s general-data2 -m app.module
+```
 
-### Example: Generate a class, an interface and emum
+### Example: Generate a class, an interface and enum
 
-`ng g cl models/customer`
+```bash
+# class
+ng g cl models/customer
 
-`ng g i models/person`
+# interface
+ng g i models/person
 
-`ng g enum models/gender`
+# enum
+ng g enum models/gender
+```
 
 ### Example: Generate a pipe
 
-`ng g pipe shared/init-caps`
+```bash
+ng g pipe shared/init-caps
+```
 
-## Generate a module
+### Generate a module
 
 Create a login directory and generate a login module in that directory
 
-`ng g module login/login.module`
+```bash
+ng g module login/login.module
+```
 
-## Add/Generate Routing Features
+### Add/Generate Routing Features
 
 Generate a module called admin and add routing feature to it.
 
-`ng g module admin --routing`
+```bash
+ng g module admin --routing
+```
 
 ## Running Tests
 
 ### Unit tests
-  
-  Set up via Karma, Jasmin
-1. `ng test` by default to watch file changes
+
+Set up via Karma, Jasmin
+1. Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ### End-to-end tests
-    Set up with Protractor
+
+Set up with Protractor
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-
-## Getting Help
-
-1. To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-1. `ng doc component` to look up documentation for features
-1. `ng serve --help` to look up doc for `ng serve` command
-
+1. Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1. Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Change aspects of the application
 
 ### Change style dialect
 
-`ng set default.styleExt css`
+```bash
+ng set default.styleExt css
+```
 
-## Regnerate a brand new project with routing and scss options
+## Regenerate a brand new project with routing and scss options
 
-`ng new my-app --routing --style scss`
+```bash
+ng new my-app --routing --style scss
+```
+
+## Getting Help
+
+1. To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md)
+1. `ng doc component` to look up documentation for features
+1. `ng serve --help` to look up doc for `ng serve` command
+
+## How to Contribute
+
+Feel free to create pull requests from the default "master" branch, click here to create one automatically: https://github.com/bcgov/eao-public/pull/new/master.
+
+## Licence
+
+    Copyright 2017 Province of British Columbia
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 # Build and Deployment
 
