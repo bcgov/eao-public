@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ComplianceOversightComponent } from 'app/compliance-oversight/compliance-oversight.component';
 import { ContactComponent } from 'app/contact/contact.component';
+import { ContactSuccess } from 'app/contact/contact.success';
 import { HomeComponent } from 'app/home/home.component';
 import { LegislationComponent } from 'app/legislation/legislation.component';
 import { ProcessComponent } from 'app/process/process.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'contact_success',
+    component: ContactSuccess
   },
   {
     path: '',

@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MaterialModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { AlertModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +18,7 @@ import { LegislationComponent } from './legislation/legislation.component';
 import { ProcessComponent } from './process/process.component';
 import { ComplianceOversightComponent } from './compliance-oversight/compliance-oversight.component';
 import { ContactComponent } from './contact/contact.component';
+import { ContactSuccess } from './contact/contact.success';
 
 @NgModule({
 	declarations: [
@@ -26,13 +30,16 @@ import { ContactComponent } from './contact/contact.component';
 	LegislationComponent,
 	ProcessComponent,
 	ComplianceOversightComponent,
-	ContactComponent
+	ContactComponent,
+	ContactSuccess
 	],
 	imports: [
 	BrowserModule,
+	BrowserAnimationsModule,
 	FormsModule,
 	HttpModule,
 	AppRoutingModule,
+	AlertModule.forRoot(),
 	NgbModule,
 	NgxPaginationModule
 	],
