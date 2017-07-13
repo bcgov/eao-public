@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProjectService } from './services/project.service';
-import { NewsService } from './services/news.service';
 import { EmailService } from './services/email.service';
 import { NewsService } from './services/news.service';
 
