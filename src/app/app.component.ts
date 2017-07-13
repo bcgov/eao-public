@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { ProjectService } from "./services/project.service";
+import { EmailService } from "./services/email.service";
 import { NewsService } from "./services/news.service";
 import { News } from './models/news';
 import { ProjectComponent } from "./project/project.component";
@@ -10,7 +11,7 @@ import { ProjectComponent } from "./project/project.component";
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
-	providers: [ProjectService, NewsService]
+	providers: [ProjectService, NewsService, EmailService]
 })
 export class AppComponent {
 	recentNews: Array<News>;
