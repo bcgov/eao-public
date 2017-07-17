@@ -31,15 +31,15 @@
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="aboutMMTI">
 						<a class="dropdown-item" href="/legislation" [routerLink]="['/legislation']" tabindex="5">
 							<strong>Legislation</strong>
-							<span class="dd-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<span class="dd-item-desc">Learn about the legislation and regulations that apply to environmental assessments in the province of British Columbia.</span>
 						</a>
 						<a class="dropdown-item" href="/process" [routerLink]="['/process']" tabindex="6">
 							<strong>Process & Procedures</strong>
-							<span class="dd-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<span class="dd-item-desc">Learn more about how the Environmental Assessment Office neutrally administers a process that holds all participants accountable.</span>
 						</a>
 						<a class="dropdown-item" href="/compliance-oversight" [routerLink]="['/compliance-oversight']" tabindex="7">
 							<strong>Compliance Oversight</strong>
-							<span class="dd-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<span class="dd-item-desc">Learn about how we collaborate with other agencies to coordinate oversight of environmental assessment projects.</span>
 						</a>
 					</div>
 				</li>
@@ -96,7 +96,7 @@
 			<div class="col-md-4">
 				<section>
 					<h4>About this website...</h4>
-					<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p class="mb-0">This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information.</p>
 				</section>
 			</div>
 
@@ -106,10 +106,10 @@
 					<h5>Find EA Projects</h5>
 					<ul>
 						<li>
-							<a ui-sref="projects">Find EA Projects by List</a>
+							<a href="/project" [routerLink]="['/project']">Find EA Projects by List</a>
 						</li>
 						<li>
-							<a ui-sref="projects">Find EA Projects by Map</a>
+							<a href="#">Find EA Projects by Map</a>
 						</li>
 					</ul>
 					<h5>The EA Process</h5>
@@ -130,7 +130,7 @@
 			<div class="col-md-4">
 				<section class="last">
 					<h4>Connect With Us</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p>If you are interested in providing us with feedback about your experience using this website, please feel free to send us your feedback.</p>
 					<a class="btn slide-r-btn inverted" href="/contact" [routerLink]="['/contact']"><span>Submit Feedback</span><i class="material-icons">arrow_forward</i></a>
 				</section>
 			</div>
@@ -138,7 +138,7 @@
 
 		<div class="footer-admin clearfix">
 			<ul class="gov-links">
-				<li><a ui-sref="home">Home</a></li>
+				<li><a href="/" [routerLink]="['/']">Home</a></li>
 				<li><a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
 				<li><a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
 				<li><a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
