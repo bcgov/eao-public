@@ -16,7 +16,11 @@ import { ProjectComponent } from './project/project.component';
 })
 export class AppComponent implements OnInit {
   recentNews: Array<News>;
-  constructor(private newsService: NewsService, private _router: Router) { }
+  hostname: String;
+  constructor(private newsService: NewsService, private _router: Router) {
+    // Used for sharing links.
+    this.hostname = encodeURI(window.location.href.replace(/\/$/, ""));
+  }
 
   ngOnInit() {
     this._router.events.subscribe((url: any) => {
