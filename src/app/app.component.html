@@ -1,12 +1,12 @@
 
-<header id="header">
+<header class="app-header" id="header">
 	<div class="brand-container">
 		<a class="brand" href="/" [routerLink]="['/']" tabindex="0"></a>
-		<button class="navbar-toggler float-right collapsed" type="button" 
-			data-toggle="collapse" 
-			data-target="#mainNav" 
-			aria-controls="mainNav" 
-			aria-expanded="false" 
+		<button class="navbar-toggler float-right collapsed" type="button"
+			data-toggle="collapse"
+			data-target="#mainNav"
+			aria-controls="mainNav"
+			aria-expanded="false"
 			aria-label="Toggle navigation"><i class="material-icons">menu</i><span>MENU</span>
 		</button>
 	</div>
@@ -24,8 +24,8 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" id="aboutMMTI" tabindex="4"
-						data-toggle="dropdown" 
-						aria-haspopup="true" 
+						data-toggle="dropdown"
+						aria-haspopup="true"
 						aria-expanded="false"><span>The EA Process</span><span class="caret"></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="aboutMMTI">
@@ -58,9 +58,9 @@
 		</div>
 	</nav>
 </header>
-	
+
 <router-outlet>
-	
+
 </router-outlet>
 
 	<!--
@@ -89,7 +89,7 @@
 	</div>
 	-->
 
-<footer>
+<footer class="app-footer">
 	<div class="container">
 		<div class="row">
 
@@ -109,7 +109,7 @@
 							<a href="/project" [routerLink]="['/project']">Find EA Projects by List</a>
 						</li>
 						<li>
-							<a href="#">Find EA Projects by Map</a>
+							<a href="/map" [routerLink]="['/map']">Find EA Projects by Map</a>
 						</li>
 					</ul>
 					<h5>The EA Process</h5>
@@ -168,7 +168,7 @@
 			</ul>
 			
 		</div>
-		
+
 	</div>
 </footer>
 

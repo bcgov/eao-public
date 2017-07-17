@@ -20,6 +20,7 @@ import { ProcessComponent } from './process/process.component';
 import { ComplianceOversightComponent } from './compliance-oversight/compliance-oversight.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactSuccess } from './contact/contact.success';
+import { MapModule } from './map/map.module';
 
 @NgModule({
 	declarations: [
@@ -43,7 +44,8 @@ import { ContactSuccess } from './contact/contact.success';
 	AppRoutingModule,
 	AlertModule.forRoot(),
 	NgbModule,
-	NgxPaginationModule
+	NgxPaginationModule,
+	MapModule
 	],
 	providers: [NewsComponent],
 	bootstrap: [AppComponent]

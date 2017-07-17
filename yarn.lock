@@ -165,6 +165,10 @@
     magic-string "^0.19.0"
     source-map "^0.5.6"
 
+"@types/arcgis-js-api@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@types/arcgis-js-api/-/arcgis-js-api-4.4.0.tgz#b247d9b6425c44c8b6abd4395ec41541065bb088"
+
 "@types/jasmine@2.5.38":
   version "2.5.38"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
@@ -260,6 +264,12 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular-esri-loader@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/angular-esri-loader/-/angular-esri-loader-1.1.0.tgz#368e7d48b661df643463f3ae95a29b1d4171b943"
+  dependencies:
+    esri-loader "^1.0.0"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -1617,6 +1627,10 @@ esprima@^2.6.0:
 esprima@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+
+esri-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/esri-loader/-/esri-loader-1.0.0.tgz#7abf56e4f5089b69285d58bde5cfe2fa86b07ed7"
 
 esutils@^2.0.2:
   version "2.0.2"

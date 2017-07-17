@@ -1,0 +1,115 @@
+@import '~assets/styles/globals';
+
+app-main-map {
+    @include flex-box();
+    @include flex-direction(column);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+
+    header {
+        &.app-header {
+            @include flex(0 0 auto);
+            @include clearfix;
+            position: relative;  // header positioning fix
+            border-bottom: 4px solid $gold;
+            background: $header-bg;
+            color: $header-font-color;
+
+            .map-header-btns {
+                margin-top: 4px;
+                margin-right: 3px;
+
+                .btn {
+                    margin-left: 0.5rem;
+                    padding: 0;
+                    width: 2rem;
+                    height: 2rem;
+                    line-height: 1rem;
+                    color: $header-font-color;
+                }
+
+                a {
+                    &.btn {
+                        i {
+                            margin-top: 3px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    + footer {
+        display: none;
+    }
+
+   .map-container {
+        @include flex(1 1 auto);
+        position: relative;
+
+        esri-map {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            // map popup styling
+            .esri-popup {
+                background: $bg-dark;
+                color: $bg-dark-color;
+
+                .esri-popup__main-container {
+                    background: $bg-dark;
+                    color: $bg-dark-color;
+                }
+
+                .esri-popup__pointer-direction {
+                    background: $bg-dark;
+                }
+
+                .esri-popup__button {
+                    color: $bg-dark-color;
+                }
+
+                .popup-detail-container {
+                    @include flex(1 1 auto);
+
+                    p {
+                        margin-bottom: 0;
+                        line-height: 1.25rem;
+                        font-size: 0.875rem;
+                    }
+
+                    a {
+                        color: inherit;
+                        text-decoration: underline;
+                    }
+                }
+
+                .popup-btn-container {
+                    @include flex(0 0 auto);
+                    margin-top: 1.25rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    app-main-map {
+        header {
+            &.app-header {
+                .map-header-btns {
+                    .close-btn {
+                        margin: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
