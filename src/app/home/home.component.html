@@ -26,7 +26,7 @@
 					<div class="col-md-6" *ngIf="i<4">
 						<div class="news-block">
 							<div class="news-block-title">
-								<h3><sup *ngIf="item.project">{{item.project}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
+								<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
 								<span class="news-date">{{item.dateAdded | date}}</span>
 								<p>{{item.content}}</p>
 								<div class="news-block-btns">
