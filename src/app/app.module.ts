@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectComponent } from './project/project.component';
 import { NewsComponent } from './news/news.component';
+import { NewsFilterPipe } from './news-filter.pipe';
 import { ObjectFilterPipe } from './object-filter.pipe';
 import { LegislationComponent } from './legislation/legislation.component';
 import { ProcessComponent } from './process/process.component';
@@ -26,6 +27,7 @@ import { ContactSuccess } from './contact/contact.success';
 	HomeComponent,
 	ProjectComponent,
 	NewsComponent,
+	NewsFilterPipe,
 	ObjectFilterPipe,
 	LegislationComponent,
 	ProcessComponent,
