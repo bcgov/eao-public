@@ -74,13 +74,13 @@
                 <tr *ngFor="let item of results | objectFilter: filter | paginate: config">
                     <td colspan="2">
                         <h3>
-							<sup *ngIf="item.project">{{item.project}}</sup>
+							<sup *ngIf="item.project">{{item.project.name}}</sup>
 							{{item.headline}}
 						</h3>
 						<span class="activity-date">{{item.dateUpdated | date:'longDate'}}</span>
                         <p>{{item.content}}</p>
                         <div class="actvity-btns">
-                            <a class="btn content-btn-alt" href="" target="_blank">View Project</a>
+                            <a class="btn content-btn-alt" href="https://projects.eao.gov.bc.ca/p/{{item.project.code}}/detail" target="_blank">View Project</a>
                         </div>
                     </td>
                 </tr>
