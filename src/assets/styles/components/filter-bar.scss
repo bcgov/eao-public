@@ -53,13 +53,26 @@
                 margin: 0;
             }
 
-            .btn-txt {
+            .hide-filter-txt {
                 display: none;
+            }
+
+            .btn-txt {
                 min-width: 5rem;
             }
 
             &:focus {
                 z-index: 2;
+            }
+
+            &.show-filters {
+                .show-filter-txt {
+                    display: none;
+                }
+
+                .hide-filter-txt {
+                    display: inline-block;
+                }
             }
         }
     }

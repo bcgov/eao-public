@@ -55,15 +55,13 @@
         margin-bottom: 2rem;
 
         td {
+            position: relative;
             padding: 2rem 1.5rem !important;
         }
 
         .date-col {
             width: 10rem;
-        }
-
-        td.date-col {
-            display: none;
+            text-align: right;
         }
 
         .activity-btns {
@@ -71,6 +69,13 @@
                 margin-right: 0.25rem;
                 font-size: 0.85rem;
             }
+        }
+
+        .activity-date {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
         }
     }
 
