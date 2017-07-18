@@ -36,8 +36,10 @@
 				
 				<!-- Advanced Filters TBD -->
 				<div class="form-group">
-					<label>Filter</label>
-					<select class="form-control">
+					<label>Type</label>
+					<select class="form-control" [(ngModel)]="filter">
+						<option value="news">News</option>
+						<option value="public comment period">Public Comment Period</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -53,14 +55,12 @@
 				
 			</div>
 
-			<!-- TODO: Show/Hide Depending on Filter state -->
-			<!--
-			<div class="button-row">
-				<button class="btn btn-default btn-sm">
+			<div class="button-row" *ngIf="filter">
+				<button class="btn btn-default btn-sm" (click)="filter = undefined">
 					Clear Filters
 				</button>
 			</div>
-			-->
+
 		</div>
         
         <table class="activities-table table" *ngIf="results">
@@ -71,7 +71,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of results | objectFilter: filter | paginate: config">
+                <tr *ngFor="let item of results | newsFilter: filter | paginate: config">
                     <td colspan="2">
                         <h3>
 							<sup *ngIf="item.project">{{item.project.name}}</sup>
