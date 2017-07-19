@@ -12,6 +12,7 @@ import { PaginationInstance } from 'ngx-pagination';
 export class ProjectComponent implements OnInit {
   results: Array<Project>;
   public loading: boolean;
+  public showFilters: boolean;
   public filter = '';
   public config: PaginationInstance = {
     id: 'custom',
