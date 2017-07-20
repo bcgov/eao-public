@@ -5,7 +5,7 @@ function scroll_style() {
     if (div_top.length) {
         var anchorPoint = div_top.offset().top;
 
-        if (window_top > anchorPoint - 350) {
+        if (window_top > anchorPoint - 450) {
             $("#header").addClass("dark");
         } else {
             $("#header").removeClass("dark");
