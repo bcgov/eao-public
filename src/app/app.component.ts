@@ -21,6 +21,10 @@ export class AppComponent implements OnInit {
     // Used for sharing links.
     this.hostname = encodeURI(window.location.href.replace(/\/$/, ""));
   }
+  
+  scrollToTop() {
+    window.scrollTo(0,0);
+  }
 
   ngOnInit() {
     this._router.events.subscribe((url: any) => {
