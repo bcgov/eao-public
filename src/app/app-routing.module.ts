@@ -8,6 +8,7 @@ import { LegislationComponent } from 'app/legislation/legislation.component';
 import { ProcessComponent } from 'app/process/process.component';
 import { ProjectComponent } from 'app/project/project.component';
 import { NewsComponent } from 'app/news/news.component';
+import { MainMapComponent } from 'app/map/main-map/main-map.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'news',
     component: NewsComponent
+  },
+  {
+    path: 'map',
+    component: MainMapComponent
   }
 ];
 
