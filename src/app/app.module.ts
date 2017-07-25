@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MaterialModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,31 +23,31 @@ import { ContactSuccess } from './contact/contact.success';
 import { MapModule } from './map/map.module';
 
 @NgModule({
-	declarations: [
-	AppComponent,
-	HomeComponent,
-	ProjectComponent,
-	NewsComponent,
-	NewsFilterPipe,
-	ObjectFilterPipe,
-	LegislationComponent,
-	ProcessComponent,
-	ComplianceOversightComponent,
-	ContactComponent,
-	ContactSuccess
-	],
-	imports: [
-	BrowserModule,
-	BrowserAnimationsModule,
-	FormsModule,
-	HttpModule,
-	AppRoutingModule,
-	AlertModule.forRoot(),
-	NgbModule,
-	NgxPaginationModule,
-	MapModule
-	],
-	providers: [NewsComponent],
-	bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProjectComponent,
+    NewsComponent,
+    NewsFilterPipe,
+    ObjectFilterPipe,
+    LegislationComponent,
+    ProcessComponent,
+    ComplianceOversightComponent,
+    ContactComponent,
+    ContactSuccess
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpModule,
+    AppRoutingModule,
+    AlertModule.forRoot(),
+    NgbModule,
+    NgxPaginationModule,
+    MapModule
+  ],
+  providers: [NewsComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
