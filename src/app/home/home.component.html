@@ -30,7 +30,7 @@
 								<span class="news-date">{{item.dateAdded | date}}</span>
 								<p>{{item.content}}</p>
 								<div class="news-block-btns">
-									<a class="btn inverted" href="#" ng-if="activity.projectLink">View Project</a>
+									<a class="btn inverted" href="https://projects.eao.gov.bc.ca/p/{{item.project.code}}/detail" ng-if="activity.projectLink">View Project</a>
 								</div>
 							</div>
 						</div>
@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="news-block-more">
-						<a href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
+						<a class="bg-dark-link" href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
 					</div>
 				</div>
 			</div>

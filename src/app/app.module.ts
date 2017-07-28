@@ -21,6 +21,7 @@ import { ComplianceOversightComponent } from './compliance-oversight/compliance-
 import { ContactComponent } from './contact/contact.component';
 import { ContactSuccess } from './contact/contact.success';
 import { MapModule } from './map/map.module';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MapModule } from './map/map.module';
     HttpModule,
     AppRoutingModule,
     AlertModule.forRoot(),
+    Ng2PageScrollModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
     MapModule
