@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ProjectService } from './services/project.service';
 import { EmailService } from './services/email.service';
 import { NewsService } from './services/news.service';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 import { News } from './models/news';
 import { ProjectComponent } from './project/project.component';
@@ -20,10 +21,23 @@ export class AppComponent implements OnInit {
   constructor(private newsService: NewsService, private _router: Router) {
     // Used for sharing links.
     this.hostname = encodeURI(window.location.href.replace(/\/$/, ''));
-  }
 
-  scrollToTop() {
-    window.scrollTo(0, 0);
+    PageScrollConfig.defaultScrollOffset = 50;
+    PageScrollConfig.defaultEasingLogic = {
+      ease: (t: number, b: number, c: number, d: number): number => {
+        // easeInOutExpo easing
+        if (t === 0) {
+          return b;
+        }
+        if (t === d) {
+          return b + c;
+        }
+        if ((t /= d / 2) < 1) {
+          return c / 2 * Math.pow(2, 8 * (t - 1)) + b;
+        }
+        return c / 2 * (-Math.pow(2, -8 * --t) + 2) + b;
+      }
+    };
   }
 
   ngOnInit() {

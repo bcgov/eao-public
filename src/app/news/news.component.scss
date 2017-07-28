@@ -1,7 +1,9 @@
+@import "~assets/styles/base.scss";
+$news-block-border-color: #5475a7;
 
 .news-block {
     padding: 2.5rem 0;
-    border-top: 2px solid #5475a7;
+    border-top: 2px solid $bg-dark-border-color;
 
     h3 {
         margin-bottom: 0.2rem;
@@ -33,14 +35,13 @@
         .btn {
             margin-right: 0.25rem;
             font-size: 0.85rem;
-            //border-color: #5475a7;
         }
     }
 }
 
 .news-block-more {
     padding-top: 2rem;
-    border-top: 3px solid #5475a7;
+    border-top: 3px solid $bg-dark-border-color;
 
     a {
         font-weight: 600;

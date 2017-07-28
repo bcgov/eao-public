@@ -59,35 +59,7 @@
 	</nav>
 </header>
 
-<router-outlet>
-
-</router-outlet>
-
-	<!--
-	<div id="pad">
-		<nav>
-			<ul>
-				<li><a href="/" [routerLink]="['/']">Home</a></li>
-				<li><a href="/project" [routerLink]="['/project']">Project</a></li>
-				<li><a href="/news" [routerLink]="['/news']">News</a></li>
-			</ul>
-		</nav>
-
-		<div class="container">
-			<router-outlet>
-				<div *ngIf="recentNews">
-					<h1>Recent News</h1>
-					<div class="list-group table-of-contents">
-						<div *ngFor="let p of recentNews" class="list-group-item">
-							<div class="list-group-item">{{p.id}}</div>
-							<div class="">{{p.headline}}</div>
-						</div>
-					</div>
-				</div>
-			</router-outlet>
-		</div>
-	</div>
-	-->
+<router-outlet id="scrollTop"></router-outlet>
 
 <footer class="app-footer">
 	<div class="container">
@@ -172,4 +144,9 @@
 	</div>
 </footer>
 
-<button class="btn scroll-top-btn" (click)="scrollToTop()"><i class="material-icons">arrow_upward</i></button>
+<a href="#scrollTop" class="btn scroll-top-btn" 
+	pageScroll 
+	[pageScrollOffset]="0" 
+	[pageScrollDuration]="800">
+	<i class="material-icons">arrow_upward</i>
+</a>

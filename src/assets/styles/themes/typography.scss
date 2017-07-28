@@ -1,4 +1,9 @@
 
+// Fix the type flashing bug that occurs when page loads
+.wf-loading {
+    display: none;
+}
+
 body {
     font-family: "myriad-pro";
     font-weight: 400;
@@ -14,7 +19,7 @@ h1 {
         display: block;
         letter-spacing: 0;
         line-height: normal;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 400;
     }
 }
@@ -37,14 +42,13 @@ h4 {
 p {
     margin-bottom: 1.75rem;
     font-size: 1rem;        //16px
-    line-height: 1.75rem;
+    line-height: 1.8rem;
 }
 
 a {
     color: #1a5a96;
 }
 
-// Controls / Form Components
 button, 
 input, 
 select, 
