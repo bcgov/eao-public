@@ -4,9 +4,9 @@ import { MapConfig } from './map-config.interface';
 
 const webmaps = {
   dev: '63e8128ae559429dbc7b045e8a6ba771',
-  test: 'e7062718902a4cff82a2d05311bf03fa',
-  train: 'e7062718902a4cff82a2d05311bf03fa',
-  prod: '25c75e90f0cf4691a86e46067782e479'
+  test: '63e8128ae559429dbc7b045e8a6ba771',
+  train: '63e8128ae559429dbc7b045e8a6ba771',
+  prod: 'a39ebfecf4a84daf926dcd7f2ce000a8'
 };
 
 const webmapForEnv = (): string => {

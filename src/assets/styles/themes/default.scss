@@ -18,7 +18,7 @@ $link-color:                    #1a5a96;
 $header-font-color:             #FFF;
 $header-bg:                     $primary;
 
-// Footer 
+// Footer
 $footer-bg:                     $primary;
 $footer-color:                  #FFF;
 
@@ -26,7 +26,7 @@ $footer-color:                  #FFF;
 $mn-font-size:                  0.875rem; //14px
 $mn-dropdown-menu-size:         0.875rem; //13px
 $mn-color:                      #FFF;
-$mn-border-color:               #5f79a2;   
+$mn-border-color:               #5f79a2;
 $mn-hover-bg:                   #2b4777;
 $mn-hover-color:                $gold;
 $mn-toggle-color:               $gold;
@@ -63,6 +63,13 @@ $pgn-btn-active-bg:             #5091cd;
 $pgn-btn-active-color:          #fff;
 $pgn-btn-border:                1px solid #ccc;
 $pgn-btn-color:                 #000;
+
+// Spinner
+$spinner-width: 50px;
+$spinner-color: #5091cd;
+$spinner-bg: rgba(255,255,255,0.8);
+$spinner-invert-color: #FFF;
+$spinner-invert-bg: rgba(0,0,0,0.8);
 
 // Tables
 $table-header-bg:               #fff;

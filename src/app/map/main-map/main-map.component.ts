@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostBinding, Inject, OnInit } from '@angular/core';
 
 import { MAP_CONFIG_TOKEN, DEFAULT_MAP_CONFIG, MapConfig } from '../config';
 
@@ -16,6 +16,8 @@ export class MainMapComponent implements OnInit {
   popupProperties: __esri.PopupProperties;
   map: __esri.Map;
   mapView: __esri.MapView;
+
+  @HostBinding('class.full-screen') fullScreen = true;
 
   constructor(@Inject(MAP_CONFIG_TOKEN) private config: MapConfig) { }
 
@@ -35,12 +37,12 @@ export class MainMapComponent implements OnInit {
   }
 
   private overridePopup(popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
-    const setPopup = (fl: __esri.FeatureLayer) => {
-      fl.popupTemplate.title = <string>popupTemplate.title;
-      fl.popupTemplate.content = <string>popupTemplate.content;
-    };
+    return new Promise((resolve, reject) => {
+      const setPopup = (fl: __esri.FeatureLayer) => {
+        fl.popupTemplate.title = <string>popupTemplate.title;
+        fl.popupTemplate.content = <string>popupTemplate.content;
+      };
 
-    return new Promise(resolve => {
       const featureLayer: __esri.FeatureLayer = this.map.layers.find((lyr: __esri.Layer) => lyr.type === 'feature');
       if (!featureLayer) {
         return resolve();
@@ -48,7 +50,9 @@ export class MainMapComponent implements OnInit {
 
       // the `esri/layers/FeatureLayer` instance is promise-based
       // call the .then() method to execute code once the layer is ready
-      return featureLayer.then(setPopup).then(resolve);
+      return featureLayer.then(setPopup)
+        .then(resolve)
+        .otherwise(reject);
     });
   }
 }
