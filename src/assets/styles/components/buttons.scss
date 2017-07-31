@@ -142,13 +142,11 @@ main {
 }
 
 .content-btn-alt {
-    padding: 0.6rem 1rem;
+    padding: 0.5rem;
     color: #5091cd;
-    border: 2px solid #5091cd;
+    border: 1px solid #5091cd;
     background: transparent;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 600;
 
     &:focus,
     &:hover {

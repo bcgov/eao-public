@@ -1,52 +1,4 @@
 @import "~assets/styles/base.scss";
-$news-block-border-color: #5475a7;
-
-.news-block {
-    padding: 2.5rem 0;
-    border-top: 2px solid $bg-dark-border-color;
-
-    h3 {
-        margin-bottom: 0.2rem;
-        text-overflow: ellipsis;
-        font-size: 1.75rem;
-        font-weight: 300;
-
-        sup {
-            display: block;
-            top: 0;
-            margin-bottom: 0.4rem;
-            line-height: 1.25rem;
-            font-size: 1.25rem;
-        }
-    }
-
-    p {
-        height: 4.5rem;
-        overflow: hidden;
-    }
-
-    .news-date {
-        display: block;
-        margin-bottom: 1.5rem;
-        opacity: 0.5;
-    }
-
-    .news-block-btns {
-        .btn {
-            margin-right: 0.25rem;
-            font-size: 0.85rem;
-        }
-    }
-}
-
-.news-block-more {
-    padding-top: 2rem;
-    border-top: 3px solid $bg-dark-border-color;
-
-    a {
-        font-weight: 600;
-    }
-}
 
 .activities-section {
     position: relative;
@@ -98,7 +50,7 @@ $news-block-border-color: #5475a7;
 
     p {
         overflow: hidden;
-        max-height: 4.5rem;
+        //max-height: 4.5rem;
         line-height: 1.5rem;
         font-size: 1rem;
     }
