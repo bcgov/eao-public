@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactSuccess } from './contact/contact.success';
 import { MapModule } from './map/map.module';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { ProponentFilterPipe } from './proponent-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
     ProcessComponent,
     ComplianceOversightComponent,
     ContactComponent,
-    ContactSuccess
+    ContactSuccess,
+    ProponentFilterPipe
   ],
   imports: [
     BrowserModule,
