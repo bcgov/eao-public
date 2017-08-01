@@ -21,7 +21,7 @@
 		<section class="container">
 			<h2>Project Activities & Updates</h2>
 
-			<div class="spinner-container inverted" *ngIf="!results">
+			<div class="spinner-container" *ngIf="!results">
 				<div class="spinner-new rotating"></div>
 			</div>
 
@@ -35,9 +35,9 @@
 									<span class="news-date">{{item.dateAdded | date}}</span>
 									<p>{{item.content}}</p>
 									<div class="news-block-btns">
-										<a class="btn btn-sm inverted" href="https://projects.eao.gov.bc.ca/p/{{item.project.code}}/detail" ng-if="activity.projectLink">Project Info</a>
-										<a class="btn btn-sm inverted" href="{{item.commentPeriodLink}}" target="_blank" *ngIf="item.commentPeriodLink">View Comments</a>
-										<a class="btn btn-sm inverted" href="{{item.documentLink}}" target="_blank" *ngIf="item.documentLink">View Documents</a>
+										<a class="btn btn-sm inverted" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail">Project Info</a>
+										<a class="btn btn-sm inverted" *ngIf="item.commentPeriodLink" href="{{item.commentPeriodLink}}" target="_blank">View Comments</a>
+										<a class="btn btn-sm inverted" *ngIf="item.documentLink" href="{{item.documentLink}}" target="_blank">View Documents</a>
 									</div>
 								</div>
 							</div>

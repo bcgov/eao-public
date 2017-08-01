@@ -17,6 +17,10 @@ export class ProjectComponent implements OnInit {
   public filter = '';
   public propfilter = '';
   public proponentListFilter: '';
+  public projectTypeFilter: '';
+  public filterType: '';
+  public projectStatusFilter: '';
+  public filterStatus: '';
   public proponents: Array<Proponent> = [];
   public config: PaginationInstance = {
     id: 'custom',
@@ -41,13 +45,23 @@ export class ProjectComponent implements OnInit {
   }
 
   insertProponents(data) {
-      var index = -1;
-      for(var i = 0, len = data.length; i < len; i++) {
-          this.proponents.indexOf(data[i].proponent.name) === -1 ? this.proponents.push({name: data[i].proponent.name}) : console.log('This item already exists');
-      }
+    var index = -1;
+    for(var i = 0, len = data.length; i < len; i++) { 
+        this.proponents.indexOf(data[i].proponent.name) === -1 ? this.proponents.push({name: data[i].proponent.name}) : console.log('This item already exists');
     }
+  }
 
   applyProponentFilter() {
     this.propfilter = this.proponentListFilter;
+  }
+
+  clearAllProjectFilters() {
+    this.filter = undefined;
+    this.projectTypeFilter = undefined;
+    this.filterType = undefined;
+    this.projectStatusFilter = undefined;
+    this.filterStatus = undefined;
+    this.proponentListFilter = undefined;
+    this.propfilter = undefined;
   }
 }

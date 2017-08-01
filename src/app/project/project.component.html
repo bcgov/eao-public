@@ -4,7 +4,7 @@
 		<div class="container-inner">
 			<div class="hb-txt">
 				<h1>Find EA Projects in British Columbia</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<p>The EAO Project Information and Collaboration site is the source for information about proposed major projects undergoing Environmental Assessments in British Columbia.</p>
 			</div>
 		</div>
 	</div>
@@ -33,23 +33,45 @@
 				<div class="form-group">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
-      					<option value=""></option>
+      					<option value="" selected>All</option>
       					<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label>Type</label>
-					<select class="form-control">
+
+					<!-- TODO: Populate Dynamically -->
+					<select class="form-control" [(ngModel)]="filterType">
+						<option value="">All</option>
+						<option value="mines">Energy-Electricity</option>
+						<option value="Energy-Petroleum & Natural Gas">Energy-Petroleum & Natural Gas</option>
+						<option value="Food Processing">Food Processing</option>
+						<option value="Industrial">Industrial</option>
+						<option value="Mines">Mines</option>
+						<option value="Other">Other</option>
+						<option value="Tourist Destination Resorts">Tourist Destination Resorts</option>
+						<option value="Transportation">Transportation</option>
+						<option value="Waste Disposal">Waste Disposal</option>
+						<option value="Water Management">Water Management</option>
 					</select>
+
 				</div>
 				<div class="form-group">
 					<label>Status</label>
-					<select class="form-control">
+					
+					<!-- TODO: Populate Dynamically -->
+					<select class="form-control" [(ngModel)]="filterStatus">
+						<option value="" selected>All</option>
+						<option value="Initiated">Initiated</option>
+						<option value="Submitted">Submitted</option>
+						<option value="In Progress">In Progress</option>
+						<option value="Certified">Certified</option>
+						<option value="Decommissioned">Decommissioned</option>
 					</select>
 				</div>
 			</div>
-			<div class="button-row">
-				<button class="btn btn-default btn-sm" *ngIf="filter" (click)="filter = undefined">
+			<div class="button-row" *ngIf="filter || filterStatus || filterType || proponentListFilter">
+				<button class="btn btn-default btn-sm" (click)="clearAllProjectFilters()">
 					Clear Filters
 				</button>
 			</div>
@@ -61,19 +83,15 @@
 					<th>Name</th>
 					<th>Proponent</th>
 					<th>Type</th>
-					<!--
 					<th>Status</th>
-					-->
 				</tr>
 			</thead>
 			<tbody>
-                  <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | paginate: config">
+                <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectStatusFilter: filterStatus | paginate: config">
 					<td><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
 					<td>{{item.proponent.name}}</td>
 					<td>{{item.type}}</td>
-					<!--
 					<td>{{item.status}}</td>
-					-->
                 </tr>
 			</tbody>
 		</table>
