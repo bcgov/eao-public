@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ProjectComponent } from './project/project.component';
 import { NewsComponent } from './news/news.component';
 import { NewsFilterPipe } from './news-filter.pipe';
+import { NewsTypeFilterPipe } from './news-type-filter.pipe';
 import { ObjectFilterPipe } from './object-filter.pipe';
 import { ProjectTypeFilterPipe } from './project-type-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
@@ -33,6 +34,7 @@ import { ProponentFilterPipe } from './proponent-filter.pipe';
     ProjectComponent,
     NewsComponent,
     NewsFilterPipe,
+    NewsTypeFilterPipe,
     ObjectFilterPipe,
     ProjectTypeFilterPipe,
     ProjectStatusFilterPipe,

@@ -14,6 +14,8 @@ export class NewsComponent implements OnInit {
   public loading: boolean;
   public showFilters: boolean;
   public filter = '';
+  public NewsTypeFilter: '';
+  public filterType = '';
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 10,
@@ -35,4 +37,9 @@ export class NewsComponent implements OnInit {
     );
   }
 
+  clearAllNewsFilters() {
+    this.filter = undefined;
+    this.NewsTypeFilter = undefined;
+    this.filterType = undefined;
+  }
 }
