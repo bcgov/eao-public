@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Project } from '../models/project';
+import { Proponent } from '../models/proponent';
 import { ProjectService } from '../services/project.service';
 import { PaginationInstance } from 'ngx-pagination';
 
@@ -14,6 +15,9 @@ export class ProjectComponent implements OnInit {
   public loading: boolean;
   public showFilters: boolean;
   public filter = '';
+  public propfilter = '';
+  public proponentListFilter: '';
+  public proponents: Array<Proponent> = [];
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 10,
@@ -27,6 +31,7 @@ export class ProjectComponent implements OnInit {
     this.projectService.getAll().subscribe(
       data => {
         this.results = data;
+        this.insertProponents(data);
         this.loading = false;
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
@@ -35,4 +40,14 @@ export class ProjectComponent implements OnInit {
     );
   }
 
+  insertProponents(data) {
+      var index = -1;
+      for(var i = 0, len = data.length; i < len; i++) {
+          this.proponents.indexOf(data[i].proponent.name) === -1 ? this.proponents.push({name: data[i].proponent.name}) : console.log('This item already exists');
+      }
+    }
+
+  applyProponentFilter() {
+    this.propfilter = this.proponentListFilter;
+  }
 }

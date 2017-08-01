@@ -32,7 +32,9 @@
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
 				<div class="form-group">
 					<label>Proponent</label>
-					<select class="form-control">
+					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
+      					<option value=""></option>
+      					<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -65,7 +67,7 @@
 				</tr>
 			</thead>
 			<tbody>
-                  <tr *ngFor="let item of results | objectFilter: filter | paginate: config">
+                  <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | paginate: config">
 					<td><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
 					<td>{{item.proponent.name}}</td>
 					<td>{{item.type}}</td>
