@@ -1,5 +1,14 @@
 @import "~assets/styles/base.scss";
 
+// hide the footer when a component (e.g. the map) is shown full screen
+.full-screen {
+    + footer {
+        &.app-footer {
+            display: none;
+        }
+    }
+}
+
 footer {
     &.app-footer {
         border-top: 4px solid $gold;

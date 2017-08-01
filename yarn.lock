@@ -3238,6 +3238,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ng2-page-scroll@^4.0.0-beta.9:
+  version "4.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/ng2-page-scroll/-/ng2-page-scroll-4.0.0-beta.9.tgz#39b20518356c7d33aa5822d1e558dba1f9da244a"
+
 ngx-bootstrap@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-1.7.1.tgz#f48e5d81c40e8e1f25abd3e7b38808ee9ec8e903"
