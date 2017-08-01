@@ -3,7 +3,7 @@
         <div class="container-inner">
             <div class="hb-txt">
                 <h1>Activities & Updates</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Stay up-to-date on environmental assessment milestones in British Columbia.</p>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
 						<span class="activity-date">{{item.dateUpdated | date:'longDate'}}</span>
                         <p>{{item.content}}</p>
                         <div class="actvity-btns">
-							<a class="btn btn-sm content-btn-alt" href="#" target="_blank">View Project</a>
+							<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail" target="_blank">View Project</a>
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.documentLink" href="{{item.documentLink}}" target="_blank">View Document</a>
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.commentPeriodLink" href="{{item.commentPeriodLink}}" target="_blank">View Comment Period</a>
                         </div>
