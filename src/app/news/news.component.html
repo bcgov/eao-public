@@ -12,7 +12,7 @@
 <section class="activities-section">
 	<div class="container" id="anchor-point">
 
-        <div class="spinner-container" *ngIf="loading">
+		<div class="spinner-container" *ngIf="!results">
 			<div class="spinner-new rotating"></div>
 		</div>
 
@@ -80,7 +80,9 @@
 						<span class="activity-date">{{item.dateUpdated | date:'longDate'}}</span>
                         <p>{{item.content}}</p>
                         <div class="actvity-btns">
-                            <a class="btn content-btn-alt" href="https://projects.eao.gov.bc.ca/p/{{item.project.code}}/detail" target="_blank">View Project</a>
+							<a class="btn btn-sm content-btn-alt" href="#" target="_blank">View Project</a>
+							<a class="btn btn-sm content-btn-alt" *ngIf="item.documentLink" href="{{item.documentLink}}" target="_blank">View Document</a>
+							<a class="btn btn-sm content-btn-alt" *ngIf="item.commentPeriodLink" href="{{item.commentPeriodLink}}" target="_blank">View Comment Period</a>
                         </div>
                     </td>
                 </tr>
