@@ -11,7 +11,7 @@
     height: 24rem;
     background-color: rgba($header-bg, 1);
     background-size: 280%;
-    background-position: -8rem 0;
+    background-position: center;
 
     .container {
         display: table;
@@ -42,8 +42,8 @@
 
 @media (min-width: 400px) {
     .hero-banner {
-        background-size: 230%;
-        background-position: -150px center;
+        background-size: 200%;
+        background-position: -15rem center;
     }
 }
 
@@ -60,8 +60,8 @@
 
         &.hb-sm {
             height: 24rem;
-            background-position: center -10rem;
-            background-size: 120%;
+            background-position: center;
+            background-size: 160%;
         }
     }
 }
@@ -93,7 +93,7 @@
 
         &.hb-sm {
             height: 24rem;
-            background-position: center -16rem;
+            background-position: center -8rem;
             background-size: 105%;
         }
     }
@@ -103,6 +103,23 @@
     .hero-banner {
         .container {
             max-width: 1100px;
+        }
+
+        &.hb-sm {
+            background-size: 100%;
+            background-position: center center;
+        }
+    }
+}
+
+@media (min-width: 1690px) {
+    .hero-banner {
+        .container {
+            max-width: 1100px;
+        }
+
+        &.hb-sm {
+            background-position: center -14rem;
         }
     }
 }
