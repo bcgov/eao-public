@@ -2,7 +2,7 @@
 
 // Banner
 .hero-banner {
-    background-image: url("assets/images/hero-banner-placeholder.jpg");
+    background-image: url("assets/images/hero-banner-placeholder-2.jpg");
     background-repeat: no-repeat;
 }
 
@@ -60,6 +60,8 @@
 
         &.hb-sm {
             height: 24rem;
+            background-position: center -10rem;
+            background-size: 120%;
         }
     }
 }
@@ -87,6 +89,12 @@
         .container {
             padding-left: 0;
             padding-right: 0;
+        }
+
+        &.hb-sm {
+            height: 24rem;
+            background-position: center -16rem;
+            background-size: 105%;
         }
     }
 }
