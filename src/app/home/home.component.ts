@@ -9,11 +9,10 @@ import { NewsService } from '../services/news.service';
 })
 export class HomeComponent implements OnInit {
   results: Array<Home>;
-  order: string = 'priority';
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-    this.newsService.getAll().subscribe(
+    this.newsService.getRecentNews().subscribe(
       data => { this.results = data; },
       error => console.log(error)
     );
