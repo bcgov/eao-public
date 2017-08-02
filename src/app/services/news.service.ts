@@ -7,7 +7,7 @@ export class NewsService {
 
   constructor(private http: Http) { }
   getAll() {
-    return this.http.get('https://projects.eao.gov.bc.ca/api/recentactivity')
+    return this.http.get('http://localhost:3000/api/recentactivity')
       .map((res: Response) => res.json());
   }
   comparePriority(a, b) {
@@ -29,7 +29,7 @@ export class NewsService {
     return 0;
   }
   getRecentNews() {
-    return this.http.get('https://projects.eao.gov.bc.ca/api/recentactivity')
+    return this.http.get('http://localhost:3000/api/recentactivity')
     .map(res => {
         // return res.json().slice(0, 4);
         const ret = res.json();
