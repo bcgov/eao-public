@@ -15,6 +15,9 @@ export class NewsComponent implements OnInit {
   public showFilters: boolean;
   public filter = '';
   public NewsTypeFilter: '';
+  public isDesc: boolean;
+  public column: string;
+  public direction: number;
   public filterType = '';
   public config: PaginationInstance = {
     id: 'custom',
@@ -35,6 +38,13 @@ export class NewsComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  sort (property) {
+    console.log('here', property);
+    this.isDesc = !this.isDesc;
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
   }
 
   clearAllNewsFilters() {

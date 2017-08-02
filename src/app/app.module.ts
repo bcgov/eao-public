@@ -28,6 +28,7 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ProponentFilterPipe } from './proponent-filter.pipe';
 import { FilterPCPPipe } from './filter-pcp.pipe';
 import { ProjectFilterPipe } from './project-filter.pipe';
+import { OrderByPipe } from './order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProjectFilterPipe } from './project-filter.pipe';
     ContactSuccess,
     ProponentFilterPipe,
     FilterPCPPipe,
-    ProjectFilterPipe
+    ProjectFilterPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

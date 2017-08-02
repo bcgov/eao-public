@@ -57,12 +57,12 @@
         <table class="activities-table table" *ngIf="results">
             <thead>
                 <tr>
-                    <th>Headline</th>
-                    <th class="date-col">Date</th>
+                    <th class="pointer" (click)="sort('headline')">Headline<i class="fa" [ngClass]="{'fa-sort': column != 'headline', 'fa-sort-asc': (column == 'headline' && isDesc), 'fa-sort-desc': (column == 'headline' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th class="date-col pointer" (click)="sort('dateUpdated')">Date<i class="fa" [ngClass]="{'fa-sort': column != 'dateUpdated', 'fa-sort-asc': (column == 'dateUpdated' && isDesc), 'fa-sort-desc': (column == 'dateUpdated' && !isDesc) }" aria-hidden="true"> </i></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of results | projectFilter: filter | newsTypeFilter: filterType | paginate: config">
+                <tr *ngFor="let item of results | projectFilter: filter | newsTypeFilter: filterType | paginate: config | orderBy: {property: column, direction: direction}">
                     <td colspan="2">
                         <h3>
 							<sup *ngIf="item.project">{{item.project.name}}</sup>
