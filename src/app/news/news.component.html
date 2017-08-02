@@ -65,11 +65,12 @@
                     <td colspan="2">
                         <h3>
 							<sup *ngIf="item.project">{{item.project.name}}</sup>
+							<sup *ngIf="!item.project">Announcement</sup>
 							{{item.headline}}
 						</h3>
 						<span class="activity-date">{{item.dateUpdated | date:'longDate'}}</span>
                         <p>{{item.content}}</p>
-                        <div class="actvity-btns">
+                        <div class="activity-btns">
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail" target="_blank">View Project</a>
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Documents</a>
