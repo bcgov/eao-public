@@ -8,6 +8,7 @@ export class Project {
   description: string;
   status: string;
   type: string;
+  openCommentPeriod: string;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -16,5 +17,6 @@ export class Project {
     this.proponent = obj && obj.proponent || null;
     this.status = obj && obj.status || null;
     this.type = obj && obj.type || null;
+    this.openCommentPeriod = obj && obj.openCommentPeriod || null;
   }
 }
