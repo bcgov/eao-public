@@ -1,8 +1,10 @@
+import { Project } from './project';
+
 export class News {
   _id: number;
   headline: string;
   content: string;
-  project: string;
+  project: Project;
   priority: number;
   type: string;
   dateUpdated: string;
