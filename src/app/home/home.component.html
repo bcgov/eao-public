@@ -25,10 +25,10 @@
 				<div class="spinner-new rotating"></div>
 			</div>
 
-			<div *ngIf="results">
+			<div *ngIf="results"> 
 				<div class="row">
-					<ng-container *ngFor="let item of results; let i=index">
-						<div class="col-md-12" *ngIf="i<4">
+					<ng-container *ngFor="let item of results | orderBy: order : reverse; let i=index">
+						<div class="col-md-12" *ngIf="item.pinned == true && item.active == true">
 							<div class="news-block">
 								<div class="news-block-title">
 									<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
@@ -36,8 +36,8 @@
 									<p>{{item.content}}</p>
 									<div class="news-block-btns">
 										<a class="btn btn-sm inverted" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail">Project Info</a>
-										<a class="btn btn-sm inverted" *ngIf="item.commentPeriodLink" href="{{item.commentPeriodLink}}" target="_blank">View Comments</a>
-										<a class="btn btn-sm inverted" *ngIf="item.documentLink" href="{{item.documentLink}}" target="_blank">View Documents</a>
+										<a class="btn btn-sm inverted" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
+										<a class="btn btn-sm inverted" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Documents</a>
 									</div>
 								</div>
 							</div>
@@ -59,7 +59,7 @@
 	<div class="bg-faded">
 		<section class="container">
 			<h2>About the BC Environmental Assessment Process...</h2>
-			<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+			<p class="mb-5">Learn more about how the Environmental Assessment Office neutrally administers a process that is predictable, transparent, timely, procedurally fair, and holds all participants accountable.</p>
 			<div class="row feature-blocks">
 				<div class="col-md-4">
 					<div class="feature-block">
