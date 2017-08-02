@@ -69,8 +69,19 @@
 						<option value="Decommissioned">Decommissioned</option>
 					</select>
 				</div>
+				<div class="form-group">
+					<label>Comment Period</label>
+					
+					<!-- TODO: Populate Dynamically -->
+					<select class="form-control" [(ngModel)]="filterPCP">
+						<option value="" selected>All</option>
+						<option value="Pending">Pending</option>
+						<option value="Completed">Completed</option>
+						<option value="Open">Open</option>
+					</select>
+				</div>
 			</div>
-			<div class="button-row" *ngIf="filter || filterStatus || filterType || proponentListFilter">
+			<div class="button-row" *ngIf="filter || filterPCP || filterStatus || filterType || proponentListFilter">
 				<button class="btn btn-default btn-sm" (click)="clearAllProjectFilters()">
 					Clear Filters
 				</button>
@@ -84,14 +95,16 @@
 					<th>Proponent</th>
 					<th>Type</th>
 					<th>Status</th>
+					<th>Comment Period</th>
 				</tr>
 			</thead>
 			<tbody>
-                <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectStatusFilter: filterStatus | paginate: config">
+                <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectStatusFilter: filterStatus | filterPCP:filterPCP | paginate: config">
 					<td><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
 					<td>{{item.proponent.name}}</td>
 					<td>{{item.type}}</td>
 					<td>{{item.status}}</td>
+					<td>{{item.openCommentPeriod}}</td>
                 </tr>
 			</tbody>
 		</table>
