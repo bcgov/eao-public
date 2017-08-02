@@ -45,9 +45,10 @@ export class ProjectComponent implements OnInit {
   }
 
   insertProponents(data) {
-    var index = -1;
-    for(var i = 0, len = data.length; i < len; i++) { 
-        this.proponents.indexOf(data[i].proponent.name) === -1 ? this.proponents.push({name: data[i].proponent.name}) : console.log('This item already exists');
+    for (let i = 0; i < data.length; i++) {
+        this.proponents.indexOf(data[i].proponent.name) === -1
+          ? this.proponents.push({name: data[i].proponent.name})
+          : console.log('This item already exists');
     }
   }
 
