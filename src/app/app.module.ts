@@ -16,6 +16,7 @@ import { NewsComponent } from './news/news.component';
 import { NewsFilterPipe } from './news-filter.pipe';
 import { NewsTypeFilterPipe } from './news-type-filter.pipe';
 import { ObjectFilterPipe } from './object-filter.pipe';
+import { OrderModule } from 'ngx-order-pipe';
 import { ProjectTypeFilterPipe } from './project-type-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
 import { LegislationComponent } from './legislation/legislation.component';
@@ -57,7 +58,8 @@ import { FilterPCPPipe } from './filter-pcp.pipe';
     Ng2PageScrollModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
-    MapModule
+    MapModule,
+    OrderModule
   ],
   providers: [NewsComponent],
   bootstrap: [AppComponent]

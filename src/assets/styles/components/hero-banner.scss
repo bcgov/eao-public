@@ -2,7 +2,7 @@
 
 // Banner
 .hero-banner {
-    background-image: url("assets/images/hero-banner-placeholder-2.jpg");
+    background-image: url("assets/images/eao-hero-banner.jpg");
     background-repeat: no-repeat;
 }
 
@@ -10,8 +10,8 @@
     position: relative;
     height: 24rem;
     background-color: rgba($header-bg, 1);
-    background-size: 280%;
-    background-position: center;
+    background-size: 305%;
+    background-position: -31rem center;
 
     .container {
         display: table;
@@ -26,6 +26,8 @@
 
     &.hb-sm {
         height: 20rem;
+        background-position: -25rem center;
+        background-size: 240%;
     }
 }
 
@@ -42,15 +44,19 @@
 
 @media (min-width: 400px) {
     .hero-banner {
-        background-size: 200%;
-        background-position: -15rem center;
+        background-size: 220%;
+        background-position: -25rem center;
+
+        &.hb-sm {
+            background-position: -30rem center;
+        }
     }
 }
 
 @media (min-width: 760px) {
     .hero-banner {
         height: 30rem;
-        background-position: center -1rem;
+        background-position: -23rem center;
         background-size: 160%;
 
         .container {
@@ -61,7 +67,7 @@
         &.hb-sm {
             height: 24rem;
             background-position: center;
-            background-size: 160%;
+            background-size: 120%;
         }
     }
 }
@@ -84,7 +90,7 @@
     .hero-banner {
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 125%;
+        background-size: 110%;
 
         .container {
             padding-left: 0;
@@ -93,7 +99,7 @@
 
         &.hb-sm {
             height: 24rem;
-            background-position: center -8rem;
+            background-position: center;
             background-size: 105%;
         }
     }
@@ -106,20 +112,20 @@
         }
 
         &.hb-sm {
+            //background-position: center bottom;
             background-size: 100%;
-            background-position: center center;
         }
     }
 }
 
-@media (min-width: 1690px) {
+@media (min-width: 1920px) {
     .hero-banner {
         .container {
             max-width: 1100px;
         }
 
         &.hb-sm {
-            background-position: center -14rem;
+            background-position: center 55%;
         }
     }
 }

@@ -71,8 +71,8 @@
                         <p>{{item.content}}</p>
                         <div class="actvity-btns">
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail" target="_blank">View Project</a>
-							<a class="btn btn-sm content-btn-alt" *ngIf="item.documentLink" href="{{item.documentLink}}" target="_blank">View Document</a>
-							<a class="btn btn-sm content-btn-alt" *ngIf="item.commentPeriodLink" href="{{item.commentPeriodLink}}" target="_blank">View Comment Period</a>
+							<a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
+							<a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Documents</a>
                         </div>
                     </td>
                 </tr>

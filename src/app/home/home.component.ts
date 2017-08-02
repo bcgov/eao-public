@@ -9,6 +9,7 @@ import { NewsService } from '../services/news.service';
 })
 export class HomeComponent implements OnInit {
   results: Array<Home>;
+  order: string = 'priority';
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
@@ -17,5 +18,4 @@ export class HomeComponent implements OnInit {
       error => console.log(error)
     );
   }
-
 }
