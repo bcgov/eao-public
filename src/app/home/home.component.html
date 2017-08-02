@@ -27,7 +27,7 @@
 
 			<div *ngIf="results"> 
 				<div class="row">
-					<ng-container *ngFor="let item of results | orderBy: order : reverse; let i=index">
+					<ng-container *ngFor="let item of results">
 						<div class="col-md-12" *ngIf="item.pinned == true && item.active == true">
 							<div class="news-block">
 								<div class="news-block-title">
