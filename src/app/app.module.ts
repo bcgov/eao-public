@@ -27,6 +27,7 @@ import { MapModule } from './map/map.module';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ProponentFilterPipe } from './proponent-filter.pipe';
 import { FilterPCPPipe } from './filter-pcp.pipe';
+import { ProjectFilterPipe } from './project-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FilterPCPPipe } from './filter-pcp.pipe';
     ContactComponent,
     ContactSuccess,
     ProponentFilterPipe,
-    FilterPCPPipe
+    FilterPCPPipe,
+    ProjectFilterPipe
   ],
   imports: [
     BrowserModule,

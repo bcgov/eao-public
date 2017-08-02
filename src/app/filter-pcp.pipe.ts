@@ -10,7 +10,6 @@ export class FilterPCPPipe implements PipeTransform {
         if (!q || q === '') {
             return value;
         }
-        console.log('filter:', q);
         return value.filter(item => -1 < item.openCommentPeriod.toLowerCase().indexOf(q.toLowerCase()));
     }
 }
