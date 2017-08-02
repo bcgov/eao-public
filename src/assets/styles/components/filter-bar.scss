@@ -1,6 +1,8 @@
 @import "~assets/styles/base.scss";
 
 .filter-bar {
+    margin-bottom: 2rem;
+
     label {
         font-size: 0.9375rem;
         font-weight: 600;
@@ -29,11 +31,14 @@
 }
 
 .filter-input-row {
+    margin-bottom: 1rem;
+
     &.filters-basic {
         @include flex-box();
 
         .form-group {
             @include flex(1 1 auto);
+            margin-bottom: 0;
 
             .form-control {
                 border-top-right-radius: 0;

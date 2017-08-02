@@ -16,10 +16,13 @@
     position: relative;
     margin-bottom: 2rem;
     padding: 1.75rem;
-    color: #fff;
-    background-image: url("~assets/images/hero-banner-placeholder.jpg");
+    background-color: #f7f8fa;
     background-position: right center;
     background-size: auto 100%;
+
+    &:nth-child(even) {
+        background-color: #f4f4f4;
+    }
 
     h3 {
         margin-bottom: 0.4rem;
@@ -38,7 +41,7 @@
     }
 
     p {
-        margin-bottom: 2rem;
+        margin-bottom: 0;
         overflow: hidden;
         line-height: 1.5rem;
         font-size: 0.9375rem;
@@ -48,6 +51,12 @@
         display: block;
         margin-bottom: 1.25rem;
         opacity: 0.5;
+    }
+
+    .news-block-btns {
+        .btn {
+            margin-top: 1.5rem;
+        }
     }
 }
 
@@ -72,7 +81,6 @@
         }
 
         p {
-            margin-bottom: 2rem;
             overflow: hidden;
             line-height: 1.4rem;
             font-size: 0.9375rem;
@@ -88,7 +96,6 @@
         .news-block-btns {
             .btn {
                 padding: 0.5rem;
-                border-width: 1px;
 
                 + .btn {
                     margin-left: 0.25rem;

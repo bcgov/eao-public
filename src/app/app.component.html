@@ -16,8 +16,20 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/" [routerLink]="['/']" tabindex="1"><span>Home</span></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/project" [routerLink]="['/project']" tabindex="2"><span>Find EA Projects</span></a>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="findEAProjects" tabindex="4"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false"><span>Find EA Projects</span><span class="caret"></span>
+					</a>
+					<div class="dropdown-menu dm-sm dropdown-menu-right" aria-labelledby="findEAProjects">
+						<a class="dropdown-item" href="/project" [routerLink]="['/project']" tabindex="5">
+							<strong>Find Projects by List</strong>
+						</a>
+						<a class="dropdown-item" href="/map" [routerLink]="['/map']" tabindex="6">
+							<strong>Find Projects by Map</strong>
+						</a>
+					</div>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/news" [routerLink]="['/news']" tabindex="3"><span>Activities & Updates</span></a>
