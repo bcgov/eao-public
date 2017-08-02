@@ -88,7 +88,7 @@
 			</div>
 		</div>
 
-		<table class="table">
+		<table class="table project-table" id="tableTop">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -100,11 +100,11 @@
 			</thead>
 			<tbody>
                 <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectStatusFilter: filterStatus | filterPCP:filterPCP | paginate: config">
-					<td><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
-					<td>{{item.proponent.name}}</td>
-					<td>{{item.type}}</td>
-					<td>{{item.status}}</td>
-					<td>{{item.openCommentPeriod}}</td>
+					<td class="name"><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
+					<td class="proj-col proponent"><span>{{item.proponent.name}}</span></td>
+					<td class="proj-col type"><span>{{item.type}}</span></td>
+					<td class="proj-col status"><span>{{item.status}}</span></td>
+					<td class="proj-col comment-period"><span>{{item.openCommentPeriod}}</span></td>
                 </tr>
 			</tbody>
 		</table>
