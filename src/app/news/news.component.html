@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of results | newsTypeFilter: filterType | paginate: config">
+                <tr *ngFor="let item of results | projectFilter: filter | newsTypeFilter: filterType | paginate: config">
                     <td colspan="2">
                         <h3>
 							<sup *ngIf="item.project">{{item.project.name}}</sup>
