@@ -25,6 +25,9 @@ export class ProjectComponent implements OnInit {
   public projectStatusFilter: '';
   public filterStatus: '';
   public filterPCP: '';
+  public isDesc: boolean;
+  public column: string;
+  public direction: number;
   public proponents: Array<Proponent> = [];
   public config: PaginationInstance = {
     id: 'custom',
@@ -80,6 +83,11 @@ export class ProjectComponent implements OnInit {
         this.results[idx].openCommentPeriod = data[i].openCommentPeriod;
       }
     }
+  }
+  sort (property) {
+    this.isDesc = !this.isDesc;
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
   }
 
   applyProponentFilter() {

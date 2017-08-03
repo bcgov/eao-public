@@ -42,7 +42,6 @@ export class NewsComponent implements OnInit {
   }
 
   sort (property) {
-    console.log('here', property);
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
