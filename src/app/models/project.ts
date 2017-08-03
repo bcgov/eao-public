@@ -9,6 +9,7 @@ export class Project {
   status: string;
   type: string;
   openCommentPeriod: string;
+  eacDecision: string;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -18,5 +19,6 @@ export class Project {
     this.status = obj && obj.status || null;
     this.type = obj && obj.type || null;
     this.openCommentPeriod = obj && obj.openCommentPeriod || null;
+    this.eacDecision = obj && obj.eacDecision || null;
   }
 }

@@ -21,13 +21,15 @@
         }
     }
 
-    i {
+    i,
+    .btn-txt {
         vertical-align: middle;
+    }
 
+    i {
         + span {
             vertical-align: middle;
         }
-
     }
 
     &.btn-default {

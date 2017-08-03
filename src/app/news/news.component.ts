@@ -13,6 +13,7 @@ export class NewsComponent implements OnInit {
   results: Array<News>;
   public loading: boolean;
   public showFilters: boolean;
+  public projectFilter: boolean;
   public filter = '';
   public NewsTypeFilter: '';
   public isDesc: boolean;

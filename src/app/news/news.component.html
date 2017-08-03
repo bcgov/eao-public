@@ -35,8 +35,8 @@
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
 				
 				<!-- Advanced Filters TBD -->
-				<div class="form-group">
-					<label>Type</label>
+				<div class="col-md-12 form-group">
+					<label>Activity Type</label>
 					<select class="form-control" [(ngModel)]="filterType">
 						<option value="">All</option>
 						<option value="news">News</option>
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="button-row" *ngIf="filter || filterType">
-				<button class="btn btn-default btn-sm" (click)="clearAllNewsFilters()">
+				<button class="btn btn-default" (click)="clearAllNewsFilters()">
 					Clear Filters
 				</button>
 			</div>
