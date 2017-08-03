@@ -17,7 +17,7 @@ import { NewsFilterPipe } from './news-filter.pipe';
 import { NewsTypeFilterPipe } from './news-type-filter.pipe';
 import { ObjectFilterPipe } from './object-filter.pipe';
 import { ProjectTypeFilterPipe } from './project-type-filter.pipe';
-import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
+import { ProjectDecisionFilterPipe } from './project-decision-filter.pipe';
 import { LegislationComponent } from './legislation/legislation.component';
 import { ProcessComponent } from './process/process.component';
 import { ComplianceOversightComponent } from './compliance-oversight/compliance-oversight.component';
@@ -39,7 +39,7 @@ import { ProjectFilterPipe } from './project-filter.pipe';
     NewsTypeFilterPipe,
     ObjectFilterPipe,
     ProjectTypeFilterPipe,
-    ProjectStatusFilterPipe,
+    ProjectDecisionFilterPipe,
     LegislationComponent,
     ProcessComponent,
     ComplianceOversightComponent,

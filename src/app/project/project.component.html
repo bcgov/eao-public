@@ -30,14 +30,26 @@
 				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
-				<div class="form-group">
+				<div class="col-md-3 form-group">
+					<label>Comment Period</label>
+					
+					<!-- TODO: Populate Dynamically -->
+					<select class="form-control" [(ngModel)]="filterPCP">
+						<option value="" selected>All</option>
+						<option value="Pending">Pending</option>
+						<option value="Completed">Completed</option>
+						<option value="Open">Open</option>
+					</select>
+				</div>
+
+				<div class="col-md-3 form-group">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
       					<option value="" selected>All</option>
       					<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="col-md-3 form-group">
 					<label>Type</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -56,33 +68,26 @@
 					</select>
 
 				</div>
-				<div class="form-group">
-					<label>Status</label>
+				<div class="col-md-3 form-group">
+					<label>EA Decision</label>
 					
 					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterStatus">
+					<select class="form-control" [(ngModel)]="filterDecision">
 						<option value="" selected>All</option>
-						<option value="Initiated">Initiated</option>
-						<option value="Submitted">Submitted</option>
-						<option value="In Progress">In Progress</option>
-						<option value="Certified">Certified</option>
-						<option value="Decommissioned">Decommissioned</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>Comment Period</label>
-					
-					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterPCP">
-						<option value="" selected>All</option>
-						<option value="Pending">Pending</option>
-						<option value="Completed">Completed</option>
-						<option value="Open">Open</option>
+						<option label="In Progress" value="In Progress">In Progress</option>
+						<option label="Certificate Issued" value="Certificate Issued">Certificate Issued</option>
+						<option label="Certificate Refused" value="Certificate Refused">Certificate Refused</option>
+						<option label="Further Assessment Required" value="Further Assessment Required">Further Assessment Required</option>
+						<option label="Certificate Not Required" value="Certificate Not Required">Certificate Not Required</option>
+						<option label="Certificate Expired" value="Certificate Expired">Certificate Expired</option>
+						<option label="Withdrawn" value="Withdrawn">Withdrawn</option>
+						<option label="Terminated" value="Terminated">Terminated</option>
+						<option label="Pre-EA Act Approval" value="Pre-EA Act Approval">Pre-EA Act Approval</option>
 					</select>
 				</div>
 			</div>
-			<div class="button-row" *ngIf="filter || filterPCP || filterStatus || filterType || proponentListFilter">
-				<button class="btn btn-default btn-sm" (click)="clearAllProjectFilters()">
+			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter">
+				<button class="btn btn-default" (click)="clearAllProjectFilters()">
 					Clear Filters
 				</button>
 			</div>
@@ -94,18 +99,18 @@
 					<th>Name</th>
 					<th>Proponent</th>
 					<th>Type</th>
-					<th>Status</th>
+					<th>EA Decision</th>
 					<!--
 					<th>Comment Period</th>
 					-->
 				</tr>
 			</thead>
 			<tbody>
-                <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectStatusFilter: filterStatus | filterPCP:filterPCP | paginate: config">
+                <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | paginate: config">
 					<td class="name"><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
 					<td class="proj-col proponent"><span>{{item.proponent.name}}</span></td>
 					<td class="proj-col type"><span>{{item.type}}</span></td>
-					<td class="proj-col status"><span>{{item.status}}</span></td>
+					<td class="proj-col status"><span>{{item.eacDecision}}</span></td>
 					<!--
 					<td class="proj-col comment-period"><span>{{item.openCommentPeriod}}</span></td>
 					-->

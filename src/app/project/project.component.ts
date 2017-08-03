@@ -20,6 +20,8 @@ export class ProjectComponent implements OnInit {
   public proponentListFilter: '';
   public projectTypeFilter: '';
   public filterType: '';
+  public projectDecisionFilter: '';
+  public filterDecision: '';
   public projectStatusFilter: '';
   public filterStatus: '';
   public filterPCP: '';
@@ -88,8 +90,8 @@ export class ProjectComponent implements OnInit {
     this.filter = undefined;
     this.projectTypeFilter = undefined;
     this.filterType = undefined;
-    this.projectStatusFilter = undefined;
-    this.filterStatus = undefined;
+    this.projectDecisionFilter = undefined;
+    this.filterDecision = undefined;
     this.proponentListFilter = undefined;
     this.propfilter = undefined;
     this.filterPCP = undefined;
