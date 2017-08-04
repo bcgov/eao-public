@@ -8,12 +8,12 @@ export class ProjectService {
 
   constructor(private http: Http) { }
   getAll() {
-    return this.http.get('https://projects.eao.gov.bc.ca/api/project')
+    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/project')
       .map((res: Response) => res.json());
   }
   getCommentPeriodProjects() {
       // MBL TODO:Inefficient - we should inject openCommentPeriod into the above call/other calls.
-      return this.http.get('https://projects.eao.gov.bc.ca/api/projects/published')
+      return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/projects/published')
       .map((res: Response) => res.json());
   }
 }
