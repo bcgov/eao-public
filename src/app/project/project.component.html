@@ -96,10 +96,14 @@
 		<table class="table project-table" id="tableTop">
 			<thead>
 				<tr>
-					<th class="pointer" (click)="sort('name')">Name<i class="fa" [ngClass]="{'fa-sort': column != 'name', 'fa-sort-asc': (column == 'name' && isDesc), 'fa-sort-desc': (column == 'name' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="pointer" (click)="sort('proponent')">Proponent<i class="fa" [ngClass]="{'fa-sort': column != 'proponent', 'fa-sort-asc': (column == 'proponent' && isDesc), 'fa-sort-desc': (column == 'proponent' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="pointer" (click)="sort('type')">Type<i class="fa" [ngClass]="{'fa-sort': column != 'type', 'fa-sort-asc': (column == 'type' && isDesc), 'fa-sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="pointer" (click)="sort('eacDecision')">EA Decision<i class="fa" [ngClass]="{'fa-sort': column != 'eacDecision', 'fa-sort-asc': (column == 'eacDecision' && isDesc), 'fa-sort-desc': (column == 'eacDecision' && !isDesc) }" aria-hidden="true"></i></th>
+					<th class="sortable" (click)="sort('name')">Name
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'name' && isDesc), 'sort-desc': (column == 'name' && !isDesc) }" aria-hidden="true"></i></th>
+					<th class="sortable" (click)="sort('proponent')">Proponent
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'proponent' && isDesc), 'sort-desc': (column == 'proponent' && !isDesc) }" aria-hidden="true"></i></th>
+					<th class="sortable" (click)="sort('type')">Type
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'type' && isDesc), 'sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"></i></th>
+					<th class="sortable" (click)="sort('eacDecision')">EA Decision
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'eacDecision' && isDesc), 'sort-desc': (column == 'eacDecision' && !isDesc) }" aria-hidden="true"></i></th>
 					<!--
 					<th>Comment Period</th>
 					-->
