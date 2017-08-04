@@ -65,11 +65,11 @@ $pgn-btn-border:                1px solid #ccc;
 $pgn-btn-color:                 #000;
 
 // Spinner
-$spinner-width: 50px;
-$spinner-color: #5091cd;
-$spinner-bg: rgba(255,255,255,0.8);
-$spinner-invert-color: #FFF;
-$spinner-invert-bg: rgba(0,0,0,0.8);
+$spinner-width:                 50px;
+$spinner-color:                 #5091cd;
+$spinner-bg:                    rgba(255,255,255,0.8);
+$spinner-invert-color:          #FFF;
+$spinner-invert-bg:             rgba(0,0,0,0.8);
 
 // Tables
 $table-header-bg:               #fff;
@@ -78,6 +78,9 @@ $table-header-sort-active:      #5091cd;
 $table-row-bg:                  #f7f8fa;
 $table-row-border:              3px solid #FFF;
 $table-alt-row-bg:              #f4f4f4;
+$table-sort-icon-color:         #ccc;
+$table-sort-icon-active-color:  #000;
+$table-sort-icon-size:          0.25rem;
 
 // Modal
 $modal-bg:                      #FFF;
