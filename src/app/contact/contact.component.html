@@ -3,9 +3,7 @@
         <div class="container-inner">
             <div class="hb-txt">
                 <h1>Connect with us...</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo consequat.</p>
+                <p>Help us improve the efficiency and transparency of the provincial environmental assessment process...</p>
             </div>
         </div>
     </div>
@@ -14,57 +12,50 @@
 <section>
     <div class="container" id="anchor-point">
         <div class="row">
-            <main class="col-lg-8">
+            <main>
                 <section class="mb-0">
                     <h2>Help us build a better service...</h2>
-                    <p>This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information. If you are interested in providing us with feedback about your experience using this website, please feel free to send us your feedback.</p>
-                    <form name="commentForm">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input class="form-control" type="text" name="name" required
-                                [(ngModel)]="model.name"
-                                #name="ngModel"
-                            />
-                        </div>
+                    <p>This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information. If you are interested in providing us with feedback about your experience using this website, please feel free to <a href="mailto:epicsupport.eao@gov.bc.ca">send us your feedback</a>.</p>
+                    <a class="btn content-btn-alt slide-l-btn" title="Submit your feedback to the Environmental Assessment Office"
+                        href="mailto:epicsupport.eao@gov.bc.ca">
+                        <i class="material-icons">email</i>
+                        <span>Submit your Feedback</span>
+                    </a>
 
-                        <!-- Toggle Classes when email address is invalid -->
-                        <!-- Both containing element and form-control need to reflect this -->
-                        <div class="form-group" [ngClass]="{'has-danger': invalid}">
-                            <label>Email Address</label>
-                            <input class="form-control" [ngClass]="{'form-control-warning': invalid}" type="email" name="email" required [(ngModel)]="model.email"
-                                #name="ngModel"/>
-                            <div class="form-control-feedback" *ngIf="invalid">Enter a valid email address</div>
-                        </div>
-                        <div class="form-group">
-                            <label>Your Feedback</label>
-                            <textarea class="form-control" rows="6" name="comment" required [(ngModel)]="model.feedbackText"
-                                #name="ngModel"></textarea>
-                        </div>
-                        <!-- Honeypot -->
-                        <div class="form-group" style="display: none;">
-                            <label>Leave this field blank</label>
-                            <input type="text" name="subject">
-                        </div>
-                        <div class="form-btns">
-
-                            <!-- Show Submitting State when submission is in progress -->
-                            <!-- Disabled until all fields are validated -->
-                            <button class="btn slide-r-btn submit-btn" (click)="sendEmail()">
-                                <span>Submit Feedback</span> <i class="material-icons">send</i>
-                            </button>
-                            <div *ngFor="let alert of alerts">
-                              <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
-                            </div>
-                            <!-- Submission in Progress
-                            <!-- Open 'contact.success.html' modal to show success/error messages
-                            <button class="btn submit-btn">
-                                <span>Submitting...</span> <i class="material-icons">send</i>
-                            </button>
-                            -->
-                        </div>
-                    </form>
+                </section>
+                <hr>
+                <section>
+                    <h3>Contact the BC Environmental Assessement Office</h3>
+                    <p>Please use the <a href="https://dir.gov.bc.ca/gtds.cgi?show=Branch&organizationCode=ENV&organizationalUnitCode=ENVIRON5" target="_blank">EAO B.C. Government Directory</a> listing to find contact information for specific Environmental Assessment Office staff.</p>
+                    <a class="btn content-btn slide-l-btn" title="Go to the EAO BC Government Directory"
+                        href="https://dir.gov.bc.ca/gtds.cgi?show=Branch&organizationCode=ENV&organizationalUnitCode=ENVIRON5" 
+                        target="_blank">
+                        <i class="material-icons">list</i>
+                        <span>EAO BC Government Directory</span>
+                    </a>
+                </section>
+                <hr>
+                <section>
+                    <h3>Compliance Oversight</h3>
+                    <p>For questions about compliance, or if you have information about possible non-compliance with an environmental assessment certificate, please email <a href="mailto:eao.compliance@gov.bc.ca">eao.compliance@gov.bc.ca</a>.</p>
+                    <a class="btn content-btn slide-l-btn" title="Email us your questions about compliance oversight"
+                        href="mailto:eao.compliance@gov.bc.ca">
+                        <i class="material-icons">email</i>
+                        <span>Email Us</span>
+                    </a>
+                </section>
+                <hr>
+                <section>
+                    <h3>Report Natural Resource Violations</h3>
+                    <p>Everyone has a role in protecting British Columbia’s natural resources. If you have seen misconduct involving wildlife, ecosystems, heritage sites or natural resources, you can report it <a href="http://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/natural-resource-law-enforcement/report-natural-resource-violations" target="_blank">here</a>.</p>
+                    <a class="btn content-btn slide-l-btn" title="Report a Natural Resource Violation"
+                        href="http://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/natural-resource-law-enforcement/report-natural-resource-violations" target="_blank">
+                        <i class="material-icons">report_problem</i>
+                        <span>Report a Natural Resource Violation</span>
+                    </a>
                 </section>
             </main>
+            <!--
             <aside class="col-lg-4">
                 <section class="card">
                     <h4 class="card-header">Contact the EAO</h4>
@@ -85,6 +76,7 @@
                     </div>
                 </section>
             </aside>
+            -->
         </div>
     </div>
 </section>
