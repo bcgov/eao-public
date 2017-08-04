@@ -28,6 +28,7 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ProponentFilterPipe } from './proponent-filter.pipe';
 import { FilterPCPPipe } from './filter-pcp.pipe';
 import { ProjectFilterPipe } from './project-filter.pipe';
+import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
 import { OrderByPipe } from './order-by.pipe';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { OrderByPipe } from './order-by.pipe';
     ProponentFilterPipe,
     FilterPCPPipe,
     ProjectFilterPipe,
+    ProjectStatusFilterPipe,
     OrderByPipe
   ],
   imports: [
