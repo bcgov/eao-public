@@ -20,10 +20,10 @@ export class NewsService {
     return 0;
   }
   compareDate(a, b) {
-    if (a.dateUpdated < b.dateUpdated) {
+    if (a.dateAdded < b.dateAdded) {
       return -1;
     }
-    if (a.dateUpdated > b.dateUpdated) {
+    if (a.dateAdded > b.dateAdded) {
       return 1;
     }
     return 0;
