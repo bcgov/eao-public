@@ -57,8 +57,10 @@
         <table class="activities-table table" *ngIf="results">
             <thead>
                 <tr>
-                    <th class="pointer" (click)="sort('headline')">Headline<i class="fa" [ngClass]="{'fa-sort': column != 'headline', 'fa-sort-asc': (column == 'headline' && isDesc), 'fa-sort-desc': (column == 'headline' && !isDesc) }" aria-hidden="true"> </i></th>
-                    <th class="date-col pointer" (click)="sort('dateUpdated')">Date<i class="fa" [ngClass]="{'fa-sort': column != 'dateUpdated', 'fa-sort-asc': (column == 'dateUpdated' && isDesc), 'fa-sort-desc': (column == 'dateUpdated' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th class="sortable" (click)="sort('headline')">Headline
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'headline' && isDesc), 'sort-desc': (column == 'headline' && !isDesc) }" aria-hidden="true"></i></th>
+                    <th class="sortable date-col" (click)="sort('dateUpdated')">Date
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'dateUpdated' && isDesc), 'sort-desc': (column == 'dateUpdated' && !isDesc) }" aria-hidden="true"></i></th>
                 </tr>
             </thead>
             <tbody>
