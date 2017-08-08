@@ -10,6 +10,6 @@ export class ProjectFilterPipe implements PipeTransform {
         if (!q || q === '') {
             return value;
         }
-        return value.filter(item => item.project.name.toLowerCase().startsWith(q.toLowerCase()));
+        return value.filter(item => -1 < item.project.name.toLowerCase().indexOf(q.toLowerCase()));
     }
 }
