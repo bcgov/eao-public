@@ -34,6 +34,8 @@ export class NewsComponent implements OnInit {
       data => {
         this.results = data;
         this.loading = false;
+        this.column = 'dateAdded';
+        this.direction = -1;
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
       },

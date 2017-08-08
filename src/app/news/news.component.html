@@ -59,19 +59,19 @@
                 <tr>
                     <th class="sortable" (click)="sort('headline')">Headline
 						<i class="sort" [ngClass]="{'sort-asc': (column == 'headline' && isDesc), 'sort-desc': (column == 'headline' && !isDesc) }" aria-hidden="true"></i></th>
-                    <th class="sortable date-col" (click)="sort('dateUpdated')">Date
-						<i class="sort" [ngClass]="{'sort-asc': (column == 'dateUpdated' && isDesc), 'sort-desc': (column == 'dateUpdated' && !isDesc) }" aria-hidden="true"></i></th>
+                    <th class="sortable date-col" (click)="sort('dateAdded')">Date
+						<i class="sort" [ngClass]="{'sort-asc': (column == 'dateAdded' && isDesc), 'sort-desc': (column == 'dateAdded' && !isDesc) }" aria-hidden="true"></i></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let item of results | projectFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+            <tbody *ngFor="let item of results | projectFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+				<tr *ngIf="item.active == true">
                     <td colspan="2">
                         <h3>
 							<sup *ngIf="item.project">{{item.project.name}}</sup>
 							<sup *ngIf="!item.project">Announcement</sup>
 							{{item.headline}}
 						</h3>
-						<span class="activity-date">{{item.dateUpdated | date:'longDate'}}</span>
+						<span class="activity-date">{{item.dateAdded | date:'longDate'}}</span>
                         <p>{{item.content}}</p>
                         <div class="activity-btns">
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail" target="_blank">View Project</a>
