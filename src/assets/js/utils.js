@@ -19,12 +19,10 @@ function scroll_style() {
     }
 }
 
-
 $(function() {
     $(window).scroll(scroll_style);
     scroll_style();
 });
-
 
 $(function(){ 
     $('.dropdown-item').click(function() {

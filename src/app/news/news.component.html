@@ -25,10 +25,10 @@
 					[ngClass]="{'show-filters': showFilters}" 
 					(click)="showFilters = !showFilters">
 					<span class="show-filter-txt">
-						<span class="btn-txt">Show Filters</span><i class="material-icons">keyboard_arrow_down</i>
+						<span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_down</i>
 					</span>
 					<span class="hide-filter-txt">
-						<span class="btn-txt">Hide Filters</span><i class="material-icons">keyboard_arrow_up</i>
+						<span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_up</i>
 					</span>
 				</button>
 			</div>
@@ -36,18 +36,27 @@
 				
 				<!-- Advanced Filters TBD -->
 				<div class="col-md-12 form-group">
-					<label>Activity Type</label>
-					<select class="form-control" [(ngModel)]="filterType">
-						<option value="">All</option>
-						<option value="news">News</option>
-						<option value="public comment period">Public Comment Period</option>
-					</select>
+					<label>Activity & Update Type</label>
+					<div>
+						<div class="toggle-btn">
+							<input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType" />
+							<label class="btn btn-secondary" for="all">All</label>
+						</div>
+						<div class="toggle-btn">
+							<input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
+							<label class="btn btn-secondary" for="news">News</label>
+						</div>
+						<div class="toggle-btn">
+							<input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period" /> 
+							<label class="btn btn-secondary" for="pcp">Public Comment Period</label>
+						</div>
+					</div>
 				</div>
 				
 			</div>
 
 			<div class="button-row" *ngIf="filter || filterType">
-				<button class="btn btn-default" (click)="clearAllNewsFilters()">
+				<button class="btn content-btn-alt" (click)="clearAllNewsFilters()">
 					Clear Filters
 				</button>
 			</div>

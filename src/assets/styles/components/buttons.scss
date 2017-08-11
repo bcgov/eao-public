@@ -183,3 +183,41 @@ main {
     font-size: 0.9375rem;
     font-weight: 700;
 }
+
+// Toggle Buttons
+.toggle-btn {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+
+    input[type="radio"] {
+        position: absolute;
+        clip: rect(0,0,0,0);
+
+        + label {
+            margin: 0;
+            border: none;
+            border-radius: 0.25rem;
+            background-color: $toggle-btn-bg;
+            text-transform: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+
+            &:hover {
+                color: $toggle-btn-active-color;
+                background-color: $toggle-btn-active-bg; 
+            }
+        }       
+
+        &:checked {
+            + label {
+                color: $toggle-btn-active-color;
+                background-color: $toggle-btn-active-bg; 
+            }
+        }
+    }
+
+    + .toggle-btn {
+        margin-left: 0.25rem;
+    }
+}

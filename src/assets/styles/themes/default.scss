@@ -15,17 +15,17 @@ $font-color:                    #494949;
 $link-color:                    #1a5a96;
 
 // Header
-$header-font-color:             #FFF;
+$header-font-color:             #fff;
 $header-bg:                     $primary;
 
 // Footer
 $footer-bg:                     $primary;
-$footer-color:                  #FFF;
+$footer-color:                  #fff;
 
 // Main Navigation
 $mn-font-size:                  0.875rem; //14px
 $mn-dropdown-menu-size:         0.875rem; //13px
-$mn-color:                      #FFF;
+$mn-color:                      #fff;
 $mn-border-color:               #5f79a2;
 $mn-hover-bg:                   #2b4777;
 $mn-hover-color:                $gold;
@@ -46,12 +46,15 @@ $card-header-bg:                #38598a;
 $feature-block-color:           #FFF;
 $feature-block-bg:              #244278;
 
+// Filter Bar
+$filter-bar-label-color:        #b9b9b9;
+
 // Form Controls
 $fc-height:                     2.75rem;
 $fc-border-color:               #ddd;
 $fc-bg:                         #fff;
-$fc-inner-shadow:               0.1rem 0.1rem 0.1rem #EEE;
-$fc-placeholder-color:          #ccc;
+$fc-inner-shadow:               0.1rem 0.1rem 0.1rem #eee;
+$fc-placeholder-color:          #999;
 $fc-focus-border-color:         #5091cd;
 
 // List Variants
@@ -68,7 +71,7 @@ $pgn-btn-color:                 #000;
 $spinner-width:                 50px;
 $spinner-color:                 #5091cd;
 $spinner-bg:                    rgba(255,255,255,0.8);
-$spinner-invert-color:          #FFF;
+$spinner-invert-color:          #fff;
 $spinner-invert-bg:             rgba(0,0,0,0.8);
 
 // Tables
@@ -76,11 +79,16 @@ $table-header-bg:               #fff;
 $table-header-hover-bg:         #ddd;
 $table-header-sort-active:      #5091cd;
 $table-row-bg:                  #f7f8fa;
-$table-row-border:              3px solid #FFF;
+$table-row-border:              3px solid #fff;
 $table-alt-row-bg:              #f4f4f4;
 $table-sort-icon-color:         #ccc;
 $table-sort-icon-active-color:  #000;
 $table-sort-icon-size:          0.25rem;
 
 // Modal
-$modal-bg:                      #FFF;
+$modal-bg:                      #fff;
+
+// Toggle Buttons
+$toggle-btn-active-color:       #fff;
+$toggle-btn-bg:                 #fff;
+$toggle-btn-active-bg:          #5091cd;

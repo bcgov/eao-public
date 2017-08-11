@@ -4,8 +4,10 @@
     margin-bottom: 1.5rem;
 
     label {
-        font-size: 0.9375rem;
-        font-weight: 600;
+        color: $filter-bar-label-color;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        font-weight: 700;
     }
 
     .form-group {
@@ -53,9 +55,8 @@
             @include flex(0 0 auto);
             height: 2.75rem;
             margin-left: -1px;
-            padding: 0.5rem;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+            border-radius: 0;
             border: 1px solid $fc-border-color;
 
             i {
@@ -68,7 +69,6 @@
 
             .btn-txt {
                 display: none;
-                min-width: 5rem;
             }
 
             &:focus {
@@ -106,7 +106,6 @@
             .toggle-filter-btn {
                 .btn-txt {
                     display: inline-block;
-                    min-width: 5rem;
                     vertical-align: middle;
                 }
             }
