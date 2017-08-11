@@ -19,76 +19,107 @@
 
 		<div class="filter-bar">
 			<div class="filter-input-row filters-basic">
-				<div class="form-group">
+				<div class="input-group">
 					<input class="form-control" placeholder="Type a Project Name" type="text" [(ngModel)]="filter">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-secondary" title="Clear Project Name Filter" (click)="clearNameFilter();" *ngIf="filter">
+							<i class="material-icons md-18">close</i>
+						</button>
+					</span>
+					<span class="input-group-btn">
+						<button class="toggle-filter-btn btn btn-sm btn-default"
+							[ngClass]="{'show-filters': showFilters}" 
+							(click)="showFilters = !showFilters">
+							<span class="show-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_down</i></span>
+							<span class="hide-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_up</i></span>
+						</button>
+					</span>
 				</div>
-				<button class="toggle-filter-btn btn btn-default btn-sm"
-					[ngClass]="{'show-filters': showFilters}" 
-					(click)="showFilters = !showFilters">
-					<span class="show-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_down</i></span>
-					<span class="hide-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_up</i></span>
-				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
-				<div class="col-md-3 form-group">
-					<label>Comment Period</label>
-					
-					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterPCP">
-						<option value="" selected>All</option>
-						<option value="Pending">Pending</option>
-						<option value="Completed">Completed</option>
-						<option value="Open">Open</option>
-					</select>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Comment Period</label>
+						<div class="input-group">
+							<select class="form-control" [(ngModel)]="filterPCP">
+								<option value="Pending">Pending</option>
+								<option value="Completed">Completed</option>
+								<option value="Open">Open</option>
+							</select>
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-secondary" title="Clear Comment Period Filter" (click)="clearPCPFilter();" *ngIf="filterPCP">
+									<i class="material-icons md-18">close</i>
+								</button>
+							</span>
+						</div>
+					</div>
 				</div>
-
-				<div class="col-md-3 form-group">
-					<label>Proponent</label>
-					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
-      					<option value="" selected>All</option>
-      					<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
-					</select>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Proponent</label>
+						<div class="input-group">
+							<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
+								<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
+							</select>
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-secondary" title="Clear Proponent Filter" (click)="clearProponentFilter();" *ngIf="proponentListFilter">
+									<i class="material-icons md-18">close</i>
+								</button>
+							</span>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-3 form-group">
-					<label>Type</label>
-
-					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterType">
-						<option value="">All</option>
-						<option value="mines">Energy-Electricity</option>
-						<option value="Energy-Petroleum & Natural Gas">Energy-Petroleum & Natural Gas</option>
-						<option value="Food Processing">Food Processing</option>
-						<option value="Industrial">Industrial</option>
-						<option value="Mines">Mines</option>
-						<option value="Other">Other</option>
-						<option value="Tourist Destination Resorts">Tourist Destination Resorts</option>
-						<option value="Transportation">Transportation</option>
-						<option value="Waste Disposal">Waste Disposal</option>
-						<option value="Water Management">Water Management</option>
-					</select>
-
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Type</label>
+						<div class="input-group">
+							<select class="form-control" [(ngModel)]="filterType">
+								<option value="mines">Energy-Electricity</option>
+								<option value="Energy-Petroleum & Natural Gas">Energy-Petroleum & Natural Gas</option>
+								<option value="Food Processing">Food Processing</option>
+								<option value="Industrial">Industrial</option>
+								<option value="Mines">Mines</option>
+								<option value="Other">Other</option>
+								<option value="Tourist Destination Resorts">Tourist Destination Resorts</option>
+								<option value="Transportation">Transportation</option>
+								<option value="Waste Disposal">Waste Disposal</option>
+								<option value="Water Management">Water Management</option>
+							</select>
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-secondary" title="Clear Project Type Filter" (click)="clearTypeFilter();" *ngIf="filterType">
+									<i class="material-icons md-18">close</i>
+								</button>
+							</span>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-3 form-group">
-					<label>EA Decision</label>
-					
-					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterDecision">
-						<option value="" selected>All</option>
-						<option label="In Progress" value="In Progress">In Progress</option>
-						<option label="Certificate Issued" value="Certificate Issued">Certificate Issued</option>
-						<option label="Certificate Refused" value="Certificate Refused">Certificate Refused</option>
-						<option label="Further Assessment Required" value="Further Assessment Required">Further Assessment Required</option>
-						<option label="Certificate Not Required" value="Certificate Not Required">Certificate Not Required</option>
-						<option label="Certificate Expired" value="Certificate Expired">Certificate Expired</option>
-						<option label="Withdrawn" value="Withdrawn">Withdrawn</option>
-						<option label="Terminated" value="Terminated">Terminated</option>
-						<option label="Pre-EA Act Approval" value="Pre-EA Act Approval">Pre-EA Act Approval</option>
-					</select>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>EA Decision</label>
+						<div class="input-group">
+							<select class="form-control" [(ngModel)]="filterDecision">
+								<option label="In Progress" value="In Progress">In Progress</option>
+								<option label="Certificate Issued" value="Certificate Issued">Certificate Issued</option>
+								<option label="Certificate Refused" value="Certificate Refused">Certificate Refused</option>
+								<option label="Further Assessment Required" value="Further Assessment Required">Further Assessment Required</option>
+								<option label="Certificate Not Required" value="Certificate Not Required">Certificate Not Required</option>
+								<option label="Certificate Expired" value="Certificate Expired">Certificate Expired</option>
+								<option label="Withdrawn" value="Withdrawn">Withdrawn</option>
+								<option label="Terminated" value="Terminated">Terminated</option>
+								<option label="Pre-EA Act Approval" value="Pre-EA Act Approval">Pre-EA Act Approval</option>
+							</select>
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-secondary" title="Clear EA Decision Filter" (click)="clearDecisionFilter();" *ngIf="filterDecision">
+									<i class="material-icons md-18">close</i>
+								</button>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter">
 				<button class="btn content-btn-alt" (click)="clearAllProjectFilters()">
-					Clear Filters
+					Clear All Filters
 				</button>
 			</div>
 		</div>

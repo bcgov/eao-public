@@ -98,14 +98,36 @@ export class ProjectComponent implements OnInit {
     this.propfilter = this.proponentListFilter;
   }
 
-  clearAllProjectFilters() {
-    this.filter = undefined;
-    this.projectTypeFilter = undefined;
-    this.filterType = undefined;
-    this.projectDecisionFilter = undefined;
-    this.filterDecision = undefined;
+
+  // Clear Filters
+  clearProponentFilter() {
     this.proponentListFilter = undefined;
     this.propfilter = undefined;
+  }
+
+  clearPCPFilter() {
     this.filterPCP = undefined;
+  }
+
+  clearDecisionFilter() {
+    this.projectDecisionFilter = undefined;
+    this.filterDecision = undefined;
+  }
+
+  clearNameFilter() {
+     this.filter = undefined;
+  }
+
+  clearTypeFilter() {
+    this.projectTypeFilter = undefined;
+    this.filterType = undefined;
+  }
+
+  clearAllProjectFilters() {
+    this.clearDecisionFilter();
+    this.clearNameFilter();
+    this.clearPCPFilter();
+    this.clearProponentFilter();
+    this.clearTypeFilter();
   }
 }

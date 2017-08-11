@@ -5,6 +5,7 @@
 }
 
 .form-control {
+	position: relative;
 	border-color: $fc-border-color;
 	border-radius: 0;
     background-color: $fc-bg;
@@ -12,6 +13,33 @@
 
 	&:focus {
 		border-color: $fc-focus-border-color;
+	}
+
+	&:after {
+		content: ' ';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 1rem;
+		background-color: blue;
+	}
+}
+
+.input-group {
+	background-color: $fc-bg;
+}
+
+.input-group-btn {
+	.btn {
+		min-width: 2.75rem;
+		border-color: $fc-border-color;
+		border-radius: 0;
+
+		&:hover,
+		&:focus {
+			border-color: $fc-focus-border-color;
+		}
 	}
 }
 
@@ -34,14 +62,13 @@ input[type="email"] {
 
 select.form-control:not([size]):not([multiple]) {
 	height: $fc-height;
-	padding: 0 0.5rem;
+	padding-right: 1.5rem;
 }
 
 textarea {
 	@include placeholder {
 		color: $fc-placeholder-color;
 	}
-
 	font-size: 0.9375rem;
 	resize: vertical;
 	box-shadow: $fc-inner-shadow inset;
