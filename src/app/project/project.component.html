@@ -25,8 +25,8 @@
 				<button class="toggle-filter-btn btn btn-default btn-sm"
 					[ngClass]="{'show-filters': showFilters}" 
 					(click)="showFilters = !showFilters">
-					<span class="show-filter-txt"><span class="btn-txt">Show Filters</span><i class="material-icons">keyboard_arrow_down</i></span>
-					<span class="hide-filter-txt"><span class="btn-txt">Hide Filters</span><i class="material-icons">keyboard_arrow_up</i></span>
+					<span class="show-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_down</i></span>
+					<span class="hide-filter-txt"><span class="btn-txt">Filter</span><i class="material-icons">keyboard_arrow_up</i></span>
 				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter">
-				<button class="btn btn-default" (click)="clearAllProjectFilters()">
+				<button class="btn content-btn-alt" (click)="clearAllProjectFilters()">
 					Clear Filters
 				</button>
 			</div>

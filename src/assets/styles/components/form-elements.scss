@@ -6,6 +6,7 @@
 
 .form-control {
 	border-color: $fc-border-color;
+	border-radius: 0;
     background-color: $fc-bg;
     font-size: 0.9375rem;
 
@@ -40,6 +41,7 @@ textarea {
 	@include placeholder {
 		color: $fc-placeholder-color;
 	}
+
 	font-size: 0.9375rem;
 	resize: vertical;
 	box-shadow: $fc-inner-shadow inset;
