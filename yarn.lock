@@ -632,6 +632,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@^4.0.0-alpha.6:
+  version "4.0.0-beta"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.tgz#dc5928175d2e71310bc668cf9e05a907211b72a6"
+
 boxen@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-1.2.0.tgz#03478d84be7fe02189b80904d81d6a80384368f1"
@@ -3247,6 +3251,10 @@ ngx-bootstrap@^1.7.1:
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-1.7.1.tgz#f48e5d81c40e8e1f25abd3e7b38808ee9ec8e903"
   dependencies:
     moment "2.18.1"
+
+ngx-order-pipe@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-order-pipe/-/ngx-order-pipe-1.0.2.tgz#a50bbaa1259c96c6dd5c8dfebfe715b4de7893b9"
 
 ngx-pagination@^3.0.1:
   version "3.0.1"

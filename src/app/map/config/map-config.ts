@@ -3,9 +3,9 @@ import { InjectionToken } from '@angular/core';
 import { MapConfig } from './map-config.interface';
 
 const webmaps = {
-  dev: '63e8128ae559429dbc7b045e8a6ba771',
-  test: '63e8128ae559429dbc7b045e8a6ba771',
-  train: '63e8128ae559429dbc7b045e8a6ba771',
+  dev: 'a39ebfecf4a84daf926dcd7f2ce000a8',
+  test: 'a39ebfecf4a84daf926dcd7f2ce000a8',
+  train: 'a39ebfecf4a84daf926dcd7f2ce000a8',
   prod: 'a39ebfecf4a84daf926dcd7f2ce000a8'
 };
 
