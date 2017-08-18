@@ -27,7 +27,7 @@
 
 			<div *ngIf="results"> 
 				<ng-container *ngFor="let item of results">
-					<div class="news-block" *ngIf="item.pinned == true && item.active == true">
+					<div class="news-block" *ngIf="item.active == true">
 						<div class="news-block-title">
 							<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
 							<span class="news-date">{{item.dateAdded | date}}</span>
