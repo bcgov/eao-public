@@ -9,16 +9,7 @@ export class NewsService {
   getAll() {
     return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/recentactivity')
       .map(res => {
-        const ret = res.json();
-        // Get pinned items.
-        let pinned = ret.filter(item => item.pinned === true);
-        pinned = pinned.sort(this.compare);
-
-        // Get non-pinned items.
-        let nonPinned = ret.filter(item => item.pinned === false);
-        nonPinned = nonPinned.sort(this.compare);
-
-        return pinned.concat(nonPinned);
+        return res.json().sort(this.compare);
       });
   }
   compare(a, b) {
