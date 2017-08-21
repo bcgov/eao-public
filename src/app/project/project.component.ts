@@ -65,9 +65,9 @@ export class ProjectComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       if (!data[i].proponent) {
         // In case a proponent object isn't set yet.
-        data[i].proponent = {name: ''};
+        data[i].proponent = {name: null};
       }
-      this.proponents.indexOf(data[i].proponent.name) === -1
+      (data[i].proponent.name && this.proponents.indexOf(data[i].proponent.name) === -1)
         ? this.proponents.push({name: data[i].proponent.name})
         : console.log('This item already exists');
     }
