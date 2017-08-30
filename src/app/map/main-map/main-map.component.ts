@@ -1,4 +1,6 @@
 import { Component, HostBinding, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EsriLoaderService } from 'angular-esri-loader';
 
 import { MAP_CONFIG_TOKEN, DEFAULT_MAP_CONFIG, MapConfig } from '../config';
 
@@ -16,10 +18,15 @@ export class MainMapComponent implements OnInit {
   popupProperties: __esri.PopupProperties;
   map: __esri.Map;
   mapView: __esri.MapView;
+  search: __esri.Search;
 
   @HostBinding('class.full-screen') fullScreen = true;
 
-  constructor(@Inject(MAP_CONFIG_TOKEN) private config: MapConfig) { }
+  constructor(
+    @Inject(MAP_CONFIG_TOKEN) private config: MapConfig,
+    private route: ActivatedRoute,
+    private esriLoader: EsriLoaderService
+  ) { }
 
   ngOnInit() {
     this.webMapProperties = this.config.mainMap.webmap;
@@ -28,31 +35,88 @@ export class MainMapComponent implements OnInit {
   }
 
   onMapInit(mapInfo: { map: __esri.Map, mapView: __esri.MapView }): void {
-    this.map = mapInfo.map;
-    this.mapView = mapInfo.mapView;
+    const args = {
+      ...mapInfo,
+      popupProperties: this.popupProperties,
+      featureLayer: <__esri.FeatureLayer>null,
+      search: <__esri.Search>null
+    };
 
-    if (this.popupProperties) {
-      this.overridePopup(this.popupProperties);
-    }
+    Promise.resolve(args)
+      // store local references to map and view
+      .then(obj => {
+        this.map = obj.map;
+        this.mapView = obj.mapView;
+        return obj;
+      })
+      // find the feature layer with `project` data
+      .then(obj => {
+        const { map } = obj;  // es6 destructuring
+        obj.featureLayer = this.findFeatureLayer(map);
+        return obj;
+      })
+      // set map popup to match app styling
+      .then(obj => {
+        const { featureLayer, popupProperties } = obj;
+        return this.setPopupTemplateForLayer(featureLayer, popupProperties)
+          .then(() => obj);
+      })
+      // create search widget instance, then add it to the map
+      .then(obj => {
+        const { mapView, featureLayer } = obj;
+        return this.createSearchWidget(mapView, featureLayer)
+          .then(search => this.search = obj.search = search)
+          .then(() => obj);
+      })
+      // add the search widget to the top-right corner of the view
+      .then(obj => {
+        const { mapView, search } = obj;
+        mapView.ui.add(search, { position: 'top-right' });
+      });
   }
 
-  private overridePopup(popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
+  private findFeatureLayer(map: __esri.Map): __esri.FeatureLayer {
+    return map.layers.find((lyr: __esri.Layer) => lyr.type === 'feature');
+  }
+
+  private setPopupTemplateForLayer(featureLayer: __esri.FeatureLayer, popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
     return new Promise((resolve, reject) => {
-      const setPopup = (fl: __esri.FeatureLayer) => {
-        fl.popupTemplate.title = <string>popupTemplate.title;
-        fl.popupTemplate.content = <string>popupTemplate.content;
-      };
-
-      const featureLayer: __esri.FeatureLayer = this.map.layers.find((lyr: __esri.Layer) => lyr.type === 'feature');
-      if (!featureLayer) {
-        return resolve();
-      }
-
-      // the `esri/layers/FeatureLayer` instance is promise-based
+      // the `esri/layers/FeatureLayer` instance is promise-based...
       // call the .then() method to execute code once the layer is ready
-      return featureLayer.then(setPopup)
-        .then(resolve)
+      return featureLayer.then(
+        (fl: __esri.FeatureLayer) => {
+          if (popupTemplate) {
+            fl.popupTemplate.title = <string>popupTemplate.title;
+            fl.popupTemplate.content = <string>popupTemplate.content;
+          }
+        })
+        .then(() => resolve())
         .otherwise(reject);
+    });
+  }
+
+  private createSearchWidget(view: __esri.MapView, featureLayer: __esri.FeatureLayer): Promise<__esri.Search> {
+    return this.esriLoader.loadModules(['esri/widgets/Search']).then(([Search]: [__esri.SearchConstructor]) => {
+      const search = new Search({
+        view: view,
+        sources: [
+          {
+            featureLayer: featureLayer,
+            displayField: 'name',
+            searchFields: ['name', 'description'],  // the names of fields in the feature layer to search
+            outFields: ['*'],
+            autoNavigate: true,
+            resultGraphicEnabled: false,  // whether to show a graphic on the map for the selected source using the `resultSymbol`
+            withinViewEnabled: false,  // whether to constrain the search results to the view's extent
+            zoomScale: 500000,
+            suggestionsEnabled: true,
+            minSuggestCharacters: 1,  // minimum number of characters required before querying for a suggestion
+            maxSuggestions: 6,
+            placeholder: 'Find EA projects'
+          }
+        ]
+      });
+      return search;
     });
   }
 }
