@@ -7,7 +7,7 @@ export class NewsService {
 
   constructor(private http: Http) { }
   getAll() {
-    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/recentactivity')
+    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/query/recentactivity?active=true')
       .map(res => {
         return res.json().sort(this.compare);
       });
@@ -16,7 +16,7 @@ export class NewsService {
     return (+(a.priority > b.priority) || +(a.dateAdded < b.dateAdded) - 1);
   }
   getRecentNews() {
-    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/recentactivity')
+    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/query/recentactivity?active=true')
     .map(res => {
         const ret = res.json();
         // Get pinned items.
