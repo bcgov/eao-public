@@ -31,7 +31,7 @@
 						<div class="news-block-title">
 							<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
 							<span class="news-date">{{item.dateAdded | date}}</span>
-							<p>{{item.content}}</p>
+							<p class="mb-0">{{item.content}}</p>
 							<div class="news-block-btns">
 								<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail">Project Info</a>
 								<a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
@@ -43,7 +43,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="news-block-more">
-							<a class="bg-dark-link" href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
+							<a href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
 						</div>
 					</div>
 				</div>
