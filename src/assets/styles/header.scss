@@ -65,6 +65,8 @@ header {
 
 .main-nav {
     padding: 0;
+    background-color: $header-bg;
+    z-index: 1000;
 
     .navbar-nav {
         margin-top: 0.5rem;
@@ -171,6 +173,7 @@ header {
 
     .main-nav {
         float: right;
+        background: transparent;
 
         .navbar-nav {
             margin-top: 0;
@@ -182,7 +185,7 @@ header {
 
                 span {
                     margin-top: 0.9rem;
-                    display: block;
+                    display: inline-block;
                 }
 
                 &:hover {
@@ -228,10 +231,6 @@ header {
                     }
                 }
             }
-
-            .dropdown-toggle:after {
-                display: none;
-            }
         }
     }
 }
@@ -241,7 +240,7 @@ header {
         margin-top: 2px;
         margin-left: 2px;
         width: 305px; // Using PX dimensions here to ensure exact match to image
-        height: 60px;
+        height: 4rem;
         background-image: url("assets/images/bcgov-eao-horiz-lg.png");
         background-size: auto;
     }

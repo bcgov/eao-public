@@ -64,6 +64,7 @@ export class MainMapComponent implements OnInit {
       // create search widget instance, then add it to the map
       .then(obj => {
         const { mapView, featureLayer } = obj;
+        mapView.ui.move('zoom', 'bottom-right');
         return this.createSearchWidget(mapView, featureLayer)
           .then(search => this.search = obj.search = search)
           .then(() => obj);
@@ -71,7 +72,7 @@ export class MainMapComponent implements OnInit {
       // add the search widget to the top-right corner of the view
       .then(obj => {
         const { mapView, search } = obj;
-        mapView.ui.add(search, { position: 'top-right' });
+        mapView.ui.add(search, { position: 'top-left' });
       });
   }
 

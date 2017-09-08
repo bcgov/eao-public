@@ -6,24 +6,16 @@
 
     td {
         position: relative;
-        padding: 1.75rem !important;
+        padding: 1.5rem !important;
     }
 
-    .pointer{
+    .pointer {
         cursor: pointer;
     }
 
     .date-col {
         width: 10rem;
         text-align: right;
-    }
-
-    .activity-btns {
-        .btn {
-            margin-top: 1.5rem;
-            margin-right: 0.25rem;
-            font-size: 0.85rem;
-        }
     }
 
     h3 {
@@ -35,7 +27,7 @@
         sup {
             display: block;
             top: 0;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.25rem;
             line-height: 1rem;
             font-size: 1rem;
             font-weight: 400;
@@ -43,16 +35,19 @@
     }
 
     p {
-        margin-bottom: 0;
+        margin-top: 1rem;
         overflow: hidden;
-        line-height: 1.4rem;
+        line-height: calc(0.9375rem * 1.5);
         font-size: 0.9375rem;
     }
 
     .activity-date {
         display: block;
-        margin-bottom: 1.25rem;
-        opacity: 0.5;
+        font-size: 0.85rem;
+    }
+
+    .activity-btns {
+        margin-top: 1.5rem;
     }
 }
 
@@ -67,32 +62,22 @@
 @media (min-width: 760px) {
     .activities-table {
         h3 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-overflow: ellipsis;
             font-size: 1.75rem;
-            font-weight: 400;
 
             sup {
-                display: block;
-                top: 0;
                 margin-bottom: 0.4rem;
                 line-height: 1.25rem;
                 font-size: 1.25rem;
-                font-weight: 300;
             }
-        }
-
-        p {
-            overflow: hidden;
-            line-height: 1.5rem;
-            font-size: 0.9375rem;
         }
 
         .activity-date {
             position: absolute;
             top: 0;
             right: 0;
-            padding: 1.75rem;
+            padding: 1.5rem;
         }
     }
 }

@@ -81,7 +81,7 @@
 							{{item.headline}}
 						</h3>
 						<span class="activity-date">{{item.dateAdded | date:'longDate'}}</span>
-                        <p>{{item.content}}</p>
+                        <p class="mb-0">{{item.content}}</p>
                         <div class="activity-btns">
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail" target="_blank">View Project</a>
 							<a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
