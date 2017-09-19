@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+
+import { Api } from './api';
 
 @Injectable()
 export class NewsService {
 
-  constructor(private http: Http) { }
+  constructor(private api: Api) { }
   getAll() {
-    return this.http.get('https://projects.eao.gov.bc.ca/api/query/recentactivity?active=true')
+    return this.api.get('query/recentactivity?active=true')
       .map(res => {
-        return res.json().sort(this.compare);
+        return res.json().sort(this.compareDateAdded);
       });
   }
-  compare(a, b) {
-    return (+(a.priority > b.priority) || +(a.dateAdded < b.dateAdded) - 1);
+  compareDateAdded(a, b) {
+    const aDate = a && a.dateAdded ? new Date(a.dateAdded).getTime() : 0;
+    const bDate = b && b.dateAdded ? new Date(b.dateAdded).getTime() : 0;
+    return bDate - aDate;
+  }
+  comparePinned(a, b) {
+    if (a.priority !== b.priority) {
+      return a.priority - b.priority;
+    }
+
+    const aDate = a && a.dateAdded ? new Date(a.dateAdded).getTime() : 0;
+    const bDate = b && b.dateAdded ? new Date(b.dateAdded).getTime() : 0;
+    return bDate - aDate;
   }
   getRecentNews() {
-    return this.http.get('https://projects.eao.gov.bc.ca/api/query/recentactivity?active=true')
+    return this.api.get('query/recentactivity?active=true')
     .map(res => {
         const ret = res.json();
         // Get pinned items.
         let pinned = ret.filter(item => item.pinned === true);
-        pinned = pinned.sort(this.compare);
+        pinned = pinned.sort(this.comparePinned);
 
         // Get non-pinned items.
         let nonPinned = ret.filter(item => item.pinned === false);
-        nonPinned = nonPinned.sort(this.compare);
+        nonPinned = nonPinned.sort(this.compareDateAdded);
 
         return pinned.concat(nonPinned).slice(0, 4);
     });

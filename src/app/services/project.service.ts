@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+
+import { Api } from './api';
 
 @Injectable()
 export class ProjectService {
 
-  constructor(private http: Http) { }
+  constructor(private api: Api) { }
   getAll() {
-    return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/project')
+    return this.api.get('project')
       .map((res: Response) => res.json());
   }
   getCommentPeriodProjects() {
       // MBL TODO:Inefficient - we should inject openCommentPeriod into the above call/other calls.
-      return this.http.get('http://esm-master.pathfinder.gov.bc.ca/api/projects/published')
+      return this.api.get('projects/published')
       .map((res: Response) => res.json());
   }
 }
