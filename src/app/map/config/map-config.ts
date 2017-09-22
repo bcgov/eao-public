@@ -74,7 +74,14 @@ export const DEFAULT_MAP_CONFIG: MapConfig = {
         id: webmapForEnv()
       }
     },
-    mapView: {},
+    mapView: {
+      constraints: {
+        minZoom: 4,  // EPIC-1209 prevent user from zooming too far out
+      },
+      ui: {
+        components: ['attribution']
+      }
+    },
     popup: defaultPopupTemplate
   }
 };
