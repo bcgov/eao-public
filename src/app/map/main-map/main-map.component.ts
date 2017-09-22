@@ -19,6 +19,7 @@ export class MainMapComponent implements OnInit {
   map: __esri.Map;
   mapView: __esri.MapView;
   search: __esri.Search;
+  zoom: __esri.Zoom;
 
   @HostBinding('class.full-screen') fullScreen = true;
 
@@ -39,7 +40,8 @@ export class MainMapComponent implements OnInit {
       ...mapInfo,
       popupProperties: this.popupProperties,
       featureLayer: <__esri.FeatureLayer>null,
-      search: <__esri.Search>null
+      search: <__esri.Search>null,
+      zoom: <__esri.Zoom>null
     };
 
     Promise.resolve(args)
@@ -48,6 +50,13 @@ export class MainMapComponent implements OnInit {
         this.map = obj.map;
         this.mapView = obj.mapView;
         return obj;
+      })
+      // create zoom widget instance
+      .then(obj => {
+        const { mapView } = obj;
+        return this.createZoomWidget(mapView)
+          .then(zoom => this.zoom = obj.zoom = zoom)
+          .then(() => obj);
       })
       // find the feature layer with `project` data
       .then(obj => {
@@ -64,15 +73,15 @@ export class MainMapComponent implements OnInit {
       // create search widget instance, then add it to the map
       .then(obj => {
         const { mapView, featureLayer } = obj;
-        mapView.ui.move('zoom', 'bottom-right');
         return this.createSearchWidget(mapView, featureLayer)
           .then(search => this.search = obj.search = search)
           .then(() => obj);
       })
-      // add the search widget to the top-right corner of the view
+      // position the interactive widgets (i.e. zoom, search) on the map
       .then(obj => {
-        const { mapView, search } = obj;
-        mapView.ui.add(search, { position: 'top-left' });
+        const { mapView, search, zoom } = obj;
+        mapView.ui.add(zoom, 'bottom-right');
+        mapView.ui.add(search, 'top-left');
       });
   }
 
@@ -119,5 +128,10 @@ export class MainMapComponent implements OnInit {
       });
       return search;
     });
+  }
+
+  private createZoomWidget(view: __esri.MapView): Promise<__esri.Zoom> {
+    return this.esriLoader.loadModules(['esri/widgets/Zoom'])
+      .then(([Zoom]: [__esri.ZoomConstructor]) => new Zoom({ view: view }));
   }
 }
