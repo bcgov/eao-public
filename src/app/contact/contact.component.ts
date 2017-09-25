@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ContactForm } from '../models/contactform';
 import { ContactSuccess } from './contact.success';
 import { EmailService } from '../services/email.service';
-import { AlertModule } from 'ngx-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
