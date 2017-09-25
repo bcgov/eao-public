@@ -8,7 +8,6 @@ import { bootstrap } from 'bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AlertModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -60,7 +59,6 @@ import { OrderByPipe } from './order-by.pipe';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AlertModule.forRoot(),
     Ng2PageScrollModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
