@@ -28,6 +28,7 @@ import { FilterPCPPipe } from './filter-pcp.pipe';
 import { ProjectFilterPipe } from './project-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
 import { OrderByPipe } from './order-by.pipe';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { OrderByPipe } from './order-by.pipe';
     NgxPaginationModule,
     MapModule
   ],
-  providers: [NewsComponent],
+  providers: [NewsComponent, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
