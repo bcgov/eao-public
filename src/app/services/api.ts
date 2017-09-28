@@ -4,32 +4,35 @@ import { Http } from '@angular/http';
 @Injectable()
 export class Api {
   apiPath: string;
+  hostnameEPIC: string;
 
   constructor(private http: Http) {
     const { hostname } = window.location;
     switch (hostname) {
       case 'localhost':
         // Local
-        this.apiPath = 'http://localhost:3000/api';
+        this.hostnameEPIC = 'http://localhost:3000';
         break;
 
       case 'www.esm-master.pathfinder.gov.bc.ca':
         // Dev
-        this.apiPath = 'http://esm-master.pathfinder.gov.bc.ca/api';
+        this.hostnameEPIC = 'http://esm-master.pathfinder.gov.bc.ca';
         break;
 
       case 'www.esm-test.pathfinder.gov.bc.ca':
       case 'eao-public-test-demo.pathfinder.gov.bc.ca':
         // Test
-        this.apiPath = 'https://esm-test.pathfinder.gov.bc.ca/api';
+        this.hostnameEPIC = 'https://esm-test.pathfinder.gov.bc.ca';
         break;
 
       case 'www.esm-prod.pathfinder.gov.bc.ca':
       case 'www-public.esm-server.pathfinder.gov.bc.ca':
       default:
         // Prod
-        this.apiPath = 'https://projects.eao.gov.bc.ca/api';
+        this.hostnameEPIC = 'https://projects.eao.gov.bc.ca';
     };
+
+    this.apiPath = `${ this.hostnameEPIC }/api`;
   }
 
   get(apiRoute: string, options?: Object) {

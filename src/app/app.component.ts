@@ -6,6 +6,7 @@ import { ProjectService } from './services/project.service';
 import { EmailService } from './services/email.service';
 import { NewsService } from './services/news.service';
 import { PageScrollConfig } from 'ng2-page-scroll';
+import { CookieService } from 'ngx-cookie-service';
 
 import { ProjectComponent } from './project/project.component';
 
@@ -17,9 +18,11 @@ import { ProjectComponent } from './project/project.component';
 })
 export class AppComponent implements OnInit {
   hostname: String;
-  constructor(private _router: Router) {
+  loggedIn: String;
+  constructor(private _router: Router, private cookieService: CookieService, private api: Api) {
     // Used for sharing links.
     this.hostname = encodeURI(window.location.href.replace(/\/$/, ''));
+    this.hostname = api.hostnameEPIC;
 
     PageScrollConfig.defaultScrollOffset = 50;
     PageScrollConfig.defaultEasingLogic = {
@@ -40,6 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loggedIn = this.cookieService.get('loggedIn');
     this._router.events.subscribe((url: any) => {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
