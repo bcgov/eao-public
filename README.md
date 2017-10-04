@@ -164,19 +164,3 @@ on how to setup in an OpenShift environment using nginx.
 # How to Contribute
 
 Feel free to create pull requests from the default "master" branch, click here to create one automatically: https://github.com/bcgov/eao-public/pull/new/master.
-
-# Licence
-
-    Copyright 2017 Province of British Columbia
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
