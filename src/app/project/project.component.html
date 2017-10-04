@@ -45,8 +45,8 @@
 				<div class="col-md-3 form-group">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
-      					<option value="" selected>All</option>
-      					<option *ngFor="let p of proponents" [ngValue]="p">{{p.name}}</option>
+						<option value="" selected>All</option>
+						<option *ngFor="let p of proponents | orderBy: {property: 'name', direction: 1}" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
 				<div class="col-md-3 form-group">
