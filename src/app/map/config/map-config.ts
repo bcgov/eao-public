@@ -44,7 +44,7 @@ const projectUrl = (code: string): string => {
   return `${protocol}//${hostSansWww}/p/${code}/detail`;
 };
 
-export const defaultPopupTemplate = {
+export const defaultPopupTemplate: __esri.PopupTemplateProperties = {
   title: '{name}',
   content: `<div class="map-popup-content">
               <ul class="map-popup-meta">
