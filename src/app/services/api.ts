@@ -16,7 +16,7 @@ export class Api {
 
       case 'www.esm-master.pathfinder.gov.bc.ca':
         // Dev
-        this.hostnameEPIC = 'http://esm-master.pathfinder.gov.bc.ca';
+        this.hostnameEPIC = 'https://esm-master.pathfinder.gov.bc.ca';
         break;
 
       case 'www.esm-test.pathfinder.gov.bc.ca':
