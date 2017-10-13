@@ -62,7 +62,7 @@ export class ProjectComponent implements OnInit {
   }
 
   insertProponents(projects) {
-    let names = [];
+    const names = [];
     projects.forEach(project => {
       if (!project.proponent) {
         // In case a proponent object isn't set yet.
