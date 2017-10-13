@@ -61,16 +61,19 @@ export class ProjectComponent implements OnInit {
     );
   }
 
-  insertProponents(data) {
-    for (let i = 0; i < data.length; i++) {
-      if (!data[i].proponent) {
+  insertProponents(projects) {
+    let names = [];
+    projects.forEach(project => {
+      if (!project.proponent) {
         // In case a proponent object isn't set yet.
-        data[i].proponent = { name: '' };
+        project.proponent = { name: '' };
+      } else if (project.proponent.name && names.indexOf(project.proponent.name) === -1) {
+        // Keep unique list of names
+        names.push(project.proponent.name);
+        // Add to proponent list.
+        this.proponents.push({ name: project.proponent.name });
       }
-      if (data[i].proponent.name && this.proponents.indexOf(data[i].proponent.name) === -1) {
-        this.proponents.push({ name: data[i].proponent.name });
-      }
-    }
+    });
   }
   findWithAttr(array, attr, value) {
     for (let i = 0; i < array.length; i += 1) {
