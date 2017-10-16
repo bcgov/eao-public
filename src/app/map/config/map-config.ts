@@ -55,8 +55,8 @@ export const defaultPopupTemplate: __esri.PopupTemplateProperties = {
               </ul>
               <div class="map-popup-desc" *ngIf="description">{description}</div>
               <div class="map-popup-btns">
-                <a class="btn btn-sm slide-r-btn" href="${projectUrl('{code}')}">
-                  <span>Go to Project Details</span><i class="material-icons">arrow_forward</i>
+                <a class="btn btn-sm slide-r-btn" title="View additional information about {name}" href="${projectUrl('{code}')}">
+                  <span>Project Info</span><i class="material-icons">arrow_forward</i>
                 </a>
               <div>
             </div>`

@@ -111,7 +111,12 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | orderBy: {property: column, direction: direction} | paginate: config">
-					<td class="name"><a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail">{{item.name}}</a></td>
+					<td class="name">
+						<a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail" 
+							title="View more information about {{item.name}}">
+							{{item.name}}
+						</a>
+					</td>
 					<td class="proj-col proponent"><span>{{item.proponent.name}}</span></td>
 					<td class="proj-col type"><span>{{item.type}}</span></td>
 					<td class="proj-col status"><span>{{item.eacDecision}}</span></td>
