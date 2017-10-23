@@ -12,6 +12,14 @@ def IMAGESTREAM_NAME = APP_NAME
 node {
   try {
     notifyBuild('STARTED')
+    stage('build angular-builder'){
+      echo "Building: angular-builder"
+      openshiftBuild(bldCfg: 'angular-builder', showBuildLogs: 'true')
+    }
+    stage('tag angular-builder'){
+      openshiftTag(srcStream: 'angular-builder', srcTag: 'latest', destStream: 'angular-builder', destTag: 'dev')
+      notifyBuild('ANGULAR_BUILDER:DEV')
+    }
     stage('build nginx runtime') {
       echo "Building: " + NGINX_BUILD_CONFIG
       openshiftBuild bldCfg: NGINX_BUILD_CONFIG, showBuildLogs: 'true'
