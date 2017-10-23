@@ -15,7 +15,7 @@ import { MAP_CONFIG_TOKEN, DEFAULT_MAP_CONFIG, MapConfig } from '../config';
 export class MainMapComponent implements OnInit {
   webMapProperties: __esri.WebMapProperties;
   mapViewProperties: __esri.MapViewProperties;
-  popupProperties: __esri.PopupProperties;
+  popupProperties: __esri.PopupTemplateProperties;
   map: __esri.Map;
   mapView: __esri.MapView;
   search: __esri.Search;
@@ -86,18 +86,19 @@ export class MainMapComponent implements OnInit {
   }
 
   private findFeatureLayer(map: __esri.Map): __esri.FeatureLayer {
-    return map.layers.find((lyr: __esri.Layer) => lyr.type === 'feature');
+    // need to cast the layer as FeatureLayer to make TypeScript happy
+    return map.layers.find(lyr => lyr.type === 'feature') as __esri.FeatureLayer;
   }
 
   private setPopupTemplateForLayer(featureLayer: __esri.FeatureLayer, popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       // the `esri/layers/FeatureLayer` instance is promise-based...
       // call the .then() method to execute code once the layer is ready
       return featureLayer.then(
         (fl: __esri.FeatureLayer) => {
           if (popupTemplate) {
-            fl.popupTemplate.title = <string>popupTemplate.title;
-            fl.popupTemplate.content = <string>popupTemplate.content;
+            fl.popupTemplate.title = popupTemplate.title;
+            fl.popupTemplate.content = popupTemplate.content;
           }
         })
         .then(() => resolve())
@@ -110,7 +111,7 @@ export class MainMapComponent implements OnInit {
       const search = new Search({
         view: view,
         sources: [
-          {
+          <any>{
             featureLayer: featureLayer,
             displayField: 'name',
             searchFields: ['name', 'description'],  // the names of fields in the feature layer to search

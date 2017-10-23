@@ -27,18 +27,22 @@ node {
     }
     stage('deploy-' + TAG_NAMES[1]) {
       try {
-        input "Deploy to " + TAG_NAMES[1] + "?"
-        openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[1], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
-        notifyBuild('DEPLOYED:TEST')
+        timeout(time: 2, unit: 'MINUTES') {
+          input "Deploy to " + TAG_NAMES[1] + "?"
+          openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[1], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
+          notifyBuild('DEPLOYED:TEST')
+        }
       } catch (e) {
         notifyBuild('DEPLOYMENT:TEST ABORTED')
       }
     }
     stage('deploy-'  + TAG_NAMES[2]) {
       try {
-        input "Deploy to " + TAG_NAMES[2] + "?"
-        openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[2], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
-        notifyBuild('DEPLOYED:PROD')
+        timeout(time: 2, unit: 'MINUTES') {
+          input "Deploy to " + TAG_NAMES[2] + "?"
+          openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[2], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
+          notifyBuild('DEPLOYED:PROD')
+        }
       } catch (e) {
         notifyBuild('DEPLOYMENT:PROD ABORTED')
       }

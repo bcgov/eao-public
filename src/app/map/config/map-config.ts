@@ -44,7 +44,7 @@ const projectUrl = (code: string): string => {
   return `${protocol}//${hostSansWww}/p/${code}/detail`;
 };
 
-export const defaultPopupTemplate = {
+export const defaultPopupTemplate: __esri.PopupTemplateProperties = {
   title: '{name}',
   content: `<div class="map-popup-content">
               <ul class="map-popup-meta">
@@ -55,8 +55,8 @@ export const defaultPopupTemplate = {
               </ul>
               <div class="map-popup-desc" *ngIf="description">{description}</div>
               <div class="map-popup-btns">
-                <a class="btn btn-sm slide-r-btn" href="${projectUrl('{code}')}">
-                  <span>Go to Project Details</span><i class="material-icons">arrow_forward</i>
+                <a class="btn btn-sm slide-r-btn" title="View additional information about {name}" href="${projectUrl('{code}')}">
+                  <span>Project Info</span><i class="material-icons">arrow_forward</i>
                 </a>
               <div>
             </div>`
@@ -77,6 +77,7 @@ export const DEFAULT_MAP_CONFIG: MapConfig = {
     mapView: {
       constraints: {
         minZoom: 4,  // EPIC-1209 prevent user from zooming too far out
+        rotationEnabled: false  // EPIC-1239 disable map rotation
       },
       ui: {
         components: ['attribution']

@@ -33,9 +33,22 @@
 							<span class="news-date">{{item.dateAdded | date}}</span>
 							<p class="mb-0">{{item.content}}</p>
 							<div class="news-block-btns">
-								<a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail">Project Info</a>
-								<a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
-								<a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Document(s)</a>
+								<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}" 
+									href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail"
+									*ngIf="item.project?.code" >
+									Project Info
+								</a>
+								<a class="btn btn-sm content-btn-alt" title="View this Public Comment Period" 
+									href="{{item.contentUrl}}" 
+									*ngIf="item.contentUrl">
+									View Comments
+								</a>
+								<a class="btn btn-sm content-btn-alt" title="View more information" 
+									href="{{item.documentUrl}}" 
+									target="_blank"
+									*ngIf="item.documentUrl">
+									View Document(s)
+								</a>
 							</div>
 						</div>
 					</div>
