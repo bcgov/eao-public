@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 export class Api {
   apiPath: string;
   hostnameEPIC: string;
+  env: 'local' | 'dev' | 'test' | 'prod';
 
   constructor(private http: Http) {
     const { hostname } = window.location;
@@ -12,17 +13,20 @@ export class Api {
       case 'localhost':
         // Local
         this.hostnameEPIC = 'http://localhost:3000';
+        this.env = 'local';
         break;
 
       case 'www-esm-master.pathfinder.gov.bc.ca':
         // Dev
         this.hostnameEPIC = 'https://esm-master.pathfinder.gov.bc.ca';
+        this.env = 'dev';
         break;
 
       case 'www-esm-test.pathfinder.gov.bc.ca':
       case 'www.test.projects.eao.gov.bc.ca':
         // Test
         this.hostnameEPIC = 'https://esm-test.pathfinder.gov.bc.ca';
+        this.env = 'test';
         break;
 
       case 'www-esm-prod.pathfinder.gov.bc.ca':
@@ -30,6 +34,7 @@ export class Api {
       default:
         // Prod
         this.hostnameEPIC = 'https://projects.eao.gov.bc.ca';
+        this.env = 'prod';
     };
 
     this.apiPath = `${ this.hostnameEPIC }/api`;
