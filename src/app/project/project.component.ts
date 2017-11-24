@@ -12,7 +12,6 @@ import { PaginationInstance } from 'ngx-pagination';
 })
 export class ProjectComponent implements OnInit {
   results: Array<Project>;
-  projectsPCP: Array<Project>;
   public loading: boolean;
   public showFilters: boolean;
   public filter = '';
@@ -39,21 +38,11 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.projectService.getCommentPeriodProjects().subscribe(
-      dataPCP => {
-        this.projectService.getAll().subscribe(
-          data => {
-            this.results = data;
-            this.insertProponents(data);
-            this.insertPCP(dataPCP);
-            this.loading = false;
-            // Needed in development mode - not required in prod.
-            this._changeDetectionRef.detectChanges();
-          },
-          error => console.log(error)
-        );
-
-        this.projectsPCP = dataPCP;
+    this.projectService.getAll().subscribe(
+      data => {
+        this.results = data;
+        this.getProponents(data);
+        this.loading = false;
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
       },
@@ -61,7 +50,7 @@ export class ProjectComponent implements OnInit {
     );
   }
 
-  insertProponents(projects) {
+  getProponents(projects) {
     const names = [];
     projects.forEach(project => {
       if (!project.proponent) {
@@ -75,22 +64,16 @@ export class ProjectComponent implements OnInit {
       }
     });
   }
+
   findWithAttr(array, attr, value) {
     for (let i = 0; i < array.length; i += 1) {
-        if (array[i][attr] === value) {
-            return i;
-        }
+      if (array[i][attr] === value) {
+        return i;
+      }
     }
     return -1;
   }
-  insertPCP(data) {
-    for (let i = 0; i < data.length; i++) {
-      const idx = this.findWithAttr(this.results, 'code', data[i].code);
-      if (idx !== -1) {
-        this.results[idx].openCommentPeriod = data[i].openCommentPeriod;
-      }
-    }
-  }
+
   sort (property) {
     this.isDesc = !this.isDesc;
     this.column = property;
