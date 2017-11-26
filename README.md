@@ -30,7 +30,7 @@ ng -v
 npm i -g yarn
 ```
 
-## Fork, Build and Deployment
+## Fork, Build, and Deployment
 
 1. After installing Node and Yarn, you can fork or straight download a copy of this application to start your own app.
 1. First download all the dependencies with `yarn install`
@@ -39,7 +39,7 @@ npm i -g yarn
     Navigate to `http://localhost:3300` to verify that the application is running
 
     :bulb: To change the default port, open `.angular-cli.json`, change the value on `defaults.serve.port`
-    
+
 1. Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build, like so: `ng serve --prod` to run in production mode.
 1. Run `npm run lint` to lint your app code using `TSLint`
 
