@@ -14,10 +14,11 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
 COPY nginx.conf.template /tmp/
 
 # Fix up permissions
+RUN chown -R 1001:1001 /tmp
 RUN chmod -R 0777 /tmp /var /run /etc /mnt /usr/libexec/s2i/
 
 # Nginx runs on port 8080 by default
 EXPOSE 8080
 
 # Switch to usermode
-USER 104
+USER 1001
