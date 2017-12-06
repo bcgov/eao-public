@@ -24,7 +24,7 @@ export class Api {
 
       case 'www.test.projects.eao.gov.bc.ca':
         // Test
-        this.hostnameEPIC = 'https://esm-test.pathfinder.gov.bc.ca';
+        this.hostnameEPIC = 'https://test.projects.eao.gov.bc.ca';
         this.env = 'test';
         break;
 
