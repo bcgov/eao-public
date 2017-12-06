@@ -22,14 +22,12 @@ export class Api {
         this.env = 'dev';
         break;
 
-      case 'www-esm-test.pathfinder.gov.bc.ca':
       case 'www.test.projects.eao.gov.bc.ca':
         // Test
         this.hostnameEPIC = 'https://esm-test.pathfinder.gov.bc.ca';
         this.env = 'test';
         break;
 
-      case 'www-esm-prod.pathfinder.gov.bc.ca':
       case 'www.projects.eao.gov.bc.ca':
       default:
         // Prod
