@@ -29,6 +29,7 @@ import { ProjectFilterPipe } from './project-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
 import { OrderByPipe } from './order-by.pipe';
 import { CookieService } from 'ngx-cookie-service';
+import { ScrollDirective } from './directives/scroll.directive';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CookieService } from 'ngx-cookie-service';
     FilterPCPPipe,
     ProjectFilterPipe,
     ProjectStatusFilterPipe,
-    OrderByPipe
+    OrderByPipe,
+    ScrollDirective,
   ],
   imports: [
     BrowserModule,
