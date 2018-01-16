@@ -112,7 +112,7 @@
 			<tbody>
 				<tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | orderBy: {property: column, direction: direction} | paginate: config">
 					<td class="name">
-						<a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail" 
+						<a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
 							title="View more information about {{item.name}}">
 							{{item.name}}
 						</a>
@@ -133,7 +133,7 @@
 
 			<ul class="pagination">
 				<li class="page-item" *ngIf="!p.isFirstPage()">
-					<a class="page-link" (click)="p.previous()"> < </a>
+					<a class="page-link" (click)="p.previous();" appScroll> < </a>
 				</li>
 				<li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
 					<a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
@@ -144,7 +144,7 @@
 					</div>
 				</li>
 				<li class="page-item" *ngIf="!p.isLastPage()">
-					<a class="page-link" (click)="p.next()"> > </a>
+					<a class="page-link" (click)="p.next();" appScroll> > </a>
 				</li>
 			</ul>
 		</pagination-template>
