@@ -1,197 +1,197 @@
 
 <header class="app-header" id="header">
-	<div class="brand-container">
-		<a class="brand" href="/" [routerLink]="['/']" tabindex="0"></a>
-		<button class="navbar-toggler float-right collapsed" type="button"
-			data-toggle="collapse"
-			data-target="#mainNav"
-			aria-controls="mainNav"
-			aria-expanded="false"
-			aria-label="Toggle navigation"><i class="material-icons">menu</i><span>MENU</span>
-		</button>
-	</div>
-	<nav class="navbar navbar-toggleable-md main-nav">
-		<div class="collapse navbar-collapse" id="mainNav">
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="findEAProjects" tabindex="4"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"><span>Find EA Projects</span><span class="caret"></span>
-					</a>
-					<div class="dropdown-menu dm-sm dropdown-menu-right" aria-labelledby="findEAProjects">
-						<a class="dropdown-item" href="/project" [routerLink]="['/project']" tabindex="5">
-							<strong>Find Projects by List</strong>
-						</a>
-						<a class="dropdown-item" href="/map" [routerLink]="['/map']" tabindex="6">
-							<strong>Find Projects by Map</strong>
-						</a>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/news" [routerLink]="['/news']" tabindex="3"><span>Activities & Updates</span></a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="aboutMMTI" tabindex="4"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"><span>The EA Process</span><span class="caret"></span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="aboutMMTI">
-						<a class="dropdown-item" href="/legislation" [routerLink]="['/legislation']" tabindex="5">
-							<strong>Legislation</strong>
-							<span class="dd-item-desc">Learn about the legislation and regulations that apply to environmental assessments in the province of British Columbia.</span>
-						</a>
-						<a class="dropdown-item" href="/process" [routerLink]="['/process']" tabindex="6">
-							<strong>Process & Procedures</strong>
-							<span class="dd-item-desc">Learn more about how the Environmental Assessment Office neutrally administers a process that holds all participants accountable.</span>
-						</a>
-						<a class="dropdown-item" href="/compliance-oversight" [routerLink]="['/compliance-oversight']" tabindex="7">
-							<strong>Compliance Oversight</strong>
-							<span class="dd-item-desc">Learn about how we collaborate with other agencies to coordinate oversight of environmental assessment projects.</span>
-						</a>
-					</div>
-				</li>
-				<!--
-				<li class="nav-item">
-					<a class="nav-link" ui-sref="guidance"><span>Support</span></a>
-				</li>
-				-->
-				<li class="nav-item">
-					<a class="nav-link" href="/contact" [routerLink]="['/contact']"><span>Contact</span></a>
-				</li>
-				<li *ngIf="loggedIn === 'false'" class="nav-item user-menu">
-					<a class="nav-link" href="https://projects.eao.gov.bc.ca/authentication/signin" target="_blank"><span>Sign in</span></a>
-				</li>
-				<li *ngIf="loggedIn === 'true'" class="nav-item">
-					<a class="nav-link" href="{{hostname}}/dashboard"><span>My Projects</span></a>
-				</li>
-				<li *ngIf="loggedIn === 'true'" class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="system" tabindex="4"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"><span>System</span><span class="caret"></span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="eee">
-						<a class="dropdown-item" href="{{hostname}}/admin/emailtemplate/list">
-							<strong>Email Templates</strong>
-						</a>
-						<a class="dropdown-item" href="{{hostname}}/admin/organization/list">
-							<strong>Organizations</strong>
-						</a>
-						<a class="dropdown-item" href="{{hostname}}/admin/recentactivity/list">
-							<strong>Activities & Updates</strong>
-						</a>
-						<a class="dropdown-item" href="{{hostname}}/admin/topic/list">
-							<strong>Valued Components</strong>
-						</a>
-						<a class="dropdown-item" href="{{hostname}}/admin/user/list">
-							<strong>Contacts</strong>
-						</a>
-						<a class="dropdown-item" href="{{hostname}}/admin/codelists/">
-							<strong>Field Management</strong>
-						</a>
-					</div>
-					<!--
-						more items here except edit system roles/perms (those are modals)
-					-->
-				</li>
-				<li *ngIf="loggedIn === 'true'" class="nav-item">
-					<a class="nav-link" href="{{hostname}}/api/auth/signout"><span>Logout</span></a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+  <div class="brand-container">
+    <a class="brand" href="/" [routerLink]="['/']" tabindex="0"></a>
+    <button class="navbar-toggler float-right collapsed" type="button"
+      data-toggle="collapse"
+      data-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"><i class="material-icons">menu</i><span>MENU</span>
+    </button>
+  </div>
+  <nav class="navbar navbar-toggleable-md main-nav">
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="findEAProjects" tabindex="4"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"><span>Find EA Projects</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu dm-sm dropdown-menu-right" aria-labelledby="findEAProjects">
+            <a class="dropdown-item" href="/project" [routerLink]="['/project']" tabindex="5">
+              <strong>Find Projects by List</strong>
+            </a>
+            <a class="dropdown-item" href="/map" [routerLink]="['/map']" tabindex="6">
+              <strong>Find Projects by Map</strong>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/news" [routerLink]="['/news']" tabindex="3"><span>Activities & Updates</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="aboutMMTI" tabindex="4"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"><span>The EA Process</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="aboutMMTI">
+            <a class="dropdown-item" href="/legislation" [routerLink]="['/legislation']" tabindex="5">
+              <strong>Legislation</strong>
+              <span class="dd-item-desc">Learn about the legislation and regulations that apply to environmental assessments in the province of British Columbia.</span>
+            </a>
+            <a class="dropdown-item" href="/process" [routerLink]="['/process']" tabindex="6">
+              <strong>Process & Procedures</strong>
+              <span class="dd-item-desc">Learn more about how the Environmental Assessment Office neutrally administers a process that holds all participants accountable.</span>
+            </a>
+            <a class="dropdown-item" href="/compliance-oversight" [routerLink]="['/compliance-oversight']" tabindex="7">
+              <strong>Compliance Oversight</strong>
+              <span class="dd-item-desc">Learn about how we collaborate with other agencies to coordinate oversight of environmental assessment projects.</span>
+            </a>
+          </div>
+        </li>
+        <!--
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="guidance"><span>Support</span></a>
+        </li>
+        -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact" [routerLink]="['/contact']"><span>Contact</span></a>
+        </li>
+        <li *ngIf="loggedIn === 'false'" class="nav-item user-menu">
+          <a class="nav-link" href="https://projects.eao.gov.bc.ca/authentication/signin" target="_blank"><span>Sign in</span></a>
+        </li>
+        <li *ngIf="loggedIn === 'true'" class="nav-item">
+          <a class="nav-link" href="{{hostname}}/dashboard"><span>My Projects</span></a>
+        </li>
+        <li *ngIf="loggedIn === 'true'" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="system" tabindex="4"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"><span>System</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="eee">
+            <a class="dropdown-item" href="{{hostname}}/admin/emailtemplate/list">
+              <strong>Email Templates</strong>
+            </a>
+            <a class="dropdown-item" href="{{hostname}}/admin/organization/list">
+              <strong>Organizations</strong>
+            </a>
+            <a class="dropdown-item" href="{{hostname}}/admin/recentactivity/list">
+              <strong>Activities & Updates</strong>
+            </a>
+            <a class="dropdown-item" href="{{hostname}}/admin/topic/list">
+              <strong>Valued Components</strong>
+            </a>
+            <a class="dropdown-item" href="{{hostname}}/admin/user/list">
+              <strong>Contacts</strong>
+            </a>
+            <a class="dropdown-item" href="{{hostname}}/admin/codelists/">
+              <strong>Field Management</strong>
+            </a>
+          </div>
+          <!--
+            more items here except edit system roles/perms (those are modals)
+          -->
+        </li>
+        <li *ngIf="loggedIn === 'true'" class="nav-item">
+          <a class="nav-link" href="{{hostname}}/api/auth/signout"><span>Logout</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>
 
 <router-outlet id="scrollTop"></router-outlet>
 
 <footer class="app-footer">
-	<div class="container">
-		<div class="row">
+  <div class="container">
+    <div class="row">
 
-			<div class="col-md-4">
-				<section>
-					<h4>About this website...</h4>
-					<p class="mb-0">This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information.</p>
-				</section>
-			</div>
+      <div class="col-md-4">
+        <section>
+          <h4>About this website...</h4>
+          <p class="mb-0">This website has been designed, built and implemented to improve the efficiency and transparency of the provincial environmental assessment process, and to provide citizens and stakeholders with more intuitive access to project data and information.</p>
+        </section>
+      </div>
 
-			<div class="col-md-4">
-				<section>
-					<h4>Navigate</h4>
-					<h5>Find EA Projects</h5>
-					<ul>
-						<li>
-							<a href="/project" [routerLink]="['/project']">Find EA Projects by List</a>
-						</li>
-						<li>
-							<a href="/map" [routerLink]="['/map']">Find EA Projects by Map</a>
-						</li>
-					</ul>
-					<h5>The EA Process</h5>
-					<ul>
-						<li>
-							<a href="/legislation" [routerLink]="['/legislation']">Legislation</a>
-						</li>
-						<li>
-							<a href="/process" [routerLink]="['/process']">Process & Procedures</a>
-						</li>
-						<li>
-							<a href="/compliance-oversight" [routerLink]="['/compliance-oversight']">Compliance Oversight</a>
-						</li>
-					</ul>
-				</section>
-			</div>
+      <div class="col-md-4">
+        <section>
+          <h4>Navigate</h4>
+          <h5>Find EA Projects</h5>
+          <ul>
+            <li>
+              <a href="/project" [routerLink]="['/project']">Find EA Projects by List</a>
+            </li>
+            <li>
+              <a href="/map" [routerLink]="['/map']">Find EA Projects by Map</a>
+            </li>
+          </ul>
+          <h5>The EA Process</h5>
+          <ul>
+            <li>
+              <a href="/legislation" [routerLink]="['/legislation']">Legislation</a>
+            </li>
+            <li>
+              <a href="/process" [routerLink]="['/process']">Process & Procedures</a>
+            </li>
+            <li>
+              <a href="/compliance-oversight" [routerLink]="['/compliance-oversight']">Compliance Oversight</a>
+            </li>
+          </ul>
+        </section>
+      </div>
 
-			<div class="col-md-4">
-				<section class="last">
-					<h4>Connect With Us</h4>
-					<p>If you are interested in providing us with feedback about your experience using this website, please feel free to send us your feedback.</p>
-					<a class="btn slide-r-btn inverted" href="/contact" [routerLink]="['/contact']"><span>Submit Feedback</span><i class="material-icons">arrow_forward</i></a>
-				</section>
-			</div>
-		</div>
+      <div class="col-md-4">
+        <section class="last">
+          <h4>Connect With Us</h4>
+          <p>If you are interested in providing us with feedback about your experience using this website, please feel free to send us your feedback.</p>
+          <a class="btn slide-r-btn inverted" href="/contact" [routerLink]="['/contact']"><span>Submit Feedback</span><i class="material-icons">arrow_forward</i></a>
+        </section>
+      </div>
+    </div>
 
-		<div class="footer-admin clearfix">
-			<ul class="gov-links">
-				<li><a href="/" [routerLink]="['/']">Home</a></li>
-				<li><a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
-				<li><a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
-				<li><a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
-				<li><a href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
-				<li><a href="https://projects.eao.gov.bc.ca/authentication/local/signin" target="_blank">Sign In</a></li>
-			</ul>
+    <div class="footer-admin clearfix">
+      <ul class="gov-links">
+        <li><a href="/" [routerLink]="['/']">Home</a></li>
+        <li><a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
+        <li><a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
+        <li><a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
+        <li><a href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
+        <li><a href="https://projects.eao.gov.bc.ca/authentication/signin" target="_blank">Sign In</a></li>
+      </ul>
 
-			<ul class="connect-links">
-				<li>
-					<div class="fb-share-button" data-href=escape(window.location.href) data-layout="button" data-size="large" data-mobile-iframe="true">
-						<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{hostname}}&amp;src=sdkpreparse">
-							<img src="assets/images/facebook_circle.svg"/>
-						</a>
-					</div>
-				</li>
-				<li>
-					<a class="twitter-share-button" href="https://twitter.com/share" data-show-count="false" target="_blank">
-						<img src="assets/images/twitter_circle.svg"/>
-					</a>
-					<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-				</li>
-				<li>
-					<a href="https://plus.google.com/share?url={{hostname}}" onclick="window.open(this.href,
-					'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
-					src="assets/images/google_circle.svg" alt="Share on Google+"/></a>
-				</li>
-			</ul>
+      <ul class="connect-links">
+        <li>
+          <div class="fb-share-button" data-href=escape(window.location.href) data-layout="button" data-size="large" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{hostname}}&amp;src=sdkpreparse">
+              <img src="assets/images/facebook_circle.svg"/>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a class="twitter-share-button" href="https://twitter.com/share" data-show-count="false" target="_blank">
+            <img src="assets/images/twitter_circle.svg"/>
+          </a>
+          <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </li>
+        <li>
+          <a href="https://plus.google.com/share?url={{hostname}}" onclick="window.open(this.href,
+          '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
+          src="assets/images/google_circle.svg" alt="Share on Google+"/></a>
+        </li>
+      </ul>
 
-		</div>
+    </div>
 
-	</div>
+  </div>
 </footer>
 
 <a href="#scrollTop" class="btn scroll-top-btn"
-	pageScroll
-	[pageScrollOffset]="0"
-	[pageScrollDuration]="800">
-	<i class="material-icons">arrow_upward</i>
+  pageScroll
+  [pageScrollOffset]="0"
+  [pageScrollDuration]="800">
+  <i class="material-icons">arrow_upward</i>
 </a>
