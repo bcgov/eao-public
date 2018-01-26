@@ -96,13 +96,17 @@
 						more items here except edit system roles/perms (those are modals)
 					-->
 				</li>
-				<li *ngIf="loggedIn === 'true'" class="nav-item">
+				<li *ngIf="loggedIn === 'true'" (click)='removeCookie()' class="nav-item">
 					<a class="nav-link" href="{{hostname}}/api/auth/signout"><span>Logout</span></a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 </header>
+
+<div id="spinner">
+  <div class="spinner-new rotating"></div>
+</div>
 
 <router-outlet id="scrollTop"></router-outlet>
 
