@@ -44,9 +44,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.cookieService.get('loggedIn');
+    if (!this.loggedIn) {
+      this.cookieService.set('loggedIn', 'false');
+      this.loggedIn = this.cookieService.get('loggedIn');
+    }
+
     this._router.events.subscribe((url: any) => {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
-  }
+  };
 }
