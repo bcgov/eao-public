@@ -24,6 +24,7 @@ import { ContactSuccess } from './contact/contact.success';
 import { MapModule } from './map/map.module';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ProponentFilterPipe } from './proponent-filter.pipe';
+import { PhaseFilterPipe } from './phase-filter.pipe';
 import { FilterPCPPipe } from './filter-pcp.pipe';
 import { ProjectFilterPipe } from './project-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
@@ -48,6 +49,7 @@ import { ScrollDirective } from './directives/scroll.directive';
     ContactComponent,
     ContactSuccess,
     ProponentFilterPipe,
+    PhaseFilterPipe,
     FilterPCPPipe,
     ProjectFilterPipe,
     ProjectStatusFilterPipe,

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Project } from '../models/project';
 import { Proponent } from '../models/proponent';
+import { CurrentPhase } from '../models/currentphase';
 import { ProjectService } from '../services/project.service';
 import { PaginationInstance } from 'ngx-pagination';
 
@@ -17,6 +18,8 @@ export class ProjectComponent implements OnInit {
   public filter = '';
   public propfilter = '';
   public proponentListFilter: '';
+  public phasefilter: '';
+  public projectPhaseFilter: '';
   public projectTypeFilter: '';
   public filterType: '';
   public projectDecisionFilter: '';
@@ -92,6 +95,8 @@ export class ProjectComponent implements OnInit {
     this.filterDecision = undefined;
     this.proponentListFilter = undefined;
     this.propfilter = undefined;
+    this.phasefilter = undefined;
+    this.projectPhaseFilter = undefined;
     this.filterPCP = undefined;
   }
 }
