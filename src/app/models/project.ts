@@ -1,4 +1,5 @@
 import { Proponent } from './proponent';
+import { CurrentPhase } from './currentphase';
 
 export class Project {
   _id: number;
@@ -10,6 +11,7 @@ export class Project {
   type: string;
   openCommentPeriod: string;
   eacDecision: string;
+  currentPhase: CurrentPhase;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -20,5 +22,6 @@ export class Project {
     this.type = obj && obj.type || null;
     this.openCommentPeriod = obj && obj.openCommentPeriod || null;
     this.eacDecision = obj && obj.eacDecision || null;
+    this.currentPhase = obj && obj.currentPhase || null;
   }
 }

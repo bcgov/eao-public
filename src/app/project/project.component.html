@@ -30,7 +30,7 @@
 				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
-				<div class="col-md-3 form-group">
+				<div class="col-md-2 form-group">
 					<label>Comment Period</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -42,7 +42,7 @@
 					</select>
 				</div>
 
-				<div class="col-md-3 form-group">
+				<div class="col-md-2 form-group">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
 						<option value="" selected>All</option>
@@ -84,9 +84,24 @@
 						<option label="Terminated" value="Terminated">Terminated</option>
 						<option label="Pre-EA Act Approval" value="Pre-EA Act Approval">Pre-EA Act Approval</option>
 					</select>
+        </div>
+
+        <div class="col-md-2 form-group">
+					<label>Current Phase</label>
+
+					<select class="form-control" [(ngModel)]="phasefilter">
+            <option value="" selected>All</option>
+            <option label="Intake" value="Intake">Intake</option>
+            <option label="Determination" value="Determination">Determination</option>
+            <option label="Scope" value="Scope">Scope</option>
+            <option label="Evaluation" value="Evaluation">Evaluation</option>
+            <option label="Review" value="Review">Review</option>
+            <option label="Decision" value="Decision">Decision</option>
+            <option label="Post-Certification" value="Post-Certification">Post-Certification</option>
+					</select>
 				</div>
 			</div>
-			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter">
+			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter || phasefilter">
 				<button class="btn content-btn-alt" (click)="clearAllProjectFilters()">
 					Clear Filters
 				</button>
@@ -110,7 +125,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | orderBy: {property: column, direction: direction} | paginate: config">
+				<tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | projectPhaseFilter: phasefilter | orderBy: {property: column, direction: direction} | paginate: config">
 					<td class="name">
 						<a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
 							title="View more information about {{item.name}}">
