@@ -13,7 +13,7 @@
         }
 
         &__main-container {
-            max-height: 50rem !important;
+            max-height: 500px !important;
         }
 
         &__main-container,
@@ -28,7 +28,7 @@
         }
 
         &__button {
-            color: $bg-dark-color; 
+            color: $bg-dark-color;
 
             &:active,
             &:focus,
@@ -98,6 +98,7 @@
     // Search Widget
     .esri-ui-top-left {
         right: 0;
+        z-index: 2;
     }
 
     .esri-search {
@@ -109,7 +110,7 @@
                 font-size: $map-search-font-size;
             }
         }
-        
+
         &__warning-body {
             font-size: $map-search-font-size;
 
@@ -166,7 +167,7 @@
 }
 
 .map-popup-desc {
-    max-height: 20rem;
+    max-height: 200px; // Have to set PX value here - ESRI map widget does not respond correctly to REM units
     line-height: calc(#{$map-popup-font-size} * 1.5);
 }
 
@@ -174,7 +175,7 @@
     list-style-type: none;
     padding-left: 0 !important;
 
-    li { 
+    li {
         @include flex-box();
         font-size: $map-popup-font-size !important;
 
@@ -197,7 +198,7 @@
         }
 
         .esri-search {
-            width: 30rem; 
+            width: 30rem;
 
             input {
                 width: 100%;
