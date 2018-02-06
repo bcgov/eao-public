@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-    font-size: 2.2rem;        // 36px 
+    font-size: 2.2rem;        // 36px
     font-weight: 400;
     letter-spacing: -0.03rem;
 
@@ -26,7 +26,7 @@ h1 {
 
 h2 {
     font-size: 2rem;        // 32px
-    font-weight: 400; 
+    font-weight: 400;
     letter-spacing: -0.05rem;
 }
 
@@ -49,9 +49,10 @@ a {
     color: #1a5a96;
 }
 
-button, 
-input, 
-select, 
+button,
+input,
+pre,
+select,
 textarea {
     font-family: "myriad-pro";
 }
