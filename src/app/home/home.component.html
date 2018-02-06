@@ -25,26 +25,26 @@
 				<div class="spinner-new rotating"></div>
 			</div>
 
-			<div *ngIf="results"> 
+			<div *ngIf="results">
 				<ng-container *ngFor="let item of results">
 					<div class="news-block" *ngIf="item.active == true">
 						<div class="news-block-title">
 							<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
 							<span class="news-date">{{item.dateAdded | date}}</span>
-							<p class="mb-0">{{item.content}}</p>
+							<pre class="activity-content mb-0" [innerHTML]="item.content"></pre>
 							<div class="news-block-btns">
-								<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}" 
+								<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
 									href="https://projects.eao.gov.bc.ca/p/{{item.project?.code}}/detail"
 									*ngIf="item.project?.code" >
 									Project Info
 								</a>
-								<a class="btn btn-sm content-btn-alt" title="View this Public Comment Period" 
-									href="{{item.contentUrl}}" 
+								<a class="btn btn-sm content-btn-alt" title="View this Public Comment Period"
+									href="{{item.contentUrl}}"
 									*ngIf="item.contentUrl">
 									View Comments
 								</a>
-								<a class="btn btn-sm content-btn-alt" title="View more information" 
-									href="{{item.documentUrl}}" 
+								<a class="btn btn-sm content-btn-alt" title="View more information"
+									href="{{item.documentUrl}}"
 									target="_blank"
 									*ngIf="item.documentUrl">
 									View Document(s)
