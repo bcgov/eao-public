@@ -19,6 +19,7 @@ import { ProjectComponent } from './project/project.component';
 export class AppComponent implements OnInit {
   hostname: String;
   loggedIn: String;
+  logout: Boolean;
   constructor(private _router: Router, private cookieService: CookieService, private api: Api) {
     // Used for sharing links.
     this.hostname = encodeURI(window.location.href.replace(/\/$/, ''));
@@ -58,7 +59,6 @@ export class AppComponent implements OnInit {
   removeCookie() {
     this.cookieService.set('loggedIn', 'false');
     this.loggedIn = this.cookieService.get('loggedIn');
-    const spinner = document.getElementById('spinner');
-    spinner.className = 'spinner-container';
+    this.logout = true;
   }
 }
