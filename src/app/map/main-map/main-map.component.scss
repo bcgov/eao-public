@@ -11,7 +11,7 @@
 
 @media (min-width: 1024px) {
     :host {
-        margin-top: 66px;
+        margin-top: 67px;
     }
 }
 
@@ -29,10 +29,10 @@
         &:before {
             content: ' ';
             position: absolute;
-            top: -66px;
+            top: -67px;
             left: 0;
             width: 100%;
-            height: 66px;
+            height: 67px;
             background: $header-bg;
         }
     }
