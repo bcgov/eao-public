@@ -6,6 +6,8 @@ import { EsriLoaderModule } from 'angular-esri-loader';
 import { EsriMapComponent } from './esri-map/esri-map.component';
 import { MainMapComponent } from './main-map/main-map.component';
 import { MapLoaderService } from './map-loader.service';
+import { MapConfigService } from './config/map-config.service';
+import { WidgetBuilder } from './widgets/widget-builder';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { MapLoaderService } from './map-loader.service';
     MainMapComponent
   ],
   providers: [
-    MapLoaderService
+    MapConfigService,
+    MapLoaderService,
+    WidgetBuilder
   ]
 })
 export class MapModule { }
