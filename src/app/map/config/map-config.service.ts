@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Api } from 'app/services/api';
-import { MapConfig } from './map-config.interface';
+import { GeocoderSettings } from '../widgets/support/geocoder';
 
 const webmaps = {
   dev: 'a39ebfecf4a84daf926dcd7f2ce000a8',
@@ -9,6 +9,15 @@ const webmaps = {
   train: 'a39ebfecf4a84daf926dcd7f2ce000a8',
   prod: 'a39ebfecf4a84daf926dcd7f2ce000a8'
 };
+
+export interface MapConfig {
+  mainMap?: {
+    webmap?: __esri.WebMapProperties,
+    mapView?: __esri.MapViewProperties,
+    popup?: __esri.PopupTemplateProperties,
+    geocoder?: GeocoderSettings;
+  };
+}
 
 @Injectable()
 export class MapConfigService {
@@ -31,7 +40,10 @@ export class MapConfigService {
             components: ['attribution']
           }
         },
-        popup: this.defaultPopupTemplate
+        popup: this.defaultPopupTemplate,
+        geocoder: {
+          type: 'databc',  // One of: [databc, arcgis]
+        }
       }
     };
   }

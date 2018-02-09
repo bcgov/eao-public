@@ -14,12 +14,12 @@ import { ProjectComponent } from './project/project.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [Api, ProjectService, NewsService, EmailService]
+  providers: [ProjectService, NewsService, EmailService]
 })
 export class AppComponent implements OnInit {
-  hostname: String;
-  loggedIn: String;
-  logout: Boolean;
+  hostname: string;
+  loggedIn: string;
+  logout: boolean;
   constructor(private _router: Router, private cookieService: CookieService, private api: Api) {
     // Used for sharing links.
     this.hostname = encodeURI(window.location.href.replace(/\/$/, ''));

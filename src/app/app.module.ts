@@ -31,6 +31,7 @@ import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
 import { OrderByPipe } from './order-by.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { ScrollDirective } from './directives/scroll.directive';
+import { Api } from './services/api';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { ScrollDirective } from './directives/scroll.directive';
     NgxPaginationModule,
     MapModule
   ],
-  providers: [NewsComponent, CookieService],
+  providers: [Api, NewsComponent, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
