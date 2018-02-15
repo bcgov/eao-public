@@ -32,6 +32,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { ScrollDirective } from './directives/scroll.directive';
 import { Api } from './services/api';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { Api } from './services/api';
     ProjectStatusFilterPipe,
     OrderByPipe,
     ScrollDirective,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
