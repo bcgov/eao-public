@@ -38,6 +38,10 @@ export class Api {
     this.apiPath = `${ this.hostnameEPIC }/api`;
   }
 
+  getProjectByCode(projectCode: string) {
+    return this.get(`project/bycode/${ projectCode }`);
+  }
+
   get(apiRoute: string, options?: Object) {
     return this.http.get(`${this.apiPath}/${apiRoute}`, options || null);
   }

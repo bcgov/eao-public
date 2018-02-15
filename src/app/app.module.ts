@@ -16,6 +16,7 @@ import { NewsTypeFilterPipe } from './news-type-filter.pipe';
 import { ObjectFilterPipe } from './object-filter.pipe';
 import { ProjectTypeFilterPipe } from './project-type-filter.pipe';
 import { ProjectDecisionFilterPipe } from './project-decision-filter.pipe';
+import { ProjectService } from './services/project.service';
 import { LegislationComponent } from './legislation/legislation.component';
 import { ProcessComponent } from './process/process.component';
 import { ComplianceOversightComponent } from './compliance-oversight/compliance-oversight.component';
@@ -33,6 +34,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ScrollDirective } from './directives/scroll.directive';
 import { Api } from './services/api';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     OrderByPipe,
     ScrollDirective,
     NotFoundComponent,
+    ProjectDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NgxPaginationModule,
     MapModule
   ],
-  providers: [Api, NewsComponent, CookieService],
+  providers: [Api, NewsComponent, CookieService, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

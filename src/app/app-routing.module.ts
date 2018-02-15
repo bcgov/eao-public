@@ -7,9 +7,12 @@ import { HomeComponent } from 'app/home/home.component';
 import { LegislationComponent } from 'app/legislation/legislation.component';
 import { ProcessComponent } from 'app/process/process.component';
 import { ProjectComponent } from 'app/project/project.component';
+import { ProjectDetailComponent } from 'app/project-detail/project-detail.component';
+import { ProjectDetailResolver } from 'app/project-detail/project-detail-resolver.service';
 import { NewsComponent } from 'app/news/news.component';
 import { MainMapComponent } from 'app/map/main-map/main-map.component';
 import { NotFoundComponent } from 'app/not-found/not-found.component';
+
 
 const routes: Routes = [
   {
@@ -41,6 +44,13 @@ const routes: Routes = [
     component: ProjectComponent
   },
   {
+    path: 'p/:code',
+    component: ProjectDetailComponent,
+    resolve: {
+      project: ProjectDetailResolver
+    },
+  },
+  {
     path: 'news',
     component: NewsComponent
   },
@@ -56,6 +66,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ProjectDetailResolver]
 })
 export class AppRoutingModule { }
