@@ -9,6 +9,7 @@ import { ProcessComponent } from 'app/process/process.component';
 import { ProjectComponent } from 'app/project/project.component';
 import { NewsComponent } from 'app/news/news.component';
 import { MainMapComponent } from 'app/map/main-map/main-map.component';
+import { NotFoundComponent } from 'app/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'map',
     component: MainMapComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
