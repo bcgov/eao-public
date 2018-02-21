@@ -1,0 +1,89 @@
+@import "~assets/styles/base.scss";
+
+.activities-table {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    td {
+        position: relative;
+        padding: 1.5rem !important;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .date-col {
+        width: 10rem;
+        text-align: right;
+    }
+
+    h3 {
+        margin-bottom: 0.4rem;
+        text-overflow: ellipsis;
+        font-size: 1.5rem;
+        font-weight: 400;
+
+        sup {
+            display: block;
+            top: 0;
+            margin-bottom: 0.25rem;
+            line-height: 1rem;
+            font-size: 1rem;
+            font-weight: 400;
+            overflow: hdden;
+            width: 25rem;
+        }
+    }
+
+    p {
+        margin-top: 1rem;
+        overflow: hidden;
+        line-height: calc(0.9375rem * 1.5);
+        font-size: 0.9375rem;
+    }
+
+    .activity-date {
+        display: block;
+        font-size: 0.85rem;
+    }
+
+    .activity-btns {
+        margin-top: 1.5rem;
+    }
+
+    .activity-content {
+        font-family: "myriad-pro";
+    }
+}
+
+@media (max-width: 760px) {
+    .activities-table {
+        thead {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 760px) {
+    .activities-table {
+        h3 {
+            margin-bottom: 1rem;
+            text-overflow: ellipsis;
+            font-size: 1.75rem;
+
+            sup {
+                margin-bottom: 0.4rem;
+                line-height: 1.25rem;
+                font-size: 1.25rem;
+            }
+        }
+
+        .activity-date {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1.5rem;
+        }
+    }
+}

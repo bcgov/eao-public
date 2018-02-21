@@ -39,7 +39,7 @@ export class Api {
   }
 
   getProjectByCode(projectCode: string) {
-    return this.get(`project/bycode/${ projectCode }`);
+    return this.get(`project/public/${ projectCode }`);
   }
 
   get(apiRoute: string, options?: Object) {
