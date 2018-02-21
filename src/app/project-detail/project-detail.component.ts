@@ -22,6 +22,10 @@ export class ProjectDetailComponent implements OnInit {
       (data: { project: Project }) => {
         this.project = data.project;
         this.loading = false;
+
+        if (!this.project.proponent) {
+          this.project.proponent = { name: '' };
+        }
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
       },
