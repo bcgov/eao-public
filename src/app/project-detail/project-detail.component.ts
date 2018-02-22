@@ -16,6 +16,12 @@ export class ProjectDetailComponent implements OnInit {
   public isDesc: boolean;
   public column: string;
   public direction: number;
+  public showFilters: boolean;
+  public projectFilter: boolean;
+  public filter = '';
+  public NewsTypeFilter: '';
+  public filterType = '';
+
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 10,
@@ -48,5 +54,10 @@ export class ProjectDetailComponent implements OnInit {
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
+  }
+  clearAllNewsFilters() {
+    this.filter = undefined;
+    this.NewsTypeFilter = undefined;
+    this.filterType = undefined;
   }
 }
