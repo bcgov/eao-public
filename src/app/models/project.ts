@@ -1,5 +1,6 @@
 import { Proponent } from './proponent';
 import { CurrentPhase } from './currentphase';
+import { RecentActivities } from './recentactivities';
 
 export class Project {
   _id: number;
@@ -15,8 +16,15 @@ export class Project {
   region: string;
   location: string;
   projectLead: string;
+  projectLeadEmail: string;
+  projectLeadPhone: string;
   responsibleEPD: string;
+  responsibleEPDEmail: string;
+  responsibleEPDPhone: string;
   CELead: string;
+  CELeadEmail: string;
+  CELeadPhone: string;
+  recent_activities: [RecentActivities];
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -33,5 +41,6 @@ export class Project {
     this.projectLead = obj && obj.projectLead || null;
     this.responsibleEPD = obj && obj.responsibleEPD || null;
     this.CELead = obj && obj.CELead || null;
+    this.recent_activities = obj && obj.recent_activities || null;
   }
 }

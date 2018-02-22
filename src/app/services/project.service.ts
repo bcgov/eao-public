@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { Project } from '../models/project';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 import { Api } from './api';
 
