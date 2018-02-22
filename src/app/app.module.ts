@@ -35,6 +35,7 @@ import { ScrollDirective } from './directives/scroll.directive';
 import { Api } from './services/api';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     ScrollDirective,
     NotFoundComponent,
     ProjectDetailComponent,
+    RecentActivityFilterPipe,
   ],
   imports: [
     BrowserModule,
