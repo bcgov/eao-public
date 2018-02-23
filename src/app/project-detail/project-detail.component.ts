@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/project';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
@@ -30,13 +30,13 @@ export class ProjectDetailComponent implements OnInit {
 
   private sub: Subscription;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute) { }
+  constructor(private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.loading = true;
     this.sub = this.route.data.subscribe(
       (data: { project: Project }) => {
-        this.project = data.project;
+        this.project = new Project(data.project);
         this.loading = false;
 
         if (!this.project.proponent) {
@@ -59,5 +59,11 @@ export class ProjectDetailComponent implements OnInit {
     this.filter = undefined;
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
+  }
+  gotoMap(): void {
+    // pass along the id of the current project if available
+    // so that the map component can show the popup for it.
+    const projectId = this.project ? this.project.code : null;
+    this.router.navigate(['/map', { project: projectId }]);
   }
 }

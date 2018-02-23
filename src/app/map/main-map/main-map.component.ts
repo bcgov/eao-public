@@ -1,5 +1,5 @@
-import { Component, HostBinding, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostBinding, Input, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { MapConfigService } from '../config/map-config.service';
 import { WidgetBuilder, ZoomWidgetProperties, SearchWidgetProperties } from '../widgets/widget-builder';
@@ -18,7 +18,13 @@ export class MainMapComponent implements OnInit {
   mapView: __esri.MapView;
   search: __esri.Search;
   zoom: __esri.Zoom;
+
+  @Input() animate = true;
+
   @HostBinding('class.full-screen') fullScreen = true;
+
+  // private fields
+  private selectedId: string;
 
   constructor(
     private config: MapConfigService,
@@ -84,6 +90,26 @@ export class MainMapComponent implements OnInit {
         const { mapView, search, zoom } = obj;
         mapView.ui.add(zoom, 'bottom-right');
         mapView.ui.add(search, 'top-left');
+        return obj;
+      })
+      // automatically show project popup on the map when coming from project details page
+      .then(obj => {
+        this.route.paramMap.subscribe((params: ParamMap) => {
+          const { featureLayer, mapView } = obj;  // es6 destructuring
+          let targetMine: __esri.Graphic;
+
+          // fetch the project Id from URL/route params (if any)
+          this.selectedId = params.get('project');
+
+          if (this.selectedId) {
+            this.queryMapLayer(featureLayer, this.selectedId)
+              .then((response: __esri.FeatureSet) => {
+                targetMine = response && response.features && response.features.length ? response.features[0] : null;
+              })
+              .then(() => this.zoomToMine(mapView, targetMine, this.animate))
+              .then(() => this.showMapPopup(mapView, targetMine));
+          }
+        });
       });
   }
 
@@ -105,6 +131,43 @@ export class MainMapComponent implements OnInit {
         })
         .then(() => resolve())
         .otherwise(reject);
+    });
+  }
+  private queryMapLayer(featureLayer: __esri.FeatureLayer, projectId: string): Promise<__esri.FeatureSet> {
+    return new Promise((resolve, reject) => {
+      // construct a query object that matches the layer's current configuration
+      const query = featureLayer.createQuery();
+      query.where = `code = '${projectId}'`;
+
+      // query the layer with the modified params object
+      // then set the popup's features which will populate popup content and title
+      return featureLayer.queryFeatures(query)
+        .then(results => resolve(results))
+        .otherwise(reject);
+    });
+  }
+
+  private zoomToMine(view: __esri.MapView, targetMine: __esri.Graphic, animate: boolean = false): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const opts: __esri.MapViewGoToOptions = {
+        animate: animate
+      };
+
+      // the `goTo` function returns a promise which resolves as soon as the new view has been set to the target.
+      return view.goTo(
+        {
+          target: targetMine,
+          zoom: 9
+        }, opts)
+        .then(() => resolve())
+        .otherwise(reject);
+    });
+  }
+
+  private showMapPopup(view: __esri.MapView, targetMine: __esri.Graphic): void {
+    view.popup.open({
+      features: [targetMine],
+      updateLocationEnabled: true  // updates the location of popup based on selected feature's geometry
     });
   }
 }
