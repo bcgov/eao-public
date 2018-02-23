@@ -98,46 +98,51 @@
             <option label="Review" value="Review">Review</option>
             <option label="Decision" value="Decision">Decision</option>
             <option label="Post-Certification" value="Post-Certification">Post-Certification</option>
-					</select>
-				</div>
-			</div>
-			<div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter || phasefilter">
-				<button class="btn content-btn-alt" (click)="clearAllProjectFilters()">
-					Clear Filters
-				</button>
-			</div>
-		</div>
+          </select>
+        </div>
+      </div>
+      <div class="button-row" *ngIf="filter || filterPCP || filterDecision || filterType || proponentListFilter || phasefilter">
+        <button class="btn content-btn-alt" (click)="clearAllProjectFilters()">
+          Clear Filters
+        </button>
+      </div>
+    </div>
 
-		<table class="table project-table" id="tableTop">
-			<thead>
-				<tr>
-					<th class="sortable" (click)="sort('name')">Name
-						<i class="sort" [ngClass]="{'sort-asc': (column == 'name' && isDesc), 'sort-desc': (column == 'name' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="sortable" (click)="sort('proponent')">Proponent
-						<i class="sort" [ngClass]="{'sort-asc': (column == 'proponent' && isDesc), 'sort-desc': (column == 'proponent' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="sortable" (click)="sort('type')">Type
-						<i class="sort" [ngClass]="{'sort-asc': (column == 'type' && isDesc), 'sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"></i></th>
-					<th class="sortable" (click)="sort('eacDecision')">EA Decision
-						<i class="sort" [ngClass]="{'sort-asc': (column == 'eacDecision' && isDesc), 'sort-desc': (column == 'eacDecision' && !isDesc) }" aria-hidden="true"></i></th>
-					<!--
-					<th>Comment Period</th>
-					-->
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | projectPhaseFilter: phasefilter | orderBy: {property: column, direction: direction} | paginate: config">
-					<td class="name">
-						<a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
-							title="View more information about {{item.name}}">
-							{{item.name}}
-						</a>
-					</td>
-					<td class="proj-col proponent"><span>{{item.proponent.name}}</span></td>
-					<td class="proj-col type"><span>{{item.type}}</span></td>
-					<td class="proj-col status"><span>{{item.eacDecision}}</span></td>
-					<!--
-					<td class="proj-col comment-period"><span>{{item.openCommentPeriod}}</span></td>
-					-->
+    <table class="table project-table" id="tableTop">
+      <thead>
+        <tr>
+          <th class="sortable" (click)="sort('name')">Name
+            <i class="sort" [ngClass]="{'sort-asc': (column == 'name' && isDesc), 'sort-desc': (column == 'name' && !isDesc) }" aria-hidden="true"></i></th>
+          <th class="sortable" (click)="sort('proponent')">Proponent
+            <i class="sort" [ngClass]="{'sort-asc': (column == 'proponent' && isDesc), 'sort-desc': (column == 'proponent' && !isDesc) }" aria-hidden="true"></i></th>
+          <th class="sortable" (click)="sort('type')">Type
+            <i class="sort" [ngClass]="{'sort-asc': (column == 'type' && isDesc), 'sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"></i></th>
+          <th class="sortable" (click)="sort('eacDecision')">EA Decision
+            <i class="sort" [ngClass]="{'sort-asc': (column == 'eacDecision' && isDesc), 'sort-desc': (column == 'eacDecision' && !isDesc) }" aria-hidden="true"></i></th>
+          <th class="sortable" (click)="sort('decisionDate')">Decision Date
+            <i class="sort" [ngClass]="{'sort-asc': (column == 'decisionDate' && isDesc), 'sort-desc': (column == 'decisionDate' && !isDesc) }" aria-hidden="true"></i></th>
+
+          <!--
+          <th>Comment Period</th>
+          -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | projectPhaseFilter: phasefilter | orderBy: {property: column, direction: direction} | paginate: config">
+          <td class="name">
+            <a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
+              title="View more information about {{item.name}}">
+              {{item.name}}
+            </a>
+          </td>
+          <td class="proj-col proponent"><span>{{item.proponent.name}}</span></td>
+          <td class="proj-col type"><span>{{item.type}}</span></td>
+          <td class="proj-col status"><span>{{item.eacDecision}}</span></td>
+          <td class="proj-col date"><span *ngIf='item.decisionDate'>{{item.decisionDate | date:'dd-MMM-yyyy'}}</span>
+            <span *ngIf='!item.decisionDate'>N/A</span></td>
+          <!--
+          <td class="proj-col comment-period"><span>{{item.openCommentPeriod}}</span></td>
+          -->
                 </tr>
 			</tbody>
 		</table>
