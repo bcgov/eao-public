@@ -8,6 +8,7 @@ import { MainMapComponent } from './main-map/main-map.component';
 import { MapLoaderService } from './map-loader.service';
 import { MapConfigService } from './config/map-config.service';
 import { WidgetBuilder } from './widgets/widget-builder';
+import { ProjectMapComponent } from './project-map/project-map.component';
 
 @NgModule({
   imports: [
@@ -17,11 +18,13 @@ import { WidgetBuilder } from './widgets/widget-builder';
   ],
   declarations: [
     EsriMapComponent,
-    MainMapComponent
+    MainMapComponent,
+    ProjectMapComponent
   ],
   exports: [
     EsriMapComponent,
-    MainMapComponent
+    MainMapComponent,
+    ProjectMapComponent
   ],
   providers: [
     MapConfigService,

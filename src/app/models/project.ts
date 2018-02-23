@@ -15,6 +15,8 @@ export class Project {
   currentPhase: CurrentPhase;
   region: string;
   location: string;
+  latitude: number;
+  longitude: number;
   projectLead: string;
   projectLeadEmail: string;
   projectLeadPhone: string;
@@ -38,6 +40,8 @@ export class Project {
     this.currentPhase = obj && obj.currentPhase || null;
     this.region = obj && obj.region || null;
     this.location = obj && obj.location || null;
+    this.latitude = obj && obj.lat || 0;
+    this.longitude = obj && obj.lon || 0;
     this.projectLead = obj && obj.projectLead || null;
     this.responsibleEPD = obj && obj.responsibleEPD || null;
     this.CELead = obj && obj.CELead || null;
