@@ -37,6 +37,7 @@ export class ProjectDetailComponent implements OnInit {
     this.sub = this.route.data.subscribe(
       (data: { project: Project }) => {
         this.project = data.project;
+        console.log('test');
         this.loading = false;
 
         if (!this.project.proponent) {
