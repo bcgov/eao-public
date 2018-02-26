@@ -53,6 +53,10 @@
                 &.comment-period:before {
                     content: 'Comment Period:';
                 }
+
+                &.date:before {
+                    content: 'Date:';
+                }
             }
         }
     }
