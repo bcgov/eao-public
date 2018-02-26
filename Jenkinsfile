@@ -7,27 +7,18 @@ def TAG_NAMES = ['dev', 'test', 'prod']
 // You shouldn't have to edit these if you're following the conventions
 def NGINX_BUILD_CONFIG = 'nginx-runtime'
 def BUILD_CONFIG = APP_NAME + '-build'
-def IMAGESTREAM_NAME = APP_NAME
+def IMAGESTREAM_NAME = 'eao-public'
 
 node {
   try {
     notifyBuild('STARTED')
-    stage('build angular-builder'){
-      echo "Building: angular-builder"
-      openshiftBuild(bldCfg: 'angular-builder', showBuildLogs: 'true')
+    stage('build eao-public-build-angular-app-build') {
+      echo "Building: eao-public-build-angular-app-build"
+      openshiftBuild bldCfg: 'eao-public-build-angular-app-build', showBuildLogs: 'true'
     }
-    stage('tag angular-builder'){
-      openshiftTag(srcStream: 'angular-builder', srcTag: 'latest', destStream: 'angular-builder', destTag: 'dev')
-      notifyBuild('ANGULAR_BUILDER:DEV')
-    }
-    stage('build nginx runtime') {
-      echo "Building: " + NGINX_BUILD_CONFIG
-      openshiftBuild bldCfg: NGINX_BUILD_CONFIG, showBuildLogs: 'true'
-    }
-    stage('build ' + BUILD_CONFIG) {
-      echo "Building: " + BUILD_CONFIG
-      openshiftBuild bldCfg: BUILD_CONFIG, showBuildLogs: 'true'
-      openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: '$BUILD_ID', srcStream: IMAGESTREAM_NAME, srcTag: 'latest'
+    stage('build eao-public') {
+      echo "Building: eao-public-build"
+      openshiftBuild bldCfg: 'eao-public-build', showBuildLogs: 'true'
     }
     stage('deploy-' + TAG_NAMES[0]) {
       openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[0], srcStream: IMAGESTREAM_NAME, srcTag: '$BUILD_ID'
