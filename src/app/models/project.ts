@@ -12,6 +12,7 @@ export class Project {
   type: string;
   openCommentPeriod: string;
   eacDecision: string;
+  decisionDate: Date;
   currentPhase: CurrentPhase;
   region: string;
   location: string;
@@ -37,6 +38,7 @@ export class Project {
     this.type = obj && obj.type || null;
     this.openCommentPeriod = obj && obj.openCommentPeriod || null;
     this.eacDecision = obj && obj.eacDecision || null;
+    this.decisionDate = obj && obj.decisionDate || null;
     this.currentPhase = obj && obj.currentPhase || null;
     this.region = obj && obj.region || null;
     this.location = obj && obj.location || null;
