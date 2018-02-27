@@ -14,13 +14,13 @@
     <main class="col-lg-8">
       <section class="mb-0">
         <div class="project-activities bg-muted">
-          <section class="container">
-            <h2>Project Activities & Updates</h2>
+          <section>
+            <h2 class="overview">{{ project.name }} Assessment Information</h2>
 
             <div class="filter-bar mb-4">
               <div class="filter-input-row filters-basic">
                 <div class="form-group">
-                  <input class="form-control" placeholder="Type a Project Name" type="text" [(ngModel)]="filter">
+                  <input class="form-control" placeholder="Type an Activity Name" type="text" [(ngModel)]="filter">
                 </div>
                 <button class="toggle-filter-btn btn btn-default btn-sm" [ngClass]="{'show-filters': showFilters}" (click)="showFilters = !showFilters">
                   <span class="show-filter-txt">
@@ -120,9 +120,20 @@
     </main>
     <aside class="col-lg-4">
       <section class="card">
+        <h4 class="card-header">EA Certificate Application</h4>
+        <ul class="nv-list mine-details-list">
+          <li>
+            <span class="name">Project Status</span>
+            <span class="value">{{project.status}}</span>
+          </li>
+        </ul>
+      </section>
+      <section class="card">
         <h4 class="card-header">Project Details</h4>
-        <div class="map-section__thumbnail" (click)="gotoMap()">
-          <app-project-map [project]="project" [zoom]="4"></app-project-map>
+        <div class="map-section">
+          <div class="map-section__thumbnail" (click)="gotoMap()">
+            <app-project-map [project]="project" [zoom]="4"></app-project-map>
+          </div>
         </div>
         <ul class="nv-list mine-details-list">
           <li>
