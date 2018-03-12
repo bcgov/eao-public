@@ -134,7 +134,7 @@
 
 // Banner Text
 .hb-txt {
-    padding: 0 1.5rem; 
+    padding: 0 1.5rem;
     color: #FFF;
 
     h1 {
@@ -146,6 +146,12 @@
         span {
             display: inline-block;
         }
+    }
+
+    h2 {
+        font-size: 1.375rem;
+        font-weight: 300;
+        line-height: 1.4rem;
     }
 
     p {
@@ -161,13 +167,15 @@
     }
 
     .badge {
-        position: relative;
-        top: 0.4rem;
-        color: $gold;
+        display: inline-block;
+        margin-top: 0.25rem;
+        margin-left: 0.25rem;
         vertical-align: top;
-        text-align: left;
-        text-transform: uppercase;
-        font-size: 0.875rem;
+    }
+
+    &__project-title {
+        font-size: 1.75rem;
+        font-weight: 300;
     }
 }
 

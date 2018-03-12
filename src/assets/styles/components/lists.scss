@@ -24,5 +24,13 @@
         &.name {
             margin-bottom: 0.25rem;
         }
+        &.header {
+            margin-bottom: 0.125rem;
+            font-weight:600;
+            display: block;
+        }
+        &.content {
+            display: block;
+        }
     }
 }
