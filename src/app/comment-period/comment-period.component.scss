@@ -1,0 +1,167 @@
+@import "~assets/styles/base.scss";
+
+.nv-list {
+  span {
+    &.name {
+      width: 40%;
+    }
+    &.value {
+      width: 60%;
+    }
+  }
+}
+
+@media (max-width: 567px) {
+  .nav {
+    margin-bottom: 1.75rem;
+
+    .nav-item {
+      width: 50%;
+    }
+
+    .nav-link {
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
+.overview {
+    margin-bottom: 0;
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: 1.625rem;
+        line-height: 2rem;
+    }
+}
+
+.comments-table {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    tr {
+        &:nth-child(even) {
+            background: #f4f4f4;
+        }
+    }
+
+    th {
+        &.date-col {
+            width: 10rem;
+            text-align: right;
+        }
+    }
+
+    td {
+        position: relative;
+        padding: 1rem !important;
+    }
+
+    &-item {
+        &__header {
+            @include flex-box();
+            @include flex-direction(column);
+
+            h3 {
+                @include flex(1 1 auto);
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .comment-date {
+                margin-top: 0.25rem;
+                display: block;
+                font-size: 0.85rem;
+            }
+        }
+
+        &__body {
+            display: block;
+            margin-top: 0.625rem;
+            font-size: 0.9375rem
+        }
+
+        &__attachments {
+            font-weight: 600;
+            margin-top: 0.625rem;
+            display: table;
+
+            i {
+                margin-top: 0.25rem;
+                font-size: 1.25rem;
+            }
+
+            .attachments-txt {
+                vertical-align: middle;
+                display: table-cell;
+                margin-top: 0.75rem;
+            }
+        }
+
+        &__badge-container {
+            margin-top: 1rem;
+
+            .badge {
+                margin-right: 0.2rem;
+                margin-bottom: 0.2rem;
+            }
+        }
+    }
+
+    p, pre {
+        font-size: 0.9375rem;
+    }
+
+    p {
+        margin-top: 1rem;
+        overflow: hidden;
+        line-height: calc(0.9375rem * 1.5);
+    }
+
+    .comment-btns {
+        margin-top: 1.5rem;
+    }
+
+    .comment-content {
+        font-family: "myriad-pro";
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 768px) {
+    .comments-table {
+       &-item {
+           &__header {
+               @include flex-direction(row);
+
+                h3 {
+                    @include flex(1 1 auto);
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+
+                .comment-date {
+                    margin-top: -0.2rem;
+                }
+           }
+       }
+    }
+}
+
+@media (max-width: 760px) {
+    .comments-table {
+        thead {
+            display: none;
+        }
+    }
+}

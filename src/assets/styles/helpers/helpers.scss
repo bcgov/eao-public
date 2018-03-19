@@ -12,3 +12,14 @@
         color: $bg-dark-link-color;
     }
 }
+
+.badge {
+    padding-bottom: 0.3rem;
+    font-size: 0.8375rem;
+    font-weight: 600;
+
+    &-status {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+}

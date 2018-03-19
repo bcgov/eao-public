@@ -36,6 +36,8 @@ import { Api } from './services/api';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
+import { CommentPeriodComponent } from './comment-period/comment-period.component';
+import { CommentPeriodService } from './services/comment-period.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
     NotFoundComponent,
     ProjectDetailComponent,
     RecentActivityFilterPipe,
+    CommentPeriodComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
     NgxPaginationModule,
     MapModule
   ],
-  providers: [Api, NewsComponent, CookieService, ProjectService],
+  providers: [Api, NewsComponent, CookieService, ProjectService, CommentPeriodService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

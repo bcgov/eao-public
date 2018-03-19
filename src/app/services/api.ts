@@ -42,10 +42,25 @@ export class Api {
     return this.get(`project/public/${ projectCode }`);
   }
 
+  getPCPByCode(code: string) {
+    return this.get(`commentperiod/for/public/${ code }`);
+  }
+
+  getDocumentById(id: string) {
+    return this.get(`document/${ id }`);
+  }
+
+  getCommentsByPCPCode(pcpCode: string) {
+    return this.get(`comments/period/${ pcpCode }/all`);
+  }
+
+  getValuedComponentsByCode(vcsCodes: any[]) {
+    return this.put(`vclist`, vcsCodes);
+  }
+
   get(apiRoute: string, options?: Object) {
     return this.http.get(`${this.apiPath}/${apiRoute}`, options || null);
   }
-
 
   put(apiRoute: string, body?: Object, options?: Object) {
     return this.http.put(`${this.apiPath}/${apiRoute}`, body || null, options || null);
