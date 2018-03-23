@@ -1,25 +1,22 @@
 import geb.spock.GebReportingSpec
 
-import spock.lang.Narrative
+import pages.app.ContactPage
+
+import pages.external.ExternalLinkPage
+
 import spock.lang.Title
 import spock.lang.Unroll
 
-import pages.app.ContactPage
-import pages.external.ExternalLinkPage
-
-@Title("Basic Navigational Tests")
-@Narrative("""As a user I expect all links in the EAO Public contact page to work.""")
+@Title("Functional tests for the Contact page")
 class ContactSpec extends GebReportingSpec {
-
   @Unroll
   def "Navigate Page from: ContactPage, click body Link: #ItemSelector, Assert Page: #AssertPage"(){
     given: "I start on the ContactPage"
       to ContactPage
     when: "I click on the link #ItemSelector"
-      waitFor { commonLink.clickMainContentLink(SectionSelector, ItemSelector) }
+      waitFor { commonLinkModule.clickMainContentLink(SectionSelector, ItemSelector) }
     then:
       at AssertPage
-
     where:
       SectionSelector                                                           | ItemSelector                                || AssertPage
       [ tag : "h3", text : "Contact the BC Environmental Assessement Office" ]  | [ text : "EAO B.C. Government Directory" ]  || new ExternalLinkPage("BC Government Directory, ENV - Environmental Assessment Office", "dir.gov.bc.ca")

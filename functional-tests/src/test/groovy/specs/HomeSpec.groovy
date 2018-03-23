@@ -1,9 +1,5 @@
 import geb.spock.GebReportingSpec
 
-import spock.lang.Narrative
-import spock.lang.Title
-import spock.lang.Unroll
-
 import pages.app.ProcessPage
 import pages.app.CompliancePage
 import pages.app.ContactPage
@@ -12,6 +8,7 @@ import pages.app.LegislationPage
 import pages.app.NewsPage
 import pages.app.ProjectListPage
 import pages.app.ProjectMapPage
+
 import pages.external.AccessibilityPage
 import pages.external.CopyrightPage
 import pages.external.DisclaimerPage
@@ -20,10 +17,11 @@ import pages.external.GooglePlusPage
 import pages.external.SignInPage
 import pages.external.TwitterPage
 
-@Title("Basic Navigational Tests")
-@Narrative("""As a user I expect all links in the EAO Public home page to work.""")
-class HomeSpec extends GebReportingSpec {
+import spock.lang.Title
+import spock.lang.Unroll
 
+@Title("Functional tests for the Home page")
+class HomeSpec extends GebReportingSpec {
   /*
    * Header Tests
    */
@@ -32,10 +30,9 @@ class HomeSpec extends GebReportingSpec {
     given: "I start on the HomePage"
       to HomePage
     when: "I click on the link #ItemSelector -> #SubItemSelector"
-      header.clickMenuItem(ItemSelector, SubItemSelector)
+      headerModule.clickMenuItem(ItemSelector, SubItemSelector)
     then:
       at AssertPage
-
     where:
       ItemSelector                      | SubItemSelector                    || AssertPage
       [ text : "FIND EA PROJECTS" ]     | [ text : "Find Projects by List" ] || ProjectListPage
@@ -59,7 +56,6 @@ class HomeSpec extends GebReportingSpec {
       waitFor { page."$ClickTarget".click() }
     then:
       at AssertPage
-
     where:
       ClickTarget                || AssertPage
       "pageTitle"                || HomePage
@@ -79,7 +75,7 @@ class HomeSpec extends GebReportingSpec {
     given: "I start on the HomePage"
       to HomePage
     when: "I click on the #ClickLink"
-      waitFor { footer."$ClickLink".click() }
+      waitFor { footerModule."$ClickLink".click() }
     then: "I arrive on the #AssertPage page"
       at AssertPage
     where:

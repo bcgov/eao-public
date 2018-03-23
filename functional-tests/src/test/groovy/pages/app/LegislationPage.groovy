@@ -1,17 +1,11 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.CommonLinkModule
-
-class LegislationPage extends Page {
-
-  static url = "/legislation"
+class LegislationPage extends BaseAppPage {
   static at = { pageTitle.text().equals("Legislation") }
-
+  static url = "/legislation"
   static content = {
     pageTitle { $("app-legislation div.hero-banner h1") }
-
-    commonLink { module(CommonLinkModule) }
   }
 }

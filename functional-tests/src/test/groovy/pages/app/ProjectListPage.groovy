@@ -1,14 +1,10 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.HeaderModule
-
-class ProjectListPage extends Page {
-
-  static url = "/project"
+class ProjectListPage extends BaseAppPage {
   static at = { pageTitle.text().equals("Find EA Projects in British Columbia") }
-
+  static url = "/project"
   static content = {
     pageTitle { $("app-project div.hero-banner h1") }
   }

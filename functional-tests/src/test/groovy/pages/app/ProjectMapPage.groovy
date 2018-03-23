@@ -1,14 +1,10 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.HeaderModule
-
-class ProjectMapPage extends Page {
-
-  static url = "/map"
+class ProjectMapPage extends BaseAppPage {
   static at = { mapContainer.displayed }
-
+  static url = "/map"
   static content = {
     mapContainer { $(".map-container") }
   }

@@ -1,17 +1,11 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.CommonLinkModule
-
-class ContactPage extends Page {
-
-  static url = "/contact"
+class ContactPage extends BaseAppPage {
   static at = { pageTitle.text().equals("Connect with us...") }
-
+  static url = "/contact"
   static content = {
     pageTitle { $("app-contact div.hero-banner h1") }
-
-    commonLink { module(CommonLinkModule) }
   }
 }
