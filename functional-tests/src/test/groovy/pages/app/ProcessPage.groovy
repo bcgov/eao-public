@@ -1,17 +1,11 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.CommonLinkModule
-
-class ProcessPage extends Page {
-
-  static url = "/process"
+class ProcessPage extends BaseAppPage {
   static at = { pageTitle.text().equals("Process & Procedures") }
-
+  static url = "/process"
   static content = {
     pageTitle { $("app-process div.hero-banner h1") }
-
-    commonLink { module(CommonLinkModule) }
   }
 }

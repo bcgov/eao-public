@@ -1,16 +1,14 @@
 import geb.spock.GebReportingSpec
 
-import spock.lang.Narrative
+import pages.app.LegislationPage
+
+import pages.external.ExternalLinkPage
+
 import spock.lang.Title
 import spock.lang.Unroll
 
-import pages.app.LegislationPage
-import pages.external.ExternalLinkPage
-
-@Title("Basic Navigational Tests")
-@Narrative("""As a user I expect all links in the EAO Public legislation page to work.""")
+@Title("Functional tests for the Legislation page")
 class LegislationSpec extends GebReportingSpec {
-
   /*
    * side links
    */
@@ -19,10 +17,9 @@ class LegislationSpec extends GebReportingSpec {
     given: "I start on the LegislationPage"
       to LegislationPage
     when: "I click on the link #ItemSelector"
-      waitFor { commonLink.clickSideBarLink(SectionSelector, ItemSelector) }
+      waitFor { commonLinkModule.clickSideBarLink(SectionSelector, ItemSelector) }
     then:
       at AssertPage
-
     where:
       SectionSelector                                        | ItemSelector                                        || AssertPage
       [ tag : "h4", text : "BC LAWS - ACTS & REGULATIONS" ]  | [ text : "Environmental Assessment Act" ]           || new ExternalLinkPage("Environmental Assessment Act", "http://www.bclaws.ca/EPLibraries/bclaws_new/document/ID/freeside/00_02043_01")
@@ -42,10 +39,9 @@ class LegislationSpec extends GebReportingSpec {
     given: "I start on the LegislationPage"
       to LegislationPage
     when: "I click on the link #ItemSelector"
-      waitFor { commonLink.clickMainContentLink(SectionSelector, ItemSelector) }
+      waitFor { commonLinkModule.clickMainContentLink(SectionSelector, ItemSelector) }
     then:
       at AssertPage
-
     where:
       SectionSelector                                     | ItemSelector                                            || AssertPage
       [ tag : "h3", text : "2016 Exemption Regulation" ]  | [ text : "Exemption Regulation" ]                       || new ExternalLinkPage("Exemption Regulation", "http://www.bclaws.ca/civix/document/id/complete/statreg/120_2016")

@@ -1,14 +1,10 @@
 package pages.app
 
-import geb.Page
+import pages.base.BaseAppPage
 
-import modules.HeaderModule
-
-class NewsPage extends Page {
-
-  static url = "/news"
+class NewsPage extends BaseAppPage {
   static at = { pageTitle.text().equals("Activities & Updates") }
-
+  static url = "/news"
   static content = {
     pageTitle { $("app-news div.hero-banner h1") }
   }
