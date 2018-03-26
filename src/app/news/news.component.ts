@@ -2,6 +2,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@
 import { News } from '../models/news';
 import { NewsService } from '../services/news.service';
 import { PaginationInstance } from 'ngx-pagination';
+import { Api } from '../services/api';
 
 @Component({
   selector: 'app-news',
@@ -26,7 +27,7 @@ export class NewsComponent implements OnInit {
     currentPage: 1
   };
 
-  constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef) { }
+  constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef, private api: Api) { }
 
   ngOnInit() {
     this.loading = true;
