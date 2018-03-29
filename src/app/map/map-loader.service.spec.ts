@@ -1,19 +1,21 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { MapLoaderService } from './map-loader.service';
+import { EsriLoaderModule } from 'angular-esri-loader';
 
 describe('MapLoaderService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MapLoaderService]
+      imports: [
+        EsriLoaderModule
+      ],
+      providers: [
+        MapLoaderService
+      ]
     });
   });
 
   it('should be created', inject([MapLoaderService], (service: MapLoaderService) => {
     expect(service).toBeTruthy();
-  }));
-
-  it('should throw if no map properties are provided', inject([MapLoaderService], (service: MapLoaderService) => {
-    expect(() => service.load({})).toThrowError(/map properties were not provided/);
   }));
 });
