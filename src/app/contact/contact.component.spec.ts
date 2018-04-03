@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Http, HttpModule } from '@angular/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ContactComponent } from './contact.component';
+
+import { EmailService } from '../services/email.service';
+import { Api } from '../services/api';
 
 describe('ContactComponent', () => {
   let component: ContactComponent;
@@ -8,7 +13,17 @@ describe('ContactComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactComponent ]
+      imports: [
+        HttpModule,
+        RouterTestingModule
+      ],
+      declarations: [
+        ContactComponent
+      ],
+      providers: [
+        EmailService,
+        Api
+      ]
     })
     .compileComponents();
   }));

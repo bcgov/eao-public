@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { EsriLoaderModule } from 'angular-esri-loader';
+import { ElementRef } from '@angular/core';
 
 import { EsriMapComponent } from './esri-map.component';
+import { MapLoaderService } from '../map-loader.service';
 
 describe('EsriMapComponent', () => {
   let component: EsriMapComponent;
@@ -8,7 +11,15 @@ describe('EsriMapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EsriMapComponent ]
+      imports: [
+        EsriLoaderModule
+      ],
+      declarations: [
+        EsriMapComponent
+      ],
+      providers: [
+        MapLoaderService
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +27,10 @@ describe('EsriMapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EsriMapComponent);
     component = fixture.componentInstance;
+    component.mapProperties = {};
+    component.webMapProperties = {};
+    component.mapViewProperties = {};
+    component.mapEl = new ElementRef('div');
     fixture.detectChanges();
   });
 

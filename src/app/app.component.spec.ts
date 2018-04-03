@@ -1,15 +1,28 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { Http, HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { CookieService } from 'ngx-cookie-service';
+import { Api } from './services/api';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      providers: [
+        CookieService,
+        Api
       ],
-      imports: [RouterTestingModule]
+      declarations: [
+        AppComponent,
+      ],
+      imports: [
+        RouterTestingModule,
+        Ng2PageScrollModule.forRoot(),
+        HttpModule
+      ]
     }).compileComponents();
   }));
 
@@ -17,12 +30,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-
-  it('should render title in a span tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span.title').textContent).toContain('MyGovBC Bootstrap Theme Demo Page');
   }));
 });

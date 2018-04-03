@@ -8,7 +8,7 @@
     "start": "ng serve -o",
     "build": "npm run lint && ng build --prod",
     "pretest": "npm run lint",
-    "test": "ng test",
+    "test": "ng test --sourcemaps=false",
     "lint": "ng lint --format=stylish",
     "e2e": "ng e2e",
     "postinstall": "ng build --prod"
@@ -52,13 +52,13 @@
     "codelyzer": "~2.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
-    "karma": "~1.4.1",
+    "karma": "~1.7.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.1.0",
+    "karma-spec-reporter": "0.0.32",
     "ts-node": "2.0.0",
     "tslint": "4.5.0"
   }
