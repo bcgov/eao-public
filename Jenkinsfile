@@ -1,85 +1,163 @@
-// Edit your app's name below
-def APP_NAME = 'eao-public'
-
-// Edit your environment TAG names below
-def TAG_NAMES = ['dev', 'test', 'prod']
-
-// You shouldn't have to edit these if you're following the conventions
-def NGINX_BUILD_CONFIG = 'nginx-runtime'
-def BUILD_CONFIG = APP_NAME + '-build'
-def IMAGESTREAM_NAME = 'eao-public'
-
-node {
-  try {
-    notifyBuild('STARTED')
-    stage('build eao-public-build-angular-app-build') {
-      echo "Building: eao-public-build-angular-app-build"
-      openshiftBuild bldCfg: 'eao-public-build-angular-app-build', showBuildLogs: 'true'
-    }
-    stage('build eao-public') {
-      echo "Building: eao-public-build"
-      openshiftBuild bldCfg: 'eao-public-build', showBuildLogs: 'true'
-    }
-    stage('deploy-' + TAG_NAMES[0]) {
-      openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[0], srcStream: IMAGESTREAM_NAME, srcTag: 'latest'
-      notifyBuild('DEPLOYED:DEV')
-    }
-    stage('deploy-' + TAG_NAMES[1]) {
-      try {
-        timeout(time: 2, unit: 'MINUTES') {
-          input "Deploy to " + TAG_NAMES[1] + "?"
-          openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[1], srcStream: IMAGESTREAM_NAME, srcTag: 'dev'
-          notifyBuild('DEPLOYED:TEST')
-        }
-      } catch (e) {
-        notifyBuild('DEPLOYMENT:TEST ABORTED')
-      }
-    }
-    stage('deploy-'  + TAG_NAMES[2]) {
-      try {
-        timeout(time: 2, unit: 'MINUTES') {
-          input "Deploy to " + TAG_NAMES[2] + "?"
-          openshiftTag destStream: IMAGESTREAM_NAME, verbose: 'true', destTag: TAG_NAMES[2], srcStream: IMAGESTREAM_NAME, srcTag: 'test'
-          notifyBuild('DEPLOYED:PROD')
-        }
-      } catch (e) {
-        notifyBuild('DEPLOYMENT:PROD ABORTED')
-      }
-    }
-  } catch (e) {
-    // If there was an exception thrown, the build failed
-    currentBuild.result = "FAILED"
-    throw e
-  } finally {
-    // Success or failure, always send notifications
-    notifyBuild(currentBuild.result)
-  }
+// Switch to using https://github.com/BCDevOps/jenkins-pipeline-shared-lib when stable.
+@NonCPS
+import groovy.json.JsonOutput
+/*
+ * Sends a slack notification
+ */
+def notifySlack(text, url, channel, attachments) {
+    def slackURL = url
+    def jenkinsIcon = 'https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png'
+    def payload = JsonOutput.toJson([text: text,
+        channel: channel,
+        username: "Jenkins",
+        icon_url: jenkinsIcon,
+        attachments: attachments
+    ])
+    def encodedReq = URLEncoder.encode(payload, "UTF-8")
+    sh("curl -s -S -X POST --data \'payload=${encodedReq}\' ${slackURL}")
 }
 
-def notifyBuild(String buildStatus = 'STARTED') {
-  // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+/*
+ * Updates the global pastBuilds array: it will iterate recursively
+ * and add all the builds prior to the current one that had a result
+ * different than 'SUCCESS'.
+ */
+def buildsSinceLastSuccess(previousBuild, build) {
+  if ((build != null) && (build.result != 'SUCCESS')) {
+      pastBuilds.add(build)
+      buildsSinceLastSuccess(pastBuilds, build.getPreviousBuild())
+   }
+}
 
-  // Default values
-  def colorName = 'RED'
-  def colorCode = '#FF0000'
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  def summary = "${subject} (${env.BUILD_URL})"
-  def details = """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-    <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>"""
+/*
+ * Generates a string containing all the commit messages from
+ * the builds in pastBuilds.
+ */
+@NonCPS
+def getChangeLog(pastBuilds) {
+    def log = ""
+    for (int x = 0; x < pastBuilds.size(); x++) {
+        for (int i = 0; i < pastBuilds[x].changeSets.size(); i++) {
+            def entries = pastBuilds[x].changeSets[i].items
+            for (int j = 0; j < entries.length; j++) {
+                def entry = entries[j]
+                log += "* ${entry.msg} by ${entry.author} \n"
+            }
+        }
+    }
+    return log;
+}
 
-  // Override default values based on build status
-  if (buildStatus == 'STARTED' || buildStatus.startsWith("DEPLOYMENT")) {
-    color = 'YELLOW'
-    colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL' || buildStatus.startsWith("DEPLOYED")) {
-    color = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
-    color = 'RED'
-    colorCode = '#FF0000'
-  }
+def CHANGELOG = "No new changes"
 
-  // Send notifications
-  slackSend (color: colorCode, message: summary)
+podTemplate(label: 'generic-maven', name: 'generic-maven', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
+  containerTemplate(
+    name: 'jnlp',
+    image: 'registry.access.redhat.com/openshift3/jenkins-slave-maven-rhel7',
+    resourceRequestCpu: '500m',
+    resourceLimitCpu: '1000m',
+    resourceRequestMemory: '1Gi',
+    resourceLimitMemory: '4Gi',
+    workingDir: '/tmp',
+    command: '',
+    args: '${computer.jnlpmac} ${computer.name}',
+    envVars: [
+        secretEnvVar(key: 'SLACK_HOOK', secretName: 'slack-secrets', secretKey: 'webhook'),
+        secretEnvVar(key: 'DEV_CHANNEL', secretName: 'slack-secrets', secretKey: 'dev-channel')
+      ]
+  )
+])
+{
+    // isolate last successful builds and then get the changelog
+    pastBuilds = []
+    buildsSinceLastSuccess(pastBuilds, currentBuild);
+    CHANGELOG = getChangeLog(pastBuilds);
+
+    echo ">>>>>>Changelog: \n ${CHANGELOG}"
+
+    stage('Build') {
+        node('generic-maven'){
+            try {
+                echo "Building: eao-public-angular"
+                openshiftBuild bldCfg: 'eao-public-angular', showBuildLogs: 'true'
+                echo "Build done"
+
+                echo "Building: eao-public"
+                openshiftBuild bldCfg: 'eao-public', showBuildLogs: 'true'
+                echo "Build done"
+
+                echo "Tagging image..."
+                // Don't tag with BUILD_ID so the pruner can do it's job; it won't delete tagged images.
+                // Tag the images for deployment based on the image's hash
+                IMAGE_HASH = sh (
+                script: """oc get istag eao-public:latest -o template --template=\"{{.image.dockerImageReference}}\"|awk -F \":\" \'{print \$3}\'""",
+                returnStdout: true).trim()
+                echo ">> IMAGE_HASH: ${IMAGE_HASH}"
+
+                openshiftTag destStream: 'eao-public', verbose: 'true', destTag: "${IMAGE_HASH}", srcStream: 'eao-public', srcTag: 'latest'
+                echo "Tagging done"
+            } catch (error) {
+                notifySlack(
+                    "The latest eao-public build seems to have broken\n'${error.message}'",
+                    SLACK_HOOK,
+                    DEV_CHANNEL,
+                    []
+                )
+                throw error
+            }
+        }
+    }
+}
+
+podTemplate(label: 'generic-maven', name: 'generic-maven', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
+  containerTemplate(
+    name: 'jnlp',
+    image: 'registry.access.redhat.com/openshift3/jenkins-slave-maven-rhel7',
+    resourceRequestCpu: '500m',
+    resourceLimitCpu: '1000m',
+    resourceRequestMemory: '1Gi',
+    resourceLimitMemory: '4Gi',
+    workingDir: '/tmp',
+    command: '',
+    args: '${computer.jnlpmac} ${computer.name}',
+    envVars: [
+        secretEnvVar(key: 'SLACK_HOOK', secretName: 'slack-secrets', secretKey: 'webhook'),
+        secretEnvVar(key: 'QA_CHANNEL', secretName: 'slack-secrets', secretKey: 'qa-channel'),
+        secretEnvVar(key: 'DEPLOY_CHANNEL', secretName: 'slack-secrets', secretKey: 'deploy-channel')
+      ]
+  )
+])
+{
+    stage('Deploy to Test') {
+        node('generic-maven'){
+            try {
+                echo "Deploying to test..."
+                openshiftTag destStream: 'eao-public', verbose: 'true', destTag: 'test', srcStream: 'eao-public', srcTag: 'latest'
+                sleep 5
+                openshiftVerifyDeployment depCfg: 'esm-test', namespace: 'esm-test', replicaCount: 1, verbose: 'false', verifyReplicaCount: 'false', waitTime: 600000
+                echo ">>>> Deployment Complete"
+
+                notifySlack(
+                    "A new version of eao-public is now in Test. \n Changes: \n ${CHANGELOG}",
+                    SLACK_HOOK,
+                    DEPLOY_CHANNEL,
+                    []
+                )
+
+                notifySlack(
+                    "A new version of eao-public is now in Test and ready for QA. \n Changes to test: \n ${CHANGELOG}",
+                    SLACK_HOOK,
+                    QA_CHANNEL,
+                    []
+                )
+            } catch (error) {
+                notifySlack(
+                    "The latest deployment of eao-public to Test seems to have failed\n'${error.message}'",
+                    SLACK_HOOK,
+                    DEPLOY_CHANNEL,
+                    []
+                )
+            }
+        }
+    }
 }
