@@ -10,6 +10,7 @@ import { Api } from '../services/api';
 })
 export class HomeComponent implements OnInit {
   results: Array<Home>;
+  hostname: String;
   constructor(private newsService: NewsService, private api: Api) { }
 
   ngOnInit() {
@@ -17,5 +18,6 @@ export class HomeComponent implements OnInit {
       data => { this.results = data; },
       error => console.log(error)
     );
+    this.hostname = this.api.hostnameEPIC;
   }
 }

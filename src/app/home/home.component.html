@@ -34,7 +34,7 @@
 							<pre class="activity-content mb-0" [innerHTML]="item.content"></pre>
 							<div class="news-block-btns">
 								<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
-									href="{{api.hostnameEPIC}}/p/{{item.project?.code}}/detail"
+									href="{{hostname}}/p/{{item.project?.code}}/detail"
 									*ngIf="item.project?.code" >
 									Project Info
 								</a>
