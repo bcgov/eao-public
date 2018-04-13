@@ -26,6 +26,7 @@ export class NewsComponent implements OnInit {
     itemsPerPage: 10,
     currentPage: 1
   };
+  hostname: String;
 
   constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef, private api: Api) { }
 
@@ -42,6 +43,7 @@ export class NewsComponent implements OnInit {
       },
       error => console.log(error)
     );
+    this.hostname = this.api.hostnameEPIC;
   }
 
   sort (property) {
