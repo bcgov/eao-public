@@ -50,8 +50,21 @@ describe('MainMapComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  describe('ngOnInit()', () => {
+    it('should call config.get()', () => {
+      expect(MockMapConfigService.get()).toBeTruthy();
+    });
+    it('should set webMapProperties', () => {
+      expect(JSON.stringify(component.webMapProperties)).toBe(JSON.stringify(MockMapConfigService.get().mainMap.webmap));
+    });
+    it('should set mapViewProperties', () => {
+      expect(JSON.stringify(component.mapViewProperties)).toBe(JSON.stringify(MockMapConfigService.get().mainMap.mapView));
+    });
+    it('should set popupProperties', () => {
+      expect(JSON.stringify(component.popupProperties)).toBe(JSON.stringify(MockMapConfigService.get().mainMap.popup));
+    });
+    it('should set geocoderProperties', () => {
+      expect(JSON.stringify(component.geocoderProperties)).toBe(JSON.stringify(MockMapConfigService.get().mainMap.geocoder));
+    });
   });
 });

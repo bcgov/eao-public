@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Http, HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { HomeComponent } from './home.component';
+import { Home } from '../models/home';
+
 import { NewsService } from '../services/news.service';
+import { Api } from '../services/api';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,8 +14,12 @@ describe('HomeComponent', () => {
 
   // mock service
   const mockNewsService = {
-    getRecentNews: () => {
-      return { subscribe: () => {} };
+    getRecentNews: function() {
+      return {
+        subscribe: function(fn) {
+          fn(Array<Home>());
+        }
+      };
     }
   };
 
@@ -20,9 +27,13 @@ describe('HomeComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         providers: [
+          Api,
           { provide: NewsService, useValue: mockNewsService }
         ],
-        imports: [RouterTestingModule],
+        imports: [
+          RouterTestingModule,
+          HttpModule
+        ],
         declarations: [HomeComponent]
       }).compileComponents();
     })
@@ -33,8 +44,12 @@ describe('HomeComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  describe('ngOnInit()', () => {
+    it('should call newsService.getRecentNews()', () => {
+      expect(mockNewsService.getRecentNews()).toHaveBeenCalled;
+    });
+    it('should return results data', () => {
+      expect('component.results').toBeTruthy;
+    });
   });
 });

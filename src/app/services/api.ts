@@ -8,34 +8,45 @@ export class Api {
   env: 'local' | 'dev' | 'test' | 'prod';
 
   constructor(private http: Http) {
-    const { hostname } = window.location;
+    const host = this.getHostName(window.location.hostname);
+    this.hostnameEPIC = host.hostnameEPIC;
+    this.env = host.env;
+    this.apiPath = this.getApiPath(this.hostnameEPIC);
+  }
+
+  getHostName(hostname: string) {
+    let hostnameEPIC: string;
+    let env: 'local' | 'dev' | 'test' | 'prod';
     switch (hostname) {
       case 'localhost':
         // Local
-        this.hostnameEPIC = 'http://localhost:3000';
-        this.env = 'local';
+        hostnameEPIC = 'http://localhost:3000';
+        env = 'local';
         break;
 
       case 'www-esm-master.pathfinder.gov.bc.ca':
         // Dev
-        this.hostnameEPIC = 'https://esm-master.pathfinder.gov.bc.ca';
-        this.env = 'dev';
+        hostnameEPIC = 'https://esm-master.pathfinder.gov.bc.ca';
+        env = 'dev';
         break;
 
       case 'www.test.projects.eao.gov.bc.ca':
         // Test
-        this.hostnameEPIC = 'https://test.projects.eao.gov.bc.ca';
-        this.env = 'test';
+        hostnameEPIC = 'https://test.projects.eao.gov.bc.ca';
+        env = 'test';
         break;
 
       case 'www.projects.eao.gov.bc.ca':
       default:
         // Prod
-        this.hostnameEPIC = 'https://projects.eao.gov.bc.ca';
-        this.env = 'prod';
+        hostnameEPIC = 'https://projects.eao.gov.bc.ca';
+        env = 'prod';
     };
+    return { hostnameEPIC, env };
+  }
 
-    this.apiPath = `${ this.hostnameEPIC }/api`;
+  getApiPath(hostnameEPIC) {
+    return `${ hostnameEPIC }/api`;
   }
 
   getProjectByCode(projectCode: string) {
