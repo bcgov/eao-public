@@ -64,8 +64,57 @@ describe('CommentPeriodComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  describe('ngOnInit()', () => {
+    it('should return data for route.data', () => {
+      expect(ActivatedRouteStub.data).toBeTruthy;
+    });
+    it('should return data for commentPeriod', () => {
+      expect(component.commentPeriod).toBeTruthy;
+    });
+    it('should set column to dateAdded', () => {
+      expect(component.column).toBe('dateAdded');
+    });
+    it('should set direction to -1', () => {
+      expect(component.direction).toBe(-1);
+    });
+  });
+  describe('sort(property)', () => {
+    let property;
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+    beforeEach(() => {
+      property = 'dateAdded';
+    });
+    describe('given isDesc is true', () => {
+      beforeEach(() => {
+        component.isDesc = true;
+        component.sort(property);
+      });
+
+      it('should set isDesc to false', () => {
+        expect(component.isDesc).toBeFalsy();
+      });
+      it('should set direction to -1', () => {
+        expect(component.direction).toBe(-1);
+      });
+    });
+    describe('given isDesc is false', () => {
+      beforeEach(() => {
+        component.isDesc = false;
+        component.sort(property);
+      });
+
+      it('should set isDesc to true', () => {
+        expect(component.isDesc).toBeTruthy();
+      });
+      it('should set direction to 1', () => {
+        expect(component.direction).toBe(1);
+      });
+    });
+    describe('given property', () => {
+      it('should assign property to column', () => {
+        component.sort(property);
+        expect(component.column).toBe(property);
+      });
+    });
   });
 });

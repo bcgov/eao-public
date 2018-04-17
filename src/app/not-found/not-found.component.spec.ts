@@ -22,4 +22,7 @@ describe('NotFoundComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+  it('should call ngOnInit()', () => {
+    expect(component.ngOnInit()).toHaveBeenCalled;
+  });
 });

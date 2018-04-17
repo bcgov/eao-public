@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   loginURL: string;
   constructor(private _router: Router, private cookieService: CookieService, private api: Api) {
     // Used for sharing links.
-    this.hostname = encodeURI(window.location.href.replace(/\/$/, ''));
     this.hostname = api.hostnameEPIC;
     this.loginURL = this.hostname === 'https://projects.eao.gov.bc.ca'
     ? 'https://projects.eao.gov.bc.ca/authentication/signin' : this.hostname + '/authentication/local/signin';

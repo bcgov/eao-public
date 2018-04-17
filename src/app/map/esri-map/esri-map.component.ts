@@ -67,6 +67,11 @@ export class EsriMapComponent implements OnInit, OnDestroy {
         this.map = mapInfo.map;
         this.mapView = mapInfo.mapView;
 
+        // static maps have no panning or zooming
+        if (this.staticMap) {
+          this.disableMapNavigation(this.mapView);
+        }
+
         // emit event informing application that the map has been loaded
         this.mapInit.emit({
           map: this.map,

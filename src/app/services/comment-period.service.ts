@@ -7,6 +7,7 @@ import { Project } from '../models/project';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/throw';
 
 import { Api } from './api';
 import { ValuedComponent } from '../models/vcs';
@@ -26,7 +27,6 @@ export class CommentPeriodService {
         if (!pcp) {
           return Observable.throw(new Error('PCP not found'));
         }
-
         this.pcp = new CommentPeriod(pcp);
         this.pcp.relatedDocuments.forEach((document, index ) => {
           document = new Document(document);
@@ -42,6 +42,23 @@ export class CommentPeriodService {
       // get what project the public comment period is associated with
       .switchMap(() => this.getProjectByCode(code))
       .map(() => this.pcp);
+  }
+
+  // get all comments associated with public comment period and map to comments attribute
+  // return array of comment json objects
+  private getCommentsByPCP(id) {
+    return this.api.getCommentsByPCPCode(id)
+      .map((res: Response) => res.json())
+      .map((pcpComments) => {
+        pcpComments.forEach((comment, index) => {
+          if (comment.isPublished) {
+            comment = new Comment(comment);
+            this.pcp.vcs = this.pcp.vcs.concat(comment.vcs);
+            this.pcp.comments.push(comment);
+          }
+        });
+        this.pcp.vcs = this.pcp.vcs.filter((vc, index) => this.pcp.vcs.indexOf(vc) === index);
+      });
   }
 
   // get all valued components associated with a comment and map it to vcs attribute
@@ -61,23 +78,6 @@ export class CommentPeriodService {
             }
           });
         });
-      });
-  }
-
-  // get all comments associated with public comment period and map to comments attribute
-  // return array of comment json objects
-  private getCommentsByPCP(id) {
-    return this.api.getCommentsByPCPCode(id)
-      .map((res: Response) => res.json())
-      .map((pcpComments) => {
-        pcpComments.forEach((comment, index) => {
-          if (comment.isPublished) {
-            comment = new Comment(comment);
-            this.pcp.vcs = this.pcp.vcs.concat(comment.vcs);
-            this.pcp.comments.push(comment);
-          }
-        });
-        this.pcp.vcs = this.pcp.vcs.filter((vc, index) => this.pcp.vcs.indexOf(vc) === index);
       });
   }
 
@@ -101,7 +101,7 @@ export class CommentPeriodService {
 
   private setStatus(start: Date, end: Date) {
     const curr = new Date();
-    const weekAgo = new Date(start.setDate(start.getDate() - 7));
+    const weekAgo = new Date(start.getDate() - 7);
     // a public comment period is in a pending state when the date is a week before it opens
     if ( curr < start && curr >= weekAgo ) {
       this.pcp.status = 'Pending';
