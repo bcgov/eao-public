@@ -23,8 +23,8 @@ class FooterModule extends Module {
     signinLink { $("footer.app-footer a", text : "Sign In") }
 
     // connect links
-    facebookConnect { $("footer.app-footer a", href : "https://www.facebook.com/sharer/sharer.php?u=https://esm-master.pathfinder.gov.bc.ca&src=sdkpreparse") }
-    twitterConnect { $("footer.app-footer a", href : "https://twitter.com/share") }
-    gplusConnect { $("footer.app-footer a", href : "https://plus.google.com/share?url=https://esm-master.pathfinder.gov.bc.ca") }
+    facebookConnect { $("footer .fb-share-button") }
+    twitterConnect { $("footer .twitter-share-button") }
+    gplusConnect { $("footer a").$("img", alt:"Share on Google+") }
   }
 }

@@ -61,7 +61,7 @@ class HomeSpec extends GebReportingSpec {
       "pageTitle"                || HomePage
       "viewListBtn"              || ProjectListPage
       "viewMapBtn"               || ProjectMapPage
-      "activitiesAndUpdatesLink" || NewsPage
+      //TODO requires admin site to be running "activitiesAndUpdatesLink" || NewsPage
       "legislationBtn"           || LegislationPage
       "processBtn"               || ProcessPage
       "complianceBtn"            || CompliancePage
