@@ -24,7 +24,9 @@ describe('CommentPeriodComponent', () => {
         subscribe: (fn: (value) => void) => fn({
             commentPeriod: {
               'comments': [
+                // we will create comments[0] for testing purposes
                 {
+                  'comment': 'Hello World',
                   'dateAdded': '2017-12-14T17:00:00.000Z',
                   'documents': [],
                   'vcs': []
@@ -76,6 +78,22 @@ describe('CommentPeriodComponent', () => {
     });
     it('should set direction to -1', () => {
       expect(component.direction).toBe(-1);
+    });
+  });
+  describe('comment readmore property', () => {
+    let commentKeys;
+    describe('on load', () => {
+      it('should initially be undefined', () => {
+        commentKeys = Object.keys(component.commentPeriod.comments[0]);
+        expect(commentKeys.includes('readmore')).toBeFalsy;
+      });
+    });
+    describe('after expanding a comment', () => {
+      it('should be defined', () => {
+        component.readmore(component.commentPeriod.comments[0]);
+        commentKeys = Object.keys(component.commentPeriod.comments[0]);
+        expect(commentKeys.includes('readmore')).toBeTruthy;
+      });
     });
   });
   describe('sort(property)', () => {

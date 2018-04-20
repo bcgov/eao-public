@@ -36,6 +36,7 @@ describe('ProjectDetailComponent', () => {
               project: {
                 'recent_activities': [
                   {
+                    'content': 'Hello World!',
                     'dateAdded': '2017-12-14T17:00:00.000Z'
                   }
                 ]
@@ -96,7 +97,22 @@ describe('ProjectDetailComponent', () => {
       expect(component.direction).toBe(-1);
     });
   });
-
+  describe('content readmore property', () => {
+    let contentKeys;
+    describe('on load', () => {
+      it('should initially be undefined', () => {
+        contentKeys = Object.keys(component.project.recent_activities[0]);
+        expect(contentKeys.includes('readmore')).toBeFalsy;
+      });
+    });
+    describe('after expanding a comment', () => {
+      it('should be defined', () => {
+        component.readmore(component.project.recent_activities[0]);
+        contentKeys = Object.keys(component.project.recent_activities[0]);
+        expect(contentKeys.includes('readmore')).toBeTruthy;
+      });
+    });
+  });
   describe('sort(property)', () => {
     let property;
 
