@@ -10,6 +10,7 @@ export class Comment {
   author: string;
   documents: Array<any>;
   comment: string;
+  commentId: string;
   vcs: Array<ValuedComponent>;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
@@ -20,6 +21,7 @@ export class Comment {
     this.author = obj && obj.author || '';
     this.documents = obj && obj.documents || [];
     this.comment = obj && obj.comment || '';
+    this.commentId = obj && obj.commentId || '';
     this.vcs = obj && obj.valuedComponents || [];
   }
 }

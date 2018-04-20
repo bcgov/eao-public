@@ -1,112 +1,134 @@
 @import "~assets/styles/base.scss";
+@import "~assets/styles/components/activity-feed.scss";
 
-.home-project-activities {
-    section {
-        min-height: 20rem;
-    }
+.home-news-feed {
+  &__project-name {
+    margin-bottom: 0.25rem;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 
-    .spinner-container {
-        &.inverted {
-            background: rgba($bg-dark, 0.8);
-        }
+  .spinner-container {
+    &.inverted {
+      background: rgba($bg-dark, 0.8);
     }
+  }
+}
+
+@media (max-width: 567px) {
+  .home-news-feed {
+    &__project-name {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .home-news-feed {
+    &__headline {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .news-block {
-    position: relative;
-    margin-bottom: 0.25rem;
-    padding: 1.5rem;
-    background-color: #f7f8fa;
-    background-position: right center;
-    background-size: auto 100%;
+  position: relative;
+  margin-bottom: 0.25rem;
+  padding: 1.5rem;
+  background-color: #f7f8fa;
+  background-position: right center;
+  background-size: auto 100%;
 
-    &:nth-child(even) {
-        background-color: #f4f4f4;
+  &:nth-child(even) {
+    background-color: #f4f4f4;
+  }
+
+  h3 {
+    margin-bottom: 0.4rem;
+    text-overflow: ellipsis;
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    sup {
+      display: block;
+      top: 0;
+      margin-bottom: 0.25rem;
+      line-height: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
     }
+  }
 
-    h3 {
-        margin-bottom: 0.4rem;
-        text-overflow: ellipsis;
-        font-size: 1.5rem;
-        font-weight: 400;
+  p {
+    margin-top: 1rem;
+    overflow: hidden;
+    line-height: calc(0.9375rem * 1.5);
+    font-size: 0.9375rem;
+  }
 
-        sup {
-            display: block;
-            top: 0;
-            margin-bottom: 0.25rem;
-            line-height: 1rem;
-            font-size: 1rem;
-            font-weight: 400;
-        }
-    }
+  .news-date {
+    display: block;
+    font-size: 0.85rem;
+  }
 
-    p {
-        margin-top: 1rem;
-        overflow: hidden;
-        line-height: calc(0.9375rem * 1.5);
-        font-size: 0.9375rem;
-    }
-
-    .news-date {
-        display: block;
-        font-size: 0.85rem;
-    }
-
-    .news-block-btns {
-        margin-top: 1.5rem;
-    }
+  .news-block-btns {
+    margin-top: 1.5rem;
+  }
 }
 
 @media (min-width: 760px) {
-    .news-block {
-        background-size: 100% auto;
+  .news-block {
+    background-size: 100% auto;
 
-        h3 {
-            margin-bottom: 1rem;
-            text-overflow: ellipsis;
-            font-size: 1.75rem;
-            font-weight: 400;
+    h3 {
+      margin-bottom: 1rem;
+      text-overflow: ellipsis;
+      font-size: 1.75rem;
+      font-weight: 400;
 
-            sup {
-                display: block;
-                top: 0;
-                margin-bottom: 0.4rem;
-                line-height: 1.25rem;
-                font-size: 1.25rem;
-            }
-        }
-
-        p {
-            overflow: hidden;
-            line-height: 1.4rem;
-            font-size: 0.9375rem;
-        }
-
-        .news-date {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 1.5rem;
-        }
-
-        .news-block-btns {
-            margin-top: 1.25rem;
-
-            .btn {
-                padding: 0.5rem;
-
-                + .btn {
-                    margin-left: 0.25rem;
-                }
-            }
-        }
+      sup {
+        display: block;
+        top: 0;
+        margin-bottom: 0.4rem;
+        line-height: 1.25rem;
+        font-size: 1.25rem;
+      }
     }
+
+    p {
+      overflow: hidden;
+      line-height: 1.4rem;
+      font-size: 0.9375rem;
+    }
+
+    .news-date {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1.5rem;
+    }
+
+    .news-block-btns {
+      margin-top: 1.25rem;
+
+      .btn {
+        padding: 0.5rem;
+
+        + .btn {
+          margin-left: 0.25rem;
+        }
+      }
+    }
+  }
 }
 
 .news-block-more {
-    margin-top: 1rem;
+  margin-top: 1rem;
+  text-align: center;
 
-    a {
-        font-weight: 600;
-    }
+  a {
+    font-weight: 600;
+  }
 }
