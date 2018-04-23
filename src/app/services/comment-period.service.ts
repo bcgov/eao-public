@@ -38,7 +38,7 @@ export class CommentPeriodService {
       // get public comment period's comments and create array of all valued components
       .switchMap(() => this.getCommentsByPCP(id))
       // get all valued components per comment
-      .switchMap(() => this.getCommentVcs())
+    .switchMap(() => this.getCommentVcs())
       // get what project the public comment period is associated with
       .switchMap(() => this.getProjectByCode(code))
       .map(() => this.pcp);
@@ -55,6 +55,16 @@ export class CommentPeriodService {
             comment = new Comment(comment);
             this.pcp.vcs = this.pcp.vcs.concat(comment.vcs);
             this.pcp.comments.push(comment);
+          }
+          if (comment.documents.length > 0) {
+            comment.documents.map((doc) => {
+              return this.api.getDocumentById(doc.id)
+                .map((res: Response) => res.json())
+                .subscribe(( trueDoc ) => {
+                  doc.displayName = trueDoc.internalOriginalName;
+                  doc.link = this.api.hostnameEPIC + '/api/document/' + doc.id + '/fetch';
+                });
+            });
           }
         });
         this.pcp.vcs = this.pcp.vcs.filter((vc, index) => this.pcp.vcs.indexOf(vc) === index);
