@@ -17,51 +17,61 @@
 
 <main id="anchor-point">
 
-	<div class="home-project-activities bg-muted">
+	<div class="bg-muted">
 		<section class="container">
 			<h2>Project Activities & Updates</h2>
+			<div class="home-news-feed">
+				
+				<div class="spinner-container" *ngIf="!results">
+					<div class="spinner-new rotating"></div>
+				</div>
 
-			<div class="spinner-container" *ngIf="!results">
-				<div class="spinner-new rotating"></div>
-			</div>
-
-			<div *ngIf="results">
-				<ng-container *ngFor="let item of results">
-					<div class="news-block" *ngIf="item.active == true">
-						<div class="news-block-title">
-							<h3><sup *ngIf="item.project">{{item.project.name}}</sup><sup *ngIf="!item.project">Announcement</sup>{{item.headline}}</h3>
-							<span class="news-date">{{item.dateAdded | date}}</span>
-							<pre class="activity-content mb-0" [innerHTML]="item.content"></pre>
-							<div class="news-block-btns">
-								<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
-									href="{{hostname}}/p/{{item.project?.code}}/detail"
-									*ngIf="item.project?.code" >
-									Project Info
-								</a>
-								<a class="btn btn-sm content-btn-alt" title="View this Public Comment Period"
-									href="{{item.contentUrl}}"
-									*ngIf="item.contentUrl">
-									View Comments
-								</a>
-								<a class="btn btn-sm content-btn-alt" title="View more information"
-									href="{{item.documentUrl}}"
-									target="_blank"
-									*ngIf="item.documentUrl">
-									View Document(s)
-								</a>
-							</div>
-						</div>
-					</div>
-				</ng-container>
+				<table class="activity-feed table" id="tableTop" *ngIf="results">
+					<ng-container *ngFor="let item of results">
+						<tr class="activity-feed__item" *ngIf="item.active == true">
+							<td>
+								<div class="title-container">
+									<h3 class="title-container__title">
+										<span class="home-news-feed__project-name" *ngIf="item.project">
+											{{item.project.name}}
+										</span>
+										<span class="home-news-feed__headline">{{item.headline}}</span>
+									</h3>
+									<span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
+								</div>
+								<div class="activity-feed__content">
+									<pre class="activity-content" [innerHTML]="item.content"></pre>
+								</div>
+								<div class="activity-feed__actions">
+									<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
+										href="{{hostname}}/p/{{item.project?.code}}/detail"
+										*ngIf="item.project?.code" >
+										Project Info
+									</a>
+									<a class="btn btn-sm content-btn-alt" title="View this Public Comment Period"
+										href="{{item.contentUrl}}"
+										*ngIf="item.contentUrl">
+										View Comments
+									</a>
+									<a class="btn btn-sm content-btn-alt" title="View more information"
+										href="{{item.documentUrl}}"
+										target="_blank"
+										*ngIf="item.documentUrl">
+										View Document(s)
+									</a>
+								</div>
+							</td>
+						</tr>
+					</ng-container>
+				</table>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="news-block-more">
-							<a href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
+							<a class="btn content-btn-alt" href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</section>
 	</div>
 

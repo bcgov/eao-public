@@ -57,4 +57,8 @@ export class NewsComponent implements OnInit {
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
   }
+
+  readmore(item): void {
+    item.readmore = !item.readmore;
+  }
 }

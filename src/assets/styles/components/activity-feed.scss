@@ -1,0 +1,129 @@
+$activity-content-font-size: 0.9375rem;
+$activity-feed-date-column-width: 10rem;
+
+.activity-feed {
+  &__item {
+    position: relative;
+    background: #f7f8fa;
+
+    &:nth-child(even) {
+      background: #f4f4f4;
+    }
+  }
+
+  &__actions {
+    margin-top: 1.2rem;
+
+    .btn {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+  }
+
+  &__attachments {
+    font-weight: 600;
+    margin-top: 0.625rem;
+    display: table;
+
+    i {
+      margin-top: 0.25rem;
+      font-size: 1.25rem;
+    }
+
+    .attachments-txt {
+      vertical-align: middle;
+      display: table-cell;
+      margin-top: 0.75rem;
+    }
+  }
+
+  &__content {
+    margin-top: 0.75rem;
+    font-size: 0.9375rem;
+
+    pre {
+      line-height: calc(0.9375rem * 1.5);
+      font-size: 0.9375rem;
+    }
+  }
+
+  .title-container {
+    @include flex-box();
+    @include flex-direction(row);
+
+    &__title {
+      @include flex(1 1 auto);
+      margin: 0;
+      padding-right: 1rem;
+      letter-spacing: -0.02rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    &__date {
+      @include flex(0 0 auto);
+    }
+  }
+
+  pre {
+    display: block;
+  }
+
+  thead {
+    .date-col {
+      width: $activity-feed-date-column-width;
+      text-align: right;
+    }
+  }
+}
+
+@media (max-width: 567px) {
+  .activity-feed {
+    .title-container {
+      @include flex-box();
+      @include flex-direction(column);
+  
+      &__title {
+        @include flex(1 1 auto);
+        margin: 0;
+        padding-right: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        order: 2;
+      }
+  
+      &__date {
+        @include flex(0 0 auto);
+        order: 1;
+      }
+    }
+
+    &__content {
+      margin-top: 0.75rem;
+
+      pre {
+        line-height: calc(0.875rem * 1.5);
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.readmore {
+  &__content {
+    display: block;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    white-space: pre-line;
+    font-size: 100%;
+  }
+
+  &__link {
+    position: relative;
+    padding: 0;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+}

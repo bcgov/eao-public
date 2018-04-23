@@ -43,4 +43,8 @@ export class CommentPeriodComponent implements OnInit {
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
   }
+
+  readmore(item): void {
+    item.readmore = !item.readmore;
+  }
 }

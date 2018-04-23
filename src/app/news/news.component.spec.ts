@@ -71,6 +71,24 @@ describe('NewsComponent', () => {
       expect(component.direction).toBe(-1);
     });
   });
+  describe('comment readmore property', () => {
+    beforeEach(() => {
+      component.results.push(new News({
+        content: 'Hello World!'
+      }));
+    });
+    describe('on load', () => {
+      it('should initially be undefined', () => {
+        expect(Object.keys(component.results[0]).includes('readmore')).toBeFalsy;
+      });
+    });
+    describe('after expanding a comment', () => {
+      it('should be defined', () => {
+        component.readmore(component.results[0]);
+        expect(Object.keys(component.results[0]).includes('readmore')).toBeTruthy;
+      });
+    });
+  });
   describe('sort(property)', () => {
     let property;
 

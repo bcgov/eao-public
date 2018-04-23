@@ -66,4 +66,8 @@ export class ProjectDetailComponent implements OnInit {
     const projectId = this.project ? this.project.code : null;
     this.router.navigate(['/map', { project: projectId }]);
   }
+
+  readmore(item): void {
+    item.readmore = !item.readmore;
+  }
 }
