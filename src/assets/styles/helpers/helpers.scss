@@ -15,11 +15,16 @@
 
 .badge {
     padding-bottom: 0.3rem;
-    font-size: 0.8375rem;
+    font-size: 0.875rem;
     font-weight: 600;
 
     &-status {
         text-transform: uppercase;
         font-weight: 700;
+    }
+
+    &-light {
+        background: #ddd;
+        color: inherit;
     }
 }

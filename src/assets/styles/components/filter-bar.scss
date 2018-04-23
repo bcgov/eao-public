@@ -4,9 +4,8 @@
     margin-bottom: 1.5rem;
 
     label {
-        color: $filter-bar-label-color;
         text-transform: uppercase;
-        font-size: 0.875rem;
+        font-size: 0.85rem;
         font-weight: 700;
     }
 
@@ -23,8 +22,6 @@
     }
 
     .button-row {
-        margin-top: 1rem;
-
         button {
             font-size: 0.85rem;
 
@@ -88,8 +85,8 @@
     }
 
     &.filters-advanced {
-        padding: 1rem 0.75rem 0.5rem 0.75rem;
-        background: #f4f4f4;
+        margin-right: 0.5rem;
+        margin-left: -0.5rem;
 
         [class^="col-md"] {
             padding-right: 0.5rem;
@@ -128,10 +125,6 @@
                 flex: 0 0 20%;
                 max-width: 20%;
             }
-        }
-
-        + .filter-input-row {
-            margin-top: 2rem;
         }
     }
 }

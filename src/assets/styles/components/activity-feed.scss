@@ -1,13 +1,15 @@
-$activity-content-font-size: 0.9375rem;
+$activity-content-font-size:      0.9375rem;
 $activity-feed-date-column-width: 10rem;
+$activity-feed-item-bg:           #f1f1f1;
+$activity-feed-alt-item-bg:       #f7f8fa;
 
 .activity-feed {
   &__item {
     position: relative;
-    background: #f7f8fa;
+    background: $activity-feed-item-bg;
 
     &:nth-child(even) {
-      background: #f4f4f4;
+      background: $activity-feed-alt-item-bg;
     }
   }
 
@@ -21,20 +23,7 @@ $activity-feed-date-column-width: 10rem;
   }
 
   &__attachments {
-    font-weight: 600;
-    margin-top: 0.625rem;
-    display: table;
-
-    i {
-      margin-top: 0.25rem;
-      font-size: 1.25rem;
-    }
-
-    .attachments-txt {
-      vertical-align: middle;
-      display: table-cell;
-      margin-top: 0.75rem;
-    }
+    margin-top: 0.725rem;
   }
 
   &__content {
@@ -122,7 +111,6 @@ $activity-feed-date-column-width: 10rem;
   &__link {
     position: relative;
     padding: 0;
-    font-weight: 700;
     font-size: 0.875rem;
     cursor: pointer;
   }

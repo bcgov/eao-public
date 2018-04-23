@@ -1,36 +1,58 @@
 @import "~assets/styles/base.scss";
 
 .nv-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 
-    li {
-        @include clearfix();
-        margin-top: 1px;
-        padding: 0.5rem 1rem;
-        font-size: 0.9375rem;
-        background: $nv-list-bg;
+  > li {
+    @include clearfix();
+    line-height: 1.15rem;
+    font-size: 0.875rem;
+
+    + li {
+      margin-top: 0.75rem;
+    }
+  }
+
+  span {
+    &.name,
+    &.value {
+      float: left;
+      display: block;
+      width: 50%;
     }
 
-    span {
-        &.name,
-        &.value {
-            float: left;
-            display: block;
-            width: 50%;
-        }
-
-        &.name {
-            margin-bottom: 0.25rem;
-        }
-        &.header {
-            margin-bottom: 0.125rem;
-            font-weight:600;
-            display: block;
-        }
-        &.content {
-            display: block;
-        }
+    &.name {
+      font-weight: 600;
     }
+
+    &.value {
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+          overflow: hidden;
+          word-break: break-all;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    &.name {
+      margin-bottom: 0.25rem;
+    }
+
+    &.header {
+      margin-bottom: 0.125rem;
+      font-weight:600;
+      display: block;
+    }
+
+    &.content {
+      display: block;
+    }
+  }
 }
