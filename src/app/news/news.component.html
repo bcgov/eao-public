@@ -33,34 +33,26 @@
         </button>
       </div>
       <div class="filter-input-row filters-advanced" *ngIf="showFilters">
-
-        <!-- Advanced Filters TBD -->
         <div class="col-md-12 form-group">
-          <label>Activity & Update Type</label>
-          <div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
-              <label class="btn btn-secondary" for="all">All</label>
-            </div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
-              <label class="btn btn-secondary" for="news">News</label>
-            </div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
-              <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
-            </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
+            <label class="btn btn-secondary" for="all">All</label>
+          </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
+            <label class="btn btn-secondary" for="news">News</label>
+          </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
+            <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
           </div>
         </div>
-
       </div>
-
       <div class="button-row" *ngIf="filter || filterType">
         <button class="btn content-btn-alt" (click)="clearAllNewsFilters()">
           Clear Filters
         </button>
       </div>
-
     </div>
 
     <div class="news-feed">
@@ -92,22 +84,21 @@
                 </div>
   
                 <div class="activity-feed__content readmore">
-                  <pre class="readmore__content" 
+                  <div class="readmore__content" 
                     [innerHTML]="item.content" 
                     *ngIf="item.readmore || item.content.length <= 400">
-                  </pre>
-                  <pre class="readmore__content" 
+                  </div>
+                  <div class="readmore__content" 
                     [innerHTML]="(item.content | slice:0:400) + '...'"
                     *ngIf="!item.readmore && item.content.length > 400">
-                  </pre>
+                  </div>
                   <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.content.length > 400" (click)="readmore(item)">
                     [{{item.readmore ? 'Show Less' : 'Show More'}}]
                   </button>
                 </div>
                 <div class="activity-feed__actions">
-                  <a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="{{hostname}}/p/{{item.project?.code}}/detail"
-                    target="_blank">View Project</a>
-                  <a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
+                  <a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="/p/{{item.project?.code}}">View Project</a>
+                  <a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}">View Comments</a>
                   <a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Document(s)</a>
                 </div>
               </td>
@@ -118,19 +109,16 @@
       <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
         <ul class="pagination">
           <li class="page-item" *ngIf="!p.isFirstPage()">
-            <a class="page-link" (click)="p.previous();" appScroll>
-              < </a>
+            <a class="page-link" (click)="p.previous();" appScroll> < </a>
           </li>
-
           <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-            <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+            <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" appScroll>
               <span>{{ page.label }}</span>
             </a>
             <div *ngIf="p.getCurrent() === page.value">
               <span class="page-link">{{ page.label }}</span>
             </div>
           </li>
-
           <li class="page-item" *ngIf="!p.isLastPage()">
             <a id="right" class="page-link" (click)="p.next();" appScroll> > </a>
           </li>

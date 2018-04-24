@@ -32,6 +32,12 @@
     flex-direction: $values;
 }
 
+@mixin flex-flow($values) {
+    -webkit-flex-flow: $values;
+    -ms-flex-flow: $values;
+    flex-flow: $values;
+}
+
 @mixin placeholder {
     &::-webkit-input-placeholder {@content;}
     &:-moz-placeholder {@content;}

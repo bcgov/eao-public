@@ -1,58 +1,56 @@
-
 // Fix the type flashing bug that occurs when page loads
 .wf-loading {
-    display: none;
+  display: none;
+}
+
+@media (max-width: 567px) {
+  html {
+    font-size: 14px;
+  }
 }
 
 body {
-    font-family: "myriad-pro";
-    font-weight: 400;
+  font-family: "myriad-pro";
+  font-weight: 400;
+}
+
+button, input, pre, select, textarea {
+  font-family: "myriad-pro";
+}
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+}
+
+h2, h3, h4 {
+  margin-bottom: 1rem;
+  letter-spacing: -0.04rem;
 }
 
 h1 {
-    font-size: 2.2rem;        // 36px
-    font-weight: 400;
-    letter-spacing: -0.03rem;
+  letter-spacing: -0.03rem;
 
-    sup {
-        top: 0;
-        display: block;
-        letter-spacing: 0;
-        line-height: normal;
-        font-size: 1.4rem;
-        font-weight: 400;
-    }
-}
-
-h2 {
-    font-size: 2rem;        // 32px
-    font-weight: 400;
-    letter-spacing: -0.05rem;
+  sup {
+    top: 0;
+    display: block;
+    letter-spacing: 0;
+    line-height: normal;
+    font-size: 1.4rem;
+  }
 }
 
 h3 {
-    font-weight: 400;
+  span {
+    display: block;
+  }
 }
 
-h4 {
-    font-weight: 400;
-    line-height: 1.7rem;
-}
+pre {
+  white-space: pre-wrap;
+  display: inline;
 
-p {
-    margin-bottom: 1.75rem;
-    font-size: 1rem;        //16px
-    line-height: 1.8rem;
-}
-
-a {
-    color: #1a5a96;
-}
-
-button,
-input,
-pre,
-select,
-textarea {
-    font-family: "myriad-pro";
+  p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
 }

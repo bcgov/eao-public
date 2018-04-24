@@ -45,8 +45,14 @@ export class Project {
     this.latitude = obj && obj.lat || 0;
     this.longitude = obj && obj.lon || 0;
     this.projectLead = obj && obj.projectLead || null;
+    this.projectLeadPhone = obj && obj.projectLeadPhone || null;
+    this.projectLeadEmail = obj && obj.projectLeadEmail || null;
     this.responsibleEPD = obj && obj.responsibleEPD || null;
+    this.responsibleEPDPhone = obj && obj.responsibleEPDPhone || null;
+    this.responsibleEPDEmail = obj && obj.responsibleEPDEmail || null;
     this.CELead = obj && obj.CELead || null;
+    this.CELeadPhone = obj && obj.CELeadPhone || null;
+    this.CELeadEmail = obj && obj.CELeadEmail || null;
     this.recent_activities = obj && obj.recent_activities || null;
   }
 }
