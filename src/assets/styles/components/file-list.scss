@@ -1,0 +1,92 @@
+$file-upload-list-item-bg:      #f4f4f4;
+$file-upload-alt-list-item-bg:  #f7f8fa;
+$file-upload-target-border:       #ccc;
+
+.file {
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  
+    li {
+      + li {
+        margin-top: 2px;
+      }
+    }
+  
+    &-item {
+      @include flex-box();
+      padding: 0.25rem;
+      background: $file-upload-list-item-bg;
+
+      &-icon {
+        width: 2rem;
+        padding: 0.2rem;
+        text-align: center;
+      }
+  
+      &-name {
+        @include flex(1 1 auto);
+        padding: 0.4rem 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.875rem;
+        font-weight: 400;
+      }
+  
+      &-action {
+        @include flex(0 0 auto);
+
+        button {
+          padding: 0.4rem 0.5rem;
+          background: transparent;
+          cursor: pointer;
+
+          &:hover,
+          &:focus {
+            background: #fff;
+          }
+        }
+      }
+  
+      &:nth-child(even) {
+        background: $file-upload-alt-list-item-bg;
+      }
+    }
+
+    &.anchor-list {
+      li {
+        padding: 0;
+
+        a {
+          @include flex-box();
+          padding: 0.5rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          .file__list-item-icon {
+            @include flex(0 0 auto);
+            position: relative;
+            width: auto;
+            padding: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            top: 0.4rem;
+            text-decoration: none;
+          }
+
+          &:hover,
+          &:active {
+            text-decoration: none;
+
+            .file__list-item-name {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -19,9 +19,9 @@
 
 	<div class="bg-muted">
 		<section class="container">
-			<h2>Project Activities & Updates</h2>
+			<h2 class="mb-4">Project Activities & Updates</h2>
 			<div class="home-news-feed">
-				
+
 				<div class="spinner-container" *ngIf="!results">
 					<div class="spinner-new rotating"></div>
 				</div>
@@ -40,11 +40,11 @@
 									<span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
 								</div>
 								<div class="activity-feed__content">
-									<pre class="activity-content" [innerHTML]="item.content"></pre>
+									<div class="activity-content" [innerHTML]="item.content"></div>
 								</div>
 								<div class="activity-feed__actions">
 									<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
-										href="{{hostname}}/p/{{item.project?.code}}/detail"
+										href="/p/{{item.project?.code}}"
 										*ngIf="item.project?.code" >
 										Project Info
 									</a>

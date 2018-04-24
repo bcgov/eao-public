@@ -1,223 +1,222 @@
 @import "~assets/styles/base.scss";
 
 .btn {
-    border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 400;
+  transition: all linear 0.2s;
+
+  &.inverted {
+    color: #fff;
+    border: 2px solid #fff;
     background: transparent;
-    color: #003366;
-    font-weight: 400;
-    transition: all linear 0.2s;
 
-    &.inverted {
-        color: #fff;
-        border: 2px solid #fff;
-        background: transparent;
-
-        &:active,
-        &:focus,
-        &:hover {
-            border-color: $gold;
-            background: $gold;
-            color: #002663;
-        }
+    &:active,
+    &:focus,
+    &:hover {
+      border-color: $gold;
+      background: $gold;
+      color: #002663;
     }
+  }
 
-    i,
-    .btn-txt {
-        vertical-align: middle;
+  i,
+  .btn-txt {
+    vertical-align: middle;
+  }
+
+  i {
+    + span {
+      vertical-align: middle;
     }
+  }
 
+  &.btn-default {
+    background: #EEE;
+    color: #1a5a96;
+  }
+
+  &.btn-sm {
     i {
-        + span {
-            vertical-align: middle;
-        }
+      margin-top: -0.1rem;
+      margin-right: 0.1rem;
     }
-
-    &.btn-default {
-        background: #EEE;
-        color: #1a5a96;
-    }
-
-    &.btn-sm {
-        i {
-            margin-top: -0.1rem;
-            margin-right: 0.1rem;
-        }
-    }
+  }
 }
 
 // Main Button
 main {
-    .btn-default {
-        padding: 0.5rem;
-    }
+  .btn-default {
+    padding: 0.5rem;
+  }
 }
 
 
 // Slide Buttons
 .slide-r-btn,
 .slide-l-btn {
-    padding: 0.5rem;
-    border-radius: 0.2rem;
-    transition: all ease-out 0.2s;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  transition: all ease-out 0.2s;
+
+  i, span {
+    transition: all ease-out 0.2s; 
+  }
+
+  i {
+    opacity: 0;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
 
     i, span {
-        transition: all ease-out 0.2s; 
+      opacity: 1;
+      transform: translateX(0);
     }
+  }
 
-    i {
-        opacity: 0;
-    }
-
-    span {
-        display: inline-block;
-    }
-
-    &:hover,
-    &:focus {
-        text-decoration: none;
-
-        i, span {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    &:disabled {
-        pointer-events: none;
-    }
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .slide-r-btn {
-    i {
-        margin-left: 0.25rem;
-        transform: translateX(20px);
-    }
+  i {
+    margin-left: 0.25rem;
+    transform: translateX(20px);
+  }
 
-    span {
-        margin-left: 0.25rem;
-        transform: translateX(12px);
-    }
+  span {
+    margin-left: 0.25rem;
+    transform: translateX(12px);
+  }
 }
 
 .slide-l-btn {
-    i {
-        margin-right: 0.25rem;
-        transform: translateX(-20px);
-    }
+  i {
+    margin-right: 0.25rem;
+    transform: translateX(-20px);
+  }
 
-    span {
-        margin-right: 0.25rem;
-        transform: translateX(-12px);
-    }
+  span {
+    margin-right: 0.25rem;
+    transform: translateX(-12px);
+  }
 }
 
 @media (max-device-width: 1024px) {
-    .slide-r-btn,
-    .slide-l-btn {
-        i, span {
-            transform: translateX(0);
-        }
-
-        i {
-            opacity: 1;
-        }
+  .slide-r-btn,
+  .slide-l-btn {
+    i, span {
+      transform: translateX(0);
     }
+
+    i {
+      opacity: 1;
+    }
+  }
 }
 
 // Content Buttons
 .content-btns {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .content-btn {
-    padding: 0.5rem;
-    background: #EEE;
-    color: #1a5a96;
-    font-size: 0.9375rem;
-    font-weight: 600;
+  padding: 0.5rem;
+  background: #EEE;
+  color: #1a5a96;
+  font-size: 0.9375rem;
+  font-weight: 600;
 
-    &:focus,
-    &:hover {
-        border-color: $gold;
-        background: $gold;
-    }
-}
+  &:focus,
+  &:hover {
+    border-color: $gold;
+    background: $gold;
+  }
 
-.content-btn-alt {
+  &-alt {
     padding: 0.5rem;
     color: #5091cd;
     border: 2px solid #5091cd;
     background: transparent;
-    font-weight: 600;
+    font-size: 0.9375rem;
+    font-weight: 700;
 
     &:focus,
     &:hover {
-        color: #fff;
-        border-color: #5091cd;
-        background: #5091cd;
+      color: #fff;
+      border-color: #5091cd;
+      background: #5091cd;
     }
+  }
 }
 
 // Scroll Top Button 
 .scroll-top-btn {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    padding: 0.5rem;
-    opacity: 0;
-    border-color: $gold;
-    background: $gold;
-    transform: translateY(1rem);
-    transition: all ease-out 0.2s;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  opacity: 0;
+  border-color: $gold;
+  background: $gold;
+  transform: translateY(1rem);
+  transition: all ease-out 0.2s;
 
-    &.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 // Submit Button
 .submit-btn {
-    border-color: $gold;
-    background: $gold;
-    font-size: 0.9375rem;
-    font-weight: 700;
+  border-color: $gold;
+  background: $gold;
+  font-size: 0.9375rem;
+  font-weight: 700;
 }
 
 // Toggle Buttons
 .toggle-btn {
-    position: relative;
-    display: inline-block;
-    vertical-align: baseline;
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
 
-    input[type="radio"] {
-        position: absolute;
-        clip: rect(0,0,0,0);
+  input[type="radio"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
 
-        + label {
-            margin: 0;
-            border: none;
-            border-radius: 0.25rem;
-            background-color: $toggle-btn-bg;
-            text-transform: none;
-            font-size: 0.875rem;
-            font-weight: 600;
+    + label {
+      margin: 0;
+      border: none;
+      border-radius: 0.25rem;
+      background-color: $toggle-btn-bg;
+      text-transform: none;
+      font-size: 0.875rem;
+      font-weight: 600;
 
-            &:hover {
-                color: $toggle-btn-active-color;
-                background-color: $toggle-btn-active-bg; 
-            }
-        }       
+      &:hover {
+        color: $toggle-btn-active-color;
+        background-color: $toggle-btn-active-bg; 
+      }
+    }     
 
-        &:checked {
-            + label {
-                color: $toggle-btn-active-color;
-                background-color: $toggle-btn-active-bg; 
-            }
-        }
+    &:checked {
+      + label {
+        color: $toggle-btn-active-color;
+        background-color: $toggle-btn-active-bg; 
+      }
     }
+  }
 
-    + .toggle-btn {
-        margin-left: 0.25rem;
-    }
+  + .toggle-btn {
+    margin-left: 0.25rem;
+  }
 }

@@ -52,4 +52,33 @@ describe('HomeComponent', () => {
       expect('component.results').toBeTruthy;
     });
   });
+  describe('setDocumentUrl', () => {
+    it('should set results.documentUrl to \'\' when given no document url', () => {
+      const data = [
+        {
+          documentUrl: ''
+        }
+      ];
+      component.setDocumentUrl(data);
+      expect(data[0].documentUrl).toBe('');
+    });
+    it('should not change results.documentUrl when given a www url', () => {
+      const data = [
+        {
+          documentUrl: 'http://www.test.com'
+        }
+      ];
+      component.setDocumentUrl(data);
+      expect(data[0].documentUrl).toBe('http://www.test.com');
+    });
+    it('should set results.documentUrl to \'http://localhost:3000/blarg\' when given an esm-server document', () => {
+      const data = [
+        {
+          documentUrl: '/blarg'
+        }
+      ];
+      component.setDocumentUrl(data);
+      expect(data[0].documentUrl).toBe('http://localhost:3000/blarg');
+    });
+  });
 });

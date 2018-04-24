@@ -1,0 +1,43 @@
+.modal {
+  &-header,
+  &-body,
+  &-footer {
+    padding: 1.25rem;
+    border: none;
+  }
+
+  &-header {
+    position: relative;
+
+    .btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.25rem;
+      background: transparent;
+    }
+  }
+
+  &-footer {
+    .btn {
+      font-size: 0.9375rem;
+      font-weight: 700;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    &-lg {
+      max-width: 640px;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .modal {
+    &-lg {
+      max-width: 760px;
+    }
+  }
+}
