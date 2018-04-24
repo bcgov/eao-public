@@ -1,6 +1,6 @@
 import { Proponent } from './proponent';
 import { CurrentPhase } from './currentphase';
-import { RecentActivities } from './recentactivities';
+import { News } from './news';
 
 export class Project {
   _id: number;
@@ -10,8 +10,11 @@ export class Project {
   description: string;
   status: string;
   type: string;
+  sector: string;
   openCommentPeriod: string;
   eacDecision: string;
+  CEAAInvolvement: string;
+  CEAALink: string;
   decisionDate: Date;
   currentPhase: CurrentPhase;
   region: string;
@@ -27,7 +30,6 @@ export class Project {
   CELead: string;
   CELeadEmail: string;
   CELeadPhone: string;
-  recent_activities: [RecentActivities];
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -36,8 +38,11 @@ export class Project {
     this.proponent = obj && obj.proponent || null;
     this.status = obj && obj.status || null;
     this.type = obj && obj.type || null;
+    this.sector = obj && obj.sector || null;
     this.openCommentPeriod = obj && obj.openCommentPeriod || null;
     this.eacDecision = obj && obj.eacDecision || null;
+    this.CEAAInvolvement = obj && obj.CEAAInvolvement || null;
+    this.CEAALink = obj && obj.CEAALink || null;
     this.decisionDate = obj && obj.decisionDate || null;
     this.currentPhase = obj && obj.currentPhase || null;
     this.region = obj && obj.region || null;
@@ -45,8 +50,13 @@ export class Project {
     this.latitude = obj && obj.lat || 0;
     this.longitude = obj && obj.lon || 0;
     this.projectLead = obj && obj.projectLead || null;
+    this.projectLeadPhone = obj && obj.projectLeadPhone || null;
+    this.projectLeadEmail = obj && obj.projectLeadEmail || null;
     this.responsibleEPD = obj && obj.responsibleEPD || null;
+    this.responsibleEPDPhone = obj && obj.responsibleEPDPhone || null;
+    this.responsibleEPDEmail = obj && obj.responsibleEPDEmail || null;
     this.CELead = obj && obj.CELead || null;
-    this.recent_activities = obj && obj.recent_activities || null;
+    this.CELeadPhone = obj && obj.CELeadPhone || null;
+    this.CELeadEmail = obj && obj.CELeadEmail || null;
   }
 }

@@ -20,7 +20,7 @@ class FooterModule extends Module {
     disclaimerLink { $("footer.app-footer a", href : "http://www2.gov.bc.ca/gov/content/home/disclaimer") }
     privacyLink { $("footer.app-footer a", href : "http://www2.gov.bc.ca/gov/content/home/privacy") }
     accessibilityLink { $("footer.app-footer a", href : "http://www2.gov.bc.ca/gov/content/home/accessibility") }
-    signinLink { $("footer.app-footer a", href : "https://projects.eao.gov.bc.ca/authentication/signin") }
+    signinLink { $("footer.app-footer a", text : "Sign In") }
 
     // connect links
     facebookConnect { $("footer.app-footer a", href : "https://www.facebook.com/sharer/sharer.php?u=https://esm-master.pathfinder.gov.bc.ca&src=sdkpreparse") }

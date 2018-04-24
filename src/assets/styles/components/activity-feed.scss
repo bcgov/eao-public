@@ -12,18 +12,18 @@ $activity-feed-date-column-width: 10rem;
   }
 
   &__actions {
-    margin-top: 1.2rem;
+    margin-top: 1rem;
 
     .btn {
+      margin-top: 0.2rem;
       font-size: 0.85rem;
       font-weight: 700;
     }
   }
 
   &__attachments {
-    font-weight: 600;
-    margin-top: 0.625rem;
-    display: table;
+    font-weight: 400;
+    margin-top: 1rem;
 
     i {
       margin-top: 0.25rem;
@@ -41,9 +41,30 @@ $activity-feed-date-column-width: 10rem;
     margin-top: 0.75rem;
     font-size: 0.9375rem;
 
-    pre {
-      line-height: calc(0.9375rem * 1.5);
-      font-size: 0.9375rem;
+    ::ng-deep {
+      p {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__no-results {
+    position: relative;
+    padding: 2rem;
+    min-height: 10rem;
+    border-radius: 0.4rem;
+    background: #f7f8fa;
+    text-align: center;
+
+    &--msg {
+      position: absolute;
+      top: 4.2rem;
+      left: 0;
+      width: 100%;
+      font-weight: 700;
+      opacity: 0.5; 
     }
   }
 
@@ -63,10 +84,6 @@ $activity-feed-date-column-width: 10rem;
     &__date {
       @include flex(0 0 auto);
     }
-  }
-
-  pre {
-    display: block;
   }
 
   thead {
@@ -104,6 +121,11 @@ $activity-feed-date-column-width: 10rem;
       pre {
         line-height: calc(0.875rem * 1.5);
         font-size: 0.875rem;
+
+        p {
+          line-height: calc(0.875rem * 1.5);
+          font-size: 0.875rem !important;
+        }
       }
     }
   }
@@ -115,14 +137,13 @@ $activity-feed-date-column-width: 10rem;
     position: relative;
     margin: 0;
     overflow: hidden;
-    white-space: pre-line;
     font-size: 100%;
   }
 
   &__link {
     position: relative;
     padding: 0;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.875rem;
     cursor: pointer;
   }

@@ -1,14 +1,16 @@
-<div class="hero-banner landing-pg-banner">
+<div class="hero-banner">
 	<div class="container">
 		<div class="container-inner">
-			<div class="hb-txt">
+			<div class="hero-banner__content">
 				<h1>BC Environmental Assessment Office</h1>
 				<p>British Columbia's environmental assessment process provides opportunities for Aboriginal groups, government agencies and the public to influence the outcome of environmental assessments in British Columbia.</p>
-				<div class="hb-btns">
-					<strong>Find EA Projects in British Columbia...</strong>
-					<a class="btn slide-l-btn hero-btn inverted" href="/project" [routerLink]="['/project']"><i class="material-icons">list</i><span>View List</span></a>
-					<span>or</span>
-					<a class="btn slide-l-btn hero-btn inverted" href="/map" [routerLink]="['/map']"><i class="material-icons">map</i><span>View Map</span></a>
+				<div class="hero-banner__actions">
+					<strong class="hero-banner__actions-title">Find EA Projects in British Columbia...</strong>
+					<div class="hero-banner__actions-buttons">
+						<a class="btn slide-l-btn hero-btn inverted" href="/project" [routerLink]="['/project']"><i class="material-icons">list</i><span>View List</span></a>
+						<span>or</span>
+						<a class="btn slide-l-btn hero-btn inverted" href="/map" [routerLink]="['/map']"><i class="material-icons">map</i><span>View Map</span></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -19,9 +21,9 @@
 
 	<div class="bg-muted">
 		<section class="container">
-			<h2>Project Activities & Updates</h2>
+			<h2 class="mb-4">Recent Activities & Updates</h2>
 			<div class="home-news-feed">
-				
+
 				<div class="spinner-container" *ngIf="!results">
 					<div class="spinner-new rotating"></div>
 				</div>
@@ -40,11 +42,11 @@
 									<span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
 								</div>
 								<div class="activity-feed__content">
-									<pre class="activity-content" [innerHTML]="item.content"></pre>
+									<div class="activity-content" [innerHTML]="item.content"></div>
 								</div>
 								<div class="activity-feed__actions">
 									<a class="btn btn-sm content-btn-alt" title="View more information about {{item.project.name}}"
-										href="{{hostname}}/p/{{item.project?.code}}/detail"
+										href="/p/{{item.project?.code}}"
 										*ngIf="item.project?.code" >
 										Project Info
 									</a>
@@ -64,12 +66,11 @@
 						</tr>
 					</ng-container>
 				</table>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="news-block-more">
-							<a class="btn content-btn-alt" href="/news" [routerLink]="['/news']">View all Activities & Updates &rsaquo;</a>
-						</div>
-					</div>
+				<div class="news-block-more">
+					<a class="btn slide-r-btn content-btn-alt" href="/news" [routerLink]="['/news']">
+						<span>View All Activities & Updates</span>
+						<i class="material-icons">&#xE5C8;</i>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -78,7 +79,7 @@
 	<div class="bg-faded">
 		<section class="container">
 			<h2>About the BC Environmental Assessment Process...</h2>
-			<p class="mb-5">Learn more about how the Environmental Assessment Office neutrally administers a process that is predictable, transparent, timely, procedurally fair, and holds all participants accountable.</p>
+			<p>Learn more about how the Environmental Assessment Office neutrally administers a process that is predictable, transparent, timely, procedurally fair, and holds all participants accountable.</p>
 			<div class="row feature-blocks">
 				<div class="col-md-4">
 					<div class="feature-block">

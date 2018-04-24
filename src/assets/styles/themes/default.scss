@@ -38,8 +38,9 @@ $aside-title-color:             #38598a;
 $aside-bg:                      #f7f8fa;
 
 // Cards
-$card-header-color:             #fff;
-$card-header-bg:                #38598a;
+$card-header-color:             #000;
+$card-header-bg:                #eee;
+$card-body-bg:                  #f7f8fa;
 
 // Feature Blocks
 $feature-block-color:           #FFF;
@@ -50,7 +51,7 @@ $filter-bar-label-color:        #b9b9b9;
 
 // Form Controls
 $fc-height:                     2.75rem;
-$fc-border-color:               #ddd;
+$fc-border-color:               #ccc;
 $fc-bg:                         #fff;
 $fc-inner-shadow:               0.1rem 0.1rem 0.1rem #eee;
 $fc-placeholder-color:          #999;
@@ -69,12 +70,12 @@ $pgn-btn-color:                 #000;
 // Spinner
 $spinner-width:                 50px;
 $spinner-color:                 #5091cd;
-$spinner-bg:                    rgba(255,255,255,0.8);
+$spinner-bg:                    #fff;
 $spinner-invert-color:          #fff;
 $spinner-invert-bg:             rgba(0,0,0,0.8);
 
 // Tables
-$table-header-bg:               #fff;
+$table-header-bg:               #eee;
 $table-header-hover-bg:         #ddd;
 $table-header-sort-active:      #5091cd;
 $table-row-bg:                  #f7f8fa;
@@ -87,11 +88,20 @@ $table-sort-icon-size:          0.25rem;
 // Modal
 $modal-bg:                      #fff;
 
+// Tab Navigation
+$tab-color:                     #38598a;
+$tab-nav-border-color:          #ccc;
+$tab-nav-bg:                    #fff;
+$tab-hover-bg:                  #eee;
+$tab-sm-active-color:           #fff;
+$tab-sm-bg:                     #eee;
+$tab-sm-active-bg:              #38598a;
+$tab-active-bg:                 #fff;
+
 // Toggle Buttons
 $toggle-btn-active-color:       #fff;
-$toggle-btn-bg:                 #fff;
+$toggle-btn-bg:                 #eee;
 $toggle-btn-active-bg:          #5091cd;
-
 
 // Map Components
 // Map Popup

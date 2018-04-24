@@ -12,7 +12,7 @@ describe('CommentPeriodService', () => {
   let responseItem;
   let pcpid;
   let projcode;
-
+  let docid;
   function createResponseItem(request: string, response: any) {
     responseItem = {
       request: request,
@@ -41,6 +41,15 @@ describe('CommentPeriodService', () => {
     return vcsObjects;
   }
 
+  function commentDocFactory(id: string, internalOriginalName: string) {
+    const docObject = {
+      id: id,
+      internalOriginalName: internalOriginalName
+    };
+
+    return docObject;
+  }
+
   function documentCodesFactory(iterations: number) {
     const docCodes = [];
     for (let i = 0; i < iterations; i++) {
@@ -55,28 +64,32 @@ describe('CommentPeriodService', () => {
     };
   }
 
-  function commentFactory(vcsCodes?: any[], isPublished?: boolean) {
+  function commentFactory(vcsCodes?: any[], isPublished?: boolean, documents?: any[]) {
     return {
       valuedComponents: vcsCodes ? vcsCodes : [],
-      isPublished: isPublished ? isPublished : true
+      isPublished: isPublished ? isPublished : true,
+      documents: documents ? documents : [],
     };
   }
 
   function commentPeriodObjectFactory(docids?: any[], dateStarted?: Date, dateCompleted?: Date) {
     return {
       _id: pcpid ? pcpid : null,
+      vcs: { filter: (x: () => {}) => {}, concat: y => y},
+      comments: [],
       relatedDocuments: docids ? docids : [],
       dateStarted: dateStarted ? dateStarted : new Date(),
       dateCompleted: dateCompleted ? dateCompleted : new Date()
     };
   }
 
-  function createMockResponses(pcpObj: any, commentsObj: any[], projectObj: any, vcsObjs: any[]) {
+  function createMockResponses(pcpObj: any, commentsObj: any[], projectObj: any, vcsObjs: any[], docObj?: any) {
     return [
       createResponseItem('commentperiod/for/public/' + pcpid, pcpObj),
       createResponseItem('comments/period/' + pcpid + '/all', commentsObj),
       createResponseItem('project/public/' + projcode, projectObj),
-      createResponseItem('vclist', vcsObjs)
+      createResponseItem('vclist', vcsObjs),
+      createResponseItem('document/' + docid, docObj)
     ];
   }
 
@@ -111,8 +124,6 @@ describe('CommentPeriodService', () => {
       it('returns an error',
         inject([CommentPeriodService, XHRBackend], (commentPeriodService, mockBackend) => {
 
-        pcpid = '';
-        projcode = '';
         const pcpObj = null;
         const commentObjs = [commentFactory()];
         const projObj = projectFactory();
@@ -123,8 +134,11 @@ describe('CommentPeriodService', () => {
         mockBackEnd(mockResponses, mockBackend);
 
         commentPeriodService.getByCode().subscribe(
-          commentPeriod => {
-            expect(commentPeriod).toThrow(Error);
+          () => {
+            fail('expected error');
+          },
+          error => {
+            expect(error).toEqual(Error('PCP not found'));
           }
         );
       }));
@@ -303,7 +317,7 @@ describe('CommentPeriodService', () => {
     });
   });
 
-  describe('getCommentsByPCP(id)', () => {
+  describe('getCommentsAndDocuments(pcp)', () => {
     let mockResponses;
     let expectedResponse;
 
@@ -327,7 +341,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const comments = commentPeriod.comments;
             expect(comments.length).toBe(expectedResponse.length);
@@ -352,7 +366,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpid, projcode).subscribe(
           commentPeriod => {
             const comments = commentPeriod.comments;
             expect(comments.length).toBe(expectedResponse.length);
@@ -378,7 +392,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpid, projcode).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[1].vcs;
             expect(vcs.length).toBe(expectedResponse.length);
@@ -401,12 +415,55 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const comments = commentPeriod.comments;
             expect(comments.length).toBe(expectedResponse.length);
           }
         );
+      }));
+    });
+    describe('given a comment with documents', () => {
+      let pcpObj;
+
+      beforeEach(() => {
+        docid = '12345';
+        const docObj = commentDocFactory(docid, 'test');
+        pcpObj = commentPeriodObjectFactory();
+        const commentObjs = [commentFactory([], false, [{
+          id: docid
+        }])];
+        const projObj = projectFactory();
+        const vcsObjs = valuedComponentsObjectsFactory(0);
+
+        mockResponses = createMockResponses(pcpObj, commentObjs, projObj, vcsObjs, docObj);
+
+      });
+      it('obtains the proper document name',
+        inject([CommentPeriodService, XHRBackend], (commentPeriodService, mockBackend) => {
+        mockBackEnd(mockResponses, mockBackend);
+
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
+          commentPeriod => {
+            const comments = commentPeriod.comments;
+            expect(comments[0].documents[0].displayName).toBe('test');
+          }
+        );
+
+      }));
+      it('obtains the proper document link',
+        inject([CommentPeriodService, XHRBackend], (commentPeriodService, mockBackend) => {
+        mockBackEnd(mockResponses, mockBackend);
+
+        const linkslice = '/api/document/' + docid + '/fetch';
+
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
+          commentPeriod => {
+            const comments = commentPeriod.comments;
+            expect(comments[0].documents[0].link).toContain(linkslice);
+          }
+        );
+
       }));
     });
   });
@@ -415,10 +472,12 @@ describe('CommentPeriodService', () => {
     let expectedResponse;
 
     describe('given a valid response', () => {
+      let pcpObj;
+
       beforeEach(() => {
         pcpid = '1234';
         projcode = '4321';
-        const pcpObj = commentPeriodObjectFactory();
+        pcpObj = commentPeriodObjectFactory();
         const commentObjs = [commentFactory()];
         const projObj = projectFactory();
         const vcsObjs = valuedComponentsObjectsFactory(0);
@@ -432,7 +491,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[0].vcs;
             expect(vcs.length).toBe(expectedResponse.length);
@@ -444,7 +503,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[0].vcs;
             expect(JSON.stringify(vcs)).toBe(JSON.stringify(expectedResponse));
@@ -453,10 +512,11 @@ describe('CommentPeriodService', () => {
       }));
     });
     describe('given an array of valued components', () => {
+      let pcpObj;
       beforeEach(() => {
         pcpid = '1234';
         projcode = '4321';
-        const pcpObj = commentPeriodObjectFactory();
+        pcpObj = commentPeriodObjectFactory();
         const vcsCodes = valuedComponentsCodesFactory(2);
         const commentObjs = [commentFactory(vcsCodes)];
         const projObj = projectFactory();
@@ -471,7 +531,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[0].vcs;
             expect(vcs.length).toBe(expectedResponse.length);
@@ -483,7 +543,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[0].vcs;
             expect(JSON.stringify(vcs[0]._id)).toBe(JSON.stringify(expectedResponse[0]._id));
@@ -491,6 +551,6 @@ describe('CommentPeriodService', () => {
           }
         );
       }));
-    });
-  });
+     });
+   });
 });

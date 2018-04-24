@@ -1,14 +1,24 @@
 @import "~assets/styles/base.scss";
 
-.spinner-new {
+[class^="spinner-new"] {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 50px;
     height: 50px;
-    margin-top: calc(-#{$spinner-width} / 1.5);
+    margin-top: calc(-#{$spinner-width} / 2);
     margin-left: calc(-#{$spinner-width} / 2);
     background-image: url("assets/images/spinner.png");
+    background-size: 100%;
+}
+
+.spinner-new {
+    &--sm {
+        width: 30px;
+        height: 30px;
+        margin-top: calc(30px / -2);
+        margin-left: calc(30px / -2);
+    }
 }
 
 .spinner-container {
@@ -17,6 +27,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    min-height: 8rem;
     padding: 5%;
     background: $spinner-bg;
     z-index: 4;
@@ -42,6 +53,13 @@
     &.fixed {
         position: fixed;
         z-index: 1000;
+    }
+
+    &.relative {
+        position: relative;
+        min-height: 10rem;
+        padding: 0;
+        border-top: 2px solid #eee;
     }
 }
 

@@ -1,262 +1,152 @@
 @import "~assets/styles/base.scss";
 
-// Banner
 .hero-banner {
-    background-image: url("assets/images/eao-hero-banner.jpg");
-    background-repeat: no-repeat;
-}
+  position: relative;
+  background-color: rgba($header-bg, 1);
+  background-image: url("assets/images/eao-hero-banner.jpg");
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 4rem #00264d inset;
 
-.hero-banner {
-    position: relative;
-    height: 24rem;
-    background-color: rgba($header-bg, 1);
-    background-size: 305%;
-    background-position: -31rem center;
-    box-shadow: 0 0 4rem #00264d inset;
+  .container {
+    display: table;
+    max-width: 1100px;
+    min-height: 20rem;
 
-    .container {
-        display: table;
-        padding: 0;
-        height: 100%;
+    &-inner {
+      display: table-row;
     }
+  }
 
-    .container-inner {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    &.hb-sm {
-        height: 20rem;
-        background-position: -25rem center;
-        background-size: 240%;
-    }
-}
-
-.hb-btns {
-    .btn {
-        margin-top: 0.45rem;
-        padding: 0.5rem;
-        min-width: 7rem;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        font-weight: 700;
-    }
-}
-
-@media (min-width: 400px) {
-    .hero-banner {
-        background-size: 220%;
-        background-position: -25rem center;
-
-        &.hb-sm {
-            background-position: -30rem center;
-        }
-    }
-}
-
-@media (min-width: 760px) {
-    .hero-banner {
-        height: 30rem;
-        background-position: -23rem center;
-        background-size: 160%;
-
-        .container {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        &.hb-sm {
-            height: 24rem;
-            background-position: center;
-            background-size: 120%;
-        }
-    }
-}
-
-@media (min-height: 900px) and (min-width: 1200px) {
-    .hero-banner {
-        height: 40rem;
-        background-size: 120%;
-    }
-}
-
-@media (min-width: 1020px) {
-    .hero-banner {
-        background-position: center;
-        background-size: 130%;
-    }
-}
-
-@media (min-width: 1200px) {
-    .hero-banner {
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 110%;
-
-        .container {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        &.hb-sm {
-            height: 24rem;
-            background-position: center;
-            background-size: 105%;
-        }
-    }
-}
-
-@media (min-width: 1360px) {
-    .hero-banner {
-        .container {
-            max-width: 1100px;
-        }
-
-        &.hb-sm {
-            //background-position: center bottom;
-            background-size: 100%;
-        }
-    }
-}
-
-@media (min-width: 1920px) {
-    .hero-banner {
-        .container {
-            max-width: 1100px;
-        }
-
-        &.hb-sm {
-            background-position: center 55%;
-        }
-    }
-}
-
-
-// Banner Text
-.hb-txt {
-    padding: 0 1.5rem;
-    color: #FFF;
+  &__content {
+    display: table-cell;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    vertical-align: middle;
+    color: #fff;
 
     h1 {
-        margin-top: -0.25rem;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        line-height: 2rem;
-
-        span {
-            display: inline-block;
-        }
-    }
-
-    h2 {
-        font-size: 1.375rem;
-        font-weight: 300;
-        line-height: 1.4rem;
+      margin-bottom: 1.5rem;
+      font-size: 2.25rem;
+  
+      span {
+        display: inline-block;
+      }
     }
 
     p {
-        margin-bottom: 1.5rem;
-        font-size: 0.9375rem;
-        font-weight: 300;
-        line-height: 1.4rem;
+      margin-bottom: 0;
+      font-weight: 300;
+    }
+  }
+
+  &__actions {
+    margin-top: 1.75rem;
+
+    &-title {
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
-    strong {
-        color: $gold;
+    &-buttons {
+      @include flex-box();
+
+      .btn {
+        @include flex(1 1 auto);
+        padding: 0.5rem;
+        text-transform: uppercase;
+        font-size: 0.85rem;
         font-weight: 700;
-    }
 
-    .badge {
-        display: inline-block;
-        margin-top: 0.25rem;
-        margin-left: 0.25rem;
-        vertical-align: top;
-    }
-
-    &__project-title {
-        font-size: 1.75rem;
-        font-weight: 300;
-    }
-}
-
-@media (min-width: 460px) {
-    .hb-txt {
-        h1 {
-            span {
-                display: inline;
-            }
-        }
-    }
-}
-
-@media (min-width: 760px) {
-    .hb-txt {
-        display: inline-block;
-        padding: 2rem;
-
-        h1 {
-            margin-bottom: 2.15rem;
-            font-size: 2.4rem;
-            line-height: 2.5rem;
-        }
-
-        p {
-            margin-bottom: 2.5rem;
-            font-size: 1rem;
-            line-height: 1.75rem;
-        }
-    }
-}
-
-@media (min-width: 900px) {
-    .hb-txt {
-        margin-top: 2.5rem;
-
-        h1 {
-            font-size: 2.65rem;
-        }
-
-        p {
-            line-height: 2rem;
-            font-size: 1.25rem;
-        }
-    }
-}
-
-
-// Banner Buttons
-.hb-btns {
-    strong {
-        display: block;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .btn {
         + span {
-            display: inline-block;
-            margin-top: 0.45rem;
-            margin-right: 0.25rem;
-            margin-left: 0.25rem;
-            vertical-align: middle;
+          @include flex(0 0 auto);
+          padding: 0.65rem 0.4rem;
+          vertical-align: middle;
         }
+      }
     }
+  }
 }
 
-@media (min-width: 400px) {
-    .hb-btns {
-        text-align: left;
-
-        .btn {
-            width: auto;
-
-            + span {
-                display: inline-block;
-                margin-top: 0.45rem;
-                margin-right: 0.5rem;
-                margin-left: 0.5rem;
-            }
-        }
+@media (min-width: 567px) {
+  .hero-banner {
+    .container {
+      min-height: 20rem;
     }
+
+    &__actions {
+      &-buttons {
+        .btn {
+          @include flex(0 0 8rem);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-banner {
+    .container {
+      padding-top: 67px;
+      min-height: 24rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-banner {
+    &__content {
+      h1 {
+        font-size: 2.65rem;
+      }
+  
+      p {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-banner {
+
+    &__content {
+      padding-top: 3rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-banner {
+    background-position: right -2rem;
+
+    .container {
+      min-height: 24rem;
+    }
+  }
+}
+
+@media (min-width: 1360px) {
+  .hero-banner {
+    background-position: right -4rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero-banner {
+    background-position: right -8rem;
+  }
+}
+
+@media (min-width: 1700px) {
+  .hero-banner {
+    background-position: right -12rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-banner {
+    background-position: right -14rem;
+  }
 }

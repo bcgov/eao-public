@@ -95,7 +95,8 @@ export class MapConfigService {
               </ul>
               <div class="map-popup-desc" *ngIf="description">{description}</div>
               <div class="map-popup-btns">
-                <a class="btn btn-sm slide-r-btn" title="View additional information about {name}" href="${this.projectUrl('{code}')}">
+                <a class="btn btn-sm slide-r-btn inverted" title="View additional information about {name}" 
+                  href="${this.projectUrl('{code}')}">
                   <span>Project Info</span><i class="material-icons">arrow_forward</i>
                 </a>
               <div>
@@ -104,7 +105,7 @@ export class MapConfigService {
   }
 
   private projectUrl(code: string): string {
-    return `${this.api.hostnameEPIC}/p/${code}/detail`;
+    return `/p/${code}`;
   }
 
   private webmapForEnv(env: 'local' | 'dev' | 'test' | 'prod'): string {

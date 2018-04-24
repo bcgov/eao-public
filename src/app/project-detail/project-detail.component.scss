@@ -1,6 +1,114 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 
+// Project Hero Banner 
+.hero-banner {
+  .ea-project-title {
+    display: block;
+  }
+
+  .ea-status-badge {
+    margin-top: 0.5rem;
+    padding-bottom: 0.25rem;
+    vertical-align: top;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-banner {
+    .ea-project-title {
+      display: inline;
+    }
+
+    .ea-status-badge {
+      margin-top: 0.5rem;
+      margin-left: 0.3rem;
+    }
+  }
+}
+
+// Map Thumbnail
+.map {
+  &__section {
+    margin-bottom: 0;
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    background: #f4f4f4;
+
+    a {
+      display: block;
+      padding: 0.2rem;
+      height: 150px;
+  
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__thumbnail {
+    margin: -1rem;
+    margin-bottom: 1rem;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+
+    ::ng-deep {
+      .map-container {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .map {
+    &__thumbnail {
+      ::ng-deep {
+        .map-container {
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+// Project Details, Contacts, etc
+@media (max-width: 768px) {
+  .nv-list {
+    @include clearfix();
+    margin: -0.5rem 0;
+
+    > li {
+      float: left;
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+
+    span {
+      float: none;
+      width: 100%;
+
+      &.name {
+        margin-bottom: 0;
+        width: 10rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .nv-list {
+    span {
+      float: left;
+      width: 50%;
+    }
+  }
+}
+
+// Activities & Updates Feed
 .project-news-feed {
   .title-container {
     &__title {
@@ -10,45 +118,7 @@
   }
 }
 
-.map-section {
-  margin-bottom: 0;
-  display: table;
-  width: 100%;
-  overflow: hidden;
-  background: #eee;
-
-  a {
-    display: block;
-    padding: 0.2rem;
-    height: 180px;
-    background-position: center -25px;
-    background-size: 140%;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  &__thumbnail {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    transform: scale(1.4);
-    cursor: pointer;
-  }
-}
-
-.nv-list {
-  span {
-    &.name {
-      width: 40%;
-    }
-    &.value {
-      width: 60%;
-    }
-  }
-}
-
+// ???
 @media (max-width: 567px) {
   .nav {
     margin-bottom: 1.75rem;

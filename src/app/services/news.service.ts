@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Api } from './api';
+import { News } from '../models/news';
 
 @Injectable()
 export class NewsService {
@@ -14,11 +16,13 @@ export class NewsService {
         return res.json().sort(this.compareDateAdded);
       });
   }
+
   compareDateAdded(a, b) {
     const aDate = a && a.dateAdded ? new Date(a.dateAdded).getTime() : 0;
     const bDate = b && b.dateAdded ? new Date(b.dateAdded).getTime() : 0;
     return bDate - aDate;
   }
+
   comparePinned(a, b) {
     if (a.priority !== b.priority) {
       return a.priority - b.priority;
@@ -28,6 +32,7 @@ export class NewsService {
     const bDate = b && b.dateAdded ? new Date(b.dateAdded).getTime() : 0;
     return bDate - aDate;
   }
+
   getRecentNews() {
     return this.api.get('query/recentactivity?active=true')
     .map(res => {
@@ -42,5 +47,10 @@ export class NewsService {
 
         return pinned.concat(nonPinned).slice(0, 4);
     });
+  }
+
+  getByProjectCode(projectCode): Observable<News[]> {
+    return this.api.get(`recentactivity/byproject/${projectCode}`)
+      .map((res: Response) => res.json());
   }
 }
