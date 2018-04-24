@@ -30,7 +30,7 @@
 				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Comment Period</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -42,14 +42,14 @@
 					</select>
 				</div>
 
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
 						<option value="" selected>All</option>
 						<option *ngFor="let p of proponents | orderBy: {property: 'name', direction: 1}" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Type</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -68,7 +68,7 @@
 					</select>
 
 				</div>
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>EA Decision</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -86,7 +86,7 @@
 					</select>
         </div>
 
-        <div class="col-md-20 form-group">
+        <div class="col-md-20">
 					<label>Current Phase</label>
 
 					<select class="form-control" [(ngModel)]="phasefilter">

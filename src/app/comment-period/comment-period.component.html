@@ -13,10 +13,32 @@
 <div class="container" id="anchor-point">
   <div class="row">
     <main class="col-lg-8">
+
       <section class="mb-0">
-        <h2>About this Comment Period...</h2>
+        <h2>About this comment period...</h2>
         <p>A 30 day public comment period on the {{ commentPeriod.informationLabel }} will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
-        
+
+        <div role="navigation">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" role="tab">
+                <!--
+                <i class="material-icons md-24">&#xE0CA;</i>
+                -->
+                <span>Comments ({{commentPeriod.comments.length}})</span>
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" role="tab">
+                <!--
+                <i class="material-icons md-24">&#xE24D;</i>
+                -->
+                <span>Related Documents</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <div class="comment-feed bg-muted">
           <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
             <thead>
@@ -37,11 +59,11 @@
                     <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                   </div>
                   <div class="activity-feed__content readmore">
-                    <pre class="readmore__content" 
+                    <pre class="readmore__content"
                       *ngIf="item.readmore || item.comment.length <= 300"
                       [innerHTML]="item.comment">
                     </pre>
-                    <pre class="readmore__content" 
+                    <pre class="readmore__content"
                       *ngIf="!item.readmore && item.comment.length > 300"
                       [innerHTML]="(item.comment | slice:0:300) + '...'">
                     </pre>
@@ -50,11 +72,22 @@
                     </button>
                   </div>
                   <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
-                    <span class="glyph"><i class="material-icons">attach_file</i></span>
-                    <span class="attachments-txt">{{ item.documents.length }} Attachment(s)</span>
+                    <div class="attachments">
+                      <div>
+                        <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
+                      </div>
+                      <ul class="attachments__list">
+                        <li class="attachments__list-item" *ngFor="let doc of item.documents">
+                          <a href="#">
+                            <i class="material-icons md-16">&#xE2BC;</i>
+                            <span><a href="{{doc.link}}" target="_blank">{{ doc.displayName }}</a></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                   <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
-                    <div class="badge badge-default" *ngFor="let vc of item.vcs">
+                    <div class="badge badge-light" *ngFor="let vc of item.vcs">
                       {{vc.name}}
                     </div>
                   </div>
@@ -89,7 +122,8 @@
     </main>
     <aside class="col-lg-4">
       <section class="card">
-        <h4 class="card-header">Comment Period Details</h4>
+        <h4 class="card-header">Details</h4>
+        <div class="card-body">
         <ul class="nv-list mine-details-list">
           <li>
             <span class="name">Status</span>
@@ -104,15 +138,18 @@
             <span class="value">{{commentPeriod.dateCompleted | date: 'longDate'}}</span>
           </li>
         </ul>
+        </div>
       </section>
-      <section class="card" *ngIf="commentPeriod.openHouses.length !== 0">
+      <section class="card open-house-list" *ngIf="commentPeriod.openHouses.length !== 0">
         <h4 class="card-header">Open House Dates</h4>
-        <ul class="nv-list mine-details-list">
-          <li *ngFor="let item of commentPeriod.openHouses">
-            <span class="header">{{ item.eventDate | date: 'longDate' }}</span>
-            <span class="content">{{ item.description }}</span>
-          </li>
-        </ul>
+        <div class="card-body">
+          <ul class="nv-list">
+            <li *ngFor="let item of commentPeriod.openHouses">
+              <span class="open-house-list__date">{{ item.eventDate | date: 'longDate' }}</span>
+              <span class="open-house-list__desc">{{ item.description }}</span>
+            </li>
+          </ul>
+        </div>
       </section>
     </aside>
   </div>

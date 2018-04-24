@@ -36,20 +36,17 @@
 
         <!-- Advanced Filters TBD -->
         <div class="col-md-12 form-group">
-          <label>Activity & Update Type</label>
-          <div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
-              <label class="btn btn-secondary" for="all">All</label>
-            </div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
-              <label class="btn btn-secondary" for="news">News</label>
-            </div>
-            <div class="toggle-btn">
-              <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
-              <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
-            </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
+            <label class="btn btn-secondary" for="all">All</label>
+          </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
+            <label class="btn btn-secondary" for="news">News</label>
+          </div>
+          <div class="toggle-btn">
+            <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
+            <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
           </div>
         </div>
 

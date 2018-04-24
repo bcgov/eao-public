@@ -1,5 +1,6 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
+@import "~assets/styles/components/attachments.scss";
 
 .comment-feed {
   .title-container {
@@ -15,40 +16,25 @@
     .badge {
       margin-right: 0.2rem;
       margin-bottom: 0.2rem;
-      font-size: 0.775rem;
-      font-weight: 700;
+      letter-spacing: -0.01rem;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
   }
 }
 
-.nv-list {
-  span {
-    &.name {
-      width: 40%;
-    }
-    &.value {
-      width: 60%;
-    }
-  }
-}
-
-@media (max-width: 567px) {
-  .nav {
-    margin-bottom: 1.75rem;
-
-    .nav-item {
-      width: 50%;
-    }
-
-    .nav-link {
-      font-size: 0.6rem;
+.open-house-list {
+  li {
+    + li {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
     }
   }
-}
 
-@media (min-width: 768px) {
-  .nav {
-    margin-top: 1.75rem;
-    margin-bottom: 1.75rem;
+  .open-house-list__date {
+    margin-bottom: 0.25rem;
+    display: block;
+    font-weight: 700;
   }
 }
