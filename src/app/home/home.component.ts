@@ -15,9 +15,23 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.newsService.getRecentNews().subscribe(
-      data => { this.results = data; },
+      data => {
+        this.setDocumentUrl(data);
+        this.results = data;
+      },
       error => console.log(error)
     );
-    this.hostname = this.api.hostnameEPIC;
+  }
+
+  setDocumentUrl(data) {
+    const regex = /http(s)?:\/\/(www.)?/;
+    data.forEach(activity => {
+      if (!activity.documentUrl) {
+        return ;
+      }
+      if (!regex.test(activity.documentUrl)) {
+        activity.documentUrl = `${this.api.hostnameEPIC }${ activity.documentUrl }`;
+      }
+    });
   }
 }

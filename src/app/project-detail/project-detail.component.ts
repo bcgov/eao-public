@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/project';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
+import { Api } from '../services/api';
 
 @Component({
   selector: 'app-project-detail',
@@ -30,7 +31,7 @@ export class ProjectDetailComponent implements OnInit {
 
   private sub: Subscription;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.loading = true;
@@ -38,6 +39,8 @@ export class ProjectDetailComponent implements OnInit {
       (data: { project: Project }) => {
         this.project = new Project(data.project);
         this.loading = false;
+        // attach host to document url if it goes to esm-server
+        this.setDocumentUrl(this.project);
 
         if (!this.project.proponent) {
           this.project.proponent = { name: '' };
@@ -49,6 +52,17 @@ export class ProjectDetailComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+  setDocumentUrl(project) {
+    const regex = /http(s)?:\/\/(www.)?/;
+    project.recent_activities.forEach(activity => {
+      if (!activity.documentUrl) {
+        return ;
+      }
+      if (!regex.test(activity.documentUrl)) {
+        activity.documentUrl = `${this.api.hostnameEPIC }${ activity.documentUrl }`;
+      }
+    });
   }
   sort (property) {
     this.isDesc = !this.isDesc;
