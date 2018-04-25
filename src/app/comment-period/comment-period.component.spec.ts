@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { Http, HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -32,6 +32,7 @@ describe('CommentPeriodComponent', () => {
                   'vcs': []
                 }
               ],
+              'relatedDocuments': [],
               'openHouses': [],
               'isPublished': true,
               'project': {
@@ -79,6 +80,9 @@ describe('CommentPeriodComponent', () => {
     it('should set direction to -1', () => {
       expect(component.direction).toBe(-1);
     });
+    it('should properly set hostname', inject([Api], (api) => {
+      expect(component.hostname).toEqual(api.hostnameEPIC);
+    }));
   });
   describe('comment readmore property', () => {
     let commentKeys;
