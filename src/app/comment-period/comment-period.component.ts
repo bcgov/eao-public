@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommentPeriod } from '../models/commentperiod';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
+import { Api } from '../services/api';
 
 @Component({
   selector: 'app-comment-period',
@@ -15,7 +16,7 @@ export class CommentPeriodComponent implements OnInit {
   public isDesc: boolean;
   public column: string;
   public direction: number;
-
+  public hostname: string;
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 10,
@@ -24,10 +25,11 @@ export class CommentPeriodComponent implements OnInit {
 
   private sub: Subscription;
 
-  constructor( private route: ActivatedRoute, private router: Router) { }
+  constructor( private route: ActivatedRoute, private api: Api, private router: Router) { }
 
   ngOnInit() {
     this.loading = true;
+    this.hostname = this.api.hostnameEPIC;
     this.sub = this.route.data.subscribe(
       (data: { commentPeriod: CommentPeriod }) => {
         this.commentPeriod = data.commentPeriod;

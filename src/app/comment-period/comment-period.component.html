@@ -21,101 +21,107 @@
         <div role="navigation">
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" role="tab">
-                <!--
-                <i class="material-icons md-24">&#xE0CA;</i>
-                -->
+              <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="home" aria-selected="true">
                 <span>Comments ({{commentPeriod.comments.length}})</span>
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" role="tab">
+              <a class="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" aria-controls="home" aria-selected="true">
                 <!--
                 <i class="material-icons md-24">&#xE24D;</i>
                 -->
-                <span>Related Documents</span>
+                <span>Related Documents ({{ commentPeriod.relatedDocuments.length }})</span>
               </a>
             </li>
           </ul>
         </div>
 
-        <div class="comment-feed bg-muted">
-          <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
-            <thead>
-              <tr>
-                <th class="sortable" (click)="sort('author')">Posted By
-                  <i class="sort" [ngClass]="{'sort-asc': (column == 'author' && isDesc), 'sort-desc': (column == 'author' && !isDesc) }" aria-hidden="true"></i>
-                </th>
-                <th class="sortable date-col" (click)="sort('dateAdded')">Date
-                  <i class="sort" [ngClass]="{'sort-asc': (column == 'dateAdded' && isDesc), 'sort-desc': (column == 'dateAdded' && !isDesc) }" aria-hidden="true"></i>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
-                <td colspan="2">
-                  <div class="title-container">
-                    <h3 class="title-container__title">{{item.author}}</h3>
-                    <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
-                  </div>
-                  <div class="activity-feed__content readmore">
-                    <pre class="readmore__content"
-                      *ngIf="item.readmore || item.comment.length <= 300"
-                      [innerHTML]="item.comment">
-                    </pre>
-                    <pre class="readmore__content"
-                      *ngIf="!item.readmore && item.comment.length > 300"
-                      [innerHTML]="(item.comment | slice:0:300) + '...'">
-                    </pre>
-                    <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
-                      [{{item.readmore ? 'Show Less' : 'Show More'}}]
-                    </button>
-                  </div>
-                  <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
-                    <div class="attachments">
-                      <div>
-                        <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
+        <div class="tab-content" id="pcpTabContent">
+          <div class="tab-pane active" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+            <div class="comment-feed bg-muted">
+              <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
+                <thead>
+                  <tr>
+                    <th class="sortable" (click)="sort('author')">Posted By
+                      <i class="sort" [ngClass]="{'sort-asc': (column == 'author' && isDesc), 'sort-desc': (column == 'author' && !isDesc) }" aria-hidden="true"></i>
+                    </th>
+                    <th class="sortable date-col" (click)="sort('dateAdded')">Date
+                      <i class="sort" [ngClass]="{'sort-asc': (column == 'dateAdded' && isDesc), 'sort-desc': (column == 'dateAdded' && !isDesc) }" aria-hidden="true"></i>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
+                    <td colspan="2">
+                      <div class="title-container">
+                        <h3 class="title-container__title">{{item.author}}</h3>
+                        <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                       </div>
-                      <ul class="attachments__list">
-                        <li class="attachments__list-item" *ngFor="let doc of item.documents">
-                          <a href="#">
-                            <i class="material-icons md-16">&#xE2BC;</i>
-                            <span><a href="{{doc.link}}" target="_blank">{{ doc.displayName }}</a></span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
-                    <div class="badge badge-light" *ngFor="let vc of item.vcs">
-                      {{vc.name}}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-template #p="paginationApi"
-            [id]="config.id"
-            (pageChange)="config.currentPage = $event">
+                      <div class="activity-feed__content readmore">
+                        <pre class="readmore__content"
+                          *ngIf="item.readmore || item.comment.length <= 300"
+                          [innerHTML]="item.comment">
+                        </pre>
+                        <pre class="readmore__content"
+                          *ngIf="!item.readmore && item.comment.length > 300"
+                          [innerHTML]="(item.comment | slice:0:300) + '...'">
+                        </pre>
+                        <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
+                          [{{item.readmore ? 'Show Less' : 'Show More'}}]
+                        </button>
+                      </div>
+                      <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
+                        <div class="attachments">
+                          <div>
+                            <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
+                          </div>
+                          <ul class="attachments__list">
+                            <li class="attachments__list-item" *ngFor="let doc of item.documents">
+                              <a href="#">
+                                <i class="material-icons md-16">&#xE2BC;</i>
+                                <span><a href="{{doc.link}}" target="_blank">{{ doc.displayName }}</a></span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
+                        <div class="badge badge-light" *ngFor="let vc of item.vcs">
+                          {{vc.name}}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-template #p="paginationApi"
+                [id]="config.id"
+                (pageChange)="config.currentPage = $event">
 
-            <ul class="pagination">
-              <li class="page-item" *ngIf="!p.isFirstPage()">
-                <a class="page-link" (click)="p.previous();" appScroll> < </a>
-              </li>
-              <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-                <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
-                  <span>{{ page.label }}</span>
-                </a>
-                <div *ngIf="p.getCurrent() === page.value">
-                  <span class="page-link">{{ page.label }}</span>
-                </div>
-              </li>
-              <li class="page-item" *ngIf="!p.isLastPage()">
-                <a class="page-link" (click)="p.next();" appScroll> > </a>
-              </li>
-            </ul>
-          </pagination-template>
+                <ul class="pagination">
+                  <li class="page-item" *ngIf="!p.isFirstPage()">
+                    <a class="page-link" (click)="p.previous();" appScroll> < </a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                    <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                      <span>{{ page.label }}</span>
+                    </a>
+                    <div *ngIf="p.getCurrent() === page.value">
+                      <span class="page-link">{{ page.label }}</span>
+                    </div>
+                  </li>
+                  <li class="page-item" *ngIf="!p.isLastPage()">
+                    <a class="page-link" (click)="p.next();" appScroll> > </a>
+                  </li>
+                </ul>
+              </pagination-template>
+            </div>
+          </div>
+          <div class="tab-pane" id="related" role="tabpanel" aria-labelledby="related-tab">
+              <ul>
+                <li *ngFor="let relDoc of commentPeriod.relatedDocuments"><a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank"><span>{{ relDoc.displayName }}</span></a></li>
+              </ul>
+          </div>
         </div>
 
       </section>
