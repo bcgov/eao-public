@@ -1,41 +1,30 @@
-<div class="hero-banner hb-sm">
-	<div class="container">
-		<div class="container-inner">
-			<div class="hb-txt">
-        <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
-				<h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
-				<p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }} `</p>
-			</div>
-		</div>
-	</div>
+<div class="spinner-container" *ngIf="!commentPeriod">
+  <div class="spinner-new rotating"></div>
 </div>
-
-<div class="container" id="anchor-point">
-  <div class="row">
-    <main class="col-lg-8">
-      <section>
-        <h2>About this comment period...</h2>
-        <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
-        <p>All accepted comments submitted to the Environmental Assessment Office (EAO) will be published online within seven days of receipt. Comments are not accepted if - in EAO’s view - they are profane, abusive or do not relate to the matter being consulted upon as stated in our Public Comment Policy [PDF].</p>
-        <p>EAO forwards all accepted comments to the project proponent so they can be considered during the project's environmental assessment.</p>
-        <div class="comment-btns mt-3">
-          <button class="btn btn-primary slide-l-btn" (click)="triggerSubmitComment()"
-            data-toggle="modal"
-            data-target="#submitCommentModal"
-            data-backdrop="static">
-            <i class="material-icons">&#xE0B9;</i>
-            <span>Submit a Comment</span>
-          </button>
-          <button class="btn btn-primary slide-l-btn">
-            <i class="material-icons">&#xE89E;</i>
-            <span>View the Documents</span>
-          </button>
+<ng-container *ngIf="commentPeriod">
+  <div class="hero-banner hb-sm">
+    <div class="container">
+      <div class="container-inner">
+        <div class="hb-txt">
+          <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
+          <h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
+          <p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }}</p>
         </div>
-      </section>
-      <section>
-        <div class="comments-table bg-muted">
-          <h3 class="mb-1">Comments ({{commentPeriod.comments.length}})</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="anchor-point">
+    <div class="row">
+      <main class="col-lg-8">
+        <section class="mb-0">
+          <h2>About this Comment Period...</h2>
+          <p>A 30 day public comment period on the {{ commentPeriod.informationLabel }} will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
+
           <div class="comment-feed bg-muted">
+            <div class="spinner-container" *ngIf="loading">
+              <div class="spinner-new rotating"></div>
+            </div>
             <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
               <thead>
                 <tr>
@@ -68,22 +57,11 @@
                       </button>
                     </div>
                     <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
-                      <div class="attachments">
-                        <div>
-                          <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
-                        </div>
-                        <ul class="attachments__list">
-                          <li class="attachments__list-item" *ngFor="let doc of item.documents">
-                            <a href="#">
-                              <i class="material-icons md-16">&#xE2BC;</i>
-                              <span><a href="{{doc.link}}" target="_blank">{{ doc.displayName }}</a></span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+                      <span class="glyph"><i class="material-icons">attach_file</i></span>
+                      <span class="attachments-txt">{{ item.documents.length }} Attachment(s)</span>
                     </div>
                     <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
-                      <div class="badge badge-light" *ngFor="let vc of item.vcs">
+                      <div class="badge badge-default" *ngFor="let vc of item.vcs">
                         {{vc.name}}
                       </div>
                     </div>
@@ -113,56 +91,37 @@
               </ul>
             </pagination-template>
           </div>
-        </div>
-      </section>
 
-      <!-- TODO: RELATED DOCUMENTS INTERFACE
-        <ul>
-         <li *ngFor="let relDoc of commentPeriod.relatedDocuments"><a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank"><span>{{ relDoc.displayName }}</span></a></li>
-       </ul>
-      -->
-
-    </main>
-    <aside class="col-lg-4">
-      <section class="card">
-        <h4 class="card-header">Comment Period Details</h4>
-        <div class="card-body">
-        <ul class="nv-list mine-details-list">
-          <li>
-            <span class="name">Status</span>
-            <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
-          </li>
-          <li>
-            <span class="name">Start Date</span>
-            <span class="value">{{commentPeriod.dateStarted | date: 'longDate'}}</span>
-          </li>
-          <li>
-            <span class="name">End Date</span>
-            <span class="value">{{commentPeriod.dateCompleted | date: 'longDate'}}</span>
-          </li>
-        </ul>
-        </div>
-      </section>
-      <section class="card open-house-list" *ngIf="commentPeriod.openHouses.length !== 0">
-        <h4 class="card-header">Open House Dates</h4>
-        <div class="card-body">
-          <ul class="nv-list">
-            <li *ngFor="let item of commentPeriod.openHouses">
-              <span class="open-house-list__date">{{ item.eventDate | date: 'longDate' }}</span>
-              <span class="open-house-list__desc">{{ item.description }}</span>
+        </section>
+      </main>
+      <aside class="col-lg-4">
+        <section class="card">
+          <h4 class="card-header">Comment Period Details</h4>
+          <ul class="nv-list mine-details-list">
+            <li>
+              <span class="name">Status</span>
+              <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
+            </li>
+            <li>
+              <span class="name">Start Date</span>
+              <span class="value">{{commentPeriod.dateStarted | date: 'longDate'}}</span>
+            </li>
+            <li>
+              <span class="name">End Date</span>
+              <span class="value">{{commentPeriod.dateCompleted | date: 'longDate'}}</span>
             </li>
           </ul>
-        </div>
-      </section>
-    </aside>
+        </section>
+        <section class="card" *ngIf="commentPeriod.openHouses.length !== 0">
+          <h4 class="card-header">Open House Dates</h4>
+          <ul class="nv-list mine-details-list">
+            <li *ngFor="let item of commentPeriod.openHouses">
+              <span class="header">{{ item.eventDate | date: 'longDate' }}</span>
+              <span class="content">{{ item.description }}</span>
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </div>
   </div>
-</div>
-
-<!-- SUBMIT A COMMENT -->
-<div class="modal fade" id="submitCommentModal" tabindex="-1" role="dialog" aria-labelledby="submitCommentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg submit-comment-modal">
-    <app-pcp-info-modal></app-pcp-info-modal>
-    <app-submit-comment-modal></app-submit-comment-modal>
-    <app-submit-comment-progress-modal></app-submit-comment-progress-modal>
-  </div>
-</div>
+</ng-container>
