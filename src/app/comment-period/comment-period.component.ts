@@ -46,6 +46,10 @@ export class CommentPeriodComponent implements OnInit {
     this.direction = this.isDesc ? 1 : -1;
   }
 
+  triggerSubmitComment() {
+    const step1 = document.getElementById('step1');
+    step1.classList.remove('hidden');
+  };
   readmore(item): void {
     item.readmore = !item.readmore;
   }
