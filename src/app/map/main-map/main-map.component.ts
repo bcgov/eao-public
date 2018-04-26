@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { MapConfigService } from '../config/map-config.service';
+import { MapConfigService } from '../core';
 import { WidgetBuilder, ZoomWidgetProperties, SearchWidgetProperties } from '../widgets/widget-builder';
 
 @Component({
@@ -121,8 +121,8 @@ export class MainMapComponent implements OnInit {
   private setPopupTemplateForLayer(featureLayer: __esri.FeatureLayer, popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       // the `esri/layers/FeatureLayer` instance is promise-based...
-      // call the .then() method to execute code once the layer is ready
-      return featureLayer.then(
+      // call the .when() method to execute code once the layer is ready
+      return featureLayer.when(
         (fl: __esri.FeatureLayer) => {
           if (popupTemplate) {
             fl.popupTemplate.title = popupTemplate.title;
@@ -130,7 +130,7 @@ export class MainMapComponent implements OnInit {
           }
         })
         .then(() => resolve())
-        .otherwise(reject);
+        .catch(reject);
     });
   }
   private queryMapLayer(featureLayer: __esri.FeatureLayer, projectId: string): Promise<__esri.FeatureSet> {
@@ -143,7 +143,7 @@ export class MainMapComponent implements OnInit {
       // then set the popup's features which will populate popup content and title
       return featureLayer.queryFeatures(query)
         .then(results => resolve(results))
-        .otherwise(reject);
+        .catch(reject);
     });
   }
 
@@ -160,7 +160,7 @@ export class MainMapComponent implements OnInit {
           zoom: 9
         }, opts)
         .then(() => resolve())
-        .otherwise(reject);
+        .catch(reject);
     });
   }
 

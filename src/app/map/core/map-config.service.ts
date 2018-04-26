@@ -2,6 +2,21 @@ import { Injectable } from '@angular/core';
 
 import { Api } from 'app/services/api';
 import { GeocoderSettings } from '../widgets/support/geocoder';
+import { ILoadScriptOptions } from 'esri-loader';
+
+// Default ArcGIS options:
+//   --> the specific version of the API that is to be used
+//   --> suppress "deprecation" warnings in the console
+//       https://www.__esri.com/arcgis-blog/products/js-api-arcgis/mapping/making-better-promises/
+const arcgisDefaults: ILoadScriptOptions = {
+  url: 'https://js.arcgis.com/4.6/',
+  dojoConfig: {
+    has: {
+      'esri-promise-compatibility': 1,
+      'esri-promise-compatibility-deprecation-warnings': 0
+    }
+  }
+};
 
 const webmaps = {
   dev: 'a39ebfecf4a84daf926dcd7f2ce000a8',
@@ -11,6 +26,7 @@ const webmaps = {
 };
 
 export interface MapConfig {
+  arcgis?: ILoadScriptOptions;
   mainMap?: {
     webmap?: __esri.WebMapProperties,
     mapView?: __esri.MapViewProperties,
@@ -21,12 +37,33 @@ export interface MapConfig {
 
 @Injectable()
 export class MapConfigService {
+  // cache map configuration object for improved performance
+  private cache: MapConfig = null;
 
   constructor(private api: Api) { }
 
   public get(): MapConfig {
+    // return cached value
+    if (this.cache) {
+      return { ...this.cache };
+    } else {
+      // create and cache value
+      const config: MapConfig = this._create();
+      this.cache = config;
+
+      // return a copy so callers cannot alter the default configuration
+      return { ...this.cache };
+    }
+  }
+
+  private _create(): MapConfig {
+    const loadScriptOptions = arcgisDefaults;
     const webmapId = this.webmapForEnv(this.api.env);
+    const geocoderOptions = this.geocoderDefaults();
+
+    // return configuration object
     return {
+      arcgis: loadScriptOptions,
       mainMap: {
         webmap: {
           portalItem: { id: webmapId }
@@ -41,9 +78,7 @@ export class MapConfigService {
           }
         },
         popup: this.defaultPopupTemplate,
-        geocoder: {
-          type: 'databc',  // One of: [databc, arcgis]
-        }
+        geocoder: geocoderOptions
       }
     };
   }
@@ -91,5 +126,12 @@ export class MapConfigService {
       default:
         return webmaps.prod;
     }
+  }
+
+  private geocoderDefaults(): any {
+    return {
+      type: 'databc',  // One of: [databc, arcgis]
+      url: `${this.api.apiPath}/geocoder`
+    };
   }
 }
