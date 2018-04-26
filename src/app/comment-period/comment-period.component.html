@@ -1,14 +1,18 @@
-<div class="hero-banner hb-sm">
-	<div class="container">
-		<div class="container-inner">
-			<div class="hb-txt">
-        <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
-				<h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
-				<p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }} `</p>
-			</div>
-		</div>
-	</div>
+<div class="spinner-container" *ngIf="!commentPeriod">
+  <div class="spinner-new rotating"></div>
 </div>
+<ng-container *ngIf="commentPeriod">
+  <div class="hero-banner hb-sm">
+    <div class="container">
+      <div class="container-inner">
+        <div class="hb-txt">
+          <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
+          <h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
+          <p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="container" id="anchor-point">
   <div class="row">
@@ -36,6 +40,9 @@
         <div class="comments-table bg-muted">
           <h3 class="mb-1">Comments ({{commentPeriod.comments.length}})</h3>
           <div class="comment-feed bg-muted">
+            <div class="spinner-container" *ngIf="loading">
+                <div class="spinner-new rotating"></div>
+            </div>
             <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
               <thead>
                 <tr>
@@ -74,9 +81,9 @@
                         </div>
                         <ul class="attachments__list">
                           <li class="attachments__list-item" *ngFor="let doc of item.documents">
-                            <a href="#">
+                            <a href="{{doc.link}}" target="_blank">
                               <i class="material-icons md-16">&#xE2BC;</i>
-                              <span><a href="{{doc.link}}" target="_blank">{{ doc.displayName }}</a></span>
+                              <span>{{ doc.displayName }}</span>
                             </a>
                           </li>
                         </ul>
