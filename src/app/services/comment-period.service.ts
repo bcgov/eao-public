@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/forkJoin';
 
 import { Api } from './api';
 import { ValuedComponent } from '../models/vcs';
@@ -15,8 +16,64 @@ import { ValuedComponent } from '../models/vcs';
 @Injectable()
 export class CommentPeriodService {
   pcp: CommentPeriod;
+  comment: Object;
 
   constructor(private api: Api) { }
+
+  // submit a comment
+  submitComment(projectId: number, documents: Array<any>, comment: Object, options: Object): Observable<any> {
+    this.comment = comment;
+
+    // if no documents
+    if (documents.length === 0) {
+      return this.submitCommentNoDocument(projectId, options);
+    // if document
+    } else {
+      return this.submitCommentWithDocuments(projectId, documents, options);
+    }
+  }
+
+  // if no document attached
+  submitCommentNoDocument(projectId, options) {
+    return this.submitCommentDetails(options);
+  }
+
+  // if document attached
+  submitCommentWithDocuments(projectId, documents, options) {
+    // submit documents first
+    return this.submitDocuments(projectId, documents, options)
+      .map((docs: any) => {
+        if (!docs) {
+          return Observable.throw(new Error('Documents not submitted!'));
+        }
+        // attach document id's to comment in array
+        this.comment['documents'] = [];
+        docs.forEach(doc => {
+          this.comment['documents'].push(doc._id);
+        });
+        return this.comment;
+      })
+      // submit comment details
+      .switchMap(() => this.submitCommentDetails(options));
+  }
+
+  // submit comment details
+  submitCommentDetails(options) {
+    return this.api.submitComment(this.comment, options)
+      .map((res: Response) => {
+        return res.json();
+      });
+  }
+
+  submitDocuments(projectId, documents, options) {
+    const observablesArray = documents.map((document) => {
+      return this.api.submitDocument(projectId, document, options)
+        .map((res: Response) => {
+          return res.json();
+        });
+    });
+    return Observable.forkJoin(observablesArray);
+  }
 
   // return a public comment period object
   getByCode(id: string, code: string): Observable<CommentPeriod> {

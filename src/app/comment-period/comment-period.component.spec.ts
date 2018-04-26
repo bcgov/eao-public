@@ -6,11 +6,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { CommentPeriodComponent } from './comment-period.component';
+import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
+import { SubmitCommentModalComponent } from './submit-comment-modal/submit-comment-modal';
+import { SubmitCommentProgressModalComponent } from './submit-comment-progress-modal/submit-comment-progress-modal';
 
 import { OrderByPipe } from '../order-by.pipe';
 import { ObjectFilterPipe } from '../object-filter.pipe';
 
 import { Api } from '../services/api';
+import { CommentPeriodService } from '../services/comment-period.service';
 
 describe('CommentPeriodComponent', () => {
   let component: CommentPeriodComponent;
@@ -45,6 +49,7 @@ describe('CommentPeriodComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         Api,
+        CommentPeriodService,
         { provide: ActivatedRoute, useValue: ActivatedRouteStub },
       ],
       imports: [
@@ -55,6 +60,9 @@ describe('CommentPeriodComponent', () => {
       ],
       declarations: [
         CommentPeriodComponent,
+        PCPInfoModalComponent,
+        SubmitCommentModalComponent,
+        SubmitCommentProgressModalComponent,
         OrderByPipe,
         ObjectFilterPipe
       ]

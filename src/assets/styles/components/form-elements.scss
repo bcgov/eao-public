@@ -1,35 +1,66 @@
 @import "~assets/styles/base.scss";
 
-.form-group {
-	margin-bottom: 2rem;
-}
-
-.form-control {
-	border-color: $fc-border-color;
-	border-radius: 0;
+.form {
+	&-control {
+		min-height: 2.5rem;
+		border-color: $fc-border-color;
     background-color: $fc-bg;
     font-size: 0.9375rem;
 
-	&:focus {
-		border-color: $fc-focus-border-color;
+		&:focus {
+			border-color: $fc-focus-border-color;
+		}
+	}
+
+	&-check {
+		input  {
+			margin-top: -3px;
+			margin-right: 0.25rem;
+			vertical-align: middle;
+		}
+	}
+
+	&-text {
+		color: #333;
+		font-size: 0.85rem;
+	}
+
+	&-group {
+		label {
+			letter-spacing: -0.01rem;
+
+			em {
+				color: #999;
+				font-weight: 400;
+			}
+		}
 	}
 }
 
-input[type="text"] {
-	@include placeholder {
-		color: $fc-placeholder-color
-	}
-	height: $fc-height;
-	padding: 0.75rem;
-	box-shadow: $fc-inner-shadow inset;
+[class^="form-"] {
+	+ .form-group,
+	+ .form-check {
+		margin-top: 1.5rem;
+	 }
 }
 
-input[type="email"] {
-	@include placeholder {
-		color: $fc-placeholder-color;
+input {
+	&[type="text"],
+	&[type="email"] {
+		@include placeholder {
+			color: $fc-placeholder-color
+		}
 	}
-	height: $fc-height;
-	padding: 0.75rem;
+
+	&[type="text"] {
+		height: $fc-height;
+		padding: 0.75rem;
+	}
+
+	&[type="email"] {
+		height: $fc-height;
+		padding: 0.75rem;
+	}
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -44,5 +75,4 @@ textarea {
 
 	font-size: 0.9375rem;
 	resize: vertical;
-	box-shadow: $fc-inner-shadow inset;
 }
