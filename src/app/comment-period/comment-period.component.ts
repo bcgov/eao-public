@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommentPeriod } from '../models/commentperiod';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
+import { CommentPeriodService } from '../services/comment-period.service';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'app-comment-period',
@@ -22,21 +24,27 @@ export class CommentPeriodComponent implements OnInit {
     currentPage: 1
   };
 
-  private sub: Subscription;
-
-  constructor( private route: ActivatedRoute, private router: Router) { }
+  constructor( private route: ActivatedRoute, private router: Router, private commentPeriodService: CommentPeriodService ) { }
 
   ngOnInit() {
-    this.loading = true;
-    this.sub = this.route.data.subscribe(
-      (data: { commentPeriod: CommentPeriod }) => {
-        this.commentPeriod = data.commentPeriod;
-
-        this.column = 'dateAdded';
-        this.direction = -1;
-      },
-      error => console.log(error)
-    );
+    const id = this.route.snapshot.params.id;
+    const code = this.route.snapshot.params.code;
+    // get comment period and project meta data
+    this.commentPeriodService.getByCode(id, code).mergeMap(
+        (commentPeriod: CommentPeriod ) => {
+          this.commentPeriod = commentPeriod;
+          this.loading = true;
+          this.column = 'dateAdded';
+          this.direction = -1;
+          // get comments and documents for comment period
+          return this.commentPeriodService.getCommentsAndDocuments(this.commentPeriod);
+        }
+      )
+      // attach comments and documents to comment period
+      .subscribe((data) => {
+        this.loading = false;
+        this.commentPeriod = data;
+      });
   }
   sort (property) {
     this.isDesc = !this.isDesc;

@@ -35,12 +35,16 @@ export class CommentPeriodService {
         this.setStatus(new Date(this.pcp.dateStarted), new Date(this.pcp.dateCompleted));
         return this.pcp;
       })
-      // get public comment period's comments and create array of all valued components
-      .switchMap(() => this.getCommentsByPCP(id))
-      // get all valued components per comment
-      .switchMap(() => this.getCommentVcs())
       // get what project the public comment period is associated with
       .switchMap(() => this.getProjectByCode(code))
+      .map(() => this.pcp);
+  }
+
+  // attach comments and documents to pcp object
+  getCommentsAndDocuments(pcp: CommentPeriod) {
+    this.pcp = pcp;
+    return this.getCommentsByPCP(this.pcp._id)
+      .switchMap(() => this.getCommentVcs())
       .map(() => this.pcp);
   }
 
