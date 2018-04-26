@@ -29,10 +29,8 @@
 // Main Element
 main {
     section {
-        margin-bottom: 2rem;
-
-        &.last {
-            margin-bottom: 0;
+        + section {
+            margin-top: 3rem;
         }
 
         ul {
@@ -72,13 +70,4 @@ hr {
     margin-top: 2rem;
     margin-bottom: 1.75rem;
     border-width: 2px;
-}
-
-
-/* Modal Positioning Fix */
-.modal-open {
-    footer {
-        margin-right: -17px;
-        padding-right: 17px;
-    }
 }

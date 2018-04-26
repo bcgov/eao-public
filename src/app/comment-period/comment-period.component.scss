@@ -2,6 +2,16 @@
 @import "~assets/styles/components/activity-feed.scss";
 @import "~assets/styles/components/attachments.scss";
 
+.comment-btns {
+  margin-bottom: 2rem;
+
+  .btn {
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+}
+
 .comment-feed {
   .title-container {
     &__title {
@@ -36,5 +46,32 @@
     margin-bottom: 0.25rem;
     display: block;
     font-weight: 700;
+  }
+}
+
+::ng-deep {
+  .modal-header {
+    padding-top: 1.5rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    border: none;
+
+    h3 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .modal-body {
+    padding: 2rem;
+    padding-top: 0;
+  }
+
+  .modal-footer {
+    padding-top: 0;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    border: none;
   }
 }

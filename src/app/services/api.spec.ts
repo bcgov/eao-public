@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpModule, Http, Response, ResponseOptions, BaseRequestOptions, XHRBackend, RequestMethod } from '@angular/http';
+import { HttpModule, Http, Response, ResponseOptions, BaseRequestOptions, XHRBackend, RequestMethod, RequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
 import { Api } from './api';
@@ -284,6 +284,106 @@ describe('Api', () => {
         );
       }));
     });
+
+    describe('submitDocument(projectId, form, options)', () => {
+      let projectId: number;
+      let form: FormData;
+      let options: RequestOptions;
+
+
+      beforeEach(() => {
+        projectId = 1234;
+        form = new FormData();
+        options = new RequestOptions();
+      });
+
+      it('should make a POST request',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.method).toEqual(RequestMethod.Post);
+        });
+
+        api.submitDocument(projectId, form, options);
+      }));
+
+      it('should make a request to /commentdocument/1234/upload',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        api.apiPath = 'http://blarg/api';
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.url).toEqual('http://blarg/api/commentdocument/1234/upload');
+        });
+
+        api.submitDocument(projectId, form, options);
+      }));
+
+      it('should return an object',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        const mockResponse = {};
+
+        mockBackEnd(mockResponse, mockBackend);
+
+        api.submitDocument(projectId, form, options).subscribe(
+          resp => {
+            expect(resp).toBeTruthy;
+          }
+        );
+      }));
+    });
+
+    describe('submitComment(comment, options)', () => {
+      let comment: Object;
+      let options: RequestOptions;
+
+
+      beforeEach(() => {
+        comment = {};
+        options = new RequestOptions();
+      });
+
+      it('should make a POST request',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.method).toEqual(RequestMethod.Post);
+        });
+
+        api.submitComment(comment, options);
+      }));
+
+      it('should make a request to /comment',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        api.apiPath = 'http://blarg/api';
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.url).toEqual('http://blarg/api/comment');
+        });
+
+        api.submitComment(comment, options);
+      }));
+
+      it('should return an object',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        const mockResponse = {};
+
+        mockBackEnd(mockResponse, mockBackend);
+
+        api.submitComment(comment, options).subscribe(
+          resp => {
+            expect(resp).toBeTruthy;
+          }
+        );
+      }));
+    });
   });
   describe('http calls', () => {
     describe('get(apiRoute, options?)', () => {
@@ -340,6 +440,34 @@ describe('Api', () => {
         });
 
         api.put(apiRoute);
+      }));
+    });
+    describe('post(apiRoute, body?, options?)', () => {
+      it('should make a PUT request',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        const apiRoute = 'projects';
+        api.apiPath = 'http://blarg/api';
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.method).toEqual(RequestMethod.Post);
+        });
+
+        api.post(apiRoute);
+      }));
+      it('should make a request to the specified path',
+        inject([Api, XHRBackend], (api, mockBackend) => {
+
+        const apiRoute = 'projects';
+        api.apiPath = 'http://blarg/api';
+
+        mockBackend.connections.subscribe((connection) => {
+          // Have connection send a response
+          expect(connection.request.url).toEqual('http://blarg/api/projects');
+        });
+
+        api.post(apiRoute);
       }));
     });
   });
