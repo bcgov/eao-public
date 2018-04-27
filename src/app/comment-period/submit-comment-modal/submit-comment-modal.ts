@@ -9,11 +9,11 @@ import { RequestOptions } from '@angular/http';
   styleUrls: ['./submit-comment-modal.component.scss']
 })
 export class SubmitCommentModalComponent implements OnInit {
-  files = [];
-  comment;
-  valid: boolean;
-  loading: boolean;
-  error: boolean;
+  public files = [];
+  public comment;
+  public valid: boolean;
+  public loading: boolean;
+  public error: boolean;
 
   constructor(private commentPeriodService: CommentPeriodService, private commentPeriodComponent: CommentPeriodComponent) { };
 
@@ -103,7 +103,7 @@ export class SubmitCommentModalComponent implements OnInit {
     });
   }
 
-  private onSubmit(form) {
+  onSubmit(form) {
     const htmlForm = <HTMLFormElement>document.getElementById('submitCommentForm');
     const commentPeriodId = this.commentPeriodComponent.commentPeriod._id;
     const projectId = this.commentPeriodComponent.commentPeriod.project._id;
