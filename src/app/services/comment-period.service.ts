@@ -82,7 +82,7 @@ export class CommentPeriodService {
       .map((res: Response) => res.json())
       .map((pcp: any) => {
         if (!pcp) {
-          return Observable.throw(new Error('PCP not found'));
+          throw new Error('PCP not found');
         }
         this.pcp = new CommentPeriod(pcp);
         this.pcp.relatedDocuments.forEach((document, index ) => {

@@ -1,9 +1,16 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject
+} from '@angular/core/testing';
 import { Http, HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { CommentPeriodComponent } from './comment-period.component';
 import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
@@ -12,8 +19,11 @@ import { SubmitCommentProgressModalComponent } from './submit-comment-progress-m
 
 import { OrderByPipe } from '../order-by.pipe';
 import { ObjectFilterPipe } from '../object-filter.pipe';
-
-import { Api } from '../services/api';
+import { CommentPeriod } from '../models/commentperiod';
+import { Comment } from '../models/comment';
+import { Document } from '../models/document';
+import { ValuedComponent } from '../models/vcs';
+import { Project } from '../models/project';
 import { CommentPeriodService } from '../services/comment-period.service';
 
 describe('CommentPeriodComponent', () => {
@@ -24,33 +34,18 @@ describe('CommentPeriodComponent', () => {
   beforeEach(async(() => {
     // stub activated route
     ActivatedRouteStub = {
-      data: {
-        subscribe: (fn: (value) => void) => fn({
-            commentPeriod: {
-              'comments': [
-                // we will create comments[0] for testing purposes
-                {
-                  'comment': 'Hello World',
-                  'dateAdded': '2017-12-14T17:00:00.000Z',
-                  'documents': [],
-                  'vcs': []
-                }
-              ],
-              'relatedDocuments': [],
-              'openHouses': [],
-              'isPublished': true,
-              'project': {
-                'name': 'Ajax Mine'
-              }
-            },
-        })
-      }
+      snapshot: { params: { id: 1, code: 2 } }
     };
     TestBed.configureTestingModule({
       providers: [
-        Api,
-        CommentPeriodService,
         { provide: ActivatedRoute, useValue: ActivatedRouteStub },
+        {
+          provide: CommentPeriodService,
+          useValue: jasmine.createSpyObj('CommentPeriodService', [
+            'getByCode',
+            'getCommentsAndDocuments'
+          ])
+        }
       ],
       imports: [
         FormsModule,
@@ -66,21 +61,47 @@ describe('CommentPeriodComponent', () => {
         OrderByPipe,
         ObjectFilterPipe
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentPeriodComponent);
     component = fixture.componentInstance;
+
+    const commentPeriodService = TestBed.get(CommentPeriodService);
+    commentPeriodService.getByCode.and.returnValue(
+      Observable.of(new CommentPeriod())
+    );
+    commentPeriodService.getCommentsAndDocuments.and.returnValue(
+      Observable.of(
+        new CommentPeriod({
+          comments: <Comment[]>[
+            new Comment({
+              comment: 'someComment',
+              documents: ['someDocument'],
+              vcs: <ValuedComponent[]>[new ValuedComponent()]
+            })
+          ],
+          openHouses: ['openHouses'],
+          project: new Project({ name: 'someProject' })
+        })
+      )
+    );
+
     fixture.detectChanges();
   });
   describe('ngOnInit()', () => {
-    it('should return data for route.data', () => {
-      expect(ActivatedRouteStub.data).toBeTruthy;
+    it('should return data for route.snapshot.params.id', () => {
+      const activatedRoute = TestBed.get(ActivatedRoute);
+      expect(activatedRoute.snapshot.params.id).toEqual(1);
+    });
+    it('should return data for route.snapshot.params.code', () => {
+      const activatedRoute = TestBed.get(ActivatedRoute);
+      expect(activatedRoute.snapshot.params.code).toEqual(2);
     });
     it('should return data for commentPeriod', () => {
       expect(component.commentPeriod).toBeTruthy;
+      expect(component.commentPeriod.comments[0].comment).toEqual('someComment');
     });
     it('should set column to dateAdded', () => {
       expect(component.column).toBe('dateAdded');
@@ -88,9 +109,9 @@ describe('CommentPeriodComponent', () => {
     it('should set direction to -1', () => {
       expect(component.direction).toBe(-1);
     });
-    it('should properly set hostname', inject([Api], (api) => {
-      expect(component.hostname).toEqual(api.hostnameEPIC);
-    }));
+    it('should set loading to false', () => {
+      expect(component.loading).toBe(false);
+    });
   });
   describe('comment readmore property', () => {
     let commentKeys;

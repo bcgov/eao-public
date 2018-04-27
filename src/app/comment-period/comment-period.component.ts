@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommentPeriod } from '../models/commentperiod';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
@@ -24,7 +24,7 @@ export class CommentPeriodComponent implements OnInit {
     currentPage: 1
   };
 
-  constructor( private route: ActivatedRoute, private router: Router, private commentPeriodService: CommentPeriodService ) { }
+  constructor( private route: ActivatedRoute, private commentPeriodService: CommentPeriodService ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params.id;
@@ -46,6 +46,7 @@ export class CommentPeriodComponent implements OnInit {
         this.commentPeriod = data;
       });
   }
+
   sort (property) {
     this.isDesc = !this.isDesc;
     this.column = property;
