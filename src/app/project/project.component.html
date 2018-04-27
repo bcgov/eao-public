@@ -130,7 +130,7 @@
       <tbody>
         <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | projectPhaseFilter: phasefilter | orderBy: {property: column, direction: direction} | paginate: config">
           <td class="name">
-            <a href="/p/{{item.code}}"
+            <a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
               title="View more information about {{item.name}}">
               {{item.name}}
             </a>
