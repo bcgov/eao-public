@@ -1,0 +1,25 @@
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 1.25rem;
+  border: none;
+}
+
+.modal-footer {
+  .btn {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-lg {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 900px) {
+  .modal-lg {
+    max-width: 760px
+  }
+}

@@ -94,7 +94,7 @@ export class SubmitCommentModalComponent implements OnInit {
 
   removeDocument(event) {
     const deleteButton = event.target;
-    const fileName = deleteButton.closest('.file-upload__list-item').querySelector('.file-upload__list-item-name').innerHTML.trim();
+    const fileName = deleteButton.closest('.file__list-item').querySelector('.file__list-item-name').innerHTML.trim();
 
     this.files.forEach((file, index) => {
       if (file.name === fileName) {
