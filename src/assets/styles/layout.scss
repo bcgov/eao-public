@@ -2,72 +2,91 @@
 
 // Container
 .container {
-    margin: 0 auto;
-    padding-top: 2rem;
-    padding-right: 1.5rem;
-    padding-bottom: 2.25rem;
-    padding-left: 1.5rem;
-    width: 100%;
-    max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  padding-right: 1.5rem;
+  padding-bottom: 2.25rem;
+  padding-left: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
 
-    section {
-        &.last {
-            margin-bottom: 0;
-        }
+  section {
+    &.last {
+      margin-bottom: 0;
     }
+  }
 }
 
 @media (min-width: 760px) {
-    .container {
-        padding-top: 3rem;
-        padding-right: 2rem;
-        padding-bottom: 3.5rem;
-        padding-left: 2rem;
-    }
+  .container {
+    padding-top: 3rem;
+    padding-right: 2rem;
+    padding-bottom: 3.5rem;
+    padding-left: 2rem;
+  }
 }
 
 // Main Element
 main {
+  section {
+    + section {
+      margin-top: 2rem;
+    }
+
+    ul {
+      margin-bottom: 1.75rem;
+      list-style-type: square;
+    }
+
+    ol {
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  ul.content-external-links {
+    margin-bottom: 2rem;
+  }
+
+  // Named anchor helper
+  .pg-anchor[id]:before {
+    content:" ";
+    display:block;
+    height: 98px;
+    margin:-98px 0 0;
+  }
+
+  .main-footer {
+    padding: 1.5rem;
+    background-color: rgba(0, 51, 102, 0.8);
+    color: #FFF;
+
+    a {
+      color: #FFf;
+    }
+  }
+}
+
+@media (max-width: 567px) {
+  main {
+    + aside {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  main {
     section {
-        + section {
-            margin-top: 3rem;
-        }
-
-        ul {
-            margin-bottom: 1.75rem;
-            list-style-type: square;
-        }
-
-        ol {
-            margin-bottom: 1.75rem;
-        }
+      > section,
+      + section {
+        margin-top: 3rem;
+      }
     }
-
-    ul.content-external-links {
-        margin-bottom: 2rem;
-    }
-
-    // Named anchor helper
-    .pg-anchor[id]:before {
-        content:" ";
-        display:block;
-        height: 98px;
-        margin:-98px 0 0;
-    }
-
-    .main-footer {
-        padding: 1.5rem;
-        background-color: rgba(0, 51, 102, 0.8);
-        color: #FFF;
-
-        a {
-            color: #FFf;
-        }
-    }
+  }
 }
 
 hr {
-    margin-top: 2rem;
-    margin-bottom: 1.75rem;
-    border-width: 2px;
+  margin-top: 2rem;
+  margin-bottom: 1.75rem;
+  border-width: 2px;
 }

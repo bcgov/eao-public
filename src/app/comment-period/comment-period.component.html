@@ -9,7 +9,7 @@
         <div class="hb-txt">
           <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
           <h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
-          <p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }}</p>
+          <p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }}.</p>
         </div>
       </div>
     </div>
@@ -19,10 +19,8 @@
       <main class="col-lg-8">
         <section>
           <h2>About this comment period...</h2>
-          <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
-          <p>All accepted comments submitted to the Environmental Assessment Office (EAO) will be published online within seven days of receipt. Comments are not accepted if - in EAO’s view - they are profane, abusive or do not relate to the matter being consulted upon as stated in our Public Comment Policy [PDF].</p>
-          <p>EAO forwards all accepted comments to the project proponent so they can be considered during the project's environmental assessment.</p>
-          <div class="comment-btns mt-3">
+          <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}. All written comments received by online form, fax, or mail during this time period will be considered.</p>
+          <div class="comments__btns">
             <button class="btn btn-primary slide-l-btn" (click)="triggerSubmitComment()"
               data-toggle="modal"
               data-target="#submitCommentModal"
@@ -31,20 +29,24 @@
               <i class="material-icons">&#xE0B9;</i>
               <span>Submit a Comment</span>
             </button>
-            <button class="btn btn-primary slide-l-btn">
+            <button class="btn btn-primary slide-l-btn"
+              data-toggle="modal"
+              data-target="#relatedDocumentsModal"
+              data-backdrop="static"
+              *ngIf="commentPeriod.relatedDocuments.length > 1">
               <i class="material-icons">&#xE89E;</i>
-              <span>View the Documents</span>
+              <span>View Related Documents</span>
             </button>
           </div>
         </section>
         <section>
-          <div class="comments-table bg-muted">
+          <div class="comments__table bg-muted">
             <div class="spinner-container" *ngIf="loading">
               <div class="spinner-new rotating"></div>
             </div>
             <h3 class="mb-1">Comments ({{commentPeriod.comments.length}})</h3>
             <div class="comment-feed bg-muted">
-              <table class="activity-feed table" id="tableTop" *ngIf="!loading">
+              <table class="activity-feed table mb-0" id="tableTop" *ngIf="!loading">
                 <thead>
                   <tr>
                     <th class="sortable" (click)="sort('author')">Posted By
@@ -99,10 +101,9 @@
                   </tr>
                 </tbody>
               </table>
-              <pagination-template #p="paginationApi"
+              <pagination-template #p="paginationApi" *ngIf="commentPeriod.comments.length > 25"
                 [id]="config.id"
                 (pageChange)="config.currentPage = $event">
-
                 <ul class="pagination">
                   <li class="page-item" *ngIf="!p.isFirstPage()">
                     <a class="page-link" (click)="p.previous();" appScroll> < </a>
@@ -122,13 +123,7 @@
               </pagination-template>
             </div>
           </div>
-        </section>
-
-        <!-- TODO: RELATED DOCUMENTS INTERFACE
-          <ul>
-          <li *ngFor="let relDoc of commentPeriod.relatedDocuments"><a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank"><span>{{ relDoc.displayName }}</span></a></li>
-        </ul>
-        -->
+        </section>        
 
       </main>
       <aside class="col-lg-4">
@@ -165,13 +160,44 @@
       </aside>
     </div>
   </div>
-</ng-container>
 
-<!-- SUBMIT A COMMENT -->
-<div class="modal fade" id="submitCommentModal" tabindex="-1" role="dialog" aria-labelledby="submitCommentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg submit-comment-modal">
-    <app-pcp-info-modal></app-pcp-info-modal>
-    <app-submit-comment-modal></app-submit-comment-modal>
-    <app-submit-comment-progress-modal></app-submit-comment-progress-modal>
+  <!-- SUBMIT A COMMENT -->
+  <div class="modal fade" id="submitCommentModal" tabindex="-1" role="dialog" aria-labelledby="submitCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg comment-period-modal">
+      <div class="modal-content">
+        <app-pcp-info-modal></app-pcp-info-modal>
+        <app-submit-comment-modal></app-submit-comment-modal>
+        <app-submit-comment-progress-modal></app-submit-comment-progress-modal>
+      </div>
+    </div>
   </div>
-</div>
+
+  <!-- RELATED DOCUMENTS -->
+  <div class="modal fade" id="relatedDocumentsModal" tabindex="-1" role="dialog" aria-labelledby="relatedDocumentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg submit-comment-modal">
+      <div class="modal-content">
+        <div class="modal-header pb-0">
+          <h3 class="modal-title comment-modal-title">Related Documents <span class="comment-modal-title__large">{{ commentPeriod.informationLabel }}</span></h3>
+        </div>
+        <div class="modal-body">
+          <ul class="file__list anchor-list">
+            <li class="file__list-item" *ngFor="let relDoc of commentPeriod.relatedDocuments">
+              <a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank">
+                <span class="file__list-item-icon">
+                  <i class="material-icons md-18">&#xE24D;</i>
+                </span>
+                <span class="file__list-item-name">
+                  <span>{{ relDoc.displayName }}</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer pt-1">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
