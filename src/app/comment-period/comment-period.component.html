@@ -1,6 +1,7 @@
-<div class="spinner-container" *ngIf="!commentPeriod">
+<div class="spinner-container fixed" *ngIf="!commentPeriod">
   <div class="spinner-new rotating"></div>
 </div>
+
 <ng-container *ngIf="commentPeriod">
   <div class="hero-banner hb-sm">
     <div class="container">
@@ -13,157 +14,158 @@
       </div>
     </div>
   </div>
-
-<div class="container" id="anchor-point">
-  <div class="row">
-    <main class="col-lg-8">
-      <section>
-        <h2>About this comment period...</h2>
-        <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
-        <p>All accepted comments submitted to the Environmental Assessment Office (EAO) will be published online within seven days of receipt. Comments are not accepted if - in EAO’s view - they are profane, abusive or do not relate to the matter being consulted upon as stated in our Public Comment Policy [PDF].</p>
-        <p>EAO forwards all accepted comments to the project proponent so they can be considered during the project's environmental assessment.</p>
-        <div class="comment-btns mt-3">
-          <button class="btn btn-primary slide-l-btn" (click)="triggerSubmitComment()"
-            data-toggle="modal"
-            data-target="#submitCommentModal"
-            data-backdrop="static">
-            <i class="material-icons">&#xE0B9;</i>
-            <span>Submit a Comment</span>
-          </button>
-          <button class="btn btn-primary slide-l-btn">
-            <i class="material-icons">&#xE89E;</i>
-            <span>View the Documents</span>
-          </button>
-        </div>
-      </section>
-      <section>
-        <div class="comments-table bg-muted">
-          <h3 class="mb-1">Comments ({{commentPeriod.comments.length}})</h3>
-          <div class="comment-feed bg-muted">
-            <div class="spinner-container" *ngIf="loading">
-                <div class="spinner-new rotating"></div>
-            </div>
-            <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
-              <thead>
-                <tr>
-                  <th class="sortable" (click)="sort('author')">Posted By
-                    <i class="sort" [ngClass]="{'sort-asc': (column == 'author' && isDesc), 'sort-desc': (column == 'author' && !isDesc) }" aria-hidden="true"></i>
-                  </th>
-                  <th class="sortable date-col" (click)="sort('dateAdded')">Date
-                    <i class="sort" [ngClass]="{'sort-asc': (column == 'dateAdded' && isDesc), 'sort-desc': (column == 'dateAdded' && !isDesc) }" aria-hidden="true"></i>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
-                  <td colspan="2">
-                    <div class="title-container">
-                      <h3 class="title-container__title">{{item.author}}</h3>
-                      <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
-                    </div>
-                    <div class="activity-feed__content readmore">
-                      <pre class="readmore__content"
-                        *ngIf="item.readmore || item.comment.length <= 300"
-                        [innerHTML]="item.comment">
-                      </pre>
-                      <pre class="readmore__content"
-                        *ngIf="!item.readmore && item.comment.length > 300"
-                        [innerHTML]="(item.comment | slice:0:300) + '...'">
-                      </pre>
-                      <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
-                        [{{item.readmore ? 'Show Less' : 'Show More'}}]
-                      </button>
-                    </div>
-                    <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
-                      <div class="attachments">
-                        <div>
-                          <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
-                        </div>
-                        <ul class="attachments__list">
-                          <li class="attachments__list-item" *ngFor="let doc of item.documents">
-                            <a href="{{doc.link}}" target="_blank">
-                              <i class="material-icons md-16">&#xE2BC;</i>
-                              <span>{{ doc.displayName }}</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
-                      <div class="badge badge-light" *ngFor="let vc of item.vcs">
-                        {{vc.name}}
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <pagination-template #p="paginationApi"
-              [id]="config.id"
-              (pageChange)="config.currentPage = $event">
-
-              <ul class="pagination">
-                <li class="page-item" *ngIf="!p.isFirstPage()">
-                  <a class="page-link" (click)="p.previous();" appScroll> < </a>
-                </li>
-                <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-                  <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
-                    <span>{{ page.label }}</span>
-                  </a>
-                  <div *ngIf="p.getCurrent() === page.value">
-                    <span class="page-link">{{ page.label }}</span>
-                  </div>
-                </li>
-                <li class="page-item" *ngIf="!p.isLastPage()">
-                  <a class="page-link" (click)="p.next();" appScroll> > </a>
-                </li>
-              </ul>
-            </pagination-template>
+  <div class="container" id="anchor-point">
+    <div class="row">
+      <main class="col-lg-8">
+        <section>
+          <h2>About this comment period...</h2>
+          <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
+          <p>All accepted comments submitted to the Environmental Assessment Office (EAO) will be published online within seven days of receipt. Comments are not accepted if - in EAO’s view - they are profane, abusive or do not relate to the matter being consulted upon as stated in our Public Comment Policy [PDF].</p>
+          <p>EAO forwards all accepted comments to the project proponent so they can be considered during the project's environmental assessment.</p>
+          <div class="comment-btns mt-3">
+            <button class="btn btn-primary slide-l-btn" (click)="triggerSubmitComment()"
+              data-toggle="modal"
+              data-target="#submitCommentModal"
+              data-backdrop="static"
+              *ngIf="commentPeriod.status == 'Open'">
+              <i class="material-icons">&#xE0B9;</i>
+              <span>Submit a Comment</span>
+            </button>
+            <button class="btn btn-primary slide-l-btn">
+              <i class="material-icons">&#xE89E;</i>
+              <span>View the Documents</span>
+            </button>
           </div>
-        </div>
-      </section>
+        </section>
+        <section>
+          <div class="comments-table bg-muted">
+            <div class="spinner-container" *ngIf="loading">
+              <div class="spinner-new rotating"></div>
+            </div>
+            <h3 class="mb-1">Comments ({{commentPeriod.comments.length}})</h3>
+            <div class="comment-feed bg-muted">
+              <table class="activity-feed table" id="tableTop" *ngIf="!loading">
+                <thead>
+                  <tr>
+                    <th class="sortable" (click)="sort('author')">Posted By
+                      <i class="sort" [ngClass]="{'sort-asc': (column == 'author' && isDesc), 'sort-desc': (column == 'author' && !isDesc) }" aria-hidden="true"></i>
+                    </th>
+                    <th class="sortable date-col" (click)="sort('dateAdded')">Date
+                      <i class="sort" [ngClass]="{'sort-asc': (column == 'dateAdded' && isDesc), 'sort-desc': (column == 'dateAdded' && !isDesc) }" aria-hidden="true"></i>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
+                    <td colspan="2">
+                      <div class="title-container">
+                        <h3 class="title-container__title">{{item.author}}</h3>
+                        <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
+                      </div>
+                      <div class="activity-feed__content readmore">
+                        <pre class="readmore__content"
+                          *ngIf="item.readmore || item.comment.length <= 300"
+                          [innerHTML]="item.comment">
+                        </pre>
+                        <pre class="readmore__content"
+                          *ngIf="!item.readmore && item.comment.length > 300"
+                          [innerHTML]="(item.comment | slice:0:300) + '...'">
+                        </pre>
+                        <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
+                          [{{item.readmore ? 'Show Less' : 'Show More'}}]
+                        </button>
+                      </div>
+                      <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
+                        <div class="attachments">
+                          <div>
+                            <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
+                          </div>
+                          <ul class="attachments__list">
+                            <li class="attachments__list-item" *ngFor="let doc of item.documents">
+                              <a href="{{doc.link}}" target="_blank">
+                                <i class="material-icons md-16">&#xE2BC;</i>
+                                <span>{{ doc.displayName }}</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="comment-feed__badge-container" *ngIf="item.vcs.length !== 0">
+                        <div class="badge badge-light" *ngFor="let vc of item.vcs">
+                          {{vc.name}}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-template #p="paginationApi"
+                [id]="config.id"
+                (pageChange)="config.currentPage = $event">
 
-      <!-- TODO: RELATED DOCUMENTS INTERFACE
-        <ul>
-         <li *ngFor="let relDoc of commentPeriod.relatedDocuments"><a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank"><span>{{ relDoc.displayName }}</span></a></li>
-       </ul>
-      -->
+                <ul class="pagination">
+                  <li class="page-item" *ngIf="!p.isFirstPage()">
+                    <a class="page-link" (click)="p.previous();" appScroll> < </a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                    <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                      <span>{{ page.label }}</span>
+                    </a>
+                    <div *ngIf="p.getCurrent() === page.value">
+                      <span class="page-link">{{ page.label }}</span>
+                    </div>
+                  </li>
+                  <li class="page-item" *ngIf="!p.isLastPage()">
+                    <a class="page-link" (click)="p.next();" appScroll> > </a>
+                  </li>
+                </ul>
+              </pagination-template>
+            </div>
+          </div>
+        </section>
 
-    </main>
-    <aside class="col-lg-4">
-      <section class="card">
-        <h4 class="card-header">Comment Period Details</h4>
-        <div class="card-body">
-        <ul class="nv-list mine-details-list">
-          <li>
-            <span class="name">Status</span>
-            <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
-          </li>
-          <li>
-            <span class="name">Start Date</span>
-            <span class="value">{{commentPeriod.dateStarted | date: 'longDate'}}</span>
-          </li>
-          <li>
-            <span class="name">End Date</span>
-            <span class="value">{{commentPeriod.dateCompleted | date: 'longDate'}}</span>
-          </li>
+        <!-- TODO: RELATED DOCUMENTS INTERFACE
+          <ul>
+          <li *ngFor="let relDoc of commentPeriod.relatedDocuments"><a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank"><span>{{ relDoc.displayName }}</span></a></li>
         </ul>
-        </div>
-      </section>
-      <section class="card open-house-list" *ngIf="commentPeriod.openHouses.length !== 0">
-        <h4 class="card-header">Open House Dates</h4>
-        <div class="card-body">
-          <ul class="nv-list">
-            <li *ngFor="let item of commentPeriod.openHouses">
-              <span class="open-house-list__date">{{ item.eventDate | date: 'longDate' }}</span>
-              <span class="open-house-list__desc">{{ item.description }}</span>
+        -->
+
+      </main>
+      <aside class="col-lg-4">
+        <section class="card">
+          <h4 class="card-header">Comment Period Details</h4>
+          <div class="card-body">
+          <ul class="nv-list mine-details-list">
+            <li>
+              <span class="name">Status</span>
+              <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
+            </li>
+            <li>
+              <span class="name">Start Date</span>
+              <span class="value">{{commentPeriod.dateStarted | date: 'longDate'}}</span>
+            </li>
+            <li>
+              <span class="name">End Date</span>
+              <span class="value">{{commentPeriod.dateCompleted | date: 'longDate'}}</span>
             </li>
           </ul>
-        </div>
-      </section>
-    </aside>
+          </div>
+        </section>
+        <section class="card open-house-list" *ngIf="commentPeriod.openHouses.length !== 0">
+          <h4 class="card-header">Open House Dates</h4>
+          <div class="card-body">
+            <ul class="nv-list">
+              <li *ngFor="let item of commentPeriod.openHouses">
+                <span class="open-house-list__date">{{ item.eventDate | date: 'longDate' }}</span>
+                <span class="open-house-list__desc">{{ item.description }}</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+    </div>
   </div>
-</div>
+</ng-container>
 
 <!-- SUBMIT A COMMENT -->
 <div class="modal fade" id="submitCommentModal" tabindex="-1" role="dialog" aria-labelledby="submitCommentModalLabel" aria-hidden="true">

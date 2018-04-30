@@ -3,25 +3,17 @@
 </div>
 <div class="modal-content hidden" id="step2">
   <div class="modal-header">
-    <h3 class="modal-title" id="submitCommentModalLabel">Submit a Comment &nbsp;&rsaquo;&nbsp; Your Comment</h3>
+    <h3 class="modal-title" id="submitCommentModalLabel">Submit a Comment: <span>Your Comment</span></h3>
   </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" id="submitCommentForm" novalidate>
 
     <div class="modal-body submit-comment-form">
-
       <div class="alert alert-danger" *ngIf="error">
         <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
       </div>
-
       <div class="form-group">
         <label class="form-control-label" for="author">Your Name <em>(Required)</em></label>
         <input class="form-control" id="author" name="author" (focus)="removeError($event)" [(ngModel)]="comment.author" #author="ngModel" required>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label" for="visible">
-          <input class="form-check-input" type="checkbox" value="" id="visible" name="visible" [(ngModel)]="comment.visible" #visible="ngModel">Make my Name visible to public.
-        </label>
-        <span class="form-text">All comments are submitted anonymously by default, unless you specify that you would like your name to be visible.</span>
       </div>
       <div class="form-group">
         <label class="form-control-label" for="location">Location <em>(Required)</em></label>
@@ -31,7 +23,6 @@
         <label class="form-control-label" for="comment">Your Comment <em>(Required)</em></label>
         <textarea class="form-control" id="comment" name="comment" rows="3" (focus)="removeError($event)" [(ngModel)]="comment.comment" #comment="ngModel"></textarea>
       </div>
-
       <div class="form-group">
         <label class="mb-0 form-control-label" for="file">Upload Attachments</label>
         <span class="form-text mt-0">Total uploads Cannot exceed 5MB.</span>
@@ -55,10 +46,16 @@
           <div class="file-upload__target">
             <span class="file-upload__prompt">
               <i class="file-upload__prompt-icon material-icons">&#xE2C6;</i>
-              <span class="file-upload__prompt-msg">Drag Files here or Click to select files</span>
+              <span class="file-upload__prompt-msg"><span class="file-upload__prompt-drag">Drag files here or</span> Browse files</span>
             </span>
           </div>
         </div>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="visible">
+          <input class="form-check-input" type="checkbox" value="" id="visible" name="visible" [(ngModel)]="comment.visible" #visible="ngModel">Make my Name visible to public.
+        </label>
+        <span class="form-text">All comments are submitted anonymously by default, unless you specify that you would like your name to be visible.</span>
       </div>
     </div>
     <div class="modal-footer">
