@@ -424,7 +424,7 @@ describe('CommentPeriodService', () => {
       }));
     });
     describe('given a comment with documents', () => {
-      var pcpObj;
+      let pcpObj;
 
       beforeEach(() => {
         docid = '12345';
@@ -472,7 +472,7 @@ describe('CommentPeriodService', () => {
     let expectedResponse;
 
     describe('given a valid response', () => {
-      var pcpObj;
+      let pcpObj;
 
       beforeEach(() => {
         pcpid = '1234';
@@ -512,7 +512,7 @@ describe('CommentPeriodService', () => {
       }));
     });
     describe('given an array of valued components', () => {
-      var pcpObj;
+      let pcpObj;
       beforeEach(() => {
         pcpid = '1234';
         projcode = '4321';

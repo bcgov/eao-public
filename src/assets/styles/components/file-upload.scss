@@ -5,6 +5,23 @@ $file-upload-target-border:       #ccc;
 .file-upload {
   position: relative;
 
+  input {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    width: 100%;
+    height: 3.5rem;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      + .file-upload__target {
+        color: $fc-focus-border-color;
+        border-color: $fc-focus-border-color;
+      }
+    }
+  }
+
   &__list {
     margin: 0;
     padding: 0;
@@ -72,7 +89,7 @@ $file-upload-target-border:       #ccc;
   }
 
   &__prompt {
-    margin-top: 1.5rem;
+    margin-top: 0.8rem;
     display: inline-block;
     font-size: 0.9375rem;
     font-weight: 700;
@@ -81,21 +98,24 @@ $file-upload-target-border:       #ccc;
       margin-top: -0.2rem;
       vertical-align: middle;
     }
+
+    &-drag {
+      display: none;
+    }
   }
+}
 
-  input {
-    position: relative;
-    z-index: 2;
-    opacity: 0;
-    width: 100%;
-    height: 5rem;
-    cursor: pointer;
+@media (min-width: 768px) {
+  .file-upload {
+    input {
+      height: 5rem;
+    }
 
-    &:hover,
-    &:focus {
-      + .file-upload__target {
-        color: $fc-focus-border-color;
-        border-color: $fc-focus-border-color;
+    &__prompt {
+      margin-top: 1.5rem;
+
+      &-drag {
+        display: inline;
       }
     }
   }
