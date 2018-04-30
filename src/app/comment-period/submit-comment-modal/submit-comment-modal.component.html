@@ -1,9 +1,10 @@
 <div class="spinner-container" *ngIf="loading">
   <div class="spinner-new rotating"></div>
 </div>
-<div class="modal-content hidden" id="step2">
-  <div class="modal-header">
-    <h3 class="modal-title" id="submitCommentModalLabel">Submit a Comment: <span>Your Comment</span></h3>
+
+<div class="hidden" id="step2">
+  <div class="modal-header pb-0">
+    <h3 class="modal-title comment-modal-title" id="submitCommentModalLabel">Submit a Comment: <span class="comment-modal-title__large">Comment Details</span></h3>
   </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" id="submitCommentForm" novalidate>
 
@@ -26,15 +27,15 @@
       <div class="form-group">
         <label class="mb-0 form-control-label" for="file">Upload Attachments</label>
         <span class="form-text mt-0">Total uploads Cannot exceed 5MB.</span>
-        <ul class="file-upload__list mt-2 mb-3" *ngIf="files.length > 0">
-          <li class="file-upload__list-item" *ngFor="let file of files">
-            <span class="file-upload__list-item-icon">
+        <ul class="file__list mt-2 mb-3" *ngIf="files.length > 0">
+          <li class="file__list-item" *ngFor="let file of files">
+            <span class="file__list-item-icon">
               <i class="material-icons">&#xE2BC;</i>
             </span>
-            <span class="file-upload__list-item-name">
+            <span class="file__list-item-name">
               {{file.name}}
             </span>
-            <span class="file-upload__list-item-action">
+            <span class="file__list-item-action">
               <button class="btn btn-default" type="button" (click)="removeDocument($event)">
                 <i class="material-icons md-18">&#xE5CD;</i>
               </button>
@@ -58,9 +59,9 @@
         <span class="form-text">All comments are submitted anonymously by default, unless you specify that you would like your name to be visible.</span>
       </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer pt-1">
       <button type="button" (click)="hideAllSteps()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      <button class="btn btn-primary" type="submit">Submit Comment</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </div>
   </form>
 </div>

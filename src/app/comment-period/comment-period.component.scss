@@ -1,24 +1,40 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 @import "~assets/styles/components/attachments.scss";
+@import "~assets/styles/components/file-list.scss";
+@import "~assets/styles/components/file-upload.scss";
+@import "~assets/styles/components/modals.scss";
 
-.comment {
+.comments {
   &__table {
     position: relative;
   }
 
   &__btns {
     margin-bottom: 2rem;
+    @include flex-box();
+    @include flex-direction(column);
+    margin: -0.25rem;
+  
+    .btn {
+      @include flex(1 1 50%);
+      margin: 0.25rem;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
   }
 }
 
-.comment-btns {
-  margin-bottom: 2rem;
+@media (min-width: 480px) {
+  .comments {
+    &__btns {
+      display: block;
 
-  .btn {
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    font-weight: 700;
+      .btn {
+        display: inline-block;
+      }
+    }
   }
 }
 
@@ -59,61 +75,58 @@
   }
 }
 
+// CUSTOM MODALS
+.comment-modal-title {
+  line-height: 1.15rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  &__large {
+    margin-top: 0.25rem;
+    display: block;
+    color: #000;
+    line-height: 1.65rem;
+    font-size: 1.65rem;
+  }
+}
+
+// SUBMIT COMMENT MODALS
 ::ng-deep {
-  .modal-header {
-    padding: 1rem;
-    padding-bottom: 0.25rem;
-    border: none;
-  }
-
-  .modal-title {
-    line-height: 1.25rem;
-    font-size: 1.25rem;
-
-    span {
-      margin-top: 0.2rem;
+  .comment-modal-title {
+    line-height: 1.15rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+  
+    &__large {
+      margin-top: 0.25rem;
       display: block;
-      line-height: 1.7rem;
-      font-size: 1.75rem;
-    }
-  }
-
-  .modal-body {
-    padding: 1rem;
-  }
-
-  .modal-footer {
-    padding: 1rem;
-    padding-top: 0.5;
-    border: none;
-
-    .btn {
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      font-weight: 700;
+      color: #000;
+      line-height: 1.65rem;
+      font-size: 1.65rem;
     }
   }
 }
 
 @media (min-width: 768px) {
-  ::ng-deep {
-    .modal-header {
-      padding: 1.5rem;
-      padding-bottom: 0;
-    }
+  .comment-modal-title {
+    line-height: 1.25rem;
+    font-size: 1.25rem;
 
-    .modal-title {
-      line-height: 1.75rem;
+    &__large {
+      line-height: 2rem;
       font-size: 1.75rem;
-
-      span {
-        display: inline;
-        line-height: 1.75rem;
-      }
     }
+  }
 
-    .modal-body {
-      padding: 1.5rem;
+  ::ng-deep {
+    .comment-modal-title {
+      line-height: 1.25rem;
+      font-size: 1.25rem;
+  
+      &__large {
+        line-height: 2rem;
+      font-size: 1.75rem;
+      }
     }
   }
 }

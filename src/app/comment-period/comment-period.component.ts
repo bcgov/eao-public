@@ -20,7 +20,7 @@ export class CommentPeriodComponent implements OnInit {
   public hostname: string;
   public config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 10,
+    itemsPerPage: 25,
     currentPage: 1
   };
 

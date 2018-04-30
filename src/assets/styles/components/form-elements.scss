@@ -14,8 +14,8 @@
 
 	&-check {
 		input  {
-			margin-top: -3px;
-			margin-right: 0.25rem;
+			margin-top: -2px;
+			margin-right: 0.5rem;
 			vertical-align: middle;
 		}
 	}
@@ -27,6 +27,7 @@
 
 	&-group {
 		label {
+			margin-bottom: 0.25rem;
 			letter-spacing: -0.01rem;
 
 			em {
