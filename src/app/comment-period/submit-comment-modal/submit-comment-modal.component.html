@@ -5,9 +5,11 @@
 <div class="hidden" id="step2">
   <div class="modal-header pb-0">
     <h3 class="modal-title comment-modal-title" id="submitCommentModalLabel">Submit a Comment: <span class="comment-modal-title__large">Comment Details</span></h3>
+    <button class="btn btn-default" (click)="hideAllSteps()" data-dismiss="modal" aria-label="Close">
+      <i class="material-icons">&#xE5CD;</i>
+    </button>
   </div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" id="submitCommentForm" novalidate>
-
     <div class="modal-body submit-comment-form">
       <div class="alert alert-danger" *ngIf="error">
         <strong>Danger!</strong> Indicates a dangerous or potentially negative action.

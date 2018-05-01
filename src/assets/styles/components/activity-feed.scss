@@ -1,7 +1,7 @@
 $activity-content-font-size:      0.9375rem;
 $activity-feed-date-column-width: 10rem;
-$activity-feed-item-bg:           #f1f1f1;
-$activity-feed-alt-item-bg:       #f7f8fa;
+$activity-feed-item-bg:           #f7f8fa;
+$activity-feed-alt-item-bg:       #f4f4f4;
 
 .activity-feed {
   &__item {
@@ -23,7 +23,7 @@ $activity-feed-alt-item-bg:       #f7f8fa;
   }
 
   &__attachments {
-    margin-top: 0.725rem;
+    margin-top: 1rem;
   }
 
   &__content {
