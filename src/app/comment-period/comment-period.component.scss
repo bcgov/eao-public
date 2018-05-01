@@ -60,6 +60,12 @@
 }
 
 .open-house-list {
+  margin: 0;
+  padding: 0;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+  list-style-type: none;
+
   li {
     + li {
       margin-top: 1rem;

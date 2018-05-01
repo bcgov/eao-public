@@ -130,7 +130,7 @@
         <section class="card">
           <h4 class="card-header">Comment Period Details</h4>
           <div class="card-body">
-          <ul class="nv-list mine-details-list">
+          <ul class="nv-list">
             <li>
               <span class="name">Status</span>
               <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
@@ -149,7 +149,7 @@
         <section class="card open-house-list" *ngIf="commentPeriod.openHouses.length !== 0">
           <h4 class="card-header">Open House Dates</h4>
           <div class="card-body">
-            <ul class="nv-list">
+            <ul class="open-house-list">
               <li *ngFor="let item of commentPeriod.openHouses">
                 <span class="open-house-list__date">{{ item.eventDate | date: 'longDate' }}</span>
                 <span class="open-house-list__desc">{{ item.description }}</span>
