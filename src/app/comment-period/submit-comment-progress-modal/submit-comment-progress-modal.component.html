@@ -1,6 +1,9 @@
 <div class="modal-content hidden" id="step3">
-  <div class="modal-header">
+  <div class="modal-header pb-0">
     <h3 class="modal-title comment-modal-title" id="submitCommentModalLabel">Submit a Comment: <span class="comment-modal-title__large">Your comment has been received.</span></h3>
+    <button class="btn btn-default" (click)="triggerSubmitComment()" data-dismiss="modal" aria-label="Close">
+      <i class="material-icons">&#xE5CD;</i>
+    </button>
   </div>
   <div class="modal-body">
     <h4>What happens next?</h4>
