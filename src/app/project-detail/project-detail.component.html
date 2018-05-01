@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="container-inner">
 			<div class="hb-txt">
-				<h1>{{project.name}}</h1>
+				<h1>{{project.name}}<span class="badge badge-primary badge-status">{{project.eacDecision}}</span></h1>
 				<p>{{project.description}}</p>
 			</div>
 		</div>
@@ -125,20 +125,12 @@
                 </ul>
               </pagination-template>
             </div>
-
           </section>
         </div>
       </section>
     </main>
     <aside class="col-lg-4">
-      <!--
-      <section class="card">
-        <h4 class="card-header">Certificate Status</h4>
-        <div class="card-body bg-primary certificate-status">
-            <span>{{project.eacDecision}}</span>
-        </div>
-      </section>
-      -->
+      
       <section class="card">
         <h4 class="card-header">Project Details</h4>
         <div class="map-section">
@@ -148,6 +140,10 @@
         </div>
         <div class="card-body">
           <ul class="nv-list">
+            <li>
+              <span class="name">EA Certificate Application</span>
+              <span class="value"><span class="badge badge-primary badge-status">{{project.eacDecision}}</span></span>
+            </li>
             <li>
               <span class="name">Project Type</span>
               <span class="value">{{project.type}}</span>
