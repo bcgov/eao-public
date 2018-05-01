@@ -6,8 +6,31 @@
 @import "~assets/styles/components/modals.scss";
 
 .comments {
-  &__table {
+  &__section-title {
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #eee;
+  }
+
+  &__feed {
     position: relative;
+
+    .title-container {
+      &__title {
+        letter-spacing: -0.02rem;
+        font-size: 1.3rem;
+      }
+    }
+  
+    .badge-container {
+      margin-top: 1rem;
+  
+      .badge {
+        margin: 0.2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
   }
 
   &__btns {
@@ -34,27 +57,6 @@
       .btn {
         display: inline-block;
       }
-    }
-  }
-}
-
-.comment-feed {
-  .title-container {
-    &__title {
-      letter-spacing: -0.02rem;
-      font-size: 1.3rem;
-    }
-  }
-
-  &__badge-container {
-    margin-top: 1rem;
-
-    .badge {
-      margin-right: 0.2rem;
-      margin-bottom: 0.2rem;
-      letter-spacing: -0.01rem;
-      font-size: 0.75rem;
-      font-weight: 600;
     }
   }
 }
@@ -96,8 +98,16 @@
   }
 }
 
+.hidden {
+  display: none;
+}
+
 // SUBMIT COMMENT MODALS
 ::ng-deep {
+  .hidden {
+    display: none;
+  }
+
   .comment-modal-title {
     line-height: 1.15rem;
     font-size: 1.15rem;
