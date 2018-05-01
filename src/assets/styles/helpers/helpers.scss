@@ -14,13 +14,13 @@
 }
 
 .badge {
-    padding-bottom: 0.3rem;
-    font-size: 0.875rem;
+    padding-bottom: 0.15rem;
+    letter-spacing: 0.02rem;
+    font-size: 0.85rem;
     font-weight: 600;
 
     &-status {
-        text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 600;
     }
 
     &-light {
