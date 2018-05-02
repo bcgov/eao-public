@@ -124,7 +124,7 @@ export class CommentPeriodService {
                 .subscribe(( trueDoc ) => {
                   doc.displayName = trueDoc.internalOriginalName;
                   doc.link = this.api.hostnameEPIC + '/api/document/' + doc.id + '/fetch';
-        });
+                });
             });
           }
         });
