@@ -1,15 +1,13 @@
-$activity-content-font-size:      0.9375rem;
+$activity-content-font-size: 0.9375rem;
 $activity-feed-date-column-width: 10rem;
-$activity-feed-item-bg:           #f7f8fa;
-$activity-feed-alt-item-bg:       #f4f4f4;
 
 .activity-feed {
   &__item {
     position: relative;
-    background: $activity-feed-item-bg;
+    background: #f7f8fa;
 
     &:nth-child(even) {
-      background: $activity-feed-alt-item-bg;
+      background: #f4f4f4;
     }
   }
 
@@ -23,16 +21,32 @@ $activity-feed-alt-item-bg:       #f4f4f4;
   }
 
   &__attachments {
-    margin-top: 1rem;
+    font-weight: 600;
+    margin-top: 0.625rem;
+    display: table;
+
+    i {
+      margin-top: 0.25rem;
+      font-size: 1.25rem;
+    }
+
+    .attachments-txt {
+      vertical-align: middle;
+      display: table-cell;
+      margin-top: 0.75rem;
+    }
   }
 
   &__content {
     margin-top: 0.75rem;
     font-size: 0.9375rem;
 
-    pre {
-      line-height: calc(0.9375rem * 1.5);
-      font-size: 0.9375rem;
+    ::ng-deep {
+      p {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 
@@ -52,10 +66,6 @@ $activity-feed-alt-item-bg:       #f4f4f4;
     &__date {
       @include flex(0 0 auto);
     }
-  }
-
-  pre {
-    display: block;
   }
 
   thead {
@@ -93,6 +103,11 @@ $activity-feed-alt-item-bg:       #f4f4f4;
       pre {
         line-height: calc(0.875rem * 1.5);
         font-size: 0.875rem;
+
+        p {
+          line-height: calc(0.875rem * 1.5);
+          font-size: 0.875rem !important;
+        }
       }
     }
   }
@@ -104,13 +119,13 @@ $activity-feed-alt-item-bg:       #f4f4f4;
     position: relative;
     margin: 0;
     overflow: hidden;
-    white-space: pre-line;
     font-size: 100%;
   }
 
   &__link {
     position: relative;
     padding: 0;
+    font-weight: 600;
     font-size: 0.875rem;
     cursor: pointer;
   }
