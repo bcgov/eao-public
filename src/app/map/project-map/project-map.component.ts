@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 
-import { MapConfigService } from '../config/map-config.service';
+import { MapConfigService } from '../core';
 import { Project } from '../../models/project';
 
 @Component({
@@ -63,12 +63,12 @@ export class ProjectMapComponent implements OnInit {
   private showSingleProject(featureLayer: __esri.FeatureLayer, projectId: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       // set the definition expression directly on layer instance to only display a single project
-      return featureLayer.then(
+      return featureLayer.when(
         (fl: __esri.FeatureLayer) => {
           fl.definitionExpression = `code = '${projectId}'`;
         })
         .then(() => resolve())
-        .otherwise(reject);
+        .catch(reject);
     });
   }
 }
