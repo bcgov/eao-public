@@ -101,7 +101,8 @@
                   </tr>
                 </tbody>
               </table>
-              <pagination-template #p="paginationApi" *ngIf="commentPeriod.comments.length > 25"
+              <pagination-template #p="paginationApi" 
+                *ngIf="commentPeriod.comments.length > 25"
                 [id]="config.id"
                 (pageChange)="config.currentPage = $event">
                 <ul class="pagination">

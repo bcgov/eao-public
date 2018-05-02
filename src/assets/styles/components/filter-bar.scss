@@ -85,12 +85,16 @@
     }
 
     &.filters-advanced {
-        margin-right: 0.5rem;
+        margin-right: -0.5rem;
         margin-left: -0.5rem;
 
         [class^="col-md"] {
             padding-right: 0.5rem;
             padding-left: 0.5rem;
+        }
+
+        label {
+            margin-bottom: 0.25rem;
         }
     }
 }
