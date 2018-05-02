@@ -122,7 +122,6 @@ export class CommentPeriodService {
               return this.api.getDocumentById(doc.id)
                 .map((res: Response) => res.json())
                 .subscribe(( trueDoc ) => {
-                  doc.isPublished;
                   doc.displayName = trueDoc.internalOriginalName;
                   doc.link = this.api.hostnameEPIC + '/api/document/' + doc.id + '/fetch';
                 });
