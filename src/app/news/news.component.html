@@ -101,9 +101,8 @@
                     [{{item.readmore ? 'Show Less' : 'Show More'}}]
                   </button>
                 </div>
-                <div class="activity-feed__actions">
-                  <a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="/p/{{item.project?.code}}"
-                    target="_blank">View Project</a>
+                <div class="activity-feed__actions" *ngIf="item.project.code || item.contentUrl || item.documentUrl">
+                  <a class="btn btn-sm content-btn-alt" *ngIf="item.project?.code" href="/p/{{item.project?.code}}">View Project</a>
                   <a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}" target="_blank">View Comments</a>
                   <a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Document(s)</a>
                 </div>

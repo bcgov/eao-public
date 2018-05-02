@@ -111,7 +111,7 @@
                     <a class="page-link" (click)="p.previous();" appScroll> < </a>
                   </li>
                   <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-                    <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                    <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" appScroll>
                       <span>{{ page.label }}</span>
                     </a>
                     <div *ngIf="p.getCurrent() === page.value">
