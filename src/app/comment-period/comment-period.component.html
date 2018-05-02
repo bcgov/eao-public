@@ -46,7 +46,7 @@
               <div class="spinner-container" *ngIf="loading">
                 <div class="spinner-new rotating"></div>
               </div>
-              <table class="activity-feed table mb-0" id="tableTop" *ngIf="!loading">
+              <table id="tableTop" class="activity-feed table mb-0" *ngIf="!loading">
                 <thead>
                   <tr>
                     <th class="sortable" (click)="sort('author')">Posted By
@@ -65,14 +65,14 @@
                         <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                       </div>
                       <div class="activity-feed__content readmore">
-                        <pre class="readmore__content"
+                        <div class="readmore__content"
                           *ngIf="item.readmore || item.comment.length <= 300"
                           [innerHTML]="item.comment">
-                        </pre>
-                        <pre class="readmore__content"
+                        </div>
+                        <div class="readmore__content"
                           *ngIf="!item.readmore && item.comment.length > 300"
                           [innerHTML]="(item.comment | slice:0:300) + '...'">
-                        </pre>
+                        </div>
                         <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
                           [{{item.readmore ? 'Show Less' : 'Show More'}}]
                         </button>
@@ -83,12 +83,14 @@
                             <span class="attachments__total">{{ item.documents.length }} Attachment(s)</span>
                           </div>
                           <ul class="attachments__list">
-                            <li class="attachments__list-item" *ngFor="let doc of item.documents">
-                              <a href="{{doc.link}}" target="_blank">
-                                <i class="material-icons md-18">&#xE24D;</i>
-                                <span>{{ doc.displayName }}</span>
-                              </a>
-                            </li>
+                            <ng-container *ngFor="let doc of item.documents">
+                              <li class="attachments__list-item">
+                                <a href="{{doc.link}}" target="_blank">
+                                  <i class="material-icons md-18">&#xE24D;</i>
+                                  <span>{{ doc.displayName }}</span>
+                                </a>
+                              </li>
+                            </ng-container>
                           </ul>
                         </div>
                       </div>
