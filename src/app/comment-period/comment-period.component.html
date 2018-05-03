@@ -15,6 +15,9 @@
     </div>
   </div>
   <div class="container" id="anchor-point">
+    <div class="spinner-container" [hidden]="!loading">
+      <div class="spinner-new rotating"></div>
+    </div>
     <div class="row">
       <main class="col-lg-8">
         <section>
@@ -29,7 +32,7 @@
               <i class="material-icons">&#xE0B9;</i>
               <span>Submit a Comment</span>
             </button>
-            <button class="btn btn-default slide-l-btn"
+            <button class="btn btn-info slide-l-btn"
               data-toggle="modal"
               data-target="#relatedDocumentsModal"
               data-backdrop="static"
@@ -39,14 +42,11 @@
             </button>
           </div>
         </section>
-        <section>
+        <section *ngIf="!loading">
           <div class="comments__table">
-            <h3 class="comments__section-title" [innerHTML]="loading ? 'Loading Comments...' : 'Comments (' + commentPeriod.comments.length + ')'"></h3>
+            <h3 class="mb-2" [innerHTML]="loading ? 'Loading Comments...' : 'Comments (' + commentPeriod.comments.length + ')'"></h3>
             <div class="comments__feed bg-muted">
-              <div class="spinner-container" *ngIf="loading">
-                <div class="spinner-new rotating"></div>
-              </div>
-              <table id="tableTop" class="activity-feed table mb-0" *ngIf="!loading">
+              <table id="tableTop" class="activity-feed table mb-0">
                 <thead>
                   <tr>
                     <th class="sortable" (click)="sort('author')">Posted By
@@ -136,7 +136,7 @@
           <ul class="nv-list">
             <li>
               <span class="name">Status</span>
-              <span class="value"><span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></span>
+              <span class="value">{{ commentPeriod.status }}</span>
             </li>
             <li>
               <span class="name">Start Date</span>
