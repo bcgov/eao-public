@@ -2,261 +2,240 @@
 
 // Banner
 .hero-banner {
-    background-image: url("assets/images/eao-hero-banner.jpg");
-    background-repeat: no-repeat;
-}
+  position: relative;
+  height: 24rem;
+  background-color: rgba($header-bg, 1);
+  background-image: url("assets/images/eao-hero-banner.jpg");
+  background-repeat: no-repeat;
+  background-size: 305%;
+  background-position: -31rem center;
+  box-shadow: 0 0 4rem #00264d inset;
 
-.hero-banner {
-    position: relative;
-    height: 24rem;
-    background-color: rgba($header-bg, 1);
-    background-size: 305%;
-    background-position: -31rem center;
-    box-shadow: 0 0 4rem #00264d inset;
+  .container {
+    display: table;
+    padding: 0;
+    height: 100%;
+  }
 
-    .container {
-        display: table;
-        padding: 0;
-        height: 100%;
-    }
+  .container-inner {
+    display: table-cell;
+    vertical-align: middle;
+  }
 
-    .container-inner {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    &.hb-sm {
-        height: 20rem;
-        background-position: -25rem center;
-        background-size: 240%;
-    }
+  &.hb-sm {
+    height: 20rem;
+    background-position: -25rem center;
+    background-size: 240%;
+  }
 }
 
 .hb-btns {
-    .btn {
-        margin-top: 0.45rem;
-        padding: 0.5rem;
-        min-width: 7rem;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        font-weight: 700;
-    }
+  .btn {
+    margin-top: 0.45rem;
+    padding: 0.5rem;
+    min-width: 7rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
 }
 
 @media (min-width: 400px) {
-    .hero-banner {
-        background-size: 220%;
-        background-position: -25rem center;
+  .hero-banner {
+    background-size: 220%;
+    background-position: -25rem center;
 
-        &.hb-sm {
-            background-position: -30rem center;
-        }
+    &.hb-sm {
+      background-position: -30rem center;
     }
+  }
 }
 
-@media (min-width: 760px) {
-    .hero-banner {
-        height: 30rem;
-        background-position: -23rem center;
-        background-size: 160%;
+@media (min-width: 768px) {
+  .hero-banner {
+    height: 30rem;
+    background-position: -23rem center;
+    background-size: 160%;
 
-        .container {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        &.hb-sm {
-            height: 24rem;
-            background-position: center;
-            background-size: 120%;
-        }
+    &.hb-sm {
+      height: 24rem;
+      background-position: center;
+      background-size: 120%;
     }
+  }
 }
 
 @media (min-height: 900px) and (min-width: 1200px) {
-    .hero-banner {
-        height: 40rem;
-        background-size: 120%;
-    }
+  .hero-banner {
+    height: 40rem;
+    background-size: 120%;
+  }
 }
 
 @media (min-width: 1020px) {
-    .hero-banner {
-        background-position: center;
-        background-size: 130%;
-    }
+  .hero-banner {
+    background-position: center;
+    background-size: 130%;
+  }
 }
 
 @media (min-width: 1200px) {
-    .hero-banner {
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 110%;
+  .hero-banner {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 110%;
 
-        .container {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        &.hb-sm {
-            height: 24rem;
-            background-position: center;
-            background-size: 105%;
-        }
+    .container {
+      padding-left: 0;
+      padding-right: 0;
     }
+
+    &.hb-sm {
+      height: 24rem;
+      background-position: center;
+      background-size: 105%;
+    }
+  }
 }
 
 @media (min-width: 1360px) {
-    .hero-banner {
-        .container {
-            max-width: 1100px;
-        }
-
-        &.hb-sm {
-            //background-position: center bottom;
-            background-size: 100%;
-        }
+  .hero-banner {
+    .container {
+      max-width: 1100px;
     }
+
+    &.hb-sm {
+      //background-position: center bottom;
+      background-size: 100%;
+    }
+  }
 }
 
 @media (min-width: 1920px) {
-    .hero-banner {
-        .container {
-            max-width: 1100px;
-        }
-
-        &.hb-sm {
-            background-position: center 55%;
-        }
+  .hero-banner {
+    .container {
+      max-width: 1100px;
     }
+
+    &.hb-sm {
+      background-position: center 55%;
+    }
+  }
 }
 
 
 // Banner Text
 .hb-txt {
-    padding: 0 1.5rem;
-    color: #FFF;
+  padding: 0 1.5rem;
+  color: #FFF;
 
-    h1 {
-        margin-top: -0.25rem;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        line-height: 2rem;
+  h1 {
+    margin-top: -0.25rem;
+    margin-bottom: 1.5rem;
 
-        span {
-            display: inline-block;
-        }
+    span {
+      display: inline-block;
     }
+  }
 
-    h2 {
-        font-size: 1.375rem;
-        font-weight: 300;
-        line-height: 1.4rem;
-    }
+  h2 {
+    font-size: 1.375rem;
+    font-weight: 300;
+  }
 
-    p {
-        margin-bottom: 1.5rem;
-        font-size: 0.9375rem;
-        font-weight: 300;
-        line-height: 1.4rem;
-    }
+  p {
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
 
-    strong {
-        color: $gold;
-        font-weight: 700;
-    }
+  strong {
+    color: $gold;
+    font-weight: 700;
+  }
 
-    .badge {
-        display: inline-block;
-        margin-top: 0.25rem;
-        margin-left: 0.25rem;
-        vertical-align: top;
-    }
+  .badge {
+    display: inline-block;
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+    vertical-align: top;
+  }
 
-    &__project-title {
-        font-size: 1.75rem;
-        font-weight: 300;
-    }
+  &__project-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+  }
 }
 
 @media (min-width: 460px) {
-    .hb-txt {
-        h1 {
-            span {
-                display: inline;
-            }
-        }
+  .hb-txt {
+    h1 {
+      span {
+        display: inline;
+      }
     }
+  }
 }
 
 @media (min-width: 760px) {
-    .hb-txt {
-        display: inline-block;
-        padding: 2rem;
+  .hb-txt {
+    display: inline-block;
+    padding: 2rem;
 
-        h1 {
-            margin-bottom: 2.15rem;
-            font-size: 2.4rem;
-            line-height: 2.5rem;
-        }
-
-        p {
-            margin-bottom: 2.5rem;
-            font-size: 1rem;
-            line-height: 1.5rem;
-        }
+    h1 {
+      margin-bottom: 2.15rem;
     }
+
+    p {
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+  }
 }
 
 @media (min-width: 900px) {
-    .hb-txt {
-        margin-top: 2.5rem;
+  .hb-txt {
+    margin-top: 2.5rem;
 
-        h1 {
-            font-size: 2.65rem;
-        }
-
-        p {
-            line-height: 1.875rem;
-            font-size: 1.25rem;
-        }
+    p {
+      font-size: 1.25rem;
     }
+  }
 }
 
 
 // Banner Buttons
 .hb-btns {
-    strong {
-        display: block;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 600;
-    }
+  strong {
+    display: block;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 
-    .btn {
-        + span {
-            display: inline-block;
-            margin-top: 0.45rem;
-            margin-right: 0.25rem;
-            margin-left: 0.25rem;
-            vertical-align: middle;
-        }
+  .btn {
+    + span {
+      display: inline-block;
+      margin-top: 0.45rem;
+      margin-right: 0.25rem;
+      margin-left: 0.25rem;
+      vertical-align: middle;
     }
+  }
 }
 
 @media (min-width: 400px) {
-    .hb-btns {
-        text-align: left;
+  .hb-btns {
+    text-align: left;
 
-        .btn {
-            width: auto;
+    .btn {
+      width: auto;
 
-            + span {
-                display: inline-block;
-                margin-top: 0.45rem;
-                margin-right: 0.5rem;
-                margin-left: 0.5rem;
-            }
-        }
+      + span {
+        display: inline-block;
+        margin-top: 0.45rem;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+      }
     }
+  }
 }
