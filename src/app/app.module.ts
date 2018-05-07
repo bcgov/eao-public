@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CommentPeriodModule } from './comment-period/comment-period.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -29,15 +30,12 @@ import { PhaseFilterPipe } from './phase-filter.pipe';
 import { FilterPCPPipe } from './filter-pcp.pipe';
 import { ProjectFilterPipe } from './project-filter.pipe';
 import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
-import { OrderByPipe } from './order-by.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { ScrollDirective } from './directives/scroll.directive';
-import { Api } from './services/api';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
-import { CommentPeriodComponent } from './comment-period/comment-period.component';
-import { CommentPeriodService } from './services/comment-period.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -60,25 +58,25 @@ import { CommentPeriodService } from './services/comment-period.service';
     FilterPCPPipe,
     ProjectFilterPipe,
     ProjectStatusFilterPipe,
-    OrderByPipe,
     ScrollDirective,
     NotFoundComponent,
     ProjectDetailComponent,
-    RecentActivityFilterPipe,
-    CommentPeriodComponent,
+    RecentActivityFilterPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    CommentPeriodModule,
     AppRoutingModule,
     Ng2PageScrollModule.forRoot(),
     NgbModule,
     NgxPaginationModule,
-    MapModule
+    MapModule,
+    SharedModule
   ],
-  providers: [Api, NewsComponent, CookieService, ProjectService, CommentPeriodService],
+  providers: [NewsComponent, CookieService, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

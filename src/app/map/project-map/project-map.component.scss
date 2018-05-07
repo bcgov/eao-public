@@ -4,9 +4,11 @@
     @include flex(1 1 auto);
 
     position: relative;
-    height: 180px;
+    height: 160px;
 
     esri-map {
         @include fill-parent(absolute);
+        font-size: 0.725rem;
+        text-align: left;
     }
 }

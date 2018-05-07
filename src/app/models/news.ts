@@ -8,6 +8,8 @@ export class News {
   priority: number;
   type: string;
   dateUpdated: string;
+  contentUrl: string;
+  documentUrl: string;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.headline = obj && obj.headline || null;
@@ -16,5 +18,7 @@ export class News {
     this.priority = obj && obj.priority || null;
     this.type = obj && obj.type || null;
     this.dateUpdated = obj && obj.dateUpdated || null;
+    this.contentUrl = obj && obj.contentUrl || null;
+    this.documentUrl = obj && obj.documentUrl || null;
   }
 }
