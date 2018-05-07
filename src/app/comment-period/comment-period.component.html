@@ -24,21 +24,21 @@
           <h2>About this comment period...</h2>
           <p>A 30 day public comment period on the <em>{{ commentPeriod.informationLabel }}</em> will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}. All written comments received by online form, fax, or mail during this time period will be considered.</p>
           <div class="comments__btns">
-            <button class="btn btn-primary slide-l-btn" (click)="triggerSubmitComment()"
-              data-toggle="modal"
-              data-target="#submitCommentModal"
-              data-backdrop="static"
-              *ngIf="commentPeriod.status == 'Open'">
-              <i class="material-icons">&#xE0B9;</i>
-              <span>Submit a Comment</span>
-            </button>
-            <button class="btn btn-info slide-l-btn"
+            <button class="btn btn-primary slide-l-btn"
               data-toggle="modal"
               data-target="#relatedDocumentsModal"
               data-backdrop="static"
               *ngIf="commentPeriod.relatedDocuments.length > 1">
               <i class="material-icons">&#xE89E;</i>
               <span>View Related Documents</span>
+            </button>
+            <button class="btn btn-info slide-l-btn" (click)="triggerSubmitComment()"
+              data-toggle="modal"
+              data-target="#submitCommentModal"
+              data-backdrop="static"
+              *ngIf="commentPeriod.status == 'Open'">
+              <i class="material-icons">&#xE0B9;</i>
+              <span>Submit a Comment</span>
             </button>
           </div>
         </section>
