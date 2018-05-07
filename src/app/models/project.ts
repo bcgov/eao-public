@@ -1,6 +1,6 @@
 import { Proponent } from './proponent';
 import { CurrentPhase } from './currentphase';
-import { RecentActivities } from './recentactivities';
+import { News } from './news';
 
 export class Project {
   _id: number;
@@ -27,7 +27,7 @@ export class Project {
   CELead: string;
   CELeadEmail: string;
   CELeadPhone: string;
-  recent_activities: [RecentActivities];
+  recent_activities: News[];
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;

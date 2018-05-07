@@ -3,6 +3,8 @@ import { News } from '../models/news';
 import { NewsService } from '../services/news.service';
 import { PaginationInstance } from 'ngx-pagination';
 import { Api } from '../services/api';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
 
 @Component({
   selector: 'app-news',
@@ -27,8 +29,13 @@ export class NewsComponent implements OnInit {
     currentPage: 1
   };
   hostname: String;
+  NewsTypeFilterPipe: NewsTypeFilterPipe;
+  ProjectFilterPipe: ProjectFilterPipe;
 
-  constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef, private api: Api) { }
+  constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef, private api: Api) {
+    this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
+    this.ProjectFilterPipe = new ProjectFilterPipe();
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -73,5 +80,22 @@ export class NewsComponent implements OnInit {
 
   readmore(item): void {
     item.readmore = !item.readmore;
+  }
+
+  getDisplayedElementCountMessage(pageNumber) {
+    let message = '';
+    let items = this.results;
+    if (items.length > 0) {
+      if (this.filter) {
+        items = this.ProjectFilterPipe.transform(items, this.filter);
+      }
+      if (this.filterType) {
+        items = this.NewsTypeFilterPipe.transform(items, this.filterType);
+      }
+      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
+      const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
+      message = `Viewing ${startRange}-${endRange} of ${items.length} news & activities`;
+    }
+    return message;
   }
 }

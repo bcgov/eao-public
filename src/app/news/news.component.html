@@ -35,15 +35,15 @@
       <div class="filter-input-row filters-advanced" *ngIf="showFilters">
         <div class="col-md-12">
           <div class="toggle-btn">
-            <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
+            <input class="form-check-input" type="radio" name="newsTypeFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
             <label class="btn btn-secondary" for="all">All</label>
           </div>
           <div class="toggle-btn">
-            <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
+            <input class="form-check-input" type="radio" name="newsTypeFilter" id="news" [(ngModel)]="filterType" value="news" />
             <label class="btn btn-secondary" for="news">News</label>
           </div>
           <div class="toggle-btn">
-            <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
+            <input class="form-check-input" type="radio" name="newsTypeFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
             <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
           </div>
         </div>
@@ -55,8 +55,11 @@
       </div>
     </div>
 
-    <div class="news-feed">
-      <table id="tableTop" class="activity-feed table" *ngIf="results">
+    <div class="news-feed" *ngIf="results">
+      <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+          <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+      </pagination-template>
+      <table id="tableTop" class="activity-feed table">
         <thead>
           <tr>
             <th class="sortable" (click)="sort('headline')">Headline
@@ -82,13 +85,13 @@
                   </h3>
                   <span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
                 </div>
-  
+
                 <div class="activity-feed__content readmore">
-                  <div class="readmore__content" 
-                    [innerHTML]="item.content" 
+                  <div class="readmore__content"
+                    [innerHTML]="item.content"
                     *ngIf="item.readmore || item.content.length <= 400">
                   </div>
-                  <div class="readmore__content" 
+                  <div class="readmore__content"
                     [innerHTML]="(item.content | slice:0:400) + '...'"
                     *ngIf="!item.readmore && item.content.length > 400">
                   </div>
@@ -107,6 +110,7 @@
         </tbody>
       </table>
       <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+        <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
         <ul class="pagination">
           <li class="page-item" *ngIf="!p.isFirstPage()">
             <a class="page-link" (click)="p.previous();" appScroll> < </a>

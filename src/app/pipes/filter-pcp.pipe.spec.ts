@@ -1,5 +1,5 @@
 import { FilterPCPPipe } from './filter-pcp.pipe';
-import { Project } from './models/project';
+import { Project } from '../models/project';
 
 describe('FilterPCPPipe', () => {
 

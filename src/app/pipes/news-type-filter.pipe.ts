@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {News} from './models/news';
+import {News} from '../models/news';
 
 @Pipe({
-  name: 'newsFilter'
+  name: 'newsTypeFilter'
 })
-export class NewsFilterPipe implements PipeTransform {
+export class NewsTypeFilterPipe implements PipeTransform {
 
     transform(value: News[], q: string) {
         if (!q || q === '') {

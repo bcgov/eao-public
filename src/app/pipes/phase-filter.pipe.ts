@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Project } from './models/project';
-import { CurrentPhase } from './models/currentphase';
+import { Project } from '../models/project';
+import { CurrentPhase } from '../models/currentphase';
 
 @Pipe({
   name: 'projectPhaseFilter'

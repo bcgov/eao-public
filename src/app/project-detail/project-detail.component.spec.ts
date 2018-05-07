@@ -4,19 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { News } from '../models/news';
 import { ProjectDetailComponent } from './project-detail.component';
 import { Project } from '../models/project';
 
-import { OrderByPipe } from '../order-by.pipe';
-import { ProjectFilterPipe } from '../project-filter.pipe';
-import { PhaseFilterPipe } from '../phase-filter.pipe';
-import { FilterPCPPipe } from '../filter-pcp.pipe';
-import { ProjectDecisionFilterPipe } from '../project-decision-filter.pipe';
-import { ProjectTypeFilterPipe } from '../project-type-filter.pipe';
-import { ProponentFilterPipe } from '../proponent-filter.pipe';
-import { ObjectFilterPipe } from '../object-filter.pipe';
-import { NewsTypeFilterPipe } from '../news-type-filter.pipe';
-import { RecentActivityFilterPipe } from '../recent-activity-filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
+import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
+import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
+import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
+import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
+import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
+import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 
 import { MapModule } from '../map/map.module';
 import { Api } from '../services/api';
@@ -37,14 +38,13 @@ describe('ProjectDetailComponent', () => {
                 'recent_activities': [
                   {
                     'content': 'Hello World!',
-                    'dateAdded': '2017-12-14T17:00:00.000Z'
+                    'dateUpdated': '2017-12-14T17:00:00.000Z'
                   }
                 ]
               },
           })
         }
       };
-
       router = {
         navigate: jasmine.createSpy('navigate')
       };
@@ -72,7 +72,7 @@ describe('ProjectDetailComponent', () => {
           ProponentFilterPipe,
           ObjectFilterPipe,
           NewsTypeFilterPipe,
-          RecentActivityFilterPipe
+          NewsHeadlineFilterPipe
         ]
       }).compileComponents();
     })
@@ -93,8 +93,8 @@ describe('ProjectDetailComponent', () => {
       expect(component.project).toBeTruthy;
     });
 
-    it('should set column to dateAdded', () => {
-      expect(component.column).toBe('dateAdded');
+    it('should set column to dateUpdated', () => {
+      expect(component.column).toBe('dateUpdated');
     });
 
     it('should set direction to -1', () => {
@@ -104,7 +104,6 @@ describe('ProjectDetailComponent', () => {
 
   describe('content readmore property', () => {
     let contentKeys;
-
     describe('on load', () => {
       it('should initially be undefined', () => {
         contentKeys = Object.keys(component.project.recent_activities[0]);
@@ -125,7 +124,7 @@ describe('ProjectDetailComponent', () => {
     let property;
 
     beforeEach(() => {
-      property = 'dateAdded';
+      property = 'dateUpdated';
     });
 
     describe('given isDesc is true', () => {
@@ -142,7 +141,6 @@ describe('ProjectDetailComponent', () => {
         expect(component.direction).toBe(-1);
       });
     });
-
     describe('given isDesc is false', () => {
       beforeEach(() => {
         component.isDesc = false;
@@ -239,12 +237,57 @@ describe('ProjectDetailComponent', () => {
     });
   });
 
-  describe('getDocumentManagerUrl', () => {
-    it('returns the correct document manager url for the project', () => {
+  describe('getDisplayedElementCountMessage', () => {
+    beforeEach(() => {
       component.project = new Project();
-      component.project.code = 'test';
-      expect(component.getDocumentManagerUrl()).toBe('http://localhost:3000/p/test/docs');
+      component.project.recent_activities = [
+        new News({ headline: 'Big mine' , type: 'news' }),
+        new News({ headline: 'Medium', type: 'public comment period' }),
+        new News({ headline: 'Bigger mine', type: 'public comment period' }),
+        new News({ headline: 'Small', type: 'news' })
+      ];
+    });
 
+    it('returns all the data if no filter is set', () => {
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-4 of 4 news & activities');
+    });
+
+    it('only returns news items if the news filter is set', () => {
+      component.filterType = 'news';
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-2 of 2 news & activities');
+    });
+
+    it('only returns public comment period items if the relevant filter is set', () => {
+      component.filterType = 'public comment period';
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-2 of 2 news & activities');
+    });
+
+    it('only returns items matching the freeform filter if the relevant filter is set', () => {
+      component.filter = 'medium';
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-1 of 1 news & activities');
+    });
+
+    it('only returns items matching both the freeform and type filters when filters are set', () => {
+      component.filterType = 'news';
+      component.filter = 'mine';
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-1 of 1 news & activities');
+    });
+
+    it('flexes correctly based on the number of items per page', () => {
+      component.config.itemsPerPage = 3;
+      const result = component.getDisplayedElementCountMessage(2);
+      expect(result).toBe('Viewing 4-4 of 4 news & activities');
+    });
+
+    it('returns an empty message if there are no items in the list', () => {
+      component.project.recent_activities = [];
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('');
     });
   });
 });

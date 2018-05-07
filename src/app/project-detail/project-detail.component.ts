@@ -4,6 +4,8 @@ import { Project } from '../models/project';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
 import { Api } from '../services/api';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 
 @Component({
   selector: 'app-project-detail',
@@ -30,8 +32,13 @@ export class ProjectDetailComponent implements OnInit {
   };
 
   private sub: Subscription;
+  NewsTypeFilterPipe: NewsTypeFilterPipe;
+  NewsHeadlineFilterPipe: NewsHeadlineFilterPipe;
 
-  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
+    this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
+    this.NewsHeadlineFilterPipe = new NewsHeadlineFilterPipe();
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -45,7 +52,7 @@ export class ProjectDetailComponent implements OnInit {
         if (!this.project.proponent) {
           this.project.proponent = { name: '' };
         }
-        this.column = 'dateAdded';
+        this.column = 'dateUpdated';
         this.direction = -1;
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
@@ -91,5 +98,22 @@ export class ProjectDetailComponent implements OnInit {
 
   readmore(item): void {
     item.readmore = !item.readmore;
+  }
+
+  getDisplayedElementCountMessage(pageNumber) {
+    let message = '';
+    let items = this.project.recent_activities;
+    if (items.length > 0) {
+      if (this.filter) {
+        items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
+      }
+      if (this.filterType) {
+        items = this.NewsTypeFilterPipe.transform(items, this.filterType);
+      }
+      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
+      const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
+      message = `Viewing ${startRange}-${endRange} of ${items.length} news & activities`;
+    }
+    return message;
   }
 }

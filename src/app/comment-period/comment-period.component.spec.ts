@@ -17,8 +17,8 @@ import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
 import { SubmitCommentModalComponent } from './submit-comment-modal/submit-comment-modal';
 import { SubmitCommentProgressModalComponent } from './submit-comment-progress-modal/submit-comment-progress-modal';
 
-import { OrderByPipe } from '../order-by.pipe';
-import { ObjectFilterPipe } from '../object-filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
 import { CommentPeriod } from '../models/commentperiod';
 import { Comment } from '../models/comment';
 import { Document } from '../models/document';

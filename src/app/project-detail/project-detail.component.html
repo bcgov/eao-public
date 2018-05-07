@@ -37,15 +37,15 @@
                 <!-- Advanced Filters TBD -->
                 <div class="col-md-12">
                   <div class="toggle-btn">
-                    <input class="form-check-input" type="radio" name="newsFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
+                    <input class="form-check-input" type="radio" name="newsTypeFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
                     <label class="btn btn-secondary" for="all">All</label>
                   </div>
                   <div class="toggle-btn">
-                    <input class="form-check-input" type="radio" name="newsFilter" id="news" [(ngModel)]="filterType" value="news" />
+                    <input class="form-check-input" type="radio" name="newsTypeFilter" id="news" [(ngModel)]="filterType" value="news" />
                     <label class="btn btn-secondary" for="news">News</label>
                   </div>
                   <div class="toggle-btn">
-                    <input class="form-check-input" type="radio" name="newsFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
+                    <input class="form-check-input" type="radio" name="newsTypeFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
                     <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
                   </div>
                 </div>
@@ -60,8 +60,11 @@
 
             </div>
 
-            <div class="project-news-feed">
-              <table id="tableTop" class="activity-feed table" *ngIf="project">
+            <div class="project-news-feed" *ngIf="project">
+              <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                  <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+              </pagination-template>
+              <table id="tableTop" class="activity-feed table">
                 <thead>
                   <tr>
                     <th class="sortable" (click)="sort('headline')">Title
@@ -76,7 +79,7 @@
                 </thead>
                 <tbody>
                   <tr class="activity-feed__item"
-                    *ngFor="let item of project.recent_activities | activitiesFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+                    *ngFor="let item of project.recent_activities | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
                     <td colspan="2">
                       <div class="title-container">
                         <h3 class="title-container__title">{{item.headline}}</h3>
@@ -107,6 +110,7 @@
                 *ngIf="project.recent_activities.length > 25"
                 [id]="config.id"
                 (pageChange)="config.currentPage = $event">
+                <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
                 <ul class="pagination">
                   <li class="page-item" *ngIf="!p.isFirstPage()">
                     <a class="page-link" (click)="p.previous();" appScroll> < </a>
@@ -202,7 +206,7 @@
       </section>
       <section class="card">
         <div class="card-body">
-          <p class="mb-0">Looking for more detailed information? <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
+          <p class="mb-0">Looking for more detailed information? <a href="{{api.hostnameEPIC}}/p/{{project.code}}/docs" target="_blank">Browse all documentation</a> for this project.</p>
         </div>
       </section>
     </aside>

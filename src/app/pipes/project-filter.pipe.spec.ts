@@ -1,5 +1,5 @@
 import { ProjectFilterPipe } from './project-filter.pipe';
-import { News } from './models/news';
+import { News } from '../models/news';
 
 describe('ProjectStatusFilterPipe', () => {
 

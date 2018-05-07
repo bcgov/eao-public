@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Project } from './models/project';
-import { Proponent } from './models/proponent';
+import { Project } from '../models/project';
+import { Proponent } from '../models/proponent';
 
 @Pipe({
   name: 'proponentFilter'

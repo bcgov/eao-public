@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { News } from './models/news';
+import { News } from '../models/news';
 
 @Pipe({
   name: 'projectFilter'
