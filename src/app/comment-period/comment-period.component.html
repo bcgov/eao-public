@@ -45,6 +45,9 @@
         <section *ngIf="!loading">
           <div class="comments__table">
             <h3 class="mb-2" [innerHTML]="loading ? 'Loading Comments...' : 'Comments (' + commentPeriod.comments.length + ')'"></h3>
+            <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+              <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+            </pagination-template>
             <div class="comments__feed bg-muted">
               <table id="tableTop" class="activity-feed table mb-0">
                 <thead>
@@ -103,10 +106,11 @@
                   </tr>
                 </tbody>
               </table>
-              <pagination-template #p="paginationApi" 
+              <pagination-template #p="paginationApi"
                 *ngIf="commentPeriod.comments.length > 25"
                 [id]="config.id"
                 (pageChange)="config.currentPage = $event">
+                <span>{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
                 <ul class="pagination">
                   <li class="page-item" *ngIf="!p.isFirstPage()">
                     <a class="page-link" (click)="p.previous();" appScroll> < </a>
@@ -126,7 +130,7 @@
               </pagination-template>
             </div>
           </div>
-        </section>        
+        </section>
 
       </main>
       <aside class="col-lg-4">

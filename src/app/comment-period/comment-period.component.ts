@@ -57,7 +57,19 @@ export class CommentPeriodComponent implements OnInit {
     const step1 = document.getElementById('step1');
     step1.classList.remove('hidden');
   };
+
   readmore(item): void {
     item.readmore = !item.readmore;
+  }
+
+  getDisplayedElementCountMessage(pageNumber) {
+    let message = '';
+    const items = this.commentPeriod.comments;
+    if (items.length > 0) {
+      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
+      const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
+      message = `Viewing ${startRange}-${endRange} of ${items.length} news & activities`;
+    }
+    return message;
   }
 }
