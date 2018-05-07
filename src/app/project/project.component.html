@@ -30,7 +30,7 @@
 				</button>
 			</div>
 			<div class="filter-input-row filters-advanced" *ngIf="showFilters">
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Comment Period</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -42,14 +42,14 @@
 					</select>
 				</div>
 
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Proponent</label>
 					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
 						<option value="" selected>All</option>
 						<option *ngFor="let p of proponents | orderBy: {property: 'name', direction: 1}" [ngValue]="p">{{p.name}}</option>
 					</select>
 				</div>
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>Type</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -68,7 +68,7 @@
 					</select>
 
 				</div>
-				<div class="col-md-20 form-group">
+				<div class="col-md-20">
 					<label>EA Decision</label>
 
 					<!-- TODO: Populate Dynamically -->
@@ -86,7 +86,7 @@
 					</select>
         </div>
 
-        <div class="col-md-20 form-group">
+        <div class="col-md-20">
 					<label>Current Phase</label>
 
 					<select class="form-control" [(ngModel)]="phasefilter">
@@ -121,16 +121,12 @@
             <i class="sort" [ngClass]="{'sort-asc': (column == 'eacDecision' && isDesc), 'sort-desc': (column == 'eacDecision' && !isDesc) }" aria-hidden="true"></i></th>
           <th class="sortable" (click)="sort('decisionDate')">Decision Date
             <i class="sort" [ngClass]="{'sort-asc': (column == 'decisionDate' && isDesc), 'sort-desc': (column == 'decisionDate' && !isDesc) }" aria-hidden="true"></i></th>
-
-          <!--
-          <th>Comment Period</th>
-          -->
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of results | objectFilter: filter | proponentFilter: propfilter | projectTypeFilter: filterType | projectDecisionFilter: filterDecision | filterPCP:filterPCP | projectPhaseFilter: phasefilter | orderBy: {property: column, direction: direction} | paginate: config">
           <td class="name">
-            <a href="https://projects.eao.gov.bc.ca/p/{{item.code}}/detail"
+            <a href="/p/{{item.code}}"
               title="View more information about {{item.name}}">
               {{item.name}}
             </a>
@@ -140,23 +136,19 @@
           <td class="proj-col status"><span>{{item.eacDecision}}</span></td>
           <td class="proj-col date"><span *ngIf='item.decisionDate'>{{item.decisionDate | date:'mediumDate'}}</span>
             <span *ngIf='!item.decisionDate'>N/A</span></td>
-          <!--
-          <td class="proj-col comment-period"><span>{{item.openCommentPeriod}}</span></td>
-          -->
-                </tr>
+        </tr>
 			</tbody>
 		</table>
 
 		<pagination-template #p="paginationApi"
 			[id]="config.id"
 			(pageChange)="config.currentPage = $event">
-
 			<ul class="pagination">
 				<li class="page-item" *ngIf="!p.isFirstPage()">
 					<a class="page-link" (click)="p.previous();" appScroll> < </a>
 				</li>
 				<li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-					<a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+					<a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" appScroll>
 						<span>{{ page.label }}</span>
 					</a>
 					<div *ngIf="p.getCurrent() === page.value">

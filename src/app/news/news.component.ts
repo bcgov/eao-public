@@ -34,6 +34,7 @@ export class NewsComponent implements OnInit {
     this.loading = true;
     this.newsService.getAll().subscribe(
       data => {
+        this.setDocumentUrl(data);
         this.results = data;
         this.loading = false;
         this.column = 'dateAdded';
@@ -43,7 +44,19 @@ export class NewsComponent implements OnInit {
       },
       error => console.log(error)
     );
-    this.hostname = this.api.hostnameEPIC;
+  }
+
+  setDocumentUrl(data) {
+    // attach host to document url if it goes to esm-server
+    const regex = /http(s)?:\/\/(www.)?/;
+    data.forEach(activity => {
+      if (!activity.documentUrl) {
+        return ;
+      }
+      if (!regex.test(activity.documentUrl)) {
+        activity.documentUrl = `${this.api.hostnameEPIC }${ activity.documentUrl }`;
+      }
+    });
   }
 
   sort (property) {

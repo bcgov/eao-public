@@ -33,7 +33,7 @@ export class ProjectComponent implements OnInit {
   public proponents: Array<Proponent> = [];
   public config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 10,
+    itemsPerPage: 25,
     currentPage: 1
   };
 

@@ -54,10 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'p/:code/commentperiod/:id',
-    component: CommentPeriodComponent,
-    resolve: {
-      commentPeriod: CommentPeriodResolver
-    },
+    component: CommentPeriodComponent
   },
   {
     path: 'news',
