@@ -53,6 +53,7 @@ export class ProjectDetailComponent implements OnInit {
       error => console.log(error)
     );
   }
+
   setDocumentUrl(project) {
     const regex = /http(s)?:\/\/(www.)?/;
     project.recent_activities.forEach(activity => {
@@ -64,16 +65,23 @@ export class ProjectDetailComponent implements OnInit {
       }
     });
   }
+
+  public getDocumentManagerUrl() {
+    return `${this.api.hostnameEPIC}/p/${this.project.code}/docs`;
+  }
+
   sort (property) {
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
   }
+
   clearAllNewsFilters() {
     this.filter = undefined;
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
   }
+
   gotoMap(): void {
     // pass along the id of the current project if available
     // so that the map component can show the popup for it.
