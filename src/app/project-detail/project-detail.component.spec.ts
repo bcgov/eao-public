@@ -44,6 +44,7 @@ describe('ProjectDetailComponent', () => {
           })
         }
       };
+
       router = {
         navigate: jasmine.createSpy('navigate')
       };
@@ -87,24 +88,30 @@ describe('ProjectDetailComponent', () => {
     it('should return data for route.data', () => {
       expect(ActivatedRouteStub.data).toBeTruthy;
     });
+
     it('should return project data', () => {
       expect(component.project).toBeTruthy;
     });
+
     it('should set column to dateAdded', () => {
       expect(component.column).toBe('dateAdded');
     });
+
     it('should set direction to -1', () => {
       expect(component.direction).toBe(-1);
     });
   });
+
   describe('content readmore property', () => {
     let contentKeys;
+
     describe('on load', () => {
       it('should initially be undefined', () => {
         contentKeys = Object.keys(component.project.recent_activities[0]);
         expect(contentKeys.includes('readmore')).toBeFalsy;
       });
     });
+
     describe('after expanding a comment', () => {
       it('should be defined', () => {
         component.readmore(component.project.recent_activities[0]);
@@ -113,12 +120,14 @@ describe('ProjectDetailComponent', () => {
       });
     });
   });
+
   describe('sort(property)', () => {
     let property;
 
     beforeEach(() => {
       property = 'dateAdded';
     });
+
     describe('given isDesc is true', () => {
       beforeEach(() => {
         component.isDesc = true;
@@ -128,10 +137,12 @@ describe('ProjectDetailComponent', () => {
       it('should set isDesc to false', () => {
         expect(component.isDesc).toBeFalsy();
       });
+
       it('should set direction to -1', () => {
         expect(component.direction).toBe(-1);
       });
     });
+
     describe('given isDesc is false', () => {
       beforeEach(() => {
         component.isDesc = false;
@@ -141,10 +152,12 @@ describe('ProjectDetailComponent', () => {
       it('should set isDesc to true', () => {
         expect(component.isDesc).toBeTruthy();
       });
+
       it('should set direction to 1', () => {
         expect(component.direction).toBe(1);
       });
     });
+
     describe('given property', () => {
       it('should assign property to column', () => {
         component.sort(property);
@@ -152,29 +165,34 @@ describe('ProjectDetailComponent', () => {
       });
     });
   });
+
   describe('clearAllNewsFilters()', () => {
     it('should set filter to undefined', () => {
       component.filter = 'filtertest';
       component.clearAllNewsFilters();
       expect(component.filter).toBeFalsy;
     });
+
     it('should set NewsTypeFilter to be undefined', () => {
       component.NewsTypeFilter = '';
       component.clearAllNewsFilters();
       expect(component.NewsTypeFilter).toBeFalsy;
     });
+
     it('should set filterType to be undefined', () => {
       component.filterType = 'test';
       component.clearAllNewsFilters();
       expect(component.filterType).toBeFalsy;
     });
   });
+
   describe('gotoMap()', () => {
     it('should navigate to /map when no project code given', () => {
       component.project = null;
       component.gotoMap();
       expect(router.navigate).toHaveBeenCalledWith(['/map', { project: null}]);
     });
+
     it('should navigate to /map given a project code', () => {
       component.project = new Project();
       component.project.code = 'test';
@@ -182,6 +200,7 @@ describe('ProjectDetailComponent', () => {
       expect(router.navigate).toHaveBeenCalledWith(['/map', { project: component.project.code}]);
     });
   });
+
   describe('setDocumentUrl', () => {
     it('should set results.documentUrl to \'\' when no document url ', () => {
       const data = {
@@ -194,6 +213,7 @@ describe('ProjectDetailComponent', () => {
       component.setDocumentUrl(data);
       expect(data.recent_activities[0].documentUrl).toBe('');
     });
+
     it('should not change results.documentUrl when given a www url', () => {
       const data = {
         recent_activities: [
@@ -205,6 +225,7 @@ describe('ProjectDetailComponent', () => {
       component.setDocumentUrl(data);
       expect(data.recent_activities[0].documentUrl).toBe('http://www.test.com');
     });
+
     it('should set results.documentUrl to \'http://localhost:3000/blarg\' when given an esm-server document ', () => {
       const data = {
         recent_activities: [
@@ -215,6 +236,15 @@ describe('ProjectDetailComponent', () => {
       };
       component.setDocumentUrl(data);
       expect(data.recent_activities[0].documentUrl).toBe('http://localhost:3000/blarg');
+    });
+  });
+
+  describe('getDocumentManagerUrl', () => {
+    it('returns the correct document manager url for the project', () => {
+      component.project = new Project();
+      component.project.code = 'test';
+      expect(component.getDocumentManagerUrl()).toBe('http://localhost:3000/p/test/docs');
+
     });
   });
 });

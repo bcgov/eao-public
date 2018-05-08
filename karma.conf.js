@@ -40,7 +40,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chromeheadless'],
+    browsers: ['ChromeHeadless'],
     singleRun: true,
     concurrency: Infinity
   });
