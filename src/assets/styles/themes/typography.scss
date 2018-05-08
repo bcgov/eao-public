@@ -3,12 +3,6 @@
   display: none;
 }
 
-@media (max-width: 567px) {
-  html {
-    font-size: 14px;
-  }
-}
-
 body {
   font-family: "myriad-pro";
   font-weight: 400;
@@ -28,7 +22,7 @@ h2, h3, h4 {
 }
 
 h1 {
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.01rem;
 
   sup {
     top: 0;
@@ -52,5 +46,20 @@ pre {
   p {
     margin-bottom: 1rem;
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 567px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    line-height: 1;
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
   }
 }
