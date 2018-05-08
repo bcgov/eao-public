@@ -68,7 +68,7 @@ export class CommentPeriodComponent implements OnInit {
     if (items.length > 0) {
       const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
       const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
-      message = `Viewing ${startRange}-${endRange} of ${items.length} news & activities`;
+      message = `Viewing ${startRange}-${endRange} of ${items.length} Comments`;
     }
     return message;
   }

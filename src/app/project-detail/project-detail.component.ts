@@ -27,7 +27,7 @@ export class ProjectDetailComponent implements OnInit {
 
   public config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 10,
+    itemsPerPage: 25,
     currentPage: 1
   };
 
@@ -112,7 +112,7 @@ export class ProjectDetailComponent implements OnInit {
       }
       const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
       const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
-      message = `Viewing ${startRange}-${endRange} of ${items.length} news & activities`;
+      message = `Viewing ${startRange}-${endRange} of ${items.length} Results`;
     }
     return message;
   }
