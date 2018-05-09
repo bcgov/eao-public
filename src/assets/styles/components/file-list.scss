@@ -17,6 +17,8 @@ $file-upload-target-border:       #ccc;
     &-item {
       @include flex-box();
       padding: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 400;
       background: $file-upload-list-item-bg;
 
       &-icon {
@@ -31,8 +33,12 @@ $file-upload-target-border:       #ccc;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 0.875rem;
-        font-weight: 400;
+      }
+
+      &-size {
+        @include flex(1 1 auto);
+        padding: 0.4rem 0.5rem;
+        text-align: right;
       }
   
       &-action {
@@ -57,11 +63,10 @@ $file-upload-target-border:       #ccc;
 
     &.anchor-list {
       li {
-        padding: 0;
+        padding: 0.5rem;
 
         a {
           @include flex-box();
-          padding: 0.5rem;
           overflow: hidden;
           text-overflow: ellipsis;
 
@@ -73,7 +78,7 @@ $file-upload-target-border:       #ccc;
             padding-right: 0;
             padding-bottom: 0;
             padding-left: 0;
-            top: 0.4rem;
+            top: 0.45rem;
             text-decoration: none;
           }
 

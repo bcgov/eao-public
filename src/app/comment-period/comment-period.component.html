@@ -185,6 +185,9 @@
       <div class="modal-content">
         <div class="modal-header pb-0">
           <h3 class="modal-title comment-modal-title">Related Documents <span class="comment-modal-title__large">{{ commentPeriod.informationLabel }}</span></h3>
+          <button class="btn btn-default" (click)="hideAllSteps()" data-dismiss="modal" aria-label="Close">
+            <i class="material-icons">&#xE5CD;</i>
+          </button>
         </div>
         <div class="modal-body">
           <ul class="file__list anchor-list">
@@ -197,7 +200,7 @@
                   <span>{{ relDoc.displayName }}</span>
                 </span>
               </a>
-              <span>{{ relDoc.fileSize }}</span>
+              <span class="file__list-item-size">{{ relDoc.fileSize }}</span>
             </li>
           </ul>
         </div>
