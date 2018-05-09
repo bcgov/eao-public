@@ -52,7 +52,7 @@ export class ProjectDetailComponent implements OnInit {
         if (!this.project.proponent) {
           this.project.proponent = { name: '' };
         }
-        this.column = 'dateUpdated';
+        this.column = 'dateAdded';
         this.direction = -1;
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();

@@ -38,7 +38,7 @@ describe('ProjectDetailComponent', () => {
                 'recent_activities': [
                   {
                     'content': 'Hello World!',
-                    'dateUpdated': '2017-12-14T17:00:00.000Z'
+                    'dateAdded': '2017-12-14T17:00:00.000Z'
                   }
                 ]
               },
@@ -93,8 +93,8 @@ describe('ProjectDetailComponent', () => {
       expect(component.project).toBeTruthy;
     });
 
-    it('should set column to dateUpdated', () => {
-      expect(component.column).toBe('dateUpdated');
+    it('should set column to dateAdded', () => {
+      expect(component.column).toBe('dateAdded');
     });
 
     it('should set direction to -1', () => {
@@ -124,7 +124,7 @@ describe('ProjectDetailComponent', () => {
     let property;
 
     beforeEach(() => {
-      property = 'dateUpdated';
+      property = 'dateAdded';
     });
 
     describe('given isDesc is true', () => {

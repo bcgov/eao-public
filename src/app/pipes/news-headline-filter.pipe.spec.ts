@@ -1,5 +1,5 @@
 import { NewsHeadlineFilterPipe } from './news-headline-filter.pipe';
-import { News } from '../models/News';
+import { News } from '../models/news';
 
 describe('NewsHeadlineFilterPipe', () => {
 

@@ -14,6 +14,6 @@ export class Document {
     this.displayName = obj && obj.displayName || null;
     this.internalSize = obj && obj.internalSize || null;
     // TODO: use a proper filter such as https://github.com/amitdahan/ngx-filesize when upgrading angular
-    this.fileSize = obj && filesize(obj.internalSize) || null;
+    this.fileSize = obj && obj.internalSize && filesize(obj.internalSize) || null;
   }
 }
