@@ -4,6 +4,8 @@ import { Project } from '../models/project';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
 import { Api } from '../services/api';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 
 @Component({
   selector: 'app-project-detail',
@@ -25,13 +27,18 @@ export class ProjectDetailComponent implements OnInit {
 
   public config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 10,
+    itemsPerPage: 25,
     currentPage: 1
   };
 
   private sub: Subscription;
+  NewsTypeFilterPipe: NewsTypeFilterPipe;
+  NewsHeadlineFilterPipe: NewsHeadlineFilterPipe;
 
-  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
+    this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
+    this.NewsHeadlineFilterPipe = new NewsHeadlineFilterPipe();
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -53,6 +60,7 @@ export class ProjectDetailComponent implements OnInit {
       error => console.log(error)
     );
   }
+
   setDocumentUrl(project) {
     const regex = /http(s)?:\/\/(www.)?/;
     project.recent_activities.forEach(activity => {
@@ -64,16 +72,23 @@ export class ProjectDetailComponent implements OnInit {
       }
     });
   }
+
+  public getDocumentManagerUrl() {
+    return `${this.api.hostnameEPIC}/p/${this.project.code}/docs`;
+  }
+
   sort (property) {
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
   }
+
   clearAllNewsFilters() {
     this.filter = undefined;
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
   }
+
   gotoMap(): void {
     // pass along the id of the current project if available
     // so that the map component can show the popup for it.
@@ -83,5 +98,22 @@ export class ProjectDetailComponent implements OnInit {
 
   readmore(item): void {
     item.readmore = !item.readmore;
+  }
+
+  getDisplayedElementCountMessage(pageNumber) {
+    let message = '';
+    let items = this.project.recent_activities;
+    if (items.length > 0) {
+      if (this.filter) {
+        items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
+      }
+      if (this.filterType) {
+        items = this.NewsTypeFilterPipe.transform(items, this.filterType);
+      }
+      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
+      const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
+      message = `Viewing ${startRange}-${endRange} of ${items.length} Results`;
+    }
+    return message;
   }
 }

@@ -7,7 +7,6 @@ pagination-template {
 
 .pagination {
   margin-bottom: 0;
-  max-width: 20rem;
 
   li {
     @include flex(1 1 auto);
@@ -62,11 +61,34 @@ pagination-template {
       }
     }
   }
+
+  &__result-count {
+    font-size: 1rem;
+  }
+
+  &--top {
+    [class*="__result-count"] {
+      display: block;
+    }
+  }
+
+  &--bottom {
+    @include clearfix();
+  }
 }
 
 @media (min-width: 768px) {
   .pagination {
-    margin-right: auto;
-    margin-left: auto;
+    margin-top: 0.5rem;
+    max-width: 20rem;
+
+    li {
+      min-width: 2rem;
+    }
+
+    &--bottom {
+      @include clearfix();
+      margin-top: 1rem;
+    }
   }
 }

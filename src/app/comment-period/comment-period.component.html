@@ -44,7 +44,10 @@
         </section>
         <section *ngIf="!loading">
           <div class="comments__table">
-            <h3 class="mb-2" [innerHTML]="loading ? 'Loading Comments...' : 'Comments (' + commentPeriod.comments.length + ')'"></h3>
+            <h3 class="mb-1" [innerHTML]="loading ? 'Loading Comments...' : 'Comments'"></h3>
+            <pagination-template class="pagination--top mb-3" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+              <span class="pagination__result-count">{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+            </pagination-template>
             <div class="comments__feed bg-muted">
               <table id="tableTop" class="activity-feed table mb-0">
                 <thead>
@@ -103,10 +106,11 @@
                   </tr>
                 </tbody>
               </table>
-              <pagination-template #p="paginationApi" 
+              <pagination-template class="pagination--bottom" #p="paginationApi"
                 *ngIf="commentPeriod.comments.length > 25"
                 [id]="config.id"
                 (pageChange)="config.currentPage = $event">
+                <span class="pagination__result-count">{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
                 <ul class="pagination">
                   <li class="page-item" *ngIf="!p.isFirstPage()">
                     <a class="page-link" (click)="p.previous();" appScroll> < </a>
@@ -126,7 +130,7 @@
               </pagination-template>
             </div>
           </div>
-        </section>        
+        </section>
 
       </main>
       <aside class="col-lg-4">
@@ -181,6 +185,9 @@
       <div class="modal-content">
         <div class="modal-header pb-0">
           <h3 class="modal-title comment-modal-title">Related Documents <span class="comment-modal-title__large">{{ commentPeriod.informationLabel }}</span></h3>
+          <button class="btn btn-default" (click)="hideAllSteps()" data-dismiss="modal" aria-label="Close">
+            <i class="material-icons">&#xE5CD;</i>
+          </button>
         </div>
         <div class="modal-body">
           <ul class="file__list anchor-list">
@@ -193,6 +200,7 @@
                   <span>{{ relDoc.displayName }}</span>
                 </span>
               </a>
+              <span class="file__list-item-size">{{ relDoc.fileSize }}</span>
             </li>
           </ul>
         </div>

@@ -7,6 +7,7 @@ export class News {
   project: Project;
   priority: number;
   type: string;
+  dateAdded: string;
   dateUpdated: string;
   contentUrl: string;
   documentUrl: string;
@@ -17,6 +18,7 @@ export class News {
     this.project = obj && obj.project || null;
     this.priority = obj && obj.priority || null;
     this.type = obj && obj.type || null;
+    this.dateAdded = obj && obj.dateAdded || null;
     this.dateUpdated = obj && obj.dateUpdated || null;
     this.contentUrl = obj && obj.contentUrl || null;
     this.documentUrl = obj && obj.documentUrl || null;

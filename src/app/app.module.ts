@@ -12,11 +12,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectComponent } from './project/project.component';
 import { NewsComponent } from './news/news.component';
-import { NewsFilterPipe } from './news-filter.pipe';
-import { NewsTypeFilterPipe } from './news-type-filter.pipe';
-import { ObjectFilterPipe } from './object-filter.pipe';
-import { ProjectTypeFilterPipe } from './project-type-filter.pipe';
-import { ProjectDecisionFilterPipe } from './project-decision-filter.pipe';
+import { NewsTypeFilterPipe } from './pipes/news-type-filter.pipe';
+import { ObjectFilterPipe } from './pipes/object-filter.pipe';
+import { ProjectTypeFilterPipe } from './pipes/project-type-filter.pipe';
+import { ProjectDecisionFilterPipe } from './pipes/project-decision-filter.pipe';
 import { ProjectService } from './services/project.service';
 import { LegislationComponent } from './legislation/legislation.component';
 import { ProcessComponent } from './process/process.component';
@@ -25,16 +24,16 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactSuccess } from './contact/contact.success';
 import { MapModule } from './map/map.module';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { ProponentFilterPipe } from './proponent-filter.pipe';
-import { PhaseFilterPipe } from './phase-filter.pipe';
-import { FilterPCPPipe } from './filter-pcp.pipe';
-import { ProjectFilterPipe } from './project-filter.pipe';
-import { ProjectStatusFilterPipe } from './project-status-filter.pipe';
+import { ProponentFilterPipe } from './pipes/proponent-filter.pipe';
+import { PhaseFilterPipe } from './pipes/phase-filter.pipe';
+import { FilterPCPPipe } from './pipes/filter-pcp.pipe';
+import { ProjectFilterPipe } from './pipes/project-filter.pipe';
+import { ProjectStatusFilterPipe } from './pipes/project-status-filter.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { ScrollDirective } from './directives/scroll.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { RecentActivityFilterPipe } from './recent-activity-filter.pipe';
+import { NewsHeadlineFilterPipe } from './pipes/news-headline-filter.pipe';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     ProjectComponent,
     NewsComponent,
-    NewsFilterPipe,
     NewsTypeFilterPipe,
     ObjectFilterPipe,
     ProjectTypeFilterPipe,
@@ -61,7 +59,7 @@ import { SharedModule } from './shared/shared.module';
     ScrollDirective,
     NotFoundComponent,
     ProjectDetailComponent,
-    RecentActivityFilterPipe
+    NewsHeadlineFilterPipe
   ],
   imports: [
     BrowserModule,

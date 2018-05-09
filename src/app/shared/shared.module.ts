@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderByPipe } from 'app/order-by.pipe';
+import { OrderByPipe } from 'app/pipes/order-by.pipe';
 
 @NgModule({
   imports: [

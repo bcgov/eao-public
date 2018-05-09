@@ -17,8 +17,8 @@ import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
 import { SubmitCommentModalComponent } from './submit-comment-modal/submit-comment-modal';
 import { SubmitCommentProgressModalComponent } from './submit-comment-progress-modal/submit-comment-progress-modal';
 
-import { OrderByPipe } from '../order-by.pipe';
-import { ObjectFilterPipe } from '../object-filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
 import { CommentPeriod } from '../models/commentperiod';
 import { Comment } from '../models/comment';
 import { Document } from '../models/document';
@@ -95,24 +95,30 @@ describe('CommentPeriodComponent', () => {
       const activatedRoute = TestBed.get(ActivatedRoute);
       expect(activatedRoute.snapshot.params.id).toEqual(1);
     });
+
     it('should return data for route.snapshot.params.code', () => {
       const activatedRoute = TestBed.get(ActivatedRoute);
       expect(activatedRoute.snapshot.params.code).toEqual(2);
     });
+
     it('should return data for commentPeriod', () => {
       expect(component.commentPeriod).toBeTruthy;
       expect(component.commentPeriod.comments[0].comment).toEqual('someComment');
     });
+
     it('should set column to dateAdded', () => {
       expect(component.column).toBe('dateAdded');
     });
+
     it('should set direction to -1', () => {
       expect(component.direction).toBe(-1);
     });
+
     it('should set loading to false', () => {
       expect(component.loading).toBe(false);
     });
   });
+
   describe('comment readmore property', () => {
     let commentKeys;
     describe('on load', () => {
@@ -121,6 +127,7 @@ describe('CommentPeriodComponent', () => {
         expect(commentKeys.includes('readmore')).toBeFalsy;
       });
     });
+
     describe('after expanding a comment', () => {
       it('should be defined', () => {
         component.readmore(component.commentPeriod.comments[0]);
@@ -129,12 +136,14 @@ describe('CommentPeriodComponent', () => {
       });
     });
   });
+
   describe('sort(property)', () => {
     let property;
 
     beforeEach(() => {
       property = 'dateAdded';
     });
+
     describe('given isDesc is true', () => {
       beforeEach(() => {
         component.isDesc = true;
@@ -144,10 +153,12 @@ describe('CommentPeriodComponent', () => {
       it('should set isDesc to false', () => {
         expect(component.isDesc).toBeFalsy();
       });
+
       it('should set direction to -1', () => {
         expect(component.direction).toBe(-1);
       });
     });
+
     describe('given isDesc is false', () => {
       beforeEach(() => {
         component.isDesc = false;
@@ -157,15 +168,47 @@ describe('CommentPeriodComponent', () => {
       it('should set isDesc to true', () => {
         expect(component.isDesc).toBeTruthy();
       });
+
       it('should set direction to 1', () => {
         expect(component.direction).toBe(1);
       });
     });
+
     describe('given property', () => {
       it('should assign property to column', () => {
         component.sort(property);
         expect(component.column).toBe(property);
       });
+    });
+  });
+
+  describe('getDisplayedElementCountMessage', () => {
+    beforeEach(() => {
+      component.commentPeriod = new CommentPeriod();
+      component.commentPeriod.comments = [
+        new Comment(),
+        new Comment(),
+        new Comment(),
+        new Comment()
+      ];
+    });
+
+    it('returns all the data according to the pagination settings', () => {
+      component.config.itemsPerPage = 2;
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing 1-2 of 4 Comments');
+    });
+
+    it('flexes correctly based on the number of items per page', () => {
+      component.config.itemsPerPage = 3;
+      const result = component.getDisplayedElementCountMessage(2);
+      expect(result).toBe('Viewing 4-4 of 4 Comments');
+    });
+
+    it('returns an empty message if there are no items in the list', () => {
+      component.commentPeriod.comments = [];
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('');
     });
   });
 });

@@ -1,6 +1,6 @@
 import { ProponentFilterPipe } from './proponent-filter.pipe';
-import { Project } from './models/project';
-import { Proponent } from './models/proponent';
+import { Project } from '../models/project';
+import { Proponent } from '../models/proponent';
 
 describe('ProponentFilterPipe', () => {
 

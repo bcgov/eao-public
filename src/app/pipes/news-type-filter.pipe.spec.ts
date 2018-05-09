@@ -1,16 +1,16 @@
-import { NewsFilterPipe } from './news-filter.pipe';
-import {News} from './models/news';
+import { NewsTypeFilterPipe } from './news-type-filter.pipe';
+import {News} from '../models/news';
 
-describe('NewsFilterPipe', () => {
+describe('NewsTypeFilterPipe', () => {
 
   const string = 'News';
   let value: News[];
   let expectedResponse: News[];
 
-  const pipe = new NewsFilterPipe();
+  const pipe = new NewsTypeFilterPipe();
 
-  describe('given no filter strings', () => {
-    it('returns items in same order given', () => {
+  describe('given no filter string', () => {
+    it('returns items in same order as given', () => {
       value = [new News()];
       expectedResponse = [new News()];
 
