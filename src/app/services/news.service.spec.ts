@@ -40,6 +40,7 @@ describe('NewsService', () => {
       ]
     });
   });
+
   describe('getRecentNews()', () => {
     let mockResponse: any;
     let expectedResponse: any;
@@ -59,6 +60,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns two items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -76,6 +78,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns four items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -95,6 +98,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns four items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -122,6 +126,7 @@ describe('NewsService', () => {
         );
       }));
     });
+
     describe('given a response with 3 pinned and 1 unpinned items', () => {
       beforeEach(() => {
         mockResponse = [
@@ -138,6 +143,7 @@ describe('NewsService', () => {
           createNewsItem('Test2', false, 2, '2018-01-14 17:00:00.000Z')
         ];
       });
+
       it('returns four items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -150,6 +156,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns the 3 pinned items first',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -164,6 +171,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns the unpinned item last',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -176,6 +184,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns items ordered by most recent date',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -189,6 +198,7 @@ describe('NewsService', () => {
         );
       }));
     });
+
     describe('given a response with 4 pinned and 1 unpinned items', () => {
       beforeEach(() => {
         mockResponse = [
@@ -206,6 +216,7 @@ describe('NewsService', () => {
           createNewsItem('Test5', true, 4, '2018-01-13 17:00:00.000Z')
         ];
       });
+
       it('returns the 4 items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -218,6 +229,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns the pinned items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -233,6 +245,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns items ordered by priority',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -248,6 +261,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns items of same priority ordered by most recent date',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -262,6 +276,7 @@ describe('NewsService', () => {
         );
       }));
     });
+
     describe('given a response with pinned and unpinned items of varying priorities', () => {
       beforeEach(() => {
         mockResponse = [
@@ -282,6 +297,7 @@ describe('NewsService', () => {
           createNewsItem('Test8', true, 4, '2018-01-15 17:00:00.000Z')
         ];
       });
+
       it('returns 4 items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -294,6 +310,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns pinned items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -309,6 +326,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('orders by priority',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -325,6 +343,7 @@ describe('NewsService', () => {
         );
       }));
     });
+
     describe('given a response with only pinned items of the same priority', () => {
       beforeEach(() => {
         mockResponse = [
@@ -344,6 +363,7 @@ describe('NewsService', () => {
           createNewsItem('Test2', true, 1, '2018-01-13 13:00:00.001Z')
         ];
       });
+
       it('returns 4 items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -356,6 +376,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('sorts by most recent date',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -372,6 +393,7 @@ describe('NewsService', () => {
         );
       }));
     });
+
     describe('given a response with no pinned items', () => {
       beforeEach(() => {
         mockResponse = [
@@ -391,6 +413,7 @@ describe('NewsService', () => {
           createNewsItem('Test7', false, 1, '2018-01-14 18:00:00.000Z')
         ];
       });
+
       it('returns 4 items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -403,6 +426,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('sorts by most recent date',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -420,6 +444,29 @@ describe('NewsService', () => {
       }));
     });
   });
+
+  describe('getByProjectCode()', () => {
+    it('returns all the news item for the project',
+      inject([NewsService, XHRBackend], (newsService, mockBackend) => {
+
+      const mockResponse = [
+        createNewsItem('Test1', true, 1, '2018-01-15 23:53:13.318Z'),
+        createNewsItem('Test2', true, 2, '2017-09-06 16:00:00.000Z'),
+        createNewsItem('Test3', true, 3, '2018-01-14 17:00:00.000Z'),
+        createNewsItem('Test4', true, 4, '2018-01-14 17:00:00.000Z')
+      ];
+
+      mockBackEnd(mockResponse, mockBackend);
+
+      // Service call
+      newsService.getRecentNews().subscribe(
+        news => {
+          expect(news.length).toBe(4);
+        }
+      );
+    }));
+  });
+
   describe('getAll()', () => {
     describe('given a valid response', () => {
       it('returns 0 items',
@@ -436,6 +483,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('returns n items',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -462,6 +510,7 @@ describe('NewsService', () => {
           }
         );
       }));
+
       it('orders by most recent date',
         inject([NewsService, XHRBackend], (newsService, mockBackend) => {
 
@@ -514,6 +563,7 @@ describe('NewsService', () => {
       }));
     });
   });
+
   describe('compareDateAdded()', () => {
     it('returns 0 when a and b are null',
         inject([NewsService], (newsService) => {
@@ -526,6 +576,7 @@ describe('NewsService', () => {
       const sorted = newsService.compareDateAdded(mockResponse[0], mockResponse[1]);
       expect(sorted).toBe(0);
     }));
+
     it('returns a is more recent than b when b is null',
       inject([NewsService], (newsService) => {
 
@@ -537,6 +588,7 @@ describe('NewsService', () => {
       const sorted = newsService.compareDateAdded(mockResponse[0], mockResponse[1]);
       expect(sorted).toBe(-1539540000000);
     }));
+
     it('returns b is more recent than a when a is null',
         inject([NewsService], (newsService) => {
 
@@ -548,6 +600,7 @@ describe('NewsService', () => {
       const sorted = newsService.compareDateAdded(mockResponse[0], mockResponse[1]);
       expect(sorted).toBe(1539540000000);
     }));
+
     it('returns a is more recent than b',
         inject([NewsService], (newsService) => {
 
@@ -559,6 +612,7 @@ describe('NewsService', () => {
       const sorted = newsService.compareDateAdded(mockResponse[0], mockResponse[1]);
       expect(sorted).toBe(-2595600000);
     }));
+
     it('returns b is more recent than a',
         inject([NewsService], (newsService) => {
 
@@ -571,6 +625,7 @@ describe('NewsService', () => {
       expect(sorted).toBe(-2588400000);
     }));
   });
+
   describe(('comparePinned()'), () => {
     describe(('given different priorities'), () => {
       it('returns a is a higher priority than b when a is null',
@@ -584,6 +639,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(-2);
       }));
+
       it('returns b is a higher priority than a when b is null',
           inject([NewsService], (newsService) => {
 
@@ -595,6 +651,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(2);
       }));
+
       it('returns a is a higher priority than b',
           inject([NewsService], (newsService) => {
 
@@ -606,6 +663,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(-1);
       }));
+
       it('returns b is a higher priority than a',
           inject([NewsService], (newsService) => {
 
@@ -618,6 +676,7 @@ describe('NewsService', () => {
         expect(sorted).toBe(1);
       }));
     });
+
     describe(('given the same priority'), () => {
       it('returns 0 when a and b are null',
           inject([NewsService], (newsService) => {
@@ -630,6 +689,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(0);
       }));
+
       it('returns a is more recent than b when b are null',
           inject([NewsService], (newsService) => {
 
@@ -641,6 +701,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(-1539540000000);
       }));
+
       it('returns b is more recent than a when a are null',
           inject([NewsService], (newsService) => {
 
@@ -652,6 +713,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(1539540000000);
       }));
+
       it('returns a is more recent than b',
           inject([NewsService], (newsService) => {
 
@@ -663,6 +725,7 @@ describe('NewsService', () => {
         const sorted = newsService.comparePinned(mockResponse[0], mockResponse[1]);
         expect(sorted).toBe(-3600000);
       }));
+
       it('returns b is more recent than a',
           inject([NewsService], (newsService) => {
 

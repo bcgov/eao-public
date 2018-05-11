@@ -90,6 +90,7 @@ describe('CommentPeriodComponent', () => {
 
     fixture.detectChanges();
   });
+
   describe('ngOnInit()', () => {
     it('should return data for route.snapshot.params.id', () => {
       const activatedRoute = TestBed.get(ActivatedRoute);

@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommentPeriod } from '../models/commentperiod';
-import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
 import { CommentPeriodService } from '../services/comment-period.service';
 import 'rxjs/add/operator/mergeMap';
