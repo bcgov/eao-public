@@ -1,20 +1,24 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../models/project';
+import { News } from '../models/news';
+import { ProjectService } from '../services/project.service';
+import { NewsService } from '../services/news.service';
 import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
 import { Api } from '../services/api';
 import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
 import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
-  styleUrls: ['./project-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./project-detail.component.scss']
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project;
+  news: News[];
   public loading: boolean;
   public isDesc: boolean;
   public column: string;
@@ -31,43 +35,47 @@ export class ProjectDetailComponent implements OnInit {
     currentPage: 1
   };
 
-  private sub: Subscription;
+  private subscription: Subscription;
   NewsTypeFilterPipe: NewsTypeFilterPipe;
   NewsHeadlineFilterPipe: NewsHeadlineFilterPipe;
 
-  constructor(private api: Api, private _changeDetectionRef: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
+  constructor(private api: Api, private route: ActivatedRoute, private router: Router,
+    private projectService: ProjectService, private newsService: NewsService) {
     this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
     this.NewsHeadlineFilterPipe = new NewsHeadlineFilterPipe();
   }
 
   ngOnInit() {
     this.loading = true;
-    this.sub = this.route.data.subscribe(
-      (data: { project: Project }) => {
-        this.project = new Project(data.project);
-        this.loading = false;
-        // attach host to document url if it goes to esm-server
-        this.setDocumentUrl(this.project);
+    const projectCode = this.route.snapshot.params.code;
 
+    // get project data
+    this.projectService.getByCode(projectCode)
+      .subscribe((data) => {
+        this.project = new Project(data);
         if (!this.project.proponent) {
           this.project.proponent = { name: '' };
         }
         this.column = 'dateAdded';
         this.direction = -1;
-        // Needed in development mode - not required in prod.
-        this._changeDetectionRef.detectChanges();
-      },
-      error => console.log(error)
-    );
+        this.loading = this.loading && this.news ? false : true;
+    });
+
+    // get recent activities
+    this.newsService.getByProjectCode(projectCode)
+      .subscribe((data) => {
+        this.news = data;
+        this.setDocumentUrl(this.news);
+        this.loading = this.loading && this.project ? false : true;
+    });
   }
 
-  setDocumentUrl(project) {
+  setDocumentUrl(news) {
     const regex = /http(s)?:\/\/(www.)?/;
-    project.recent_activities.forEach(activity => {
+    news.forEach(activity => {
       if (!activity.documentUrl) {
-        return ;
-      }
-      if (!regex.test(activity.documentUrl)) {
+        activity.documentUrl = '';
+      } else if (!regex.test(activity.documentUrl)) {
         activity.documentUrl = `${this.api.hostnameEPIC }${ activity.documentUrl }`;
       }
     });
@@ -102,7 +110,7 @@ export class ProjectDetailComponent implements OnInit {
 
   getDisplayedElementCountMessage(pageNumber) {
     let message = '';
-    let items = this.project.recent_activities;
+    let items = this.news;
     if (items.length > 0) {
       if (this.filter) {
         items = this.NewsHeadlineFilterPipe.transform(items, this.filter);

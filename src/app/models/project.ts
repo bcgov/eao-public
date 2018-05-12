@@ -27,7 +27,6 @@ export class Project {
   CELead: string;
   CELeadEmail: string;
   CELeadPhone: string;
-  recent_activities: News[];
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.code = obj && obj.code || null;
@@ -53,6 +52,5 @@ export class Project {
     this.CELead = obj && obj.CELead || null;
     this.CELeadPhone = obj && obj.CELeadPhone || null;
     this.CELeadEmail = obj && obj.CELeadEmail || null;
-    this.recent_activities = obj && obj.recent_activities || null;
   }
 }

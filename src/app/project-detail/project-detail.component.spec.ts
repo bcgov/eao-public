@@ -3,6 +3,8 @@ import { Http, HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { News } from '../models/news';
 import { ProjectDetailComponent } from './project-detail.component';
@@ -21,6 +23,8 @@ import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 
 import { MapModule } from '../map/map.module';
 import { Api } from '../services/api';
+import { ProjectService } from '../services/project.service';
+import { NewsService } from '../services/news.service';
 
 describe('ProjectDetailComponent', () => {
   let component: ProjectDetailComponent;
@@ -32,18 +36,7 @@ describe('ProjectDetailComponent', () => {
     async(() => {
       // stub activated route
       ActivatedRouteStub = {
-        data: {
-          subscribe: (fn: (value) => void) => fn({
-              project: {
-                'recent_activities': [
-                  {
-                    'content': 'Hello World!',
-                    'dateAdded': '2017-12-14T17:00:00.000Z'
-                  }
-                ]
-              },
-          })
-        }
+        snapshot: { params: { code: 'a-mine' } }
       };
       router = {
         navigate: jasmine.createSpy('navigate')
@@ -53,7 +46,19 @@ describe('ProjectDetailComponent', () => {
         providers: [
           Api,
           { provide: ActivatedRoute, useValue: ActivatedRouteStub },
-          { provide: Router, useValue: router}
+          { provide: Router, useValue: router},
+          {
+            provide: ProjectService,
+            useValue: jasmine.createSpyObj('ProjectService', [
+              'getByCode'
+            ])
+          },
+          {
+            provide: NewsService,
+            useValue: jasmine.createSpyObj('NewsService', [
+              'getByProjectCode'
+            ])
+          }
         ],
         imports: [
           FormsModule,
@@ -81,16 +86,61 @@ describe('ProjectDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProjectDetailComponent);
     component = fixture.componentInstance;
+
+    const projectService = TestBed.get(ProjectService);
+    projectService.getByCode.and.returnValue(
+      Observable.of(new Project())
+    );
+
+    const newsService = TestBed.get(NewsService);
+    newsService.getByProjectCode.and.returnValue(
+      Observable.of([
+        new News({
+          headline: 'Big mine' ,
+          type: 'news',
+          content : 'My news',
+          dateAdded : '2017-12-14T17:00:00.000Z',
+          documentUrl: ''
+        }),
+        new News({
+          headline: 'Medium',
+          type: 'public comment period',
+          content : 'Your news',
+          dateAdded : '2017-11-10T15:00:00.000Z',
+          documentUrl: 'http://www.test.com'
+        }),
+        new News({
+          headline: 'Bigger mine',
+          type: 'public comment period',
+          content : 'Greatest news',
+          dateAdded : '2017-06-01T11:00:00.000Z',
+          documentUrl: '/blarg'
+        }),
+        new News({
+          headline: 'Small',
+          type: 'news',
+          content : 'Greatest news',
+          dateAdded : '2017-06-01T11:00:00.000Z',
+          documentUrl: '/blarg'
+        })
+      ])
+    );
+
     fixture.detectChanges();
   });
 
   describe('ngOnInit', () => {
-    it('should return data for route.data', () => {
-      expect(ActivatedRouteStub.data).toBeTruthy;
+    it('should return data for route.snapshot.params.code', () => {
+      const activatedRoute = TestBed.get(ActivatedRoute);
+      expect(activatedRoute.snapshot.params.code).toEqual('a-mine');
     });
 
     it('should return project data', () => {
       expect(component.project).toBeTruthy;
+    });
+
+    it('should return news data', () => {
+      expect(component.news).toBeTruthy;
     });
 
     it('should set column to dateAdded', () => {
@@ -106,15 +156,15 @@ describe('ProjectDetailComponent', () => {
     let contentKeys;
     describe('on load', () => {
       it('should initially be undefined', () => {
-        contentKeys = Object.keys(component.project.recent_activities[0]);
+        contentKeys = Object.keys(component.news[0]);
         expect(contentKeys.includes('readmore')).toBeFalsy;
       });
     });
 
     describe('after expanding a comment', () => {
       it('should be defined', () => {
-        component.readmore(component.project.recent_activities[0]);
-        contentKeys = Object.keys(component.project.recent_activities[0]);
+        component.readmore(component.news[0]);
+        contentKeys = Object.keys(component.news[0]);
         expect(contentKeys.includes('readmore')).toBeTruthy;
       });
     });
@@ -141,6 +191,7 @@ describe('ProjectDetailComponent', () => {
         expect(component.direction).toBe(-1);
       });
     });
+
     describe('given isDesc is false', () => {
       beforeEach(() => {
         component.isDesc = false;
@@ -200,54 +251,24 @@ describe('ProjectDetailComponent', () => {
   });
 
   describe('setDocumentUrl', () => {
+    beforeEach(() => {
+      component.setDocumentUrl(component.news);
+    });
+
     it('should set results.documentUrl to \'\' when no document url ', () => {
-      const data = {
-        recent_activities: [
-          {
-            documentUrl: ''
-          }
-        ]
-      };
-      component.setDocumentUrl(data);
-      expect(data.recent_activities[0].documentUrl).toBe('');
+      expect(component.news[0].documentUrl).toBe('');
     });
 
     it('should not change results.documentUrl when given a www url', () => {
-      const data = {
-        recent_activities: [
-          {
-            documentUrl: 'http://www.test.com'
-          }
-        ]
-      };
-      component.setDocumentUrl(data);
-      expect(data.recent_activities[0].documentUrl).toBe('http://www.test.com');
+      expect(component.news[1].documentUrl).toBe('http://www.test.com');
     });
 
     it('should set results.documentUrl to \'http://localhost:3000/blarg\' when given an esm-server document ', () => {
-      const data = {
-        recent_activities: [
-          {
-            documentUrl: '/blarg'
-          }
-        ]
-      };
-      component.setDocumentUrl(data);
-      expect(data.recent_activities[0].documentUrl).toBe('http://localhost:3000/blarg');
+      expect(component.news[2].documentUrl).toBe('http://localhost:3000/blarg');
     });
   });
 
   describe('getDisplayedElementCountMessage', () => {
-    beforeEach(() => {
-      component.project = new Project();
-      component.project.recent_activities = [
-        new News({ headline: 'Big mine' , type: 'news' }),
-        new News({ headline: 'Medium', type: 'public comment period' }),
-        new News({ headline: 'Bigger mine', type: 'public comment period' }),
-        new News({ headline: 'Small', type: 'news' })
-      ];
-    });
-
     it('returns all the data if no filter is set', () => {
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing 1-4 of 4 Results');
@@ -285,7 +306,7 @@ describe('ProjectDetailComponent', () => {
     });
 
     it('returns an empty message if there are no items in the list', () => {
-      component.project.recent_activities = [];
+      component.news = [];
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('');
     });

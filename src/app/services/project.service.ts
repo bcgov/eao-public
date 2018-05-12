@@ -11,6 +11,7 @@ import { Api } from './api';
 export class ProjectService {
 
   constructor(private api: Api) { }
+
   getAll() {
     return this.api.get('projects/public')
       .map((res: Response) => res.json());
