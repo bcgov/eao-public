@@ -1,134 +1,133 @@
 @import "~assets/styles/base.scss";
 
 .filter-bar {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 
-    label {
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        font-weight: 700;
+  label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    &:focus {
+      border-color: $fc-focus-border-color;
+      z-index: 2;
     }
+  }
 
-    .form-group {
-        position: relative;
-        margin-bottom: 1rem;
+  .button-row {
+    button {
+      font-size: 0.85rem;
+
+      i {
+        vertical-align: middle;
+      }
     }
-
-    .form-control {
-        &:focus {
-            border-color: $fc-focus-border-color;
-            z-index: 2;
-        }
-    }
-
-    .button-row {
-        button {
-            font-size: 0.85rem;
-
-            i {
-                vertical-align: middle;
-            }
-        }
-    }
+  }
 }
 
 .filter-input-row {
-    margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 
-    &.filters-basic {
-        @include flex-box();
+  &.filters-basic {
+    @include flex-box();
 
-        .form-group {
-            @include flex(1 1 auto);
-            margin-bottom: 0;
+    .form-group {
+      @include flex(1 1 auto);
+      margin-bottom: 0;
 
-            .form-control {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-        }
-
-        .toggle-filter-btn {
-            @include flex(0 0 auto);
-            height: 2.75rem;
-            margin-left: -1px;
-            padding: 0.5rem 0.5rem 0.5rem 0.75rem;
-            border-radius: 0;
-            border: 1px solid $fc-border-color;
-
-            i {
-                margin: 0;
-            }
-
-            .hide-filter-txt {
-                display: none;
-            }
-
-            .btn-txt {
-                display: none;
-            }
-
-            &:focus {
-                z-index: 2;
-            }
-
-            &.show-filters {
-                .show-filter-txt {
-                    display: none;
-                }
-
-                .hide-filter-txt {
-                    display: inline-block;
-                }
-            }
-        }
+      .form-control {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
 
-    &.filters-advanced {
-        margin-right: -0.5rem;
-        margin-left: -0.5rem;
+    .toggle-filter-btn {
+      @include flex(0 0 auto);
+      height: 2.75rem;
+      margin-left: -1px;
+      padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+      border-radius: 0;
+      border: 1px solid $fc-border-color;
 
-        [class^="col-md"] {
-            padding-right: 0.5rem;
-            padding-left: 0.5rem;
+      i {
+        margin: 0;
+      }
+
+      .hide-filter-txt {
+        display: none;
+      }
+
+      .btn-txt {
+        display: none;
+      }
+
+      &:focus {
+        z-index: 2;
+      }
+
+      &.show-filters {
+        .show-filter-txt {
+          display: none;
         }
 
-        label {
-            margin-bottom: 0.25rem;
+        .hide-filter-txt {
+          display: inline-block;
         }
+      }
     }
+  }
+
+  &.filters-advanced {
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+
+    [class^="col-md"] {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    label {
+      margin-bottom: 0.25rem;
+    }
+  }
 }
 
 @media (min-width: 760px) {
-    .filter-input-row {
-        position: relative;
+  .filter-input-row {
+    position: relative;
 
-        &.filters-basic {
-            .toggle-filter-btn {
-                .btn-txt {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-            }
+    &.filters-basic {
+      .toggle-filter-btn {
+        .btn-txt {
+          display: inline-block;
+          vertical-align: middle;
         }
-
-        &.filters-advanced {
-            @include flex-box();
-
-            .form-group {
-                .form-control {
-                    position: relative;
-                    border-radius: 0;
-
-                    &:focus {
-                        z-index: 2;
-                    }
-                }
-            }
-            .col-md-20 {
-                flex: 0 0 20%;
-                max-width: 20%;
-            }
-        }
+      }
     }
+
+    &.filters-advanced {
+      @include flex-box();
+
+      .form-group {
+        .form-control {
+          position: relative;
+          border-radius: 0;
+
+          &:focus {
+            z-index: 2;
+          }
+        }
+      }
+      .col-md-20 {
+        flex: 0 0 20%;
+        max-width: 20%;
+      }
+    }
+  }
 }

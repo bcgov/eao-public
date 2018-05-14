@@ -9,18 +9,4 @@ aside {
             line-height: 1.4rem;
         }
     }
-
-    .card-header {
-        color: #000;
-        border-bottom: none;
-        background: #eee;
-        text-shadow: 1px 1px 1px #fff;
-        text-transform: uppercase;
-        font-size: 0.9375rem;
-        font-weight: 700;
-    }
-
-    .card-body {
-        background: $aside-bg;
-    }
 }

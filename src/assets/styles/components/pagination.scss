@@ -6,16 +6,22 @@ pagination-template {
 }
 
 .pagination {
+  margin-right: auto;
   margin-bottom: 0;
 
+  &__container {
+    display: inline-block;
+  }
+
   li {
-    @include flex(1 1 auto);
+    @include flex(0 1 auto);
+    min-width: 2rem;
 
     .page-link {
       margin: 0;
       display: block;
       padding: 0.5rem;
-      height: 2.5rem;
+      height: 2.25rem;
       border: 1px solid transparent;
       background: $pgn-btn-bg;
       text-align: center;
@@ -63,7 +69,8 @@ pagination-template {
   }
 
   &__result-count {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
   }
 
   &--top {
@@ -83,7 +90,7 @@ pagination-template {
     max-width: 20rem;
 
     li {
-      min-width: 2rem;
+      min-width: 2.4rem;
     }
 
     &--bottom {

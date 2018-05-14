@@ -1,63 +1,67 @@
 @import "~assets/styles/base.scss";
 
 @media (max-width: 760px) {
-    .project-table {
-        thead {
-            display: none;
-        }
-
-        tr, td {
-            display: block;
-        }
-
-        td {
-            padding: 1rem;
-            border-top: none;
-
-            &.name {
-                padding-bottom: 0.75rem;
-                font-size: 1.25rem;
-                font-weight: 600;
-            }
-
-            &.proj-col {
-                position: relative;
-                margin: 0 1rem;
-                padding: 0.25rem 0;
-
-                &:before {
-                    display: table-cell;
-                    width: 8rem;
-                }
-
-                &:last-child {
-                    padding-bottom: 1.25rem;
-                }
-
-                span {
-                    display: table-cell;
-                }
-
-                &.proponent:before {
-                    content: 'Proponent:';
-                }
-
-                &.status:before {
-                    content: 'Status:';
-                }
-
-                &.type:before {
-                    content: 'Type:';
-                }
-
-                &.comment-period:before {
-                    content: 'Comment Period:';
-                }
-
-                &.date:before {
-                    content: 'Date:';
-                }
-            }
-        }
+  .project-table {
+    thead {
+      display: none;
     }
+
+    tr, td {
+      display: block;
+    }
+
+    td {
+      @include flex-box();
+      padding: 1.25rem 1rem;
+      border-top: none;
+
+      &.name {
+        padding-bottom: 0.5rem;
+        line-height: 1.1;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      &.proj-col {
+        position: relative;
+        padding-top: 0.75rem;
+        padding-right: 1rem;
+        padding-bottom: 0;
+        padding-left: 1rem;
+
+        &:before {
+          @include flex(0 0 50%);
+          font-weight: 600;
+        }
+
+        &:last-child {
+          padding-bottom: 1.25rem;
+        }
+
+        span {
+          @include flex(0 0 50%);
+        }
+
+        &.proponent:before {
+          content: 'Proponent:';
+        }
+
+        &.status:before {
+          content: 'EA Decision:';
+        }
+
+        &.type:before {
+          content: 'Type:';
+        }
+
+        &.comment-period:before {
+          content: 'Comment Period:';
+        }
+
+        &.date:before {
+          content: 'Decision Date:';
+        }
+      }
+    }
+  }
 }

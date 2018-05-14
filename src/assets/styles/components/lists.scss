@@ -8,7 +8,7 @@
   > li {
     @include clearfix();
     line-height: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
 
     + li {
       margin-top: 0.75rem;
@@ -24,6 +24,7 @@
     }
 
     &.name {
+      padding-right: 1rem;
       font-weight: 600;
     }
 
@@ -31,6 +32,8 @@
       ul {
         margin: 0;
         padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
         list-style-type: none;
 
         li {

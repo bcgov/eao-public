@@ -1,6 +1,63 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 
+.map {
+  &__thumbnail {
+    margin: -1rem;
+    margin-bottom: 1rem;
+
+    ::ng-deep {
+      .map-container {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .map {
+    &__thumbnail {
+      ::ng-deep {
+        .map-container {
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .nv-list {
+    @include clearfix();
+    margin: -0.5rem 0;
+
+    > li {
+      float: left;
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+
+    span {
+      float: none;
+      width: 100%;
+
+      &.name {
+        margin-bottom: 0;
+        width: 10rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .nv-list {
+    span {
+      float: left;
+      width: 50%;
+    }
+  }
+}
+
 .project-news-feed {
   .title-container {
     &__title {

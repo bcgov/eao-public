@@ -10,8 +10,11 @@ export class Project {
   description: string;
   status: string;
   type: string;
+  sector: string;
   openCommentPeriod: string;
   eacDecision: string;
+  CEAAInvolvement: string;
+  CEAALink: string;
   decisionDate: Date;
   currentPhase: CurrentPhase;
   region: string;
@@ -35,8 +38,11 @@ export class Project {
     this.proponent = obj && obj.proponent || null;
     this.status = obj && obj.status || null;
     this.type = obj && obj.type || null;
+    this.sector = obj && obj.sector || null;
     this.openCommentPeriod = obj && obj.openCommentPeriod || null;
     this.eacDecision = obj && obj.eacDecision || null;
+    this.CEAAInvolvement = obj && obj.CEAAInvolvement || null;
+    this.CEAALink = obj && obj.CEAALink || null;
     this.decisionDate = obj && obj.decisionDate || null;
     this.currentPhase = obj && obj.currentPhase || null;
     this.region = obj && obj.region || null;
