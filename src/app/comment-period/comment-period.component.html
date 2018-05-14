@@ -16,7 +16,7 @@
       <section class="mb-0">
         <h2>About this Comment Period...</h2>
         <p>A 30 day public comment period on the {{ commentPeriod.informationLabel }} will start on {{ commentPeriod.dateStarted | date: 'longDate' }} and end on {{ commentPeriod.dateCompleted | date: 'longDate' }}.  All written comments received by online form, fax, or mail during this time period will be considered.</p>
-        
+
         <div class="comment-feed bg-muted">
           <table class="activity-feed table" id="tableTop" *ngIf="commentPeriod">
             <thead>
@@ -37,11 +37,11 @@
                     <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                   </div>
                   <div class="activity-feed__content readmore">
-                    <pre class="readmore__content" 
+                    <pre class="readmore__content"
                       *ngIf="item.readmore || item.comment.length <= 300"
                       [innerHTML]="item.comment">
                     </pre>
-                    <pre class="readmore__content" 
+                    <pre class="readmore__content"
                       *ngIf="!item.readmore && item.comment.length > 300"
                       [innerHTML]="(item.comment | slice:0:300) + '...'">
                     </pre>
@@ -71,7 +71,7 @@
                 <a class="page-link" (click)="p.previous();" appScroll> < </a>
               </li>
               <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
-                <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                <a class="page-link" (click)="p.setCurrent(page.value);" appScroll *ngIf="p.getCurrent() !== page.value">
                   <span>{{ page.label }}</span>
                 </a>
                 <div *ngIf="p.getCurrent() === page.value">
