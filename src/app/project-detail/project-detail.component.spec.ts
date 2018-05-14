@@ -310,5 +310,12 @@ describe('ProjectDetailComponent', () => {
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('');
     });
+
+    it('returns the correct message if no items match the filter(s)', () => {
+      component.filterType = 'dskijfb';
+      component.filter = 'ubdnmbsdk';
+      const result = component.getDisplayedElementCountMessage(1);
+      expect(result).toBe('Viewing <strong>0-0</strong> of <strong>0</strong> Results');
+    });
   });
 });
