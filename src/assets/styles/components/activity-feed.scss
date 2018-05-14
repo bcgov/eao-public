@@ -49,6 +49,24 @@ $activity-feed-date-column-width: 10rem;
     }
   }
 
+  &__no-results {
+    position: relative;
+    padding: 2rem;
+    min-height: 10rem;
+    border-radius: 0.4rem;
+    background: #f7f8fa;
+    text-align: center;
+
+    &--msg {
+      position: absolute;
+      top: 4.2rem;
+      left: 0;
+      width: 100%;
+      font-weight: 700;
+      opacity: 0.5; 
+    }
+  }
+
   .title-container {
     @include flex-box();
     @include flex-direction(row);
