@@ -6,33 +6,6 @@
 @import "~assets/styles/components/modals.scss";
 
 .comments {
-  &__section-title {
-    margin-bottom: 0;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid #eee;
-  }
-
-  &__feed {
-    position: relative;
-
-    .title-container {
-      &__title {
-        letter-spacing: -0.02rem;
-        font-size: 1.3rem;
-      }
-    }
-  
-    .badge-container {
-      margin-top: 1rem;
-  
-      .badge {
-        margin: 0.2rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-      }
-    }
-  }
-
   &__btns {
     margin-bottom: 2rem;
     @include flex-box();
@@ -58,6 +31,18 @@
         display: inline-block;
       }
     }
+  }
+}
+
+.badge-container {
+  margin-top: 1rem;
+  margin-right: -0.2rem;
+  margin-left: -0.2rem;
+
+  .badge {
+    margin: 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 }
 
