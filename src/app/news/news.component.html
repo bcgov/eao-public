@@ -17,19 +17,18 @@
     </div>
 
     <div class="filter-bar">
+      <label for="projectName">Find Project Activities & Updates</label>
       <div class="filter-input-row filters-basic">
         <div class="form-group">
-          <input class="form-control" placeholder="Type a Project Name" type="text" [(ngModel)]="filter">
+          <input class="form-control" placeholder="Enter a Project Name" type="text" [(ngModel)]="filter">
         </div>
-        <button class="toggle-filter-btn btn btn-default btn-sm" [ngClass]="{'show-filters': showFilters}" (click)="showFilters = !showFilters">
-          <span class="show-filter-txt">
-            <span class="btn-txt">Filter</span>
-            <i class="material-icons">keyboard_arrow_down</i>
-          </span>
-          <span class="hide-filter-txt">
-            <span class="btn-txt">Filter</span>
-            <i class="material-icons">keyboard_arrow_up</i>
-          </span>
+        <button class="toggle-filter-btn btn btn-default btn-sm" title="{{showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
+          [ngClass]="{'show-filters': showFilters}"
+          (click)="showFilters = !showFilters">
+          <span class="btn-txt">{{showFilters ? 'Hide Filters' : 'Show Filters'}}</span>
+          <i class="material-icons">
+            {{showFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+          </i>
         </button>
       </div>
       <div class="filter-input-row filters-advanced" *ngIf="showFilters">
@@ -57,7 +56,7 @@
 
     <div class="news-feed" *ngIf="results">
       <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-        <span class="pagination__result-count">{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+        <span class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
       </pagination-template>
       <table id="tableTop" class="activity-feed table">
         <thead>
@@ -110,7 +109,7 @@
         </tbody>
       </table>
       <pagination-template class="pagination--bottom" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-        <span class="pagination__result-count">{{ getDisplayedElementCountMessage(p.getCurrent()) }}</span>
+        <span class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
         <ul class="pagination">
           <li class="page-item" *ngIf="!p.isFirstPage()">
             <a class="page-link" (click)="p.previous();" appScroll> < </a>

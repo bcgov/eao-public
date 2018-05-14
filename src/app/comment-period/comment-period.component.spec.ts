@@ -197,13 +197,13 @@ describe('CommentPeriodComponent', () => {
     it('returns all the data according to the pagination settings', () => {
       component.config.itemsPerPage = 2;
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-2 of 4 Comments');
+      expect(result).toBe('Viewing <strong>1-2</strong> of <strong>4</strong> Comments');
     });
 
     it('flexes correctly based on the number of items per page', () => {
       component.config.itemsPerPage = 3;
       const result = component.getDisplayedElementCountMessage(2);
-      expect(result).toBe('Viewing 4-4 of 4 Comments');
+      expect(result).toBe('Viewing <strong>4-4</strong> of <strong>4</strong> Comments');
     });
 
     it('returns an empty message if there are no items in the list', () => {

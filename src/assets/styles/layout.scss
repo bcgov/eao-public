@@ -59,13 +59,9 @@ main {
       color: #FFf;
     }
   }
-}
 
-@media (max-width: 567px) {
-  main {
-    + aside {
-      margin-top: 2rem;
-    }
+  + aside {
+    margin-top: 2rem;
   }
 }
 
@@ -82,6 +78,14 @@ main {
       + section {
         margin-top: 3rem;
       }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    + aside {
+      margin-top: 0;
     }
   }
 }

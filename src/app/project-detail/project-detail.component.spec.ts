@@ -271,38 +271,38 @@ describe('ProjectDetailComponent', () => {
   describe('getDisplayedElementCountMessage', () => {
     it('returns all the data if no filter is set', () => {
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-4 of 4 Results');
+      expect(result).toBe('Viewing <strong>1-4</strong> of <strong>4</strong> Results');
     });
 
     it('only returns news items if the news filter is set', () => {
       component.filterType = 'news';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-2 of 2 Results');
+      expect(result).toBe('Viewing <strong>1-2</strong> of <strong>2</strong> Results');
     });
 
     it('only returns public comment period items if the relevant filter is set', () => {
       component.filterType = 'public comment period';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-2 of 2 Results');
+      expect(result).toBe('Viewing <strong>1-2</strong> of <strong>2</strong> Results');
     });
 
     it('only returns items matching the freeform filter if the relevant filter is set', () => {
       component.filter = 'medium';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-1 of 1 Results');
+      expect(result).toBe('Viewing <strong>1-1</strong> of <strong>1</strong> Results');
     });
 
     it('only returns items matching both the freeform and type filters when filters are set', () => {
       component.filterType = 'news';
       component.filter = 'mine';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing 1-1 of 1 Results');
+      expect(result).toBe('Viewing <strong>1-1</strong> of <strong>1</strong> Results');
     });
 
     it('flexes correctly based on the number of items per page', () => {
       component.config.itemsPerPage = 3;
       const result = component.getDisplayedElementCountMessage(2);
-      expect(result).toBe('Viewing 4-4 of 4 Results');
+      expect(result).toBe('Viewing <strong>4-4</strong> of <strong>4</strong> Results');
     });
 
     it('returns an empty message if there are no items in the list', () => {
