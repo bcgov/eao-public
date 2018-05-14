@@ -154,7 +154,7 @@
                 <span class="name">EA Certificate Application</span>
                 <span class="value">{{project.eacDecision}}</span>
               </li>
-              <li>
+              <li *ngIf="project.CEAALink">
                 <span class="name">CEAA Involvement</span>
                 <span class="value">
                   <a href="{{project.CEAALink}}" target="_blank">{{project.CEAAInvolvement}}</a>
