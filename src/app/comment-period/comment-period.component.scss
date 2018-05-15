@@ -5,6 +5,37 @@
 @import "~assets/styles/components/file-upload.scss";
 @import "~assets/styles/components/modals.scss";
 
+// Comment Hero Banner
+.hero-banner {
+  .ea-project-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+  }
+
+  .ea-pcp-title {
+    display: block;
+  }
+
+  .ea-status-badge {
+    margin-top: 0.75rem;
+    padding-bottom: 0.25rem;
+    vertical-align: top;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-banner {
+    .ea-pcp-title {
+      display: inline;
+    }
+  
+    .ea-status-badge {
+      margin-top: 0.5rem;
+      margin-left: 0.3rem;
+    }
+  }
+}
+
 .comments {
   &__btns {
     margin-bottom: 2rem;
