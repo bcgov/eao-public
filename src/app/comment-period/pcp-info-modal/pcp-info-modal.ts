@@ -13,6 +13,7 @@ export class PCPInfoModalComponent {
     const step2 = document.getElementById('step2');
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
+    step2.scrollIntoView();
   };
 
   hideAllSteps() {
