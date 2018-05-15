@@ -1,6 +1,45 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 
+// Home Page Hero Banner
+@media (min-width: 768px) {
+  .hero-banner {
+    //background-position: right -2rem;
+
+    .container {
+      min-height: 30rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-banner {
+    background-position: right top;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero-banner {
+    background-position: right -2.5rem;
+  }
+}
+
+@media (min-width: 1700px) {
+  .hero-banner {
+    background-position: right -5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-banner {
+    background-position: right top;
+
+    .container {
+      height: 40rem;
+    }
+  }
+}
+
 .home-news-feed {
   &__project-name {
     margin-bottom: 0.25rem;

@@ -1,10 +1,59 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 
+// Project Hero Banner 
+.hero-banner {
+  .ea-project-title {
+    display: block;
+  }
+
+  .ea-status-badge {
+    margin-top: 0.5rem;
+    padding-bottom: 0.25rem;
+    vertical-align: top;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-banner {
+    .ea-project-title {
+      display: inline;
+    }
+
+    .ea-status-badge {
+      margin-top: 0.5rem;
+      margin-left: 0.3rem;
+    }
+  }
+}
+
+// Map Thumbnail
 .map {
+  &__section {
+    margin-bottom: 0;
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    background: #f4f4f4;
+
+    a {
+      display: block;
+      padding: 0.2rem;
+      height: 150px;
+  
+      img {
+        width: 100%;
+      }
+    }
+  }
+
   &__thumbnail {
     margin: -1rem;
     margin-bottom: 1rem;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
 
     ::ng-deep {
       .map-container {
@@ -26,6 +75,7 @@
   }
 }
 
+// Project Details, Contacts, etc
 @media (max-width: 768px) {
   .nv-list {
     @include clearfix();
@@ -58,6 +108,7 @@
   }
 }
 
+// Activities & Updates Feed
 .project-news-feed {
   .title-container {
     &__title {
@@ -67,33 +118,7 @@
   }
 }
 
-.map-section {
-  margin-bottom: 0;
-  display: table;
-  width: 100%;
-  overflow: hidden;
-  background: #f4f4f4;
-
-  a {
-    display: block;
-    padding: 0.2rem;
-    height: 150px;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .map {
-    &__thumbnail {
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-      cursor: pointer;
-    }
-  }
-}
-
+// ???
 @media (max-width: 567px) {
   .nav {
     margin-bottom: 1.75rem;
@@ -113,11 +138,4 @@
     margin-top: 1.75rem;
     margin-bottom: 1.75rem;
   }
-}
-
-.certificate-status {
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.875rem;
 }

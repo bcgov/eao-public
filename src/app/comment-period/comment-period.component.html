@@ -3,12 +3,12 @@
 </div>
 
 <ng-container *ngIf="commentPeriod">
-  <div class="hero-banner hb-sm">
+  <div class="hero-banner">
     <div class="container">
       <div class="container-inner">
-        <div class="hb-txt">
-          <span class="hb-txt__project-title">{{ commentPeriod.project.name }}</span>
-          <h1>Public Comment and Open House on Application<span class="badge badge-primary badge-status">{{ commentPeriod.status }}</span></h1>
+        <div class="hero-banner__content">
+          <span class="ea-project-title">{{ commentPeriod.project.name }}</span>
+          <h1><span class="ea-pcp-title">Public Comment and Open House on Application</span><span class="ea-status-badge badge badge-primary">{{ commentPeriod.status }}</span></h1>
           <p>The public is invited to obtain information about and comment on the {{ commentPeriod.informationLabel }} for the proposed {{ commentPeriod.project.name }}.</p>
         </div>
       </div>

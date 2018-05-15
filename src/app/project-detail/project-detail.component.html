@@ -3,16 +3,18 @@
 </div>
 
 <ng-container *ngIf="project">
-  <div class="hero-banner hb-sm">
+  
+  <div class="hero-banner">
     <div class="container">
       <div class="container-inner">
-        <div class="hb-txt">
-          <h1>{{project.name}}<span class="badge badge-primary badge-status">{{project.eacDecision}}</span></h1>
+        <div class="hero-banner__content">
+          <h1><span class="ea-project-title">{{project.name}}</span><span class="ea-status-badge badge badge-primary">{{project.eacDecision}}</span></h1>
           <p>{{project.description}}</p>
         </div>
       </div>
     </div>
   </div>
+
   <div class="container" id="anchor-point">
     <div class="row">
       <main class="col-lg-8">
@@ -143,7 +145,7 @@
       <aside class="col-lg-4">
         <section class="card">
           <h4 class="card-header">Project Details</h4>
-          <div class="map-section">
+          <div class="map__section">
             <div class="map__thumbnail" (click)="gotoMap()">
               <app-project-map [project]="project" [zoom]="4"></app-project-map>
             </div>
