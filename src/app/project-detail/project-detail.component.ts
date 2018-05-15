@@ -118,7 +118,7 @@ export class ProjectDetailComponent implements OnInit {
       if (this.filterType) {
         items = this.NewsTypeFilterPipe.transform(items, this.filterType);
       }
-      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + 1;
+      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + (items.length === 0 ? 0 : 1);
       const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
       message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
     }
