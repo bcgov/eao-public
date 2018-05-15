@@ -28,11 +28,12 @@ export class CommentPeriodComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.params.id;
     const code = this.route.snapshot.params.code;
+    this.loading = true;
+
     // get comment period and project meta data
     this.commentPeriodService.getByCode(id, code).mergeMap(
         (commentPeriod: CommentPeriod ) => {
           this.commentPeriod = commentPeriod;
-          this.loading = true;
           this.column = 'dateAdded';
           this.direction = -1;
           // get comments and documents for comment period
@@ -41,8 +42,8 @@ export class CommentPeriodComponent implements OnInit {
       )
       // attach comments and documents to comment period
       .subscribe((data) => {
-        this.loading = false;
         this.commentPeriod = data;
+        this.loading = false;
       });
   }
 

@@ -48,25 +48,25 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     const projectCode = this.route.snapshot.params.code;
+    this.loading = true;
 
     // get project data
-    this.projectService.getByCode(projectCode)
-      .subscribe((data) => {
-        this.project = new Project(data);
+    this.projectService.getByCode(projectCode).mergeMap(
+      (project: Project ) => {
+        this.project = new Project(project);
         if (!this.project.proponent) {
           this.project.proponent = { name: '' };
         }
         this.column = 'dateAdded';
         this.direction = -1;
-        this.loading = this.loading && this.news ? false : true;
-    });
-
-    // get recent activities
-    this.newsService.getByProjectCode(projectCode)
-      .subscribe((data) => {
-        this.news = data;
-        this.setDocumentUrl(this.news);
-        this.loading = this.loading && this.project ? false : true;
+        // get news for the project
+        return this.newsService.getByProjectCode(projectCode);
+      }
+    )
+    .subscribe((data) => {
+      this.news = data;
+      this.setDocumentUrl(this.news);
+      this.loading = false;
     });
   }
 
