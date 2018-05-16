@@ -212,4 +212,49 @@ describe('CommentPeriodComponent', () => {
       expect(result).toBe('');
     });
   });
+
+  describe('filterRejectedDocuments', () => {
+    beforeEach(() => {
+      component.commentPeriod = new CommentPeriod();
+      component.commentPeriod.comments = [
+        new Comment(),
+      ];
+
+    });
+
+    it('returns all documents if none are rejected', () => {
+      component.commentPeriod.comments[0].documents = [
+        new Document( {displayName: 'name1'} ),
+        new Document( {displayName: 'name2'} ),
+        new Document( {displayName: 'name3'} ),
+        new Document( {displayName: 'name4'} ),
+      ];
+      const result = component.filterRejectedDocuments(component.commentPeriod.comments);
+      expect(result[0].documents.length).toBe(4);
+    });
+
+    it('returns no documents if all are rejected', () => {
+      component.commentPeriod.comments[0].documents = [
+        new Document( ),
+        new Document( ),
+        new Document( ),
+        new Document( ),
+      ];
+      const result = component.filterRejectedDocuments(component.commentPeriod.comments);
+      expect(result[0].documents.length).toBe(0);
+    });
+
+    it('returns only publishable documents if some are rejected', () => {
+      component.commentPeriod.comments[0].documents = [
+        new Document( {displayName: 'name1'} ),
+        new Document( {displayName: 'name2'} ),
+        new Document( ),
+        new Document( ),
+      ];
+      const result = component.filterRejectedDocuments(component.commentPeriod.comments);
+      expect(result[0].documents.length).toBe(2);
+    });
+
+
+  });
 });

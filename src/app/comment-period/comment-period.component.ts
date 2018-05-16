@@ -43,8 +43,18 @@ export class CommentPeriodComponent implements OnInit {
       // attach comments and documents to comment period
       .subscribe((data) => {
         this.commentPeriod = data;
+        data.comments = this.filterRejectedDocuments(data.comments);
         this.loading = false;
       });
+  }
+
+  filterRejectedDocuments(comments) {
+    for (const comment of comments){
+      comment.documents = comment.documents.filter((item) => {
+        return item.displayName;
+      });
+    }
+    return comments;
   }
 
   sort (property) {
