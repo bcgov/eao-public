@@ -9,12 +9,12 @@ import pages.app.NewsPage
 import pages.app.ProjectListPage
 import pages.app.ProjectMapPage
 
+import pages.external.ExternalLinkPage
 import pages.external.AccessibilityPage
 import pages.external.CopyrightPage
 import pages.external.DisclaimerPage
 import pages.external.FacebookPage
 import pages.external.GooglePlusPage
-import pages.external.SignInPage
 import pages.external.TwitterPage
 
 import spock.lang.Title
@@ -42,7 +42,7 @@ class HomeSpec extends GebReportingSpec {
       [ text : "THE EA PROCESS" ]       | [ text : "Process & Procedures" ]  || ProcessPage
       [ text : "THE EA PROCESS" ]       | [ text : "Compliance Oversight" ]  || CompliancePage
       [ text : "CONTACT" ]              | null                               || ContactPage
-      [ text : "SIGN IN" ]              | null                               || SignInPage
+      [ text : "SIGN IN" ]              | null                               || new ExternalLinkPage("EAO Project Information and Collaboration (EPIC)", "/authentication/local/signin")
   }
 
   /*
@@ -90,7 +90,7 @@ class HomeSpec extends GebReportingSpec {
       "copyRightLink"           || CopyrightPage
       "disclaimerLink"          || DisclaimerPage
       "accessibilityLink"       || AccessibilityPage
-      "signinLink"              || SignInPage
+      "signinLink"              || new ExternalLinkPage("EAO Project Information and Collaboration (EPIC)", "/authentication/local/signin")
       "facebookConnect"         || FacebookPage
       "twitterConnect"          || TwitterPage
       "gplusConnect"            || GooglePlusPage
