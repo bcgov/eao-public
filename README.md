@@ -116,15 +116,26 @@ ng g module admin --routing
 
 ### Unit tests
 
-Set up via Karma, Jasmine
-1. Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Set up via [Karma](https://karma-runner.github.io), [Jasmine](https://jasmine.github.io/).
+1. Run `ng test` to execute the unit tests.
 
-### End-to-end tests
+### End-to-end functional tests
 
-Set up with Protractor
+Set up with [BDDStack](https://github.com/BCDevOps/BDDStack).
 
-1. Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-1. Before running the tests make sure you are serving the app via `ng serve`.
+#### Run tests against local application:
+
+1. Run `npm run e2e` to automatically start the application locally and execute the end-to-end tests.
+
+#### Run tests against remote application:
+
+1. Determine the URL at which the application is running.
+2. Update the baseurl to the URL from step 1:
+    1. Either modify the GebConfig.groovy baseUrl directly.
+    2. Or set a `BASEURL` environment variable
+3. See `functional-tests/readme.md` for how to execute the tests.
+
+See the [BDDStack Wiki](https://github.com/BCDevOps/BDDStack/wiki) for more information.
 
 ## Change aspects of the application
 
