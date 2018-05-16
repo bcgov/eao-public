@@ -156,6 +156,7 @@ export class SubmitCommentModalComponent implements OnInit {
     const step3 = document.getElementById('step3');
     step2.classList.add('hidden');
     step3.classList.remove('hidden');
+    step3.scrollIntoView();
   }
 
   hideAllSteps() {
