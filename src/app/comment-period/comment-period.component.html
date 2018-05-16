@@ -41,11 +41,10 @@
         </section>
         <section>
           <h3 class="mb-1" [innerHTML]="loading ? 'Loading Comments...' : 'Comments'"></h3>
-
           <!-- Comment Activity Feed -->
           <div class="activity-feed">
-            <div class="spinner-container relative" [hidden]="!loading">
-              <div class="spinner-new rotating"></div>
+            <div class="spinner-container relative mt-4" [hidden]="!loading">
+              <div class="spinner-new--sm rotating"></div>
             </div>
             <div class="activity-feed__no-results" *ngIf="!loading && commentPeriod.comments.length === 0">
               <span class="activity-feed__no-results--msg">No comments found.</span>
