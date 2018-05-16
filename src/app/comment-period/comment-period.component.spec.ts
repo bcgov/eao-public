@@ -218,6 +218,9 @@ describe('CommentPeriodComponent', () => {
       component.commentPeriod = new CommentPeriod();
       component.commentPeriod.comments = [
         new Comment(),
+        new Comment(),
+        new Comment(),
+        new Comment()
       ];
 
     });
@@ -253,6 +256,41 @@ describe('CommentPeriodComponent', () => {
       ];
       const result = component.filterRejectedDocuments(component.commentPeriod.comments);
       expect(result[0].documents.length).toBe(2);
+    });
+
+    it('returns all publishable documents for multiple sets of comments', () => {
+      component.commentPeriod.comments[0].documents = [
+        new Document( {displayName: 'name1'} ),
+        new Document( {displayName: 'name2'} ),
+        new Document( ),
+        new Document( ),
+      ];
+
+      component.commentPeriod.comments[1].documents = [
+        new Document( {displayName: 'name1'} ),
+        new Document( {displayName: 'name2'} ),
+        new Document( {displayName: 'name3'} ),
+        new Document( {displayName: 'name4'} ),
+      ];
+
+      component.commentPeriod.comments[2].documents = [
+        new Document( {displayName: 'name1'} ),
+        new Document( ),
+        new Document( ),
+        new Document( ),
+      ];
+
+      component.commentPeriod.comments[3].documents = [
+        new Document( ),
+        new Document( ),
+        new Document( ),
+        new Document( ),
+      ];
+      const result = component.filterRejectedDocuments(component.commentPeriod.comments);
+      expect(result[0].documents.length).toBe(2);
+      expect(result[1].documents.length).toBe(4);
+      expect(result[2].documents.length).toBe(1);
+      expect(result[3].documents.length).toBe(0);
     });
 
 
