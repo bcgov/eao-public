@@ -1,6 +1,6 @@
 @import "~assets/styles/base.scss";
 
-.spinner-new {
+[class^="spinner-new"] {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,6 +9,16 @@
     margin-top: calc(-#{$spinner-width} / 2);
     margin-left: calc(-#{$spinner-width} / 2);
     background-image: url("assets/images/spinner.png");
+    background-size: 100%;
+}
+
+.spinner-new {
+    &--sm {
+        width: 30px;
+        height: 30px;
+        margin-top: calc(30px / -2);
+        margin-left: calc(30px / -2);
+    }
 }
 
 .spinner-container {
@@ -48,8 +58,8 @@
     &.relative {
         position: relative;
         min-height: 10rem;
-        border-radius: 0.4rem;
-        background: #f7f8fa;
+        padding: 0;
+        border-top: 2px solid #eee;
     }
 }
 

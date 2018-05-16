@@ -23,8 +23,8 @@
             <section>
               <h2 class="overview">Activities & Updates</h2>
               <div class="activity-feed">
-                <div class="spinner-container" [hidden]="!loading">
-                  <div class="spinner-new rotating"></div>
+                <div class="spinner-container relative mt-4" [hidden]="!loading">
+                  <div class="spinner-new--sm rotating"></div>
                 </div>
                 <div class="activity-feed__no-results" *ngIf="news && news.length === 0">
                   <span class="activity-feed__no-results--msg">No results found.</span>
