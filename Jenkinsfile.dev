@@ -51,7 +51,7 @@ def getChangeLog(pastBuilds) {
 
 def CHANGELOG = "No new changes"
 
-// def unitTestPodLabel = "eao-unittest-${UUID.randomID().toString()}"
+// def unitTestPodLabel = "eao-unittest-${UUID.randomUUID().toString()}"
 // podTemplate(label: unitTestPodLabel, name: unitTestPodLabel, serviceAccount: 'jenkins', cloud: 'openshift', containers: [
 //   containerTemplate(
 //     name: 'jnlp',
@@ -140,7 +140,7 @@ node('master') {
   }
 }
 
-def sonarqubePodLabel = "eao-sonar-${UUID.randomID().toString()}"
+def sonarqubePodLabel = "eao-sonar-${UUID.randomUUID().toString()}"
 podTemplate(label: sonarqubePodLabel, name: sonarqubePodLabel, serviceAccount: 'jenkins', cloud: 'openshift', containers: [
   containerTemplate(
     name: 'jnlp',
@@ -211,7 +211,7 @@ node('master'){
   }
 }
 
-def bddPodLabel = "eao-bdd-${UUID.randomID().toString()}"
+def bddPodLabel = "eao-bdd-${UUID.randomUUID().toString()}"
 podTemplate(label: bddPodLabel, name: bddPodLabel, serviceAccount: 'jenkins', cloud: 'openshift', containers: [
   containerTemplate(
     name: 'jnlp',
@@ -261,7 +261,7 @@ podTemplate(label: bddPodLabel, name: bddPodLabel, serviceAccount: 'jenkins', cl
   }
 }
 
-def zapPodLabel = "eao-owasp-zap-${UUID.randomID().toString()}"
+def zapPodLabel = "eao-owasp-zap-${UUID.randomUUID().toString()}"
 podTemplate(label: zapPodLabel, name: zapPodLabel, serviceAccount: 'jenkins', cloud: 'openshift', containers: [
   containerTemplate(
     name: 'jnlp',
