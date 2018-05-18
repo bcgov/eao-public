@@ -10,9 +10,6 @@ import pages.app.ProjectListPage
 import pages.app.ProjectMapPage
 
 import pages.external.ExternalLinkPage
-import pages.external.AccessibilityPage
-import pages.external.CopyrightPage
-import pages.external.DisclaimerPage
 import pages.external.FacebookPage
 import pages.external.GooglePlusPage
 import pages.external.TwitterPage
@@ -61,7 +58,7 @@ class HomeSpec extends GebReportingSpec {
       "pageTitle"                || HomePage
       "viewListBtn"              || ProjectListPage
       "viewMapBtn"               || ProjectMapPage
-      //TODO requires admin site to be running "activitiesAndUpdatesLink" || NewsPage
+      "activitiesAndUpdatesLink" || NewsPage
       "legislationBtn"           || LegislationPage
       "processBtn"               || ProcessPage
       "complianceBtn"            || CompliancePage
@@ -87,9 +84,9 @@ class HomeSpec extends GebReportingSpec {
       "complianceLink"          || CompliancePage
       "contactBtn"              || ContactPage
       "homeLink"                || HomePage
-      "copyRightLink"           || CopyrightPage
-      "disclaimerLink"          || DisclaimerPage
-      "accessibilityLink"       || AccessibilityPage
+      "copyRightLink"           || new ExternalLinkPage("Copyright - Province of British Columbia", "gov.bc.ca/gov/content/home/copyright")
+      "disclaimerLink"          || new ExternalLinkPage("Disclaimer - Province of British Columbia", "gov.bc.ca/gov/content/home/disclaimer")
+      "accessibilityLink"       || new ExternalLinkPage("Web Accessibility - Province of British Columbia", "gov.bc.ca/gov/content/home/accessibility")
       "signinLink"              || new ExternalLinkPage("EAO Project Information and Collaboration (EPIC)", "/authentication/local/signin")
       "facebookConnect"         || FacebookPage
       "twitterConnect"          || TwitterPage
