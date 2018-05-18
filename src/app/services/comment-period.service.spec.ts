@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { async, TestBed, inject } from '@angular/core/testing';
 import { HttpModule, Http, Response, ResponseOptions, BaseRequestOptions, XHRBackend } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
@@ -133,7 +133,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode().subscribe(
+        commentPeriodService.getByCode(pcpid, projcode).subscribe(
           () => {
             fail('expected error');
           },
@@ -156,7 +156,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getByCode().subscribe(
+        commentPeriodService.getByCode(pcpid, projcode).subscribe(
           commentPeriod => {
             expect(commentPeriod._id).toBe(null);
           }
@@ -366,7 +366,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getCommentsAndDocuments(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const comments = commentPeriod.comments;
             expect(comments.length).toBe(expectedResponse.length);
@@ -392,7 +392,7 @@ describe('CommentPeriodService', () => {
 
         mockBackEnd(mockResponses, mockBackend);
 
-        commentPeriodService.getCommentsAndDocuments(pcpid, projcode).subscribe(
+        commentPeriodService.getCommentsAndDocuments(pcpObj).subscribe(
           commentPeriod => {
             const vcs = commentPeriod.comments[1].vcs;
             expect(vcs.length).toBe(expectedResponse.length);

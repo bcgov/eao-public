@@ -136,11 +136,11 @@ describe('ProjectDetailComponent', () => {
     });
 
     it('should return project data', () => {
-      expect(component.project).toBeTruthy;
+      expect(component.project).toBeTruthy();
     });
 
     it('should return news data', () => {
-      expect(component.news).toBeTruthy;
+      expect(component.news).toBeTruthy();
     });
 
     it('should set column to dateAdded', () => {
@@ -157,7 +157,7 @@ describe('ProjectDetailComponent', () => {
     describe('on load', () => {
       it('should initially be undefined', () => {
         contentKeys = Object.keys(component.news[0]);
-        expect(contentKeys.includes('readmore')).toBeFalsy;
+        expect(contentKeys.includes('readmore')).toBeFalsy();
       });
     });
 
@@ -165,7 +165,7 @@ describe('ProjectDetailComponent', () => {
       it('should be defined', () => {
         component.readmore(component.news[0]);
         contentKeys = Object.keys(component.news[0]);
-        expect(contentKeys.includes('readmore')).toBeTruthy;
+        expect(contentKeys.includes('readmore')).toBeTruthy();
       });
     });
   });
@@ -219,19 +219,19 @@ describe('ProjectDetailComponent', () => {
     it('should set filter to undefined', () => {
       component.filter = 'filtertest';
       component.clearAllNewsFilters();
-      expect(component.filter).toBeFalsy;
+      expect(component.filter).toBeFalsy();
     });
 
     it('should set NewsTypeFilter to be undefined', () => {
       component.NewsTypeFilter = '';
       component.clearAllNewsFilters();
-      expect(component.NewsTypeFilter).toBeFalsy;
+      expect(component.NewsTypeFilter).toBeFalsy();
     });
 
     it('should set filterType to be undefined', () => {
       component.filterType = 'test';
       component.clearAllNewsFilters();
-      expect(component.filterType).toBeFalsy;
+      expect(component.filterType).toBeFalsy();
     });
   });
 

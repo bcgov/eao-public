@@ -95,7 +95,7 @@ describe('CommentPeriodComponent', () => {
       expect(activatedRoute.snapshot.params.code).toEqual(2);
     });
     it('should return data for commentPeriod', () => {
-      expect(component.commentPeriod).toBeTruthy;
+      expect(component.commentPeriod).toBeTruthy();
       expect(component.commentPeriod.comments[0].comment).toEqual('someComment');
     });
     it('should set column to dateAdded', () => {
@@ -113,14 +113,14 @@ describe('CommentPeriodComponent', () => {
     describe('on load', () => {
       it('should initially be undefined', () => {
         commentKeys = Object.keys(component.commentPeriod.comments[0]);
-        expect(commentKeys.includes('readmore')).toBeFalsy;
+        expect(commentKeys.includes('readmore')).toBeFalsy();
       });
     });
     describe('after expanding a comment', () => {
       it('should be defined', () => {
         component.readmore(component.commentPeriod.comments[0]);
         commentKeys = Object.keys(component.commentPeriod.comments[0]);
-        expect(commentKeys.includes('readmore')).toBeTruthy;
+        expect(commentKeys.includes('readmore')).toBeTruthy();
       });
     });
   });
