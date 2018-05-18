@@ -21,7 +21,7 @@
 			<label for="projectName">Find Projects by Name</label>
 			<div class="filter-input-row filters-basic">
 				<div class="form-group">
-					<input class="form-control" placeholder="Enter a Project Name" type="text" id="projectName" [(ngModel)]="filter">
+					<input class="form-control" placeholder="Enter a Project Name" type="text" id="projectName" [(ngModel)]="filter" (ngModelChange)="config.currentPage = 1">
 				</div>
 				<button class="toggle-filter-btn btn btn-default btn-sm" title="{{showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
 					[ngClass]="{'show-filters': showFilters}"
@@ -37,7 +37,7 @@
 					<label>Comment Period</label>
 
 					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterPCP">
+					<select class="form-control" [(ngModel)]="filterPCP" (ngModelChange)="config.currentPage = 1">
 						<option value="" selected>All</option>
 						<option value="Pending">Pending</option>
 						<option value="Completed">Completed</option>
@@ -47,7 +47,7 @@
 
 				<div class="col-md-20">
 					<label>Proponent</label>
-					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter()">
+					<select class="form-control" name="selectproponent" [(ngModel)]="proponentListFilter" (ngModelChange)="applyProponentFilter(); config.currentPage = 1">
 						<option value="" selected>All</option>
 						<option *ngFor="let p of proponents | orderBy: {property: 'name', direction: 1}" [ngValue]="p">{{p.name}}</option>
 					</select>
@@ -56,7 +56,7 @@
 					<label>Type</label>
 
 					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterType">
+					<select class="form-control" [(ngModel)]="filterType" (ngModelChange)="config.currentPage = 1">
 						<option value="">All</option>
 						<option value="Energy-Electricity">Energy-Electricity</option>
 						<option value="Energy-Petroleum & Natural Gas">Energy-Petroleum & Natural Gas</option>
@@ -75,7 +75,7 @@
 					<label>EA Decision</label>
 
 					<!-- TODO: Populate Dynamically -->
-					<select class="form-control" [(ngModel)]="filterDecision">
+					<select class="form-control" [(ngModel)]="filterDecision" (ngModelChange)="config.currentPage = 1">
 						<option value="" selected>All</option>
 						<option label="In Progress" value="In Progress">In Progress</option>
 						<option label="Certificate Issued" value="Certificate Issued">Certificate Issued</option>
@@ -92,7 +92,7 @@
         <div class="col-md-20">
 					<label>Current Phase</label>
 
-					<select class="form-control" [(ngModel)]="phasefilter">
+					<select class="form-control" [(ngModel)]="phasefilter" (ngModelChange)="config.currentPage = 1">
             <option value="" selected>All</option>
             <option label="Intake" value="Intake">Intake</option>
             <option label="Determination" value="Determination">Determination</option>
