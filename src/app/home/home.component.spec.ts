@@ -14,13 +14,11 @@ describe('HomeComponent', () => {
 
   // mock service
   const mockNewsService = {
-    getRecentNews: function() {
-      return {
-        subscribe: function(fn) {
-          fn(Array<Home>());
-        }
-      };
-    }
+    getRecentNews: jasmine.createSpy().and.returnValue({
+      subscribe: function(fn) {
+        fn(Array<Home>());
+      }
+    })
   };
 
   beforeEach(
@@ -46,10 +44,10 @@ describe('HomeComponent', () => {
   });
   describe('ngOnInit()', () => {
     it('should call newsService.getRecentNews()', () => {
-      expect(mockNewsService.getRecentNews()).toHaveBeenCalled;
+      expect(mockNewsService.getRecentNews).toHaveBeenCalled();
     });
     it('should return results data', () => {
-      expect('component.results').toBeTruthy;
+      expect('component.results').toBeTruthy();
     });
   });
   describe('setDocumentUrl', () => {

@@ -23,13 +23,11 @@ describe('ProjectComponent', () => {
 
   // mock service
   const mockProjectService = {
-    getAll: function() {
-      return {
-        subscribe: function(fn) {
-          fn(Array<Project>());
-        }
-      };
-    }
+    getAll: jasmine.createSpy().and.returnValue({
+      subscribe: function(fn) {
+        fn(Array<Project>());
+      }
+    })
   };
 
   beforeEach(
@@ -62,19 +60,20 @@ describe('ProjectComponent', () => {
 
   describe('ngOnInit()', () => {
     beforeEach(() => {
+      spyOn(component, 'getProponents').and.stub();
       component.ngOnInit();
     });
 
     it('should call projectService.getAll()', () => {
-      expect(mockProjectService.getAll()).toHaveBeenCalled;
+      expect(mockProjectService.getAll).toHaveBeenCalled();
     });
 
     it('should return results', () => {
-      expect(component.results).toBeTruthy;
+      expect(component.results).toBeTruthy();
     });
 
-    it('should call getProponents(data)', () => {
-      expect(component.getProponents([])).toHaveBeenCalled;
+    it('should call getProponents()', () => {
+      expect(component.getProponents).toHaveBeenCalled();
     });
   });
 
@@ -177,63 +176,61 @@ describe('ProjectComponent', () => {
     it('should set filter to undefined', () => {
       component.filter = 'filtertest';
       component.clearAllProjectFilters();
-      expect(component.filter).toBeFalsy;
+      expect(component.filter).toBeFalsy();
     });
 
     it('should set NewsTypeFilter to be undefined', () => {
       component.projectTypeFilter = '';
       component.clearAllProjectFilters();
-      expect(component.projectTypeFilter).toBeFalsy;
+      expect(component.projectTypeFilter).toBeFalsy();
     });
 
     it('should set filterType to be undefined', () => {
       component.filterType = '';
       component.clearAllProjectFilters();
-      expect(component.filterType).toBeFalsy;
+      expect(component.filterType).toBeFalsy();
     });
 
     it('should set projectDecisionFilter to be undefined', () => {
       component.projectDecisionFilter = '';
       component.clearAllProjectFilters();
-      expect(component.projectDecisionFilter).toBeFalsy;
+      expect(component.projectDecisionFilter).toBeFalsy();
     });
 
     it('should set filterDecision to be undefined', () => {
       component.filterDecision = '';
       component.clearAllProjectFilters();
-      expect(component.filterDecision).toBeFalsy;
+      expect(component.filterDecision).toBeFalsy();
     });
 
     it('should set proponentListFilter to be undefined', () => {
       component.proponentListFilter = '';
       component.clearAllProjectFilters();
-      expect(component.proponentListFilter).toBeFalsy;
+      expect(component.proponentListFilter).toBeFalsy();
     });
 
     it('should set propfilter to be undefined', () => {
       component.propfilter = 'test';
       component.clearAllProjectFilters();
-      expect(component.propfilter).toBeFalsy;
+      expect(component.propfilter).toBeFalsy();
     });
 
     it('should set phasefilter to be undefined', () => {
       component.phasefilter = '';
       component.clearAllProjectFilters();
-      expect(component.phasefilter).toBeFalsy;
+      expect(component.phasefilter).toBeFalsy();
     });
 
     it('should set projectPhaseFilter to be undefined', () => {
       component.projectPhaseFilter = '';
       component.clearAllProjectFilters();
-      expect(component.projectPhaseFilter).toBeFalsy;
+      expect(component.projectPhaseFilter).toBeFalsy();
     });
 
     it('should set filterPCP to be undefined', () => {
       component.filterPCP = '';
       component.clearAllProjectFilters();
-      expect(component.filterPCP).toBeFalsy;
+      expect(component.filterPCP).toBeFalsy();
     });
   });
 });
-
-

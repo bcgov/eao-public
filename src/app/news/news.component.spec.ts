@@ -19,13 +19,11 @@ describe('NewsComponent', () => {
 
   // mock service
   const mockNewsService = {
-    getAll: function () {
-      return {
-        subscribe: function (fn) {
-          fn(Array<News>());
-        }
-      };
-    }
+    getAll: jasmine.createSpy().and.returnValue({
+      subscribe: function(fn) {
+        fn(Array<News>());
+      }
+    })
   };
 
   beforeEach(
@@ -59,7 +57,7 @@ describe('NewsComponent', () => {
 
   describe('ngOnInit()', () => {
     it('should call newsService.getAll()', () => {
-      expect(mockNewsService.getAll()).toHaveBeenCalled;
+      expect(mockNewsService.getAll).toHaveBeenCalled();
     });
 
     it('should return a result', () => {
@@ -84,14 +82,14 @@ describe('NewsComponent', () => {
 
     describe('on load', () => {
       it('should initially be undefined', () => {
-        expect(Object.keys(component.results[0]).includes('readmore')).toBeFalsy;
+        expect(Object.keys(component.results[0]).includes('readmore')).toBeFalsy();
       });
     });
 
     describe('after expanding a comment', () => {
       it('should be defined', () => {
         component.readmore(component.results[0]);
-        expect(Object.keys(component.results[0]).includes('readmore')).toBeTruthy;
+        expect(Object.keys(component.results[0]).includes('readmore')).toBeTruthy();
       });
     });
   });
@@ -143,19 +141,19 @@ describe('NewsComponent', () => {
     it('should set filter to undefined', () => {
       component.filter = 'filtertest';
       component.clearAllNewsFilters();
-      expect(component.filter).toBeFalsy;
+      expect(component.filter).toBeFalsy();
     });
 
     it('should set NewsTypeFilter to be undefined', () => {
       component.NewsTypeFilter = '';
       component.clearAllNewsFilters();
-      expect(component.NewsTypeFilter).toBeFalsy;
+      expect(component.NewsTypeFilter).toBeFalsy();
     });
 
     it('should set filterType to be undefined', () => {
       component.filterType = 'test';
       component.clearAllNewsFilters();
-      expect(component.filterType).toBeFalsy;
+      expect(component.filterType).toBeFalsy();
     });
   });
 

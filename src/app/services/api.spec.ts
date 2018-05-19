@@ -98,7 +98,7 @@ describe('Api', () => {
 
         api.getProjectByCode(projectCode).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -143,7 +143,7 @@ describe('Api', () => {
 
         api.getPCPByCode(code).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -188,7 +188,7 @@ describe('Api', () => {
 
         api.getDocumentById(id).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -233,7 +233,7 @@ describe('Api', () => {
 
         api.getCommentsByPCPCode(code).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -279,7 +279,7 @@ describe('Api', () => {
 
         api.getValuedComponentsByCode(vcsCodes).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -330,7 +330,7 @@ describe('Api', () => {
 
         api.submitDocument(projectId, form, options).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));
@@ -379,7 +379,7 @@ describe('Api', () => {
 
         api.submitComment(comment, options).subscribe(
           resp => {
-            expect(resp).toBeTruthy;
+            expect(resp).toBeTruthy();
           }
         );
       }));

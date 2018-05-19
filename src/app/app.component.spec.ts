@@ -11,17 +11,11 @@ import { Api } from './services/api';
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let cookieStatus: string;
-
-  const mockCookieService = {
-    get: (cookie) => cookieStatus,
-    set: (cookie, status) => null
-  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: CookieService, useValue: mockCookieService },
+        CookieService,
         Api,
         PageScrollConfig
       ],
@@ -72,23 +66,42 @@ describe('AppComponent', () => {
   });
 
   describe('ngOnInit()', () => {
-    it('should set loggedIn to be false', () => {
-      cookieStatus = 'false';
-      component.ngOnInit();
-      expect(component.loggedIn).toBe('false');
+    describe('loggedIn cookie undefined', () => {
+      it('should set loggedIn to be false', () => {
+        component.ngOnInit();
+        expect(component.loggedIn).toBe('false');
+      });
+    });
+
+    describe('loggedIn cookie defined', () => {
+      it('should set loggedIn to be false', () => {
+        const cookieService: CookieService = TestBed.get(CookieService);
+        cookieService.set('loggedIn', 'false');
+        component.ngOnInit();
+        expect(component.loggedIn).toBe('false');
+      });
     });
   });
 
   describe('removeCookie()', () => {
-    it('should set loggedIn to be false', () => {
+    let cookieService: CookieService;
+
+    beforeEach(() => {
+      cookieService = TestBed.get(CookieService);
+      cookieService.set('loggedIn', 'true');
 
       component.removeCookie();
+    });
+
+    it('should set the loggedIn cookie to be false', () => {
+      expect(cookieService.get('loggedIn')).toBe('false');
+    });
+
+    it('should set loggedIn to be false', () => {
       expect(component.loggedIn).toBe('false');
     });
 
     it('should set logout to be true', () => {
-
-      component.removeCookie();
       expect(component.logout).toBe(true);
     });
   });

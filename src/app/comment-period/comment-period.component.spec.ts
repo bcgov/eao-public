@@ -103,7 +103,7 @@ describe('CommentPeriodComponent', () => {
     });
 
     it('should return data for commentPeriod', () => {
-      expect(component.commentPeriod).toBeTruthy;
+      expect(component.commentPeriod).toBeTruthy();
       expect(component.commentPeriod.comments[0].comment).toEqual('someComment');
     });
 
@@ -125,7 +125,7 @@ describe('CommentPeriodComponent', () => {
     describe('on load', () => {
       it('should initially be undefined', () => {
         commentKeys = Object.keys(component.commentPeriod.comments[0]);
-        expect(commentKeys.includes('readmore')).toBeFalsy;
+        expect(commentKeys.includes('readmore')).toBeFalsy();
       });
     });
 
@@ -133,7 +133,7 @@ describe('CommentPeriodComponent', () => {
       it('should be defined', () => {
         component.readmore(component.commentPeriod.comments[0]);
         commentKeys = Object.keys(component.commentPeriod.comments[0]);
-        expect(commentKeys.includes('readmore')).toBeTruthy;
+        expect(commentKeys.includes('readmore')).toBeTruthy();
       });
     });
   });
