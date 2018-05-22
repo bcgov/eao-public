@@ -216,22 +216,28 @@ describe('ProjectDetailComponent', () => {
   });
 
   describe('clearAllNewsFilters()', () => {
-    it('should set filter to undefined', () => {
+    beforeEach(() => {
       component.filter = 'filtertest';
+      component.NewsTypeFilter = 'news';
+      component.filterType = 'test';
+      component.config.currentPage = 100;
       component.clearAllNewsFilters();
-      expect(component.filter).toBeFalsy();
+    });
+
+    it('should set filter to undefined', () => {
+      expect(component.filter).toBeUndefined();
     });
 
     it('should set NewsTypeFilter to be undefined', () => {
-      component.NewsTypeFilter = '';
-      component.clearAllNewsFilters();
-      expect(component.NewsTypeFilter).toBeFalsy();
+      expect(component.NewsTypeFilter).toBeUndefined();
     });
 
     it('should set filterType to be undefined', () => {
-      component.filterType = 'test';
-      component.clearAllNewsFilters();
-      expect(component.filterType).toBeFalsy();
+      expect(component.filterType).toBeUndefined();
+    });
+
+    it('should set the current page to 1', () => {
+      expect(component.config.currentPage).toBe(1);
     });
   });
 

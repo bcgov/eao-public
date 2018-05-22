@@ -173,64 +173,63 @@ describe('ProjectComponent', () => {
   });
 
   describe('clearAllProjectFilters()', () => {
-    it('should set filter to undefined', () => {
+    beforeEach(() => {
       component.filter = 'filtertest';
+      component.projectTypeFilter = 'great type';
+      component.filterType = 'superfilter';
+      component.projectDecisionFilter = 'awesome decision';
+      component.filterDecision = 'filterD';
+      component.proponentListFilter = 'proponenT';
+      component.propfilter = 'test';
+      component.phasefilter = 'phase epsylon';
+      component.projectPhaseFilter = 'project gamma';
+      component.filterPCP = 'pcp for p in p';
+      component.config.currentPage = 100;
       component.clearAllProjectFilters();
-      expect(component.filter).toBeFalsy();
+    });
+
+    it('should set filter to undefined', () => {
+      expect(component.filter).toBeUndefined();
     });
 
     it('should set NewsTypeFilter to be undefined', () => {
-      component.projectTypeFilter = '';
-      component.clearAllProjectFilters();
-      expect(component.projectTypeFilter).toBeFalsy();
+      expect(component.projectTypeFilter).toBeUndefined();
     });
 
     it('should set filterType to be undefined', () => {
-      component.filterType = '';
-      component.clearAllProjectFilters();
-      expect(component.filterType).toBeFalsy();
+      expect(component.filterType).toBeUndefined();
     });
 
     it('should set projectDecisionFilter to be undefined', () => {
-      component.projectDecisionFilter = '';
-      component.clearAllProjectFilters();
-      expect(component.projectDecisionFilter).toBeFalsy();
+      expect(component.projectDecisionFilter).toBeUndefined();
     });
 
     it('should set filterDecision to be undefined', () => {
-      component.filterDecision = '';
-      component.clearAllProjectFilters();
-      expect(component.filterDecision).toBeFalsy();
+      expect(component.filterDecision).toBeUndefined();
     });
 
     it('should set proponentListFilter to be undefined', () => {
-      component.proponentListFilter = '';
-      component.clearAllProjectFilters();
-      expect(component.proponentListFilter).toBeFalsy();
+      expect(component.proponentListFilter).toBeUndefined();
     });
 
     it('should set propfilter to be undefined', () => {
-      component.propfilter = 'test';
-      component.clearAllProjectFilters();
-      expect(component.propfilter).toBeFalsy();
+      expect(component.propfilter).toBeUndefined();
     });
 
     it('should set phasefilter to be undefined', () => {
-      component.phasefilter = '';
-      component.clearAllProjectFilters();
-      expect(component.phasefilter).toBeFalsy();
+      expect(component.phasefilter).toBeUndefined();
     });
 
     it('should set projectPhaseFilter to be undefined', () => {
-      component.projectPhaseFilter = '';
-      component.clearAllProjectFilters();
-      expect(component.projectPhaseFilter).toBeFalsy();
+      expect(component.projectPhaseFilter).toBeUndefined();
     });
 
     it('should set filterPCP to be undefined', () => {
-      component.filterPCP = '';
-      component.clearAllProjectFilters();
-      expect(component.filterPCP).toBeFalsy();
+      expect(component.filterPCP).toBeUndefined();
+    });
+
+    it('should set the current page to 1', () => {
+      expect(component.config.currentPage).toBe(1);
     });
   });
 });
