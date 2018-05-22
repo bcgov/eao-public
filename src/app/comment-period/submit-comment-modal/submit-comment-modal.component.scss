@@ -3,3 +3,14 @@
 @import "~assets/styles/components/file-list.scss";
 @import "~assets/styles/components/file-upload.scss";
 @import "~assets/styles/components/modals.scss";
+
+.submit-comment-modal {
+  position: relative;
+
+  .spinner-container {
+    position: relative;
+    margin-bottom: 2rem;
+    min-height: 18rem;
+    border-radius: 0.4rem;
+  }
+}
