@@ -26,7 +26,7 @@ export class ProjectDetailComponent implements OnInit {
   public showFilters: boolean;
   public projectFilter: boolean;
   public filter = '';
-  public NewsTypeFilter: '';
+  public NewsTypeFilter = '';
   public filterType = '';
 
   public config: PaginationInstance = {
@@ -95,6 +95,7 @@ export class ProjectDetailComponent implements OnInit {
     this.filter = undefined;
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
+    this.config.currentPage = 1;
   }
 
   gotoMap(): void {

@@ -17,16 +17,16 @@ export class ProjectComponent implements OnInit {
   public showFilters: boolean;
   public filter = '';
   public propfilter = '';
-  public proponentListFilter: '';
-  public phasefilter: '';
-  public projectPhaseFilter: '';
-  public projectTypeFilter: '';
-  public filterType: '';
-  public projectDecisionFilter: '';
-  public filterDecision: '';
-  public projectStatusFilter: '';
-  public filterStatus: '';
-  public filterPCP: '';
+  public proponentListFilter = '';
+  public phasefilter = '';
+  public projectPhaseFilter = '';
+  public projectTypeFilter = '';
+  public filterType = '';
+  public projectDecisionFilter = '';
+  public filterDecision = '';
+  public projectStatusFilter = '';
+  public filterStatus = '';
+  public filterPCP = '';
   public isDesc: boolean;
   public column: string;
   public direction: number;
@@ -89,5 +89,6 @@ export class ProjectComponent implements OnInit {
     this.phasefilter = undefined;
     this.projectPhaseFilter = undefined;
     this.filterPCP = undefined;
+    this.config.currentPage = 1;
   }
 }

@@ -18,7 +18,7 @@ export class NewsComponent implements OnInit {
   public showFilters: boolean;
   public projectFilter: boolean;
   public filter = '';
-  public NewsTypeFilter: '';
+  public NewsTypeFilter = '';
   public isDesc: boolean;
   public column: string;
   public direction: number;
@@ -76,6 +76,7 @@ export class NewsComponent implements OnInit {
     this.filter = undefined;
     this.NewsTypeFilter = undefined;
     this.filterType = undefined;
+    this.config.currentPage = 1;
   }
 
   readmore(item): void {
