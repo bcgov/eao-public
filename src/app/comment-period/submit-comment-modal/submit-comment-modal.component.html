@@ -13,7 +13,12 @@
   <form #f="ngForm" [hidden]="loading" (ngSubmit)="onSubmit(f.value)" id="submitCommentForm" novalidate>
     <div class="modal-body submit-comment-form">
       <div class="alert alert-danger" *ngIf="error">
-        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+        <span class="alert__icon">
+          <i class="material-icons">
+              error
+          </i>
+        </span>
+        <span class="alert__msg">An error occurred while attempting to submit your comment. Please try again later.</span>
       </div>
       <div class="form-group">
         <label class="form-control-label" for="author">Your Name <em>(Required)</em></label>
@@ -30,7 +35,7 @@
       <div class="form-group">
         <label class="mb-0 form-control-label" for="file">Upload Attachments</label>
         <span class="form-text mt-0">Total uploads Cannot exceed 5MB. Accepted file types: pdf, png, gif, jpg, jpeg, bmp</span>
-        <ul class="file__list mt-2 mb-3" *ngIf="files.length > 0">
+        <ul class="file__list mt-3" *ngIf="files.length > 0">
           <li class="file__list-item" *ngFor="let file of files">
             <span class="file__list-item-icon">
               <i class="material-icons">&#xE2BC;</i>
@@ -45,7 +50,7 @@
             </span>
           </li>
         </ul>
-        <div class="file-upload mt-2">
+        <div class="file-upload mt-3">
           <input type="file" class="form-control" id="file" name="file" size="5000000" accept=".pdf, .png, .gif, .jpg., .jpeg, .bmp" (change)="onFileChange($event, f.value)" multiple [(ngModel)]="comment.documents" #documents="ngModel">
           <div class="file-upload__target">
             <span class="file-upload__prompt">

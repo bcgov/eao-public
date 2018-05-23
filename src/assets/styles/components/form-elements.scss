@@ -77,3 +77,19 @@ textarea {
 	font-size: 0.9375rem;
 	resize: vertical;
 }
+
+.has-danger {
+	label {
+		em {
+			color: inherit;
+		}
+	}
+
+	.form-text {
+		color: $fc-invalid-color;
+	}
+
+	.form-control {
+		background-color: $fc-invalid-bg;
+	}
+}
