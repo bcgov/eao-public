@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // pipes
+import { FileSizePipe } from '../pipes/filesize.pipe';
 import { OrderByPipe } from 'app/pipes/order-by.pipe';
 import { NewsTypeFilterPipe } from 'app/pipes/news-type-filter.pipe';
 import { ObjectFilterPipe } from 'app/pipes/object-filter.pipe';
@@ -22,6 +23,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     CommonModule
   ],
   declarations: [
+    FileSizePipe,
     FilterPCPPipe,
     NewsHeadlineFilterPipe,
     NewsTypeFilterPipe,
@@ -36,6 +38,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     ScrollDirective
   ],
   exports: [
+    FileSizePipe,
     FilterPCPPipe,
     NewsHeadlineFilterPipe,
     NewsTypeFilterPipe,
