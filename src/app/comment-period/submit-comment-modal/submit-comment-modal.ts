@@ -171,5 +171,6 @@ export class SubmitCommentModalComponent implements OnInit {
     step2.classList.add('hidden');
     step3.classList.add('hidden');
 
+    this.error = false;
   }
 }

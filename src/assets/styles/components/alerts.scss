@@ -1,0 +1,26 @@
+$alert-danger-color:  #fff;
+$alert-danger-bg:     red;
+
+.alert {
+  @include flex-box();
+  line-height: 1rem;
+  font-size: 0.9375rem;
+
+  &__icon {
+    @include flex(0 0 auto);
+    margin-top: -0.1rem;
+    margin-right: 0.75rem;
+  }
+
+  &__msg {
+    @include flex(1 1 auto);
+    line-height: 1.25rem;
+    font-size: 0.9375rem;
+  }
+}
+
+.alert-danger {
+  border-color: $alert-danger-bg;
+  background-color: $alert-danger-bg;
+  color: $alert-danger-color;
+}
