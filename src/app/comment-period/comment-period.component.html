@@ -68,7 +68,7 @@
                   <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
                     <td colspan="2">
                       <div class="title-container">
-                        <h3 class="title-container__title">{{item.author}}</h3>
+                          <h3  class="title-container__title" [innerText]="item.isAnonymous ? 'Anonymous' : item.author "></h3>
                         <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                       </div>
                       <div class="activity-feed__content readmore">

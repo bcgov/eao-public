@@ -17,7 +17,7 @@ export class Comment {
     this.isPublished = obj && obj.isPublished || false;
     this.dateUpdated = obj && obj.dateUpdated || null;
     this.dateAdded = obj && obj.dateAdded || '';
-    this.isAnonymous = obj && obj.isAnonymous || true;
+    this.isAnonymous = obj && obj.isAnonymous || false;
     this.author = obj && obj.author || '';
     this.documents = obj && obj.documents || [];
     this.comment = obj && obj.comment || '';
