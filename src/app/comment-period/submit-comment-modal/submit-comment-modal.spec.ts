@@ -20,8 +20,9 @@ import { Document } from '../../models/document';
 import { ValuedComponent } from '../../models/vcs';
 import { Project } from '../../models/project';
 import { CommentPeriodService } from '../../services/comment-period.service';
+import { FileSizePipe } from '../../pipes/filesize.pipe';
 
-describe('CommentPeriodComponent', () => {
+describe('SubmitCommentModal', () => {
   let component: CommentPeriodComponent;
   let fixture: ComponentFixture<CommentPeriodComponent>;
   let ActivatedRouteStub;
@@ -53,6 +54,7 @@ describe('CommentPeriodComponent', () => {
         PCPInfoModalComponent,
         SubmitCommentModalComponent,
         SubmitCommentProgressModalComponent,
+        FileSizePipe,
         OrderByPipe,
         ObjectFilterPipe
       ]
