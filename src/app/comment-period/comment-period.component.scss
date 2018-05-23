@@ -137,6 +137,12 @@
       font-size: 1.65rem;
     }
   }
+
+  .modal-footer {
+    .btn {
+      min-width: 6rem;
+    }
+  }
 }
 
 @media (min-width: 768px) {
