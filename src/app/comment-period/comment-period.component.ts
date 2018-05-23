@@ -5,6 +5,8 @@ import { PaginationInstance } from 'ngx-pagination';
 import { CommentPeriodService } from '../services/comment-period.service';
 import 'rxjs/add/operator/mergeMap';
 
+import { Api } from '../services/api';
+
 @Component({
   selector: 'app-comment-period',
   templateUrl: './comment-period.component.html',
@@ -23,13 +25,13 @@ export class CommentPeriodComponent implements OnInit {
     currentPage: 1
   };
 
-  constructor( private route: ActivatedRoute, private commentPeriodService: CommentPeriodService ) { }
+  constructor( private route: ActivatedRoute, private commentPeriodService: CommentPeriodService, private api: Api ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params.id;
     const code = this.route.snapshot.params.code;
     this.loading = true;
-
+    this.hostname = this.api.hostnameEPIC;
     // get comment period and project meta data
     this.commentPeriodService.getByCode(id, code).mergeMap(
         (commentPeriod: CommentPeriod ) => {
