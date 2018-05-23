@@ -26,6 +26,7 @@ import { ValuedComponent } from '../models/vcs';
 import { Project } from '../models/project';
 import { CommentPeriodService } from '../services/comment-period.service';
 import { FileSizePipe } from '../pipes/filesize.pipe';
+import { Api } from '../services/api';
 
 describe('CommentPeriodComponent', () => {
   let component: CommentPeriodComponent;
@@ -39,6 +40,7 @@ describe('CommentPeriodComponent', () => {
     };
     TestBed.configureTestingModule({
       providers: [
+        Api,
         { provide: ActivatedRoute, useValue: ActivatedRouteStub },
         {
           provide: CommentPeriodService,
@@ -94,6 +96,10 @@ describe('CommentPeriodComponent', () => {
   });
 
   describe('ngOnInit()', () => {
+    it('should set hostname to api.hostnameEPIC',
+        inject(([Api]), api => {
+        expect(component.hostname).toBe(api.hostnameEPIC);
+      }));
     it('should return data for route.snapshot.params.id', () => {
       const activatedRoute = TestBed.get(ActivatedRoute);
       expect(activatedRoute.snapshot.params.id).toEqual(1);
