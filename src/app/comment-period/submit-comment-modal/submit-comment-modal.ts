@@ -78,7 +78,7 @@ export class SubmitCommentModalComponent implements OnInit {
       for (let i = 0; i < filesList.length; i++ ) {
         if (this.files.length > 0) {
           const namesArray = this.files.map(file => file.name);
-          if (!namesArray.includes(filesList[i].name)) {
+          if (namesArray.indexOf(filesList[i].name) < 0) {
             this.files.push(filesList[i]);
           } else {
             // TODO: WRITE ERROR STUFF HERE
