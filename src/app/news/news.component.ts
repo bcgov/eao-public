@@ -28,7 +28,7 @@ export class NewsComponent implements OnInit {
     itemsPerPage: 10,
     currentPage: 1
   };
-  hostname: String;
+  hostname: string;
   NewsTypeFilterPipe: NewsTypeFilterPipe;
   ProjectFilterPipe: ProjectFilterPipe;
 

@@ -5,11 +5,10 @@ import { Project } from '../models/project';
   name: 'projectRegionFilter'
 })
 export class ProjectRegionFilterPipe implements PipeTransform {
-
-    transform(value: Project[], q: string) {
-        if (!q ) {
-            return value;
-        }
-        return value.filter(item => -1 < item.region.toLowerCase().indexOf(q.toLowerCase()));
+  transform(value: Project[], q: string) {
+    if (!q) {
+      return value;
     }
+    return value.filter(item => -1 < item.region.toLowerCase().indexOf(q.toLowerCase()));
+  }
 }

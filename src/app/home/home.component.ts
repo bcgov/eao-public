@@ -10,7 +10,7 @@ import { Api } from '../services/api';
 })
 export class HomeComponent implements OnInit {
   results: Array<Home>;
-  hostname: String;
+  hostname: string;
   constructor(private newsService: NewsService, private api: Api) { }
 
   ngOnInit() {
