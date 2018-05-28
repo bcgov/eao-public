@@ -10,6 +10,7 @@ import { Api } from '../services/api';
 import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
 import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 import 'rxjs/add/operator/mergeMap';
+import { Proponent } from '../models/proponent';
 
 @Component({
   selector: 'app-project-detail',
@@ -55,7 +56,7 @@ export class ProjectDetailComponent implements OnInit {
       (project: Project ) => {
         this.project = new Project(project);
         if (!this.project.proponent) {
-          this.project.proponent = { name: '' };
+          this.project.proponent = new Proponent({ name: '' });
         }
         this.column = 'dateAdded';
         this.direction = -1;

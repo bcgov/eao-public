@@ -7,16 +7,11 @@ import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-contact-success',
-  templateUrl: './contact.success.html',
+  templateUrl: './contact.success.html'
 })
 // tslint:disable-next-line:component-class-suffix
 export class ContactSuccess implements OnInit {
+  constructor() {}
 
-  constructor() {
-    console.log('ContactSuccess construct');
-  }
-
-  ngOnInit() {
-    console.log('ContactSuccess init');
-  }
+  ngOnInit() {}
 }

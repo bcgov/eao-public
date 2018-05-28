@@ -3,16 +3,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'orderBy'
 })
-
 export class OrderByPipe implements PipeTransform {
-
   transform(records: Array<any>, args: any): any {
-
-    if (!args.property || !args.direction) {
+    if (!args || !args.property || !args.direction) {
       return records;
     }
 
-    return records.sort(function (a, b) {
+    return records.sort(function(a, b) {
       let aCompare = a[args.property];
       let bCompare = b[args.property];
 
@@ -49,5 +46,5 @@ export class OrderByPipe implements PipeTransform {
 
       return 0;
     });
-  };
+  }
 }

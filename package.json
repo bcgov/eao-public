@@ -52,6 +52,7 @@
     "@types/jasmine": "2.8.7",
     "@types/lodash": "4.14.108",
     "@types/node": "6.0.110",
+    "@types/jquery": "3.3.2",
     "codelyzer": "2.0.0",
     "jasmine-core": "3.1.0",
     "jasmine-spec-reporter": "3.2.0",
