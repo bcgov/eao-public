@@ -3,54 +3,62 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { ProjectComponent } from './project.component';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project';
 
 import { OrderByPipe } from '../pipes/order-by.pipe';
-import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
 import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
 import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
 import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
 import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
 import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
+import { Proponent } from '../models/proponent';
+import { ProjectFilters } from './project-filters';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
   let fixture: ComponentFixture<ProjectComponent>;
 
-  // mock service
-  const mockProjectService = {
-    getAll: jasmine.createSpy().and.returnValue({
-      subscribe: function(fn) {
-        fn(Array<Project>());
-      }
-    })
+  const projectServiceSpy = {
+    getAll: jasmine.createSpy().and.returnValue(Observable.of(Array<Project>()))
+  };
+  const params: Params = {};
+  const activatedRouteStub = {
+    params: Observable.of(params)
+  };
+  const routerSpy = {
+    navigate: jasmine.createSpy('navigate')
   };
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        providers: [
-          { provide: ProjectService, useValue: mockProjectService }
-        ],
-        imports: [RouterTestingModule, FormsModule, NgxPaginationModule],
-        declarations: [
-          ProjectComponent,
-          OrderByPipe,
-          ProjectFilterPipe,
-          PhaseFilterPipe,
-          FilterPCPPipe,
-          ProjectDecisionFilterPipe,
-          ProjectTypeFilterPipe,
-          ProponentFilterPipe,
-          ObjectFilterPipe
-        ]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: ProjectService, useValue: projectServiceSpy },
+        { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: Router, useValue: routerSpy },
+        ChangeDetectorRef
+      ],
+      imports: [FormsModule, NgxPaginationModule, HttpModule, RouterTestingModule],
+      declarations: [
+        ProjectComponent,
+        OrderByPipe,
+        PhaseFilterPipe,
+        FilterPCPPipe,
+        ProjectDecisionFilterPipe,
+        ProjectTypeFilterPipe,
+        ProponentFilterPipe,
+        ObjectFilterPipe
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProjectComponent);
@@ -60,176 +68,174 @@ describe('ProjectComponent', () => {
 
   describe('ngOnInit()', () => {
     beforeEach(() => {
-      spyOn(component, 'getProponents').and.stub();
+      spyOn(component, 'getDistinctSortedProponentNames').and.stub();
       component.ngOnInit();
     });
 
     it('should call projectService.getAll()', () => {
-      expect(mockProjectService.getAll).toHaveBeenCalled();
+      expect(projectServiceSpy.getAll).toHaveBeenCalled();
     });
 
     it('should return results', () => {
       expect(component.results).toBeTruthy();
     });
 
-    it('should call getProponents()', () => {
-      expect(component.getProponents).toHaveBeenCalled();
+    it('should call getDistinctSortedProponentNames()', () => {
+      expect(component.getDistinctSortedProponentNames).toHaveBeenCalled();
     });
   });
 
-  describe('getProponents(data)', () => {
-    let data;
-
-    describe('given empty data array', () => {
+  describe('getDistinctSortedProponentNames(projects)', () => {
+    describe('given empty projects array', () => {
+      let result: Array<String>;
       beforeEach(() => {
-        data = [{}];
-        component.getProponents(data);
+        result = component.getDistinctSortedProponentNames(Array<Project>());
       });
 
-      it('should return 1 item', () => {
-        expect(data.length).toBe(1);
-      });
-
-      it('should set project.proponent.name to undefined', () => {
-        expect(data[0].name).toBe(undefined);
-      });
-
-      it('should not add project.proponent.name to proponents', () => {
-        expect(component.proponents.length).toBe(0);
+      it('should return an empty array', () => {
+        expect(result.length).toBe(0);
       });
     });
 
-    describe('given a non-empty data array', () => {
+    describe('given a non-empty projects array', () => {
+      let result: Array<String>;
       beforeEach(() => {
-        data = [{
-          proponent: {
-            name: 'test'
-          }
-        }];
-        component.getProponents(data);
+        const projects = [
+          new Project({ proponent: new Proponent({ name: 'ccc' }) }),
+          new Project({ proponent: new Proponent({ name: 'aaa' }) }),
+          new Project({ proponent: new Proponent({ name: 'bbb' }) }),
+          new Project({ proponent: new Proponent({ name: 'ccc' }) })
+        ];
+        result = component.getDistinctSortedProponentNames(projects);
       });
 
-      it('should return 1 item', () => {
-        expect(data.length).toBe(1);
+      it('should return 3 items', () => {
+        expect(result.length).toBe(3);
       });
 
-      it('should add project.proponent.name to proponents', () => {
-        expect(component.proponents[0].name).toBe('test');
+      it('should sort the items', () => {
+        expect(result[0]).toBe('aaa');
+        expect(result[1]).toBe('bbb');
+        expect(result[2]).toBe('ccc');
       });
     });
   });
 
-  describe('sort(property)', () => {
-    let property;
-
+  describe('sort(columnName)', () => {
+    let columnName;
     beforeEach(() => {
-      property = 'dateAdded';
+      columnName = 'dateAdded';
     });
 
-    describe('given isDesc is true', () => {
+    describe('given sortDirection is 1', () => {
       beforeEach(() => {
-        component.isDesc = true;
-        component.sort(property);
+        component.sortDirection = 1;
+        component.sort(columnName);
       });
 
-      it('should set isDesc to false', () => {
-        expect(component.isDesc).toBeFalsy();
-      });
-
-      it('should set direction to -1', () => {
-        expect(component.direction).toBe(-1);
+      it('should set sortDirection to -1', () => {
+        expect(component.sortDirection).toBe(-1);
       });
     });
 
-    describe('given isDesc is false', () => {
+    describe('given sortDirection is -1', () => {
       beforeEach(() => {
-        component.isDesc = false;
-        component.sort(property);
+        component.sortDirection = -1;
+        component.sort(columnName);
       });
 
-      it('should set isDesc to true', () => {
-        expect(component.isDesc).toBeTruthy();
-      });
-
-      it('should set direction to 1', () => {
-        expect(component.direction).toBe(1);
+      it('should set sortDirection to 1', () => {
+        expect(component.sortDirection).toBe(1);
       });
     });
 
-    describe('given property', () => {
-      it('should assign property to column', () => {
-        component.sort(property);
-        expect(component.column).toBe(property);
+    describe('given columnName', () => {
+      it('should assign columnName to sortColumn', () => {
+        component.sort('aNewColumn');
+        expect(component.sortColumn).toBe('aNewColumn');
       });
     });
   });
 
-  describe('applyProponentFilter()', () => {
-    it('should set propfilter to proponentListFilter', () => {
-      component.proponentListFilter = '';
-      component.applyProponentFilter();
-      expect(component.propfilter).toBe('');
+  describe('applyProjectFilters()', () => {
+    it('navigates to project page with saved filters', () => {
+      component.savedFilters = new ProjectFilters({ keyword: 'some keyword', type: 'some type' });
+      component.applyProjectFilters();
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['project', component.savedFilters.getParams()]);
     });
   });
 
-  describe('clearAllProjectFilters()', () => {
+  describe('clear()', () => {
     beforeEach(() => {
-      component.filter = 'filtertest';
-      component.projectTypeFilter = 'great type';
-      component.filterType = 'superfilter';
-      component.projectDecisionFilter = 'awesome decision';
-      component.filterDecision = 'filterD';
-      component.proponentListFilter = 'proponenT';
-      component.propfilter = 'test';
-      component.phasefilter = 'phase epsylon';
-      component.projectPhaseFilter = 'project gamma';
-      component.filterPCP = 'pcp for p in p';
-      component.config.currentPage = 100;
+      component.savedFilters = new ProjectFilters({ keyword: 'some keyword', type: 'some type' });
+      component.appliedFilters = null;
       component.clearAllProjectFilters();
     });
 
-    it('should set filter to undefined', () => {
-      expect(component.filter).toBeUndefined();
+    it('clears any saved filters', () => {
+      expect(component.savedFilters.keyword).toBe('');
+      expect(component.savedFilters.type).toBe('');
+      expect(component.savedFilters.getParams()).toEqual({});
     });
 
-    it('should set NewsTypeFilter to be undefined', () => {
-      expect(component.projectTypeFilter).toBeUndefined();
+    it('sets current page to 1', () => {
+      expect(component.pagination.currentPage).toBe(1);
+    });
+  });
+
+  describe('showAdvancedFilters()', () => {
+    beforeEach(() => {
+      component.appliedFilters = new ProjectFilters();
     });
 
-    it('should set filterType to be undefined', () => {
-      expect(component.filterType).toBeUndefined();
+    describe('with no filters set', () => {
+      it('should return false', () => {
+        expect(component.showAdvancedFilters()).toBe(false);
+      });
     });
 
-    it('should set projectDecisionFilter to be undefined', () => {
-      expect(component.projectDecisionFilter).toBeUndefined();
+    describe('with only keyword filter set', () => {
+      it('should return false', () => {
+        component.appliedFilters.keyword = 'status';
+        expect(component.showAdvancedFilters()).toBe(false);
+      });
     });
 
-    it('should set filterDecision to be undefined', () => {
-      expect(component.filterDecision).toBeUndefined();
-    });
+    describe('with filters set', () => {
+      describe('with commentPeriodStatus set', () => {
+        it('should return true', () => {
+          component.appliedFilters.commentPeriodStatus = 'status';
+          expect(component.showAdvancedFilters()).toBe(true);
+        });
+      });
 
-    it('should set proponentListFilter to be undefined', () => {
-      expect(component.proponentListFilter).toBeUndefined();
-    });
+      describe('with proponent set', () => {
+        it('should return true', () => {
+          component.appliedFilters.proponent = 'status';
+          expect(component.showAdvancedFilters()).toBe(true);
+        });
+      });
 
-    it('should set propfilter to be undefined', () => {
-      expect(component.propfilter).toBeUndefined();
-    });
+      describe('with type set', () => {
+        it('should return true', () => {
+          component.appliedFilters.type = 'status';
+          expect(component.showAdvancedFilters()).toBe(true);
+        });
+      });
 
-    it('should set phasefilter to be undefined', () => {
-      expect(component.phasefilter).toBeUndefined();
-    });
+      describe('with phase set', () => {
+        it('should return true', () => {
+          component.appliedFilters.phase = 'status';
+          expect(component.showAdvancedFilters()).toBe(true);
+        });
+      });
 
-    it('should set projectPhaseFilter to be undefined', () => {
-      expect(component.projectPhaseFilter).toBeUndefined();
-    });
-
-    it('should set filterPCP to be undefined', () => {
-      expect(component.filterPCP).toBeUndefined();
-    });
-
-    it('should set the current page to 1', () => {
-      expect(component.config.currentPage).toBe(1);
+      describe('with decision set', () => {
+        it('should return true', () => {
+          component.appliedFilters.decision = 'status';
+          expect(component.showAdvancedFilters()).toBe(true);
+        });
+      });
     });
   });
 });

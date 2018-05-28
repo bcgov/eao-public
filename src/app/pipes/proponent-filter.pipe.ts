@@ -6,12 +6,10 @@ import { Proponent } from '../models/proponent';
   name: 'proponentFilter'
 })
 export class ProponentFilterPipe implements PipeTransform {
-
-    transform(value: Project[], q: Proponent) {
-        if (!q) {
-            return value;
-        }
-        return value.filter(item => -1 < item.proponent.name.toLowerCase().indexOf(q.name.toLowerCase()));
+  transform(value: Project[], name: string) {
+    if (!name) {
+      return value;
     }
-
+    return value.filter(item => -1 < item.proponent.name.toLowerCase().indexOf(name.toLowerCase()));
+  }
 }
