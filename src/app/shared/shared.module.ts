@@ -14,6 +14,7 @@ import { FilterPCPPipe } from 'app/pipes/filter-pcp.pipe';
 import { ProjectFilterPipe } from 'app/pipes/project-filter.pipe';
 import { ProjectStatusFilterPipe } from 'app/pipes/project-status-filter.pipe';
 import { NewsHeadlineFilterPipe } from 'app/pipes/news-headline-filter.pipe';
+import { ProjectRegionFilterPipe } from 'app/pipes/project-region-filter.pipe';
 
 // directives
 import { ScrollDirective } from '../directives/scroll.directive';
@@ -35,6 +36,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     ProjectStatusFilterPipe,
     ProponentFilterPipe,
     ProjectFilterPipe,
+    ProjectRegionFilterPipe,
     ScrollDirective
   ],
   exports: [
@@ -47,6 +49,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     PhaseFilterPipe,
     ProjectTypeFilterPipe,
     ProjectDecisionFilterPipe,
+    ProjectRegionFilterPipe,
     ProjectStatusFilterPipe,
     ProponentFilterPipe,
     ProjectFilterPipe,

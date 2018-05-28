@@ -16,6 +16,7 @@ import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe
 import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
 import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
+import { ProjectRegionFilterPipe } from '../pipes/project-region-filter.pipe';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -46,7 +47,8 @@ describe('ProjectComponent', () => {
           ProjectDecisionFilterPipe,
           ProjectTypeFilterPipe,
           ProponentFilterPipe,
-          ObjectFilterPipe
+          ObjectFilterPipe,
+          ProjectRegionFilterPipe
         ]
       }).compileComponents();
     })
@@ -119,6 +121,37 @@ describe('ProjectComponent', () => {
     });
   });
 
+  describe('getRegions(projects', () => {
+    let result: Array<String>;
+    describe('given empty projects array', () => {
+      beforeEach(() => {
+        result = component.getRegions(Array<Project>());
+      });
+      it('should return an empty array', () => {
+        expect(result.length).toBe(0);
+      });
+    });
+    describe('given a non-empty projects array', () => {
+      beforeEach(() => {
+        const projects = [
+          new Project({region: 'Peace'}),
+          new Project({region: 'Lower Mainland'}),
+          new Project({region: 'Peace'}),
+          new Project({region: 'Skeena'}),
+        ];
+        result = component.getRegions(projects);
+      });
+      it('should return 3 items', () => {
+        expect(result.length).toBe(3);
+      });
+      it('should sort the items', () => {
+        expect(result[0]).toBe('Lower Mainland');
+        expect(result[1]).toBe('Peace');
+        expect(result[2]).toBe('Skeena');
+      });
+    });
+  });
+
   describe('sort(property)', () => {
     let property;
 
@@ -184,6 +217,7 @@ describe('ProjectComponent', () => {
       component.phasefilter = 'phase epsylon';
       component.projectPhaseFilter = 'project gamma';
       component.filterPCP = 'pcp for p in p';
+      component.projectRegionFilter = 'test region';
       component.config.currentPage = 100;
       component.clearAllProjectFilters();
     });
@@ -226,6 +260,10 @@ describe('ProjectComponent', () => {
 
     it('should set filterPCP to be undefined', () => {
       expect(component.filterPCP).toBeUndefined();
+    });
+
+    it('should set projectRegionFilter to be undefined', () => {
+      expect(component.projectRegionFilter).toBeUndefined();
     });
 
     it('should set the current page to 1', () => {
