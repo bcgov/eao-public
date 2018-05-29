@@ -24,6 +24,8 @@ export class ProjectComponent implements OnInit {
   public filterType = '';
   public projectDecisionFilter = '';
   public filterDecision = '';
+  public projectRegionFilter = '';
+  public regionFilter = '';
   public projectStatusFilter = '';
   public filterStatus = '';
   public filterPCP = '';
@@ -31,6 +33,7 @@ export class ProjectComponent implements OnInit {
   public column: string;
   public direction: number;
   public proponents: Array<Proponent> = [];
+  public regions: Array<string> = [];
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 25,
@@ -46,6 +49,7 @@ export class ProjectComponent implements OnInit {
         this.results = data;
         this.getProponents(data);
         this.loading = false;
+        this.regions = this.getRegions(data);
         // Needed in development mode - not required in prod.
         this._changeDetectionRef.detectChanges();
       },
@@ -68,6 +72,16 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  getRegions(projects) {
+    const regions: Array<string> = [];
+    projects.forEach(project => {
+      if (project.region) {
+        regions.push(project.region.replace(/\b\w/g, letter => letter.toUpperCase()));
+      }
+    });
+    return Array.from(new Set (regions)).sort();
+  }
+
   sort (property) {
     this.isDesc = !this.isDesc;
     this.column = property;
@@ -84,6 +98,8 @@ export class ProjectComponent implements OnInit {
     this.filterType = undefined;
     this.projectDecisionFilter = undefined;
     this.filterDecision = undefined;
+    this.projectRegionFilter = undefined;
+    this.regionFilter = undefined;
     this.proponentListFilter = undefined;
     this.propfilter = undefined;
     this.phasefilter = undefined;
