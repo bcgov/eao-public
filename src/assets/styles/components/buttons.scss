@@ -4,6 +4,7 @@
   border-radius: 0.25rem;
   font-weight: 400;
   transition: all linear 0.2s;
+  cursor: pointer;
 
   &.inverted {
     color: #fff;
@@ -32,8 +33,19 @@
   }
 
   &.btn-default {
-    background: #EEE;
     color: #1a5a96;
+    background: #eee;
+  }
+
+  &.btn-secondary {
+    border: 2px solid #eee;
+    background: #eee;
+
+    &:focus,
+    &:hover {
+      border: 2px solid #ddd;
+      background: #ddd;
+    }
   }
 
   &.btn-sm {

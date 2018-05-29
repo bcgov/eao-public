@@ -41,28 +41,32 @@ export class Api {
         // Prod
         hostnameEPIC = 'https://projects.eao.gov.bc.ca';
         env = 'prod';
-    };
+    }
     return { hostnameEPIC, env };
   }
 
   getApiPath(hostnameEPIC) {
-    return `${ hostnameEPIC }/api`;
+    return `${hostnameEPIC}/api`;
   }
 
   getProjectByCode(projectCode: string) {
-    return this.get(`project/public/${ projectCode }`);
+    return this.get(`project/public/${projectCode}`);
+  }
+
+  getAllProjects() {
+    return this.get('projects/public');
   }
 
   getPCPByCode(code: string) {
-    return this.get(`commentperiod/for/public/${ code }`);
+    return this.get(`commentperiod/for/public/${code}`);
   }
 
   getDocumentById(id: string) {
-    return this.get(`document/${ id }`);
+    return this.get(`document/${id}`);
   }
 
   getCommentsByPCPCode(pcpCode: string) {
-    return this.get(`comments/period/${ pcpCode }/all`);
+    return this.get(`comments/period/${pcpCode}/all`);
   }
 
   getValuedComponentsByCode(vcsCodes: any[]) {
@@ -70,7 +74,7 @@ export class Api {
   }
 
   submitDocument(projectId: number, form: FormData, options: Object) {
-    return this.post(`commentdocument/${ projectId }/upload`, form, options);
+    return this.post(`commentdocument/${projectId}/upload`, form, options);
   }
 
   submitComment(comment, options) {
