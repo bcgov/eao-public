@@ -28,6 +28,7 @@ export class ProjectDetailComponent implements OnInit {
   public filter = '';
   public NewsTypeFilter = '';
   public filterType = '';
+  public filteredResults: number;
 
   public config: PaginationInstance = {
     id: 'custom',
@@ -66,6 +67,7 @@ export class ProjectDetailComponent implements OnInit {
     .subscribe((data) => {
       this.news = data;
       this.setDocumentUrl(this.news);
+      this.filteredResults = this.news.length;
       this.loading = false;
     });
   }
@@ -112,17 +114,18 @@ export class ProjectDetailComponent implements OnInit {
   getDisplayedElementCountMessage(pageNumber) {
     let message = '';
     let items = this.news;
+    if (this.filter) {
+      items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
+    }
+    if (this.filterType) {
+      items = this.NewsTypeFilterPipe.transform(items, this.filterType);
+    }
     if (items.length > 0) {
-      if (this.filter) {
-        items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
-      }
-      if (this.filterType) {
-        items = this.NewsTypeFilterPipe.transform(items, this.filterType);
-      }
       const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + (items.length === 0 ? 0 : 1);
       const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
       message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
     }
+    this.filteredResults = items.length;
     return message;
   }
 }

@@ -18,11 +18,12 @@ export class NewsComponent implements OnInit {
   public showFilters: boolean;
   public projectFilter: boolean;
   public filter = '';
+  public filterType = '';
   public NewsTypeFilter = '';
+  public filteredResults: number;
   public isDesc: boolean;
   public column: string;
   public direction: number;
-  public filterType = '';
   public config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 10,
@@ -44,6 +45,7 @@ export class NewsComponent implements OnInit {
         this.setDocumentUrl(data);
         this.results = data;
         this.loading = false;
+        this.filteredResults = this.results.length;
         this.column = 'dateAdded';
         this.direction = -1;
         // Needed in development mode - not required in prod.
@@ -86,17 +88,18 @@ export class NewsComponent implements OnInit {
   getDisplayedElementCountMessage(pageNumber) {
     let message = '';
     let items = this.results;
+    if (this.filter) {
+      items = this.ProjectFilterPipe.transform(items, this.filter);
+    }
+    if (this.filterType) {
+      items = this.NewsTypeFilterPipe.transform(items, this.filterType);
+    }
     if (items.length > 0) {
-      if (this.filter) {
-        items = this.ProjectFilterPipe.transform(items, this.filter);
-      }
-      if (this.filterType) {
-        items = this.NewsTypeFilterPipe.transform(items, this.filterType);
-      }
       const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + (items.length === 0 ? 0 : 1);
       const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
       message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
     }
+    this.filteredResults = items.length;
     return message;
   }
 }
