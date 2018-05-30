@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from '../models/project';
-import { News } from '../models/news';
-import { ProjectService } from '../services/project.service';
-import { NewsService } from '../services/news.service';
-import { Subscription } from 'rxjs/Subscription';
 import { PaginationInstance } from 'ngx-pagination';
-import { Api } from '../services/api';
-import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
-import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
+import { News } from '../models/news';
+import { Project } from '../models/project';
 import { Proponent } from '../models/proponent';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { Api } from '../services/api';
+import { NewsService } from '../services/news.service';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -41,8 +41,13 @@ export class ProjectDetailComponent implements OnInit {
   NewsTypeFilterPipe: NewsTypeFilterPipe;
   NewsHeadlineFilterPipe: NewsHeadlineFilterPipe;
 
-  constructor(private api: Api, private route: ActivatedRoute, private router: Router,
-    private projectService: ProjectService, private newsService: NewsService) {
+  constructor(
+    private api: Api,
+    private route: ActivatedRoute,
+    private router: Router,
+    private projectService: ProjectService,
+    private newsService: NewsService
+  ) {
     this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
     this.NewsHeadlineFilterPipe = new NewsHeadlineFilterPipe();
   }
@@ -53,8 +58,9 @@ export class ProjectDetailComponent implements OnInit {
     this.loading = true;
 
     // get project data
-    this.projectService.getByCode(projectCode).mergeMap(
-      (project: Project ) => {
+    this.projectService
+      .getByCode(projectCode)
+      .mergeMap((project: Project) => {
         this.project = new Project(project);
         if (!this.project.proponent) {
           this.project.proponent = new Proponent({ name: '' });
@@ -63,14 +69,13 @@ export class ProjectDetailComponent implements OnInit {
         this.direction = -1;
         // get news for the project
         return this.newsService.getByProjectCode(projectCode);
-      }
-    )
-    .subscribe((data) => {
-      this.news = data;
-      this.setDocumentUrl(this.news);
-      this.filteredResults = this.news.length;
-      this.loading = false;
-    });
+      })
+      .subscribe(data => {
+        this.news = data;
+        this.setDocumentUrl(this.news);
+        this.filteredResults = this.news.length;
+        this.loading = false;
+      });
   }
 
   setDocumentUrl(news) {
@@ -79,7 +84,7 @@ export class ProjectDetailComponent implements OnInit {
       if (!activity.documentUrl) {
         activity.documentUrl = '';
       } else if (!regex.test(activity.documentUrl)) {
-        activity.documentUrl = `${this.api.hostnameEPIC }${ activity.documentUrl }`;
+        activity.documentUrl = `${this.api.hostnameEPIC}${activity.documentUrl}`;
       }
     });
   }
@@ -88,7 +93,7 @@ export class ProjectDetailComponent implements OnInit {
     return `${this.api.hostnameEPIC}/p/${this.project.code}/docs`;
   }
 
-  sort (property) {
+  sort(property) {
     this.isDesc = !this.isDesc;
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
@@ -122,8 +127,8 @@ export class ProjectDetailComponent implements OnInit {
       items = this.NewsTypeFilterPipe.transform(items, this.filterType);
     }
     if (items.length > 0) {
-      const startRange = ((pageNumber - 1) * this.config.itemsPerPage) + (items.length === 0 ? 0 : 1);
-      const endRange = Math.min(((pageNumber - 1) * this.config.itemsPerPage) + this.config.itemsPerPage, items.length);
+      const startRange = (pageNumber - 1) * this.config.itemsPerPage + (items.length === 0 ? 0 : 1);
+      const endRange = Math.min((pageNumber - 1) * this.config.itemsPerPage + this.config.itemsPerPage, items.length);
       message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
     }
     this.filteredResults = items.length;

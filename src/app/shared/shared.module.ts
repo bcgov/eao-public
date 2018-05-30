@@ -3,21 +3,22 @@ import { CommonModule } from '@angular/common';
 
 // pipes
 import { FileSizePipe } from '../pipes/filesize.pipe';
-import { OrderByPipe } from 'app/pipes/order-by.pipe';
+import { FilterPCPPipe } from 'app/pipes/filter-pcp.pipe';
+import { NewsHeadlineFilterPipe } from 'app/pipes/news-headline-filter.pipe';
 import { NewsTypeFilterPipe } from 'app/pipes/news-type-filter.pipe';
 import { ObjectFilterPipe } from 'app/pipes/object-filter.pipe';
-import { ProjectTypeFilterPipe } from 'app/pipes/project-type-filter.pipe';
-import { ProjectDecisionFilterPipe } from 'app/pipes/project-decision-filter.pipe';
-import { ProponentFilterPipe } from 'app/pipes/proponent-filter.pipe';
+import { OrderByPipe } from 'app/pipes/order-by.pipe';
 import { PhaseFilterPipe } from 'app/pipes/phase-filter.pipe';
-import { FilterPCPPipe } from 'app/pipes/filter-pcp.pipe';
+import { ProjectDecisionFilterPipe } from 'app/pipes/project-decision-filter.pipe';
 import { ProjectFilterPipe } from 'app/pipes/project-filter.pipe';
-import { ProjectStatusFilterPipe } from 'app/pipes/project-status-filter.pipe';
-import { NewsHeadlineFilterPipe } from 'app/pipes/news-headline-filter.pipe';
 import { ProjectRegionFilterPipe } from 'app/pipes/project-region-filter.pipe';
+import { ProjectStatusFilterPipe } from 'app/pipes/project-status-filter.pipe';
+import { ProjectTypeFilterPipe } from 'app/pipes/project-type-filter.pipe';
+import { ProponentFilterPipe } from 'app/pipes/proponent-filter.pipe';
 
 // directives
 import { ScrollDirective } from '../directives/scroll.directive';
+import { ProperCasePipe } from '../pipes/proper-case.pipe';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     ProponentFilterPipe,
     ProjectFilterPipe,
     ProjectRegionFilterPipe,
+    ProperCasePipe,
     ScrollDirective
   ],
   exports: [
@@ -53,6 +55,7 @@ import { ScrollDirective } from '../directives/scroll.directive';
     ProjectStatusFilterPipe,
     ProponentFilterPipe,
     ProjectFilterPipe,
+    ProperCasePipe,
     ScrollDirective
   ]
 })

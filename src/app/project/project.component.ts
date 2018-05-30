@@ -11,6 +11,7 @@ import { ProjectRegionFilterPipe } from '../pipes/project-region-filter.pipe';
 import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
 import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ProjectService } from '../services/project.service';
+import { StringHelper } from '../utils/string-helper';
 import { ProjectFilters } from './project-filters';
 
 @Component({
@@ -93,7 +94,7 @@ export class ProjectComponent implements OnInit {
     const names: Array<string> = [];
     projects.forEach(project => {
       if (project.proponent && project.proponent.name) {
-        names.push(project.proponent.name);
+        names.push(StringHelper.toProperCase(project.proponent.name));
       }
     });
     return Array.from(new Set(names)).sort();
@@ -109,7 +110,7 @@ export class ProjectComponent implements OnInit {
     const regions: Array<string> = [];
     projects.forEach(project => {
       if (project.region) {
-        regions.push(project.region.replace(/\b\w/g, letter => letter.toUpperCase()));
+        regions.push(StringHelper.toProperCase(project.region));
       }
     });
     return Array.from(new Set(regions)).sort();

@@ -1,30 +1,28 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Http, HttpModule } from '@angular/http';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
-import { News } from '../models/news';
-import { ProjectDetailComponent } from './project-detail.component';
-import { Project } from '../models/project';
-
-import { OrderByPipe } from '../pipes/order-by.pipe';
-import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
-import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
-import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
-import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
-import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
-import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
-import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
-import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
-import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
-
 import { MapModule } from '../map/map.module';
+import { News } from '../models/news';
+import { Project } from '../models/project';
+import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
+import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
+import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
+import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
+import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
+import { ProperCasePipe } from '../pipes/proper-case.pipe';
+import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { Api } from '../services/api';
-import { ProjectService } from '../services/project.service';
 import { NewsService } from '../services/news.service';
+import { ProjectService } from '../services/project.service';
+import { ProjectDetailComponent } from './project-detail.component';
 
 describe('ProjectDetailComponent', () => {
   let component: ProjectDetailComponent;
@@ -32,95 +30,83 @@ describe('ProjectDetailComponent', () => {
   let ActivatedRouteStub;
   let router;
 
-  beforeEach(
-    async(() => {
-      // stub activated route
-      ActivatedRouteStub = {
-        snapshot: { params: { code: 'a-mine' } }
-      };
-      router = {
-        navigate: jasmine.createSpy('navigate')
-      };
+  beforeEach(async(() => {
+    // stub activated route
+    ActivatedRouteStub = {
+      snapshot: { params: { code: 'a-mine' } }
+    };
+    router = {
+      navigate: jasmine.createSpy('navigate')
+    };
 
-      TestBed.configureTestingModule({
-        providers: [
-          Api,
-          { provide: ActivatedRoute, useValue: ActivatedRouteStub },
-          { provide: Router, useValue: router},
-          {
-            provide: ProjectService,
-            useValue: jasmine.createSpyObj('ProjectService', [
-              'getByCode'
-            ])
-          },
-          {
-            provide: NewsService,
-            useValue: jasmine.createSpyObj('NewsService', [
-              'getByProjectCode'
-            ])
-          }
-        ],
-        imports: [
-          FormsModule,
-          NgxPaginationModule,
-          MapModule,
-          HttpModule
-        ],
-        declarations: [
-          ProjectDetailComponent,
-          OrderByPipe,
-          ProjectFilterPipe,
-          PhaseFilterPipe,
-          FilterPCPPipe,
-          ProjectDecisionFilterPipe,
-          ProjectTypeFilterPipe,
-          ProponentFilterPipe,
-          ObjectFilterPipe,
-          NewsTypeFilterPipe,
-          NewsHeadlineFilterPipe
-        ]
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      providers: [
+        Api,
+        { provide: ActivatedRoute, useValue: ActivatedRouteStub },
+        { provide: Router, useValue: router },
+        {
+          provide: ProjectService,
+          useValue: jasmine.createSpyObj('ProjectService', ['getByCode'])
+        },
+        {
+          provide: NewsService,
+          useValue: jasmine.createSpyObj('NewsService', ['getByProjectCode'])
+        }
+      ],
+      imports: [FormsModule, NgxPaginationModule, MapModule, HttpModule],
+      declarations: [
+        ProjectDetailComponent,
+        OrderByPipe,
+        ProjectFilterPipe,
+        PhaseFilterPipe,
+        FilterPCPPipe,
+        ProjectDecisionFilterPipe,
+        ProjectTypeFilterPipe,
+        ProponentFilterPipe,
+        ObjectFilterPipe,
+        NewsTypeFilterPipe,
+        NewsHeadlineFilterPipe,
+        ProperCasePipe
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProjectDetailComponent);
     component = fixture.componentInstance;
 
     const projectService = TestBed.get(ProjectService);
-    projectService.getByCode.and.returnValue(
-      Observable.of(new Project())
-    );
+    projectService.getByCode.and.returnValue(Observable.of(new Project()));
 
     const newsService = TestBed.get(NewsService);
     newsService.getByProjectCode.and.returnValue(
       Observable.of([
         new News({
-          headline: 'Big mine' ,
+          headline: 'Big mine',
           type: 'news',
-          content : 'My news',
-          dateAdded : '2017-12-14T17:00:00.000Z',
+          content: 'My news',
+          dateAdded: '2017-12-14T17:00:00.000Z',
           documentUrl: ''
         }),
         new News({
           headline: 'Medium',
           type: 'public comment period',
-          content : 'Your news',
-          dateAdded : '2017-11-10T15:00:00.000Z',
+          content: 'Your news',
+          dateAdded: '2017-11-10T15:00:00.000Z',
           documentUrl: 'http://www.test.com'
         }),
         new News({
           headline: 'Bigger mine',
           type: 'public comment period',
-          content : 'Greatest news',
-          dateAdded : '2017-06-01T11:00:00.000Z',
+          content: 'Greatest news',
+          dateAdded: '2017-06-01T11:00:00.000Z',
           documentUrl: '/blarg'
         }),
         new News({
           headline: 'Small',
           type: 'news',
-          content : 'Greatest news',
-          dateAdded : '2017-06-01T11:00:00.000Z',
+          content: 'Greatest news',
+          dateAdded: '2017-06-01T11:00:00.000Z',
           documentUrl: '/blarg'
         })
       ])
@@ -245,14 +231,14 @@ describe('ProjectDetailComponent', () => {
     it('should navigate to /map when no project code given', () => {
       component.project = null;
       component.gotoMap();
-      expect(router.navigate).toHaveBeenCalledWith(['/map', { project: null}]);
+      expect(router.navigate).toHaveBeenCalledWith(['/map', { project: null }]);
     });
 
     it('should navigate to /map given a project code', () => {
       component.project = new Project();
       component.project.code = 'test';
       component.gotoMap();
-      expect(router.navigate).toHaveBeenCalledWith(['/map', { project: component.project.code}]);
+      expect(router.navigate).toHaveBeenCalledWith(['/map', { project: component.project.code }]);
     });
   });
 
@@ -261,7 +247,7 @@ describe('ProjectDetailComponent', () => {
       component.setDocumentUrl(component.news);
     });
 
-    it('should set results.documentUrl to \'\' when no document url ', () => {
+    it("should set results.documentUrl to '' when no document url ", () => {
       expect(component.news[0].documentUrl).toBe('');
     });
 
@@ -269,7 +255,7 @@ describe('ProjectDetailComponent', () => {
       expect(component.news[1].documentUrl).toBe('http://www.test.com');
     });
 
-    it('should set results.documentUrl to \'http://localhost:3000/blarg\' when given an esm-server document ', () => {
+    it("should set results.documentUrl to 'http://localhost:3000/blarg' when given an esm-server document ", () => {
       expect(component.news[2].documentUrl).toBe('http://localhost:3000/blarg');
     });
   });

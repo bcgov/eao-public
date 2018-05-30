@@ -8,7 +8,10 @@
     <div class="container">
       <div class="container-inner">
         <div class="hero-banner__content">
-          <h1><span class="ea-project-title">{{project.name}}</span><span class="ea-status-badge badge badge-primary">{{project.eacDecision}}</span></h1>
+          <h1>
+            <span class="ea-project-title">{{project.name}}</span>
+            <span class="ea-status-badge badge badge-primary">{{project.eacDecision}}</span>
+          </h1>
           <p>{{project.description}}</p>
         </div>
       </div>
@@ -49,7 +52,8 @@
                     <div class="filter-input-row filters-advanced" *ngIf="showFilters">
                       <div class="col-md-12">
                         <div class="toggle-btn">
-                          <input class="form-check-input" type="radio" name="newsTypeFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"/>
+                          <input class="form-check-input" type="radio" name="newsTypeFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"
+                          />
                           <label class="btn btn-secondary" for="all">All</label>
                         </div>
                         <div class="toggle-btn">
@@ -57,7 +61,8 @@
                           <label class="btn btn-secondary" for="news">News</label>
                         </div>
                         <div class="toggle-btn">
-                          <input class="form-check-input" type="radio" name="newsTypeFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"/>
+                          <input class="form-check-input" type="radio" name="newsTypeFilter" id="pcp" [(ngModel)]="filterType" value="public comment period"
+                          />
                           <label class="btn btn-secondary" for="pcp">Public Comment Period</label>
                         </div>
                       </div>
@@ -69,11 +74,11 @@
                     </div>
                   </div>
                   <ng-container>
-                      <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-                        <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
-                        <span [hidden]="filteredResults > 0" class="pagination__result-count">No results found</span>
-                      </pagination-template>
-                      <table [hidden]="filteredResults <= 0" id="tableTop" class="activity-feed__table table">
+                    <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                      <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
+                      <span [hidden]="filteredResults > 0" class="pagination__result-count">No results found</span>
+                    </pagination-template>
+                    <table [hidden]="filteredResults <= 0" id="tableTop" class="activity-feed__table table">
                       <thead>
                         <tr>
                           <th class="sortable" (click)="sort('headline')">Title
@@ -87,23 +92,19 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="activity-feed__item"
-                          *ngFor="let item of news | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+                        <tr class="activity-feed__item" *ngFor="let item of news | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
                           <td colspan="2">
                             <div class="title-container">
                               <h3 class="title-container__title">{{item.headline}}</h3>
                               <span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
                             </div>
                             <div class="activity-feed__content readmore">
-                              <div class="readmore__content"
-                                [innerHTML]="item.content"
-                                *ngIf="item.readmore || item.content.length <= 280">
+                              <div class="readmore__content" [innerHTML]="item.content" *ngIf="item.readmore || item.content.length <= 280">
                               </div>
-                              <div class="readmore__content"
-                                [innerHTML]="(item.content | slice:0:280) + '...'"
-                                *ngIf="!item.readmore && item.content.length > 280">
+                              <div class="readmore__content" [innerHTML]="(item.content | slice:0:280) + '...'" *ngIf="!item.readmore && item.content.length > 280">
                               </div>
-                              <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.content.length > 280" (click)="readmore(item)">
+                              <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.content.length > 280"
+                                (click)="readmore(item)">
                                 [{{item.readmore ? 'Show Less' : 'Show More'}}]
                               </button>
                             </div>
@@ -115,13 +116,12 @@
                         </tr>
                       </tbody>
                     </table>
-                    <pagination-template class="pagination--bottom" #p="paginationApi"
-                      [id]="config.id"
-                      (pageChange)="config.currentPage = $event">
+                    <pagination-template class="pagination--bottom" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
                       <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
                       <ul class="pagination" *ngIf="news.length > 25">
                         <li class="page-item" *ngIf="!p.isFirstPage()">
-                          <a class="page-link" (click)="p.previous();" appScroll> < </a>
+                          <a class="page-link" (click)="p.previous();" appScroll>
+                            < </a>
                         </li>
                         <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
                           <a class="page-link" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" appScroll>
@@ -173,7 +173,7 @@
               </li>
               <li>
                 <span class="name">Region</span>
-                <span class="value">{{project.region}}</span>
+                <span class="value">{{project.region | properCasePipe}}</span>
               </li>
               <li>
                 <span class="name">Location</span>
@@ -221,7 +221,8 @@
         </section>
         <section class="card">
           <div class="card-body">
-            <p class="mb-0">Looking for more detailed information? <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
+            <p class="mb-0">Looking for more detailed information?
+              <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
           </div>
         </section>
       </aside>
