@@ -149,9 +149,9 @@ describe('ProjectComponent', () => {
       });
 
       it('should sort the items', () => {
-        expect(result[0]).toBe('aaa');
-        expect(result[1]).toBe('bbb');
-        expect(result[2]).toBe('ccc');
+        expect(result[0]).toBe('Aaa');
+        expect(result[1]).toBe('Bbb');
+        expect(result[2]).toBe('Ccc');
       });
     });
   });

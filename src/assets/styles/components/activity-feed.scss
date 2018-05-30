@@ -64,7 +64,7 @@ $activity-feed-date-column-width: 10rem;
       left: 0;
       width: 100%;
       font-weight: 700;
-      opacity: 0.5; 
+      opacity: 0.5;
     }
   }
 
@@ -99,7 +99,7 @@ $activity-feed-date-column-width: 10rem;
     .title-container {
       @include flex-box();
       @include flex-direction(column);
-  
+
       &__title {
         @include flex(1 1 auto);
         margin: 0;
@@ -108,7 +108,7 @@ $activity-feed-date-column-width: 10rem;
         font-weight: 600;
         order: 2;
       }
-  
+
       &__date {
         @include flex(0 0 auto);
         order: 1;
@@ -138,6 +138,7 @@ $activity-feed-date-column-width: 10rem;
     margin: 0;
     overflow: hidden;
     font-size: 100%;
+    white-space: pre;
   }
 
   &__link {
