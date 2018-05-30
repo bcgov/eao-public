@@ -21,8 +21,6 @@ import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
 import { SubmitCommentModalComponent } from './submit-comment-modal/submit-comment-modal';
 import { SubmitCommentProgressModalComponent } from './submit-comment-progress-modal/submit-comment-progress-modal';
 
-
-
 describe('CommentPeriodComponent', () => {
   let component: CommentPeriodComponent;
   let fixture: ComponentFixture<CommentPeriodComponent>;

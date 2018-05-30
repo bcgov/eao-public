@@ -10,14 +10,16 @@ import { CommentPeriodComponent } from '../comment-period.component';
 })
 
 export class SubmitCommentModalComponent implements OnInit {
-  public files = [];
+  public files: Array<File>;
   public comment;
   public valid: boolean;
   public loading: boolean;
   public error: boolean;
   public maxAttachmentSize = 5242880; // 5 MB
 
-  constructor(private commentPeriodService: CommentPeriodService, private commentPeriodComponent: CommentPeriodComponent) { };
+  constructor(private commentPeriodService: CommentPeriodService, private commentPeriodComponent: CommentPeriodComponent) {
+    this.files = new Array<File>();
+   };
 
   ngOnInit() {
     this.comment = {
@@ -49,7 +51,7 @@ export class SubmitCommentModalComponent implements OnInit {
     element.classList.add('error', 'form-control-danger');
   }
 
-  validateAttachments(files) {
+  validateAttachments(files: Array<File>) {
     let valid = true;
 
     let attachmentSize = 0;
