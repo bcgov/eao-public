@@ -1,32 +1,27 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  inject
-} from '@angular/core/testing';
-import { Http, HttpModule } from '@angular/http';
+import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
+import { Comment } from '../models/comment';
+import { CommentPeriod } from '../models/commentperiod';
+import { Document } from '../models/document';
+import { Project } from '../models/project';
+import { ValuedComponent } from '../models/vcs';
+import { FileSizePipe } from '../pipes/filesize.pipe';
+import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
+import { OrderByPipe } from '../pipes/order-by.pipe';
+import { Api } from '../services/api';
+import { CommentPeriodService } from '../services/comment-period.service';
 import { CommentPeriodComponent } from './comment-period.component';
 import { PCPInfoModalComponent } from './pcp-info-modal/pcp-info-modal';
 import { SubmitCommentModalComponent } from './submit-comment-modal/submit-comment-modal';
 import { SubmitCommentProgressModalComponent } from './submit-comment-progress-modal/submit-comment-progress-modal';
 
-import { OrderByPipe } from '../pipes/order-by.pipe';
-import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
-import { CommentPeriod } from '../models/commentperiod';
-import { Comment } from '../models/comment';
-import { Document } from '../models/document';
-import { ValuedComponent } from '../models/vcs';
-import { Project } from '../models/project';
-import { CommentPeriodService } from '../services/comment-period.service';
-import { FileSizePipe } from '../pipes/filesize.pipe';
-import { Api } from '../services/api';
+
 
 describe('CommentPeriodComponent', () => {
   let component: CommentPeriodComponent;
