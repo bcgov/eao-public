@@ -208,24 +208,28 @@ describe('NewsComponent', () => {
     it('returns all the data if no filter is set', () => {
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing <strong>1-4</strong> of <strong>4</strong> Results');
+      expect(component.filteredResults).toBe(4);
     });
 
     it('only returns news items if the news filter is set', () => {
       component.filterType = 'news';
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing <strong>1-2</strong> of <strong>2</strong> Results');
+      expect(component.filteredResults).toBe(2);
     });
 
     it('only returns public comment period items if the relevant filter is set', () => {
       component.filterType = 'public comment period';
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing <strong>1-2</strong> of <strong>2</strong> Results');
+      expect(component.filteredResults).toBe(2);
     });
 
     it('only returns items matching the freeform filter if the relevant filter is set', () => {
       component.filter = 'medium';
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing <strong>1-1</strong> of <strong>1</strong> Results');
+      expect(component.filteredResults).toBe(1);
     });
 
     it('only returns items matching both the freeform and type filters when filters are set', () => {
@@ -233,25 +237,29 @@ describe('NewsComponent', () => {
       component.filter = 'mine';
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('Viewing <strong>1-1</strong> of <strong>1</strong> Results');
+      expect(component.filteredResults).toBe(1);
     });
 
     it('flexes correctly based on the number of items per page', () => {
       component.config.itemsPerPage = 3;
       const result = component.getDisplayedElementCountMessage(2);
       expect(result).toBe('Viewing <strong>4-4</strong> of <strong>4</strong> Results');
+      expect(component.filteredResults).toBe(4);
     });
 
     it('returns an empty message if there are no items in the list', () => {
       component.results = [];
       const result = component.getDisplayedElementCountMessage(1);
       expect(result).toBe('');
+      expect(component.filteredResults).toBe(0);
     });
 
     it('returns the correct message if no items match the filter(s)', () => {
       component.filterType = 'dskijfb';
       component.filter = 'ubdnmbsdk';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing <strong>0-0</strong> of <strong>0</strong> Results');
+      expect(result).toBe('');
+      expect(component.filteredResults).toBe(0);
     });
   });
 });

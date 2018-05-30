@@ -69,10 +69,11 @@
                     </div>
                   </div>
                   <ng-container>
-                    <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-                      <span class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
-                    </pagination-template>
-                    <table id="tableTop" class="activity-feed__table table">
+                      <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                        <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
+                        <span [hidden]="filteredResults > 0" class="pagination__result-count">No results found</span>
+                      </pagination-template>
+                      <table [hidden]="filteredResults <= 0" id="tableTop" class="activity-feed__table table">
                       <thead>
                         <tr>
                           <th class="sortable" (click)="sort('headline')">Title
@@ -117,7 +118,7 @@
                     <pagination-template class="pagination--bottom" #p="paginationApi"
                       [id]="config.id"
                       (pageChange)="config.currentPage = $event">
-                      <span class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
+                      <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
                       <ul class="pagination" *ngIf="news.length > 25">
                         <li class="page-item" *ngIf="!p.isFirstPage()">
                           <a class="page-link" (click)="p.previous();" appScroll> < </a>
