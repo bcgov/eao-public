@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestOptions } from '@angular/http';
 import { CommentPeriodService } from '../../services/comment-period.service';
 import { CommentPeriodComponent } from '../comment-period.component';
-import { RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-submit-comment-modal',
   templateUrl: './submit-comment-modal.component.html',
   styleUrls: ['./submit-comment-modal.component.scss']
 })
+
 export class SubmitCommentModalComponent implements OnInit {
-  public files = [];
+  public files: Array<File>;
   public comment;
   public valid: boolean;
   public loading: boolean;
   public error: boolean;
+  public maxAttachmentSize = 5242880; // 5 MB
 
-  constructor(private commentPeriodService: CommentPeriodService, private commentPeriodComponent: CommentPeriodComponent) { };
+  constructor(private commentPeriodService: CommentPeriodService, private commentPeriodComponent: CommentPeriodComponent) {
+    this.files = new Array<File>();
+   };
 
   ngOnInit() {
     this.comment = {
@@ -47,8 +51,28 @@ export class SubmitCommentModalComponent implements OnInit {
     element.classList.add('error', 'form-control-danger');
   }
 
+  validateAttachments(files: Array<File>) {
+    let valid = true;
+
+    let attachmentSize = 0;
+    files.forEach(file => {
+      // Ensure indiviual and total size does not exceed the limit.
+      attachmentSize += file.size;
+      if (file.size > this.maxAttachmentSize || attachmentSize > this.maxAttachmentSize) {
+        this.displayError(document.getElementById('file'));
+        valid = false;
+      }
+      // Ensure only allowed file types can be uploaded
+      const fileTypeRegExp = /((image\/)|(application\/pdf))/;
+      if (!fileTypeRegExp.test(file.type)) {
+        this.displayError(document.getElementById('file'));
+        valid = false;
+      }
+    });
+    return valid;
+  }
+
   validateFields(form) {
-    let size = 0;
     if (!form.author) {
       this.displayError(document.getElementById('author'));
       this.valid = false;
@@ -61,13 +85,7 @@ export class SubmitCommentModalComponent implements OnInit {
       this.displayError(document.getElementById('comment'));
       this.valid = false;
     }
-    this.files.forEach(file => {
-      size += file.size;
-    });
-    if (size > 5000000) {
-      this.displayError(document.getElementById('file'));
-      return false;
-    }
+    this.valid = this.validateAttachments(this.files);
     return this.valid;
   }
 

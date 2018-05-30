@@ -34,7 +34,7 @@
       </div>
       <div class="form-group">
         <label class="mb-0 form-control-label" for="file">Upload Attachments</label>
-        <span class="form-text mt-0">Total uploads Cannot exceed 5MB. Accepted file types: pdf, png, gif, jpg, jpeg, bmp</span>
+        <span class="form-text mt-0">Total uploads Cannot exceed {{maxAttachmentSize | filesize}}. Accepted file types: pdf, png, gif, jpg, jpeg, bmp</span>
         <ul class="file__list mt-3" *ngIf="files.length > 0">
           <li class="file__list-item" *ngFor="let file of files">
             <span class="file__list-item-icon">
@@ -54,7 +54,7 @@
           </li>
         </ul>
         <div class="file-upload mt-3">
-          <input type="file" class="form-control" id="file" name="file" size="5000000" accept=".pdf, .png, .gif, .jpg., .jpeg, .bmp" (change)="onFileChange($event, f.value)" multiple [(ngModel)]="comment.documents" #documents="ngModel">
+          <input type="file" class="form-control" id="file" name="file" accept=".pdf,.png,.gif,.jpg,.jpeg,.bmp" (change)="onFileChange($event, f.value)" multiple [(ngModel)]="comment.documents" #documents="ngModel">
           <div class="file-upload__target">
             <span class="file-upload__prompt">
               <i class="file-upload__prompt-icon material-icons">&#xE2C6;</i>
