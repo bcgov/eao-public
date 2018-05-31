@@ -12,6 +12,8 @@ export class ProjectFilters {
   public decision: string;
   public region: string;
 
+  public showFilters: boolean;
+
   constructor(obj?: any) {
     this.keyword = (obj && obj.keyword) || '';
     this.commentPeriodStatus = (obj && obj.commentPeriodStatus) || '';
@@ -20,6 +22,7 @@ export class ProjectFilters {
     this.decision = (obj && obj.decision) || '';
     this.phase = (obj && obj.phase) || '';
     this.region = (obj && obj.region) || '';
+    this.showFilters = (obj && obj.showFilters) || false;
   }
 
   /**
@@ -27,7 +30,7 @@ export class ProjectFilters {
    * @returns object of non-null, non-empty filters.
    * @memberof ProjectFilters
    */
-  public getParams() {
+  public getParams(): Object {
     const params = {};
 
     if (this.keyword) {
@@ -50,6 +53,9 @@ export class ProjectFilters {
     }
     if (this.region) {
       params['region'] = this.region;
+    }
+    if (this.showFilters) {
+      params['showFilters'] = this.showFilters;
     }
 
     return params;

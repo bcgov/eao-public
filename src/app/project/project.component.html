@@ -25,16 +25,17 @@
             <input class="form-control" placeholder="Enter a Project Name" type="text" id="projectName" [(ngModel)]="savedFilters.keyword"
               name="keyword">
           </div>
-          <button class="toggle-filter-btn btn btn-default btn-sm" title="{{showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
-            [ngClass]="{'show-filters': showFilters}" (click)="showFilters = !showFilters" type="button">
-            <span class="btn-txt">{{showFilters ? 'Hide Filters' : 'Show Filters'}}</span>
+          <button class="toggle-filter-btn btn btn-default btn-sm" title="{{savedFilters.showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
+            [ngClass]="{'show-filters': savedFilters.showFilters}" (click)="savedFilters.showFilters = !savedFilters.showFilters"
+            type="button">
+            <span class="btn-txt">{{savedFilters.showFilters ? 'Hide Filters' : 'Show Filters'}}</span>
             <i class="material-icons">
-              {{showFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+              {{savedFilters.showFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
             </i>
           </button>
         </div>
 
-        <div class="filter-input-row filters-advanced" *ngIf="showFilters">
+        <div class="filter-input-row filters-advanced" *ngIf="savedFilters.showFilters">
           <div class="col-md-2">
             <label>Comment Period</label>
             <!-- TODO: Populate Dynamically -->
@@ -125,8 +126,7 @@
 
     <div class="news-feed" *ngIf="results">
       <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="pagination.id" (pageChange)="config.currentPage = $event">
-        <span [hidden]="!itemsFound" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
-        <span [hidden]="itemsFound" class="pagination__result-count">No results found</span>
+        <span class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
       </pagination-template>
 
       <table class="table project-table" id="tableTop" [hidden]="!itemsFound">
