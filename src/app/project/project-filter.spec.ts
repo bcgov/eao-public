@@ -164,7 +164,7 @@ describe('ProjectFilter', () => {
     });
 
     describe('does not reset showFilters', () => {
-      it('showFilters show be true', () => {
+      it('showFilters should be true', () => {
         const projectFilter = new ProjectFilters({
           keyword: null,
           commentPeriodStatus: undefined,
