@@ -162,33 +162,17 @@ describe('ProjectComponent', () => {
       columnName = 'dateAdded';
     });
 
-    describe('given sortDirection is 1', () => {
-      beforeEach(() => {
-        component.sortDirection = 1;
-        component.sort(columnName);
-      });
-
-      it('should set sortDirection to -1', () => {
-        expect(component.sortDirection).toBe(-1);
-      });
+    it('toggles sortDirection', () => {
+      expect(component.sortDirection).toBe(1);
+      component.sort(columnName);
+      expect(component.sortDirection).toBe(-1);
+      component.sort(columnName);
+      expect(component.sortDirection).toBe(1);
     });
 
-    describe('given sortDirection is -1', () => {
-      beforeEach(() => {
-        component.sortDirection = -1;
-        component.sort(columnName);
-      });
-
-      it('should set sortDirection to 1', () => {
-        expect(component.sortDirection).toBe(1);
-      });
-    });
-
-    describe('given columnName', () => {
-      it('should assign columnName to sortColumn', () => {
-        component.sort('aNewColumn');
-        expect(component.sortColumn).toBe('aNewColumn');
-      });
+    it('assigns columnName to sortColumn', () => {
+      component.sort('aNewColumn');
+      expect(component.sortColumn).toBe('aNewColumn');
     });
   });
 
@@ -218,223 +202,188 @@ describe('ProjectComponent', () => {
     });
   });
 
-  describe('showAdvancedFilters()', () => {
-    beforeEach(() => {
-      component.appliedFilters = new ProjectFilters();
-    });
-
-    describe('with no filters set', () => {
-      it('should return false', () => {
-        expect(component.showAdvancedFilters()).toBe(false);
-      });
-    });
-
-    describe('with only keyword filter set', () => {
-      it('should return false', () => {
-        component.appliedFilters.keyword = 'status';
-        expect(component.showAdvancedFilters()).toBe(false);
-      });
-    });
-
-    describe('with filters set', () => {
-      describe('with commentPeriodStatus set', () => {
-        it('should return true', () => {
-          component.appliedFilters.commentPeriodStatus = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-
-      describe('with proponent set', () => {
-        it('should return true', () => {
-          component.appliedFilters.proponent = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-
-      describe('with type set', () => {
-        it('should return true', () => {
-          component.appliedFilters.type = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-
-      describe('with decision set', () => {
-        it('should return true', () => {
-          component.appliedFilters.decision = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-
-      describe('with phase set', () => {
-        it('should return true', () => {
-          component.appliedFilters.phase = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-
-      describe('with region set', () => {
-        it('should return true', () => {
-          component.appliedFilters.region = 'status';
-          expect(component.showAdvancedFilters()).toBe(true);
-        });
-      });
-    });
-  });
-
   describe('getDisplayedElementCountMessage(currentPage)', () => {
-    describe('with no filters set', () => {
+    describe('when no results found', () => {
       beforeEach(() => {
-        const p = new Project();
-        component.results = new Array<Project>(p, p, p, p, p, p, p, p, p, p, p, p, p, p, p);
-        component.appliedFilters = new ProjectFilters();
-        component.pagination.itemsPerPage = 10;
+        component.results = new Array<Project>();
       });
 
-      it('returns the item count for all items on page 1', () => {
+      it('sets itemsFound to false', () => {
         const message = component.getDisplayedElementCountMessage(1);
-        expect(message).toBe(`Viewing <strong>${1}-${10}</strong> of <strong>${15}</strong> Results`);
+        expect(component.itemsFound).toBe(false);
       });
 
-      it('returns the item count for all items on page 2', () => {
-        const message = component.getDisplayedElementCountMessage(2);
-        expect(message).toBe(`Viewing <strong>${11}-${15}</strong> of <strong>${15}</strong> Results`);
+      it('returns a message indicating no results were found', () => {
+        const message = component.getDisplayedElementCountMessage(1);
+        expect(message).toBe('No results found');
       });
     });
 
-    describe('with filters set', () => {
-      beforeEach(() => {
-        const projects = new Array<Project>(
-          new Project({
-            name: 'a',
-            type: 't1',
-            eacDecision: 'y',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop1' }
-          }),
-          new Project({
-            name: 'ba',
-            type: 't2',
-            eacDecision: 'y',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop2' }
-          }),
-          new Project({
-            name: 'c',
-            type: 't1',
-            eacDecision: 'y',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop3' }
-          }),
-          new Project({
-            name: 'd',
-            type: 't2',
-            eacDecision: 'y',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop4' }
-          }),
-          new Project({
-            name: 'ae',
-            type: 't1',
-            eacDecision: 'y',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop1' }
-          }),
-          new Project({
-            name: 'bb',
-            type: 't2',
-            eacDecision: 'n',
-            openCommentPeriod: 'open',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop6' }
-          }),
-          new Project({
-            name: 'ggah',
-            type: 't1',
-            eacDecision: 'n',
-            openCommentPeriod: 'closed',
-            region: 'r2',
-            currentPhase: { name: 'p1' },
-            proponent: { name: 'prop2' }
-          }),
-          new Project({
-            name: 'h',
-            type: 't2',
-            eacDecision: 'n',
-            openCommentPeriod: 'closed',
-            region: 'r2',
-            currentPhase: { name: 'p2' },
-            proponent: { name: 'prop3' }
-          })
-        );
-        component.results = projects;
-        component.pagination.itemsPerPage = 3;
-      });
-
-      it('returns the item count for the results with matching keyword', () => {
-        component.appliedFilters = new ProjectFilters({ keyword: 'a' });
-        const message = component.getDisplayedElementCountMessage(1);
-        expect(message).toBe(`Viewing <strong>${1}-${3}</strong> of <strong>${4}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching proponent', () => {
-        component.appliedFilters = new ProjectFilters({ proponent: 'prop2' });
-        const message = component.getDisplayedElementCountMessage(1);
-        expect(message).toBe(`Viewing <strong>${1}-${2}</strong> of <strong>${2}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching type', () => {
-        component.appliedFilters = new ProjectFilters({ type: 't1' });
-        const message = component.getDisplayedElementCountMessage(1);
-        expect(message).toBe(`Viewing <strong>${1}-${3}</strong> of <strong>${4}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching decision', () => {
-        component.appliedFilters = new ProjectFilters({ decision: 'y' });
-        const message = component.getDisplayedElementCountMessage(2);
-        expect(message).toBe(`Viewing <strong>${4}-${5}</strong> of <strong>${5}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching commentPeriodStatus', () => {
-        component.appliedFilters = new ProjectFilters({ commentPeriodStatus: 'open' });
-        const message = component.getDisplayedElementCountMessage(2);
-        expect(message).toBe(`Viewing <strong>${4}-${6}</strong> of <strong>${6}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching phase', () => {
-        component.appliedFilters = new ProjectFilters({ phase: 'p1' });
-        const message = component.getDisplayedElementCountMessage(3);
-        expect(message).toBe(`Viewing <strong>${7}-${7}</strong> of <strong>${7}</strong> Results`);
-      });
-
-      it('returns the item count for the results with matching region', () => {
-        component.appliedFilters = new ProjectFilters({ region: 'r2' });
-        const message = component.getDisplayedElementCountMessage(3);
-        expect(message).toBe(`Viewing <strong>${7}-${8}</strong> of <strong>${8}</strong> Results`);
-      });
-
-      it('returns the item count for the results with all matching filters', () => {
-        component.appliedFilters = new ProjectFilters({
-          keyword: 'a',
-          proponent: 'prop2',
-          type: 't1',
-          decision: 'n',
-          commentPeriodStatus: 'closed',
-          phase: 'p1',
-          region: 'r2'
+    describe('when results found', () => {
+      describe('with no filters set', () => {
+        beforeEach(() => {
+          const p = new Project();
+          component.results = new Array<Project>(p, p, p, p, p, p, p, p, p, p, p, p, p, p, p);
+          component.appliedFilters = new ProjectFilters();
+          component.pagination.itemsPerPage = 10;
         });
-        const message = component.getDisplayedElementCountMessage(1);
-        expect(message).toBe(`Viewing <strong>${1}-${1}</strong> of <strong>${1}</strong> Results`);
+
+        it('sets itemsFound to true', () => {
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(component.itemsFound).toBe(true);
+        });
+
+        it('returns the item count for all items on page 1', () => {
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(message).toBe(`Viewing <strong>${1}-${10}</strong> of <strong>${15}</strong> Results`);
+        });
+
+        it('returns the item count for all items on page 2', () => {
+          const message = component.getDisplayedElementCountMessage(2);
+          expect(message).toBe(`Viewing <strong>${11}-${15}</strong> of <strong>${15}</strong> Results`);
+        });
+      });
+
+      describe('with filters set', () => {
+        beforeEach(() => {
+          const projects = new Array<Project>(
+            new Project({
+              name: 'a',
+              type: 't1',
+              eacDecision: 'y',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop1' }
+            }),
+            new Project({
+              name: 'ba',
+              type: 't2',
+              eacDecision: 'y',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop2' }
+            }),
+            new Project({
+              name: 'c',
+              type: 't1',
+              eacDecision: 'y',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop3' }
+            }),
+            new Project({
+              name: 'd',
+              type: 't2',
+              eacDecision: 'y',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop4' }
+            }),
+            new Project({
+              name: 'ae',
+              type: 't1',
+              eacDecision: 'y',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop1' }
+            }),
+            new Project({
+              name: 'bb',
+              type: 't2',
+              eacDecision: 'n',
+              openCommentPeriod: 'open',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop6' }
+            }),
+            new Project({
+              name: 'ggah',
+              type: 't1',
+              eacDecision: 'n',
+              openCommentPeriod: 'closed',
+              region: 'r2',
+              currentPhase: { name: 'p1' },
+              proponent: { name: 'prop2' }
+            }),
+            new Project({
+              name: 'h',
+              type: 't2',
+              eacDecision: 'n',
+              openCommentPeriod: 'closed',
+              region: 'r2',
+              currentPhase: { name: 'p2' },
+              proponent: { name: 'prop3' }
+            })
+          );
+          component.results = projects;
+          component.pagination.itemsPerPage = 3;
+        });
+
+        it('sets itemsFound to true', () => {
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(component.itemsFound).toBe(true);
+        });
+
+        it('returns the item count for the results with matching keyword', () => {
+          component.appliedFilters = new ProjectFilters({ keyword: 'a' });
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(message).toBe(`Viewing <strong>${1}-${3}</strong> of <strong>${4}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching proponent', () => {
+          component.appliedFilters = new ProjectFilters({ proponent: 'prop2' });
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(message).toBe(`Viewing <strong>${1}-${2}</strong> of <strong>${2}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching type', () => {
+          component.appliedFilters = new ProjectFilters({ type: 't1' });
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(message).toBe(`Viewing <strong>${1}-${3}</strong> of <strong>${4}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching decision', () => {
+          component.appliedFilters = new ProjectFilters({ decision: 'y' });
+          const message = component.getDisplayedElementCountMessage(2);
+          expect(message).toBe(`Viewing <strong>${4}-${5}</strong> of <strong>${5}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching commentPeriodStatus', () => {
+          component.appliedFilters = new ProjectFilters({ commentPeriodStatus: 'open' });
+          const message = component.getDisplayedElementCountMessage(2);
+          expect(message).toBe(`Viewing <strong>${4}-${6}</strong> of <strong>${6}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching phase', () => {
+          component.appliedFilters = new ProjectFilters({ phase: 'p1' });
+          const message = component.getDisplayedElementCountMessage(3);
+          expect(message).toBe(`Viewing <strong>${7}-${7}</strong> of <strong>${7}</strong> Results`);
+        });
+
+        it('returns the item count for the results with matching region', () => {
+          component.appliedFilters = new ProjectFilters({ region: 'r2' });
+          const message = component.getDisplayedElementCountMessage(3);
+          expect(message).toBe(`Viewing <strong>${7}-${8}</strong> of <strong>${8}</strong> Results`);
+        });
+
+        it('returns the item count for the results with all matching filters', () => {
+          component.appliedFilters = new ProjectFilters({
+            keyword: 'a',
+            proponent: 'prop2',
+            type: 't1',
+            decision: 'n',
+            commentPeriodStatus: 'closed',
+            phase: 'p1',
+            region: 'r2'
+          });
+          const message = component.getDisplayedElementCountMessage(1);
+          expect(message).toBe(`Viewing <strong>${1}-${1}</strong> of <strong>${1}</strong> Results`);
+        });
       });
     });
   });

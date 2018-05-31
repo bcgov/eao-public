@@ -3,7 +3,7 @@ import { ProjectFilters } from './project-filters';
 
 describe('ProjectFilter', () => {
   describe('constructor', () => {
-    let projectFilter;
+    let projectFilter: ProjectFilters;
     beforeEach(() => {
       projectFilter = new ProjectFilters({
         keyword: '1',
@@ -12,7 +12,8 @@ describe('ProjectFilter', () => {
         type: null,
         // decision: '5'
         phase: '',
-        region: ''
+        region: '',
+        showFilters: true
       });
     });
 
@@ -39,10 +40,14 @@ describe('ProjectFilter', () => {
     it('should set region to empty string', () => {
       expect(projectFilter.region).toBe('');
     });
+
+    it('should set showFilters to true', () => {
+      expect(projectFilter.showFilters).toBe(true);
+    });
   });
 
   describe('getParams()', () => {
-    let params;
+    let params: Object;
     beforeEach(() => {
       const projectFilter = new ProjectFilters({
         keyword: '1',
@@ -51,7 +56,8 @@ describe('ProjectFilter', () => {
         type: null,
         // decision: '5'
         phase: '',
-        region: ''
+        region: '',
+        showFilters: true
       });
       params = projectFilter.getParams();
     });
@@ -99,49 +105,94 @@ describe('ProjectFilter', () => {
         expect(_.has(params, 'region')).toBeFalsy();
       });
     });
+
+    describe('showFilters', () => {
+      it('should exist', () => {
+        expect(_.has(params, 'showFilters')).toBeTruthy();
+      });
+
+      it('should be true', () => {
+        expect(params['showFilters']).toBe(true);
+      });
+    });
   });
 
   describe('clear()', () => {
-    let projectFilter;
-    beforeEach(() => {
-      projectFilter = new ProjectFilters({
-        keyword: null,
-        commentPeriodStatus: undefined,
-        proponent: '3',
-        type: '4',
-        decision: '5',
-        phase: '6',
-        region: ''
+    describe('resets filters', () => {
+      let projectFilter: ProjectFilters;
+      beforeEach(() => {
+        projectFilter = new ProjectFilters({
+          keyword: null,
+          commentPeriodStatus: undefined,
+          proponent: '3',
+          type: '4',
+          decision: '5',
+          phase: '6',
+          region: '',
+          showFilters: true
+        });
+        projectFilter.clear();
       });
-      projectFilter.clear();
+
+      it('should set keyword to empty string', () => {
+        expect(projectFilter.keyword).toBe('');
+      });
+
+      it('should set type to be empty string', () => {
+        expect(projectFilter.type).toBe('');
+      });
+
+      it('should set proponent to be empty string', () => {
+        expect(projectFilter.proponent).toBe('');
+      });
+
+      it('should set type to be empty string', () => {
+        expect(projectFilter.type).toBe('');
+      });
+
+      it('should set decision to be empty string', () => {
+        expect(projectFilter.decision).toBe('');
+      });
+
+      it('should set phase to be empty string', () => {
+        expect(projectFilter.phase).toBe('');
+      });
+
+      it('should set region to be empty string', () => {
+        expect(projectFilter.region).toBe('');
+      });
     });
 
-    it('should set keyword to empty string', () => {
-      expect(projectFilter.keyword).toBe('');
-    });
+    describe('does not reset showFilters', () => {
+      it('showFilters show be true', () => {
+        const projectFilter = new ProjectFilters({
+          keyword: null,
+          commentPeriodStatus: undefined,
+          proponent: '3',
+          type: '4',
+          decision: '5',
+          phase: '6',
+          region: '',
+          showFilters: true
+        });
+        projectFilter.clear();
+        expect(projectFilter.showFilters).toBe(true);
+      });
 
-    it('should set type to be empty string', () => {
-      expect(projectFilter.type).toBe('');
-    });
-
-    it('should set proponent to be empty string', () => {
-      expect(projectFilter.proponent).toBe('');
-    });
-
-    it('should set type to be empty string', () => {
-      expect(projectFilter.type).toBe('');
-    });
-
-    it('should set decision to be empty string', () => {
-      expect(projectFilter.decision).toBe('');
-    });
-
-    it('should set phase to be empty string', () => {
-      expect(projectFilter.phase).toBe('');
-    });
-
-    it('should set region to be empty string', () => {
-      expect(projectFilter.region).toBe('');
+      it('showFilters should be false', () => {
+        const projectFilter = new ProjectFilters({
+          keyword: null,
+          commentPeriodStatus: undefined,
+          proponent: '3',
+          type: '4',
+          decision: '5',
+          phase: '6',
+          region: '',
+          showFilters: false
+        });
+        projectFilter.clear();
+        expect(projectFilter.showFilters).toBe(false);
+      });
     });
   });
 });

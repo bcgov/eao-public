@@ -32,7 +32,6 @@ export class ProjectComponent implements OnInit {
   projectRegionFilter: ProjectRegionFilterPipe;
 
   public loading: boolean;
-  public showFilters: boolean;
   public savedFilters: ProjectFilters; // The search filters chosen by the user
   public appliedFilters: ProjectFilters; // The search filters actually being applied to the results
   public distinctSortedProponentNames: Array<string>;
@@ -43,8 +42,8 @@ export class ProjectComponent implements OnInit {
     currentPage: 1
   };
   public sortColumn: string;
-  public sortDirection: number;
-  public itemsFound: boolean;
+  public sortDirection = 1;
+  public itemsFound = false;
 
   constructor(
     private projectService: ProjectService,
@@ -68,7 +67,6 @@ export class ProjectComponent implements OnInit {
       .mergeMap((params: Params) => {
         this.savedFilters = new ProjectFilters(params);
         this.appliedFilters = new ProjectFilters(params);
-        this.showFilters = this.showAdvancedFilters();
         return this.projectService.getAll();
       })
       .subscribe(
@@ -145,25 +143,6 @@ export class ProjectComponent implements OnInit {
   }
 
   /**
-   * Checks the applied filters to determine if the advanced filters should be shown on initial page load.
-   * @returns True if at least 1 advanced filter has been populated.  False otherwise.
-   * @memberof ProjectComponent
-   */
-  showAdvancedFilters() {
-    if (
-      this.appliedFilters.commentPeriodStatus ||
-      this.appliedFilters.proponent ||
-      this.appliedFilters.type ||
-      this.appliedFilters.decision ||
-      this.appliedFilters.phase ||
-      this.appliedFilters.region
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * Return a formatted string containing a message about the numebr of items currently being viewed on the page.
    *
    * @param {number} currentPage the current pagination page number.
@@ -171,7 +150,7 @@ export class ProjectComponent implements OnInit {
    * @memberof ProjectComponent
    */
   getDisplayedElementCountMessage(currentPage: number) {
-    let message = '';
+    let message = 'No results found';
     let items = this.results;
     if (items.length > 0) {
       if (this.appliedFilters.keyword) {
@@ -201,7 +180,9 @@ export class ProjectComponent implements OnInit {
         items.length
       );
       this.itemsFound = items.length > 0;
-      message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
+      if (this.itemsFound) {
+        message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
+      }
     }
     return message;
   }
