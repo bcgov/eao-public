@@ -12,7 +12,6 @@ import { CommentPeriodComponent } from '../comment-period.component';
 export class SubmitCommentModalComponent implements OnInit {
   public files: Array<File>;
   public comment;
-  public valid: boolean;
   public loading: boolean;
   public error: boolean;
   public maxAttachmentSize = 5242880; // 5 MB
@@ -35,7 +34,7 @@ export class SubmitCommentModalComponent implements OnInit {
     event.target.closest('.form-group').classList.remove('has-danger');
   }
 
-  removeErrors() {
+  clearErrors() {
     const controls = document.querySelectorAll('.form-group');
     const errors = document.querySelectorAll('.error');
     for (let i = 0; i < controls.length; i++) {
@@ -73,20 +72,25 @@ export class SubmitCommentModalComponent implements OnInit {
   }
 
   validateFields(form) {
+    this.clearErrors();
+    let validAuthor = true;
+    let validLocation = true;
+    let validComment = true;
+    let validAttachments = true;
     if (!form.author) {
       this.displayError(document.getElementById('author'));
-      this.valid = false;
+      validAuthor = false;
     }
     if (!form.location) {
       this.displayError(document.getElementById('location'));
-      this.valid = false;
+      validLocation = false;
     }
     if (!form.comment) {
       this.displayError(document.getElementById('comment'));
-      this.valid = false;
+      validComment = false;
     }
-    this.valid = this.validateAttachments(this.files);
-    return this.valid;
+    validAttachments = this.validateAttachments(this.files);
+    return validAuthor && validLocation && validComment && validAttachments;
   }
 
   onFileChange(event, form) {
@@ -135,38 +139,31 @@ export class SubmitCommentModalComponent implements OnInit {
       comment: form.comment
     };
 
-    this.valid = true;
-    this.loading = true;
+    if (this.validateFields(form)) {
+      this.loading = true;
+      const documentsForms = [];
+      this.files.forEach((doc, index) => {
+        const document = new FormData();
+        document.append('file', doc, doc.name);
+        documentsForms.push(document);
+      });
 
-    this.validateFields(form);
+      const options = new RequestOptions();
 
-    if (!this.valid) {
-      this.loading = false;
-      return false;
+      this.commentPeriodService.submitComment(projectId, documentsForms, commentForm, options).subscribe(
+        data => {
+          this.loading = false;
+          htmlForm.reset();
+          this.files = [];
+          this.triggerSubmitComment();
+        },
+        error => {
+          this.error = true;
+          this.loading = false;
+          console.log(error);
+        }
+      );
     }
-
-    const documentsForms = [];
-    this.files.forEach((doc, index) => {
-      const document = new FormData();
-      document.append('file', doc, doc.name);
-      documentsForms.push(document);
-    });
-
-    const options = new RequestOptions();
-
-    this.commentPeriodService.submitComment(projectId, documentsForms, commentForm, options).subscribe(
-      data => {
-        this.loading = false;
-        htmlForm.reset();
-        this.files = [];
-        this.triggerSubmitComment();
-      },
-      error => {
-        this.error = true;
-        this.loading = false;
-        console.log(error);
-      }
-    );
   }
 
   triggerSubmitComment() {
@@ -180,7 +177,7 @@ export class SubmitCommentModalComponent implements OnInit {
   hideAllSteps() {
     const form = <HTMLFormElement>document.getElementById('submitCommentForm');
     form.reset();
-    this.removeErrors();
+    this.clearErrors();
     this.files = [];
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
