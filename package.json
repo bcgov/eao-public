@@ -35,7 +35,6 @@
     "lodash": "4.17.10",
     "mygovbc-bootstrap-theme": "0.4.1",
     "ng2-page-scroll": "4.0.0-beta.12",
-    "ngx-cookie-service": "1.0.10",
     "ngx-filesize": "1.1.2",
     "ngx-order-pipe": "1.0.4",
     "ngx-pagination": "3.0.3",

@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { PageScrollConfig } from 'ng2-page-scroll';
 import { Api } from './services/api';
-import { ProjectService } from './services/project.service';
 import { EmailService } from './services/email.service';
 import { NewsService } from './services/news.service';
-import { PageScrollConfig } from 'ng2-page-scroll';
-import { CookieService } from 'ngx-cookie-service';
-
-import { ProjectComponent } from './project/project.component';
+import { ProjectService } from './services/project.service';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +14,8 @@ import { ProjectComponent } from './project/project.component';
 })
 export class AppComponent implements OnInit {
   hostname: string;
-  loggedIn: string;
-  logout: boolean;
   loginURL: string;
-  constructor(private _router: Router, private cookieService: CookieService, private api: Api) {
+  constructor(private _router: Router, private api: Api) {
     // Used for sharing links.
     this.hostname = api.hostnameEPIC;
     this.loginURL = this.hostname === 'https://projects.eao.gov.bc.ca'
@@ -46,21 +40,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loggedIn = this.cookieService.get('loggedIn');
-    if (!this.loggedIn) {
-      this.cookieService.set('loggedIn', 'false');
-      this.loggedIn = this.cookieService.get('loggedIn');
-    }
-
     this._router.events.subscribe((url: any) => {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     });
-  }
-
-  removeCookie() {
-    this.cookieService.set('loggedIn', 'false');
-    this.loggedIn = this.cookieService.get('loggedIn');
-    this.logout = true;
   }
 }
