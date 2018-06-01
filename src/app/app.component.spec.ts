@@ -1,11 +1,8 @@
-import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Http, HttpModule } from '@angular/http';
 import { Ng2PageScrollModule, PageScrollConfig } from 'ng2-page-scroll';
-import { CookieService } from 'ngx-cookie-service';
-
 import { AppComponent } from './app.component';
-
 import { Api } from './services/api';
 
 describe('AppComponent', () => {
@@ -15,7 +12,6 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        CookieService,
         Api,
         PageScrollConfig
       ],
@@ -62,47 +58,6 @@ describe('AppComponent', () => {
       it('should set ease to 3', () => {
         expect(PageScrollConfig.defaultEasingLogic.ease(4, 1, 2, 1)).toBe(3);
       });
-    });
-  });
-
-  describe('ngOnInit()', () => {
-    describe('loggedIn cookie undefined', () => {
-      it('should set loggedIn to be false', () => {
-        component.ngOnInit();
-        expect(component.loggedIn).toBe('false');
-      });
-    });
-
-    describe('loggedIn cookie defined', () => {
-      it('should set loggedIn to be false', () => {
-        const cookieService: CookieService = TestBed.get(CookieService);
-        cookieService.set('loggedIn', 'false');
-        component.ngOnInit();
-        expect(component.loggedIn).toBe('false');
-      });
-    });
-  });
-
-  describe('removeCookie()', () => {
-    let cookieService: CookieService;
-
-    beforeEach(() => {
-      cookieService = TestBed.get(CookieService);
-      cookieService.set('loggedIn', 'true');
-
-      component.removeCookie();
-    });
-
-    it('should set the loggedIn cookie to be false', () => {
-      expect(cookieService.get('loggedIn')).toBe('false');
-    });
-
-    it('should set loggedIn to be false', () => {
-      expect(component.loggedIn).toBe('false');
-    });
-
-    it('should set logout to be true', () => {
-      expect(component.logout).toBe(true);
     });
   });
 });

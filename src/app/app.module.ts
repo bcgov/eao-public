@@ -1,28 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CommentPeriodModule } from './comment-period/comment-period.module';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ProjectComponent } from './project/project.component';
-import { NewsComponent } from './news/news.component';
-import { ProjectService } from './services/project.service';
-import { LegislationComponent } from './legislation/legislation.component';
-import { ProcessComponent } from './process/process.component';
+import { CommentPeriodModule } from './comment-period/comment-period.module';
 import { ComplianceOversightComponent } from './compliance-oversight/compliance-oversight.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactSuccess } from './contact/contact.success';
+import { HomeComponent } from './home/home.component';
+import { LegislationComponent } from './legislation/legislation.component';
 import { MapModule } from './map/map.module';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { CookieService } from 'ngx-cookie-service';
+import { NewsComponent } from './news/news.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ProcessComponent } from './process/process.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectService } from './services/project.service';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -52,7 +50,7 @@ import { SharedModule } from './shared/shared.module';
     MapModule,
     SharedModule
   ],
-  providers: [NewsComponent, CookieService, ProjectService],
+  providers: [NewsComponent, ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
