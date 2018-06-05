@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   loginURL: string;
   constructor(private _router: Router, private api: Api) {
     const isDevEnv = this.api.env === 'dev';
-    this.loginURL = isDevEnv ? api.hostnameEPIC + '/authentication/local/signin' : api.hostnameEPIC + '/authentication/signin';
+    this.loginURL = isDevEnv ? this.api.hostnameEPIC + '/authentication/local/signin' : this.api.hostnameEPIC + '/authentication/signin';
 
     PageScrollConfig.defaultScrollOffset = 50;
     PageScrollConfig.defaultEasingLogic = {
