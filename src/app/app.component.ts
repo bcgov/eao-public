@@ -13,13 +13,10 @@ import { ProjectService } from './services/project.service';
   providers: [ProjectService, NewsService, EmailService]
 })
 export class AppComponent implements OnInit {
-  hostname: string;
   loginURL: string;
   constructor(private _router: Router, private api: Api) {
-    // Used for sharing links.
-    this.hostname = api.hostnameEPIC;
-    this.loginURL = this.hostname === 'https://projects.eao.gov.bc.ca'
-    ? 'https://projects.eao.gov.bc.ca/authentication/signin' : this.hostname + '/authentication/local/signin';
+    const isDevEnv = this.api.env === 'dev';
+    this.loginURL = isDevEnv ? api.hostnameEPIC + '/authentication/local/signin' : api.hostnameEPIC + '/authentication/signin';
 
     PageScrollConfig.defaultScrollOffset = 50;
     PageScrollConfig.defaultEasingLogic = {
