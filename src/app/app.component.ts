@@ -13,11 +13,12 @@ import { ProjectService } from './services/project.service';
   providers: [ProjectService, NewsService, EmailService]
 })
 export class AppComponent implements OnInit {
+  hostname: string;
   loginURL: string;
   constructor(private _router: Router, private api: Api) {
-    const isDevEnv = this.api.env === 'dev';
-    this.loginURL = isDevEnv ? this.api.hostnameEPIC + '/authentication/local/signin' : this.api.hostnameEPIC + '/authentication/signin';
-
+    this.hostname = this.api.hostnameEPIC;
+    const isDevEnv = this.api.env === 'dev' || this.api.env === 'local';
+    this.loginURL = isDevEnv ? this.hostname + '/authentication/local/signin' : this.hostname + '/authentication/signin';
     PageScrollConfig.defaultScrollOffset = 50;
     PageScrollConfig.defaultEasingLogic = {
       ease: (t: number, b: number, c: number, d: number): number => {
