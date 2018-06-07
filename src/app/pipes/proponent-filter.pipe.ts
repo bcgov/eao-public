@@ -9,6 +9,11 @@ export class ProponentFilterPipe implements PipeTransform {
     if (!q) {
       return value;
     }
-    return value.filter(item => -1 < item.proponent.name.toLowerCase().indexOf(q.toLowerCase()));
+    return value.filter(item => {
+      if (item.proponent && item.proponent.name) {
+        return item.proponent.name.toLowerCase().indexOf(q.toLowerCase()) > -1;
+      }
+      return false;
+    });
   }
 }
