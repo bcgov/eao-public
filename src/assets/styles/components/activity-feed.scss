@@ -138,7 +138,7 @@ $activity-feed-date-column-width: 10rem;
     margin: 0;
     overflow: hidden;
     font-size: 100%;
-    white-space: pre;
+    white-space: pre-wrap;
   }
 
   &__link {
