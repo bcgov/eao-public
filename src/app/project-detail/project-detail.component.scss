@@ -86,25 +86,6 @@
       margin: 0.5rem 0;
       width: 100%;
     }
-
-    span {
-      float: none;
-      width: 100%;
-
-      &.name {
-        margin-bottom: 0;
-        width: 10rem;
-      }
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .nv-list {
-    span {
-      float: left;
-      width: 50%;
-    }
   }
 }
 
@@ -118,7 +99,6 @@
   }
 }
 
-// ???
 @media (max-width: 567px) {
   .nav {
     margin-bottom: 1.75rem;

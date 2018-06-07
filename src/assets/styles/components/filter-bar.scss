@@ -88,12 +88,17 @@
     margin-left: -0.5rem;
 
     [class^="col-md"] {
+      margin-top: 1rem;
       padding-right: 0.5rem;
       padding-left: 0.5rem;
     }
 
     label {
+      display: block;
       margin-bottom: 0.25rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -114,6 +119,10 @@
     &.filters-advanced {
       @include flex-box();
 
+      [class^="col-md"] {
+        margin-top: 0;
+      }
+
       .form-group {
         .form-control {
           position: relative;
@@ -124,6 +133,7 @@
           }
         }
       }
+
       .col-md-20 {
         flex: 0 0 20%;
         max-width: 20%;

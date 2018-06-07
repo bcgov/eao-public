@@ -32,14 +32,11 @@
       ul {
         margin: 0;
         padding: 0;
-        white-space: nowrap;
         overflow: hidden;
         list-style-type: none;
 
         li {
-          overflow: hidden;
           word-break: break-all;
-          text-overflow: ellipsis;
         }
       }
     }
