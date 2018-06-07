@@ -212,7 +212,7 @@ main {
 
     + label {
       margin: 0;
-      border: none;
+      border: 2px solid $toggle-btn-bg;
       border-radius: 0.25rem;
       background-color: $toggle-btn-bg;
       text-transform: none;
@@ -221,6 +221,7 @@ main {
 
       &:hover {
         color: $toggle-btn-active-color;
+        border-color: $toggle-btn-active-bg;
         background-color: $toggle-btn-active-bg; 
       }
     }     
@@ -228,6 +229,7 @@ main {
     &:checked {
       + label {
         color: $toggle-btn-active-color;
+        border-color: $toggle-btn-active-bg;
         background-color: $toggle-btn-active-bg; 
       }
     }
