@@ -84,4 +84,22 @@ export class CommentPeriodComponent implements OnInit {
     }
     return message;
   }
+
+  calculateDateRange() {
+
+    let dayDiff;
+
+    if (this.commentPeriod.dateCompleted && this.commentPeriod.dateStarted) {
+      const dCompleted = new Date(this.commentPeriod.dateCompleted);
+      const dStarted = new Date(this.commentPeriod.dateStarted);
+      const timeDiff = Math.abs(dCompleted.getTime() - dStarted.getTime());
+      dayDiff = Math.ceil( timeDiff / (1000 * 3600 * 24));
+    }
+
+    if (dayDiff) {
+      return dayDiff;
+    }
+    console.log(dayDiff);
+    return 'TBD';
+  }
 }
