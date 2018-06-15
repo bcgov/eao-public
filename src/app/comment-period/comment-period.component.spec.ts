@@ -295,5 +295,34 @@ describe('CommentPeriodComponent', () => {
     });
 
 
+    describe('calculateDateRange', () => {
+      beforeEach(() => {
+        component.commentPeriod = new CommentPeriod();
+        component.commentPeriod.dateCompleted = null;
+        component.commentPeriod.dateStarted = null;
+      });
+
+      it('returns TBD for two empty dates', () => {
+        const result = component.calculateDateRange();
+        expect(result).toBe('TBD');
+      });
+
+      it('returns the correct date duration for two dates', () => {
+        component.commentPeriod.dateStarted = new Date(2018, 5, 14);
+        component.commentPeriod.dateCompleted = new Date(2018, 5, 21);
+        const result = component.calculateDateRange();
+        expect(result).toBe(7);
+      });
+
+      it('returns TBD if one date is empty', () => {
+        component.commentPeriod.dateCompleted = new Date(2018, 5, 14);
+        const result = component.calculateDateRange();
+        expect(result).toBe('TBD');
+      });
+
+
+    });
+
   });
+
 });
