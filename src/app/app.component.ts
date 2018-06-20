@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PageScrollConfig } from 'ng2-page-scroll';
+import { PageScrollConfig } from 'ngx-page-scroll';
 import { Api } from './services/api';
 import { EmailService } from './services/email.service';
 import { NewsService } from './services/news.service';
