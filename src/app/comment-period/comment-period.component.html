@@ -110,7 +110,7 @@
                         </button>
                         <div class="response__info" [hidden]="!hideme[item.commentId]">
                           <!-- <div class="response__org">{{commentPeriod.project.proponent.name}}</div> -->
-                          <div class="response__content" [innerHTML]="item.proponentResponse"></div>
+                          <div class="response__content">{{item.proponentResponse}}</div>
                         </div>
                       </div>
                       <div class="badge-container" *ngIf="item.vcs.length !== 0">
