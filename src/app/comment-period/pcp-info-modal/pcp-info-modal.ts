@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'; 
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pcp-info-modal',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./pcp-info-modal.component.scss']
 })
 export class PCPInfoModalComponent {
-  @Input() commentPeriod; 
+  @Input() commentPeriod;
   constructor() { };
 
   triggerSubmitComment() {
@@ -26,4 +26,3 @@ export class PCPInfoModalComponent {
     step3.classList.add('hidden');
   }
 }
-
