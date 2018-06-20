@@ -68,7 +68,7 @@
                   <tr class="activity-feed__item" *ngFor="let item of commentPeriod.comments | orderBy: {property: column, direction: direction} | paginate: config">
                     <td colspan="2">
                       <div class="title-container">
-                          <h3  class="title-container__title" [innerText]="item.isAnonymous ? 'Anonymous' : item.author "></h3>
+                        <h3  class="title-container__title" [innerText]="item.isAnonymous ? 'Anonymous' : item.author "></h3>
                         <span class="title-container__date">{{item.dateAdded | date: 'mediumDate'}} @ {{item.dateAdded | date: 'shortTime'}}</span>
                       </div>
                       <div class="activity-feed__content readmore">
@@ -81,7 +81,7 @@
                           [innerHTML]="(item.comment | slice:0:300) + '...'">
                         </div>
                         <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.comment.length > 300" (click)="readmore(item)">
-                          [{{item.readmore ? 'Show Less' : 'Show More'}}]
+                          [{{item.readmore ? 'Show Less' : 'Read More'}}]
                         </button>
                       </div>
                       <div class="activity-feed__attachments" *ngIf="item.documents.length !== 0">
@@ -99,6 +99,18 @@
                               </li>
                             </ng-container>
                           </ul>
+                        </div>
+                      </div>
+                      <div class="response__container" *ngIf="item.showProponentResponse">
+                        <button class="response__toggle btn btn-link" (click)="hideme[item.commentId] = !hideme[item.commentId]">
+                          <i class="material-icons md-16">
+                            mode_comment
+                          </i>
+                          &nbsp;{{hideme[item.commentId] ? 'Hide Response from Proponent' : 'Show Response from Proponent'}}
+                        </button>
+                        <div class="response__info" [hidden]="!hideme[item.commentId]">
+                          <!-- <div class="response__org">{{commentPeriod.project.proponent.name}}</div> -->
+                          <div class="response__content">{{item.proponentResponse}}</div>
                         </div>
                       </div>
                       <div class="badge-container" *ngIf="item.vcs.length !== 0">

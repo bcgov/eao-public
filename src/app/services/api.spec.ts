@@ -194,7 +194,7 @@ describe('Api', () => {
       }));
     });
 
-    describe('getCommentsByPCPCode(code)', () => {
+    describe('getPublishedCommentsByPCPCode(code)', () => {
       let code: string;
 
       beforeEach(() => {
@@ -208,20 +208,20 @@ describe('Api', () => {
           expect(connection.request.method).toEqual(RequestMethod.Get);
         });
 
-        api.getCommentsByPCPCode(code);
+        api.getPublishedCommentsByPCPCode(code);
       }));
 
-      it('should make a request to /comments/period/${ pcpCode }/all',
+      it('should make a request to /comments/period/${ pcpCode }/published',
         inject([Api, XHRBackend], (api, mockBackend) => {
 
         api.apiPath = 'http://blarg/api';
 
         mockBackend.connections.subscribe((connection) => {
           // Have connection send a response
-          expect(connection.request.url).toEqual('http://blarg/api/comments/period/589a192c5658e1001d22a088/all');
+          expect(connection.request.url).toEqual('http://blarg/api/comments/period/589a192c5658e1001d22a088/published');
         });
 
-        api.getCommentsByPCPCode(code);
+        api.getPublishedCommentsByPCPCode(code);
       }));
 
       it('should return an object',
@@ -231,7 +231,7 @@ describe('Api', () => {
 
         mockBackEnd(mockResponse, mockBackend);
 
-        api.getCommentsByPCPCode(code).subscribe(
+        api.getPublishedCommentsByPCPCode(code).subscribe(
           resp => {
             expect(resp).toBeTruthy();
           }
