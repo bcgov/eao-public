@@ -4404,10 +4404,6 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-ng2-page-scroll@4.0.0-beta.12:
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/ng2-page-scroll/-/ng2-page-scroll-4.0.0-beta.12.tgz#26b4e71ef9ad0859f1fa4e5e8d6ce7c75b73c6f7"
-
 ngx-filesize@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ngx-filesize/-/ngx-filesize-1.1.2.tgz#d107d236cde364bc86ba48678787ab2003edd6e7"
@@ -4417,6 +4413,10 @@ ngx-filesize@1.1.2:
 ngx-order-pipe@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/ngx-order-pipe/-/ngx-order-pipe-1.0.4.tgz#f71775ad1543aef2bb507fb79425866dd4d3c641"
+
+ngx-page-scroll@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-page-scroll/-/ngx-page-scroll-4.0.2.tgz#0b1b7f26f48f2d55356a19023490052e9fa5a8d9"
 
 ngx-pagination@3.0.3:
   version "3.0.3"

@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +44,7 @@ import { SharedModule } from './shared/shared.module';
     CommentPeriodModule,
     FormsModule,
     HttpModule,
-    Ng2PageScrollModule.forRoot(),
+    NgxPageScrollModule,
     NgbModule,
     NgxPaginationModule,
     MapModule,

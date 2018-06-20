@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Ng2PageScrollModule, PageScrollConfig } from 'ng2-page-scroll';
+import { NgxPageScrollModule, PageScrollConfig } from 'ngx-page-scroll';
 import { AppComponent } from './app.component';
 import { Api } from './services/api';
 
@@ -21,7 +21,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         HttpModule,
-        Ng2PageScrollModule.forRoot()
+        NgxPageScrollModule
       ]
     }).compileComponents();
   });
