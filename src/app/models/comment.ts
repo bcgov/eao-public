@@ -11,6 +11,8 @@ export class Comment {
   documents: Array<any>;
   comment: string;
   commentId: string;
+  showProponentResponse: boolean;
+  proponentResponse: string;
   vcs: Array<ValuedComponent>;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
@@ -22,6 +24,8 @@ export class Comment {
     this.documents = obj && obj.documents || [];
     this.comment = obj && obj.comment || '';
     this.commentId = obj && obj.commentId || '';
+    this.showProponentResponse = obj && obj.showProponentResponse || false;
+    this.proponentResponse = obj && obj.proponentResponse || '';
     this.vcs = obj && obj.valuedComponents || [];
   }
 }
