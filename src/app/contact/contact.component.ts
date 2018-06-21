@@ -34,13 +34,11 @@ export class ContactComponent implements OnInit {
     this.emailService.sendEmail(this.model)
       .toPromise()
       .then(function (res) {
-        console.log('done:', res);
         self.alerts.pop();
         setTimeout(() => {
           self.router.navigate(['/contact_success']);
         }, 3000);
       }, function (err) {
-        console.log('err:', err);
         self.alerts.pop();
         self.alerts.push({
           type: 'danger',

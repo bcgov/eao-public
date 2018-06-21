@@ -11,7 +11,7 @@ import { News } from '../models/news';
 import { Api } from '../services/api';
 import { OrderByPipe } from '../pipes/order-by.pipe';
 import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
-import { ProjectFilterPipe } from '../pipes/project-filter.pipe';
+import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -43,7 +43,7 @@ describe('NewsComponent', () => {
           NewsComponent,
           OrderByPipe,
           NewsTypeFilterPipe,
-          ProjectFilterPipe
+          NewsHeadlineFilterPipe
         ]
       }).compileComponents();
     })
@@ -198,10 +198,10 @@ describe('NewsComponent', () => {
   describe('getDisplayedElementCountMessage', () => {
     beforeEach(() => {
       component.results = [
-        new News({ project: { name: 'Big mine' }, type: 'news' }),
-        new News({ project: { name: 'Medium'}, type: 'public comment period' }),
-        new News({ project: { name: 'Bigger mine'}, type: 'public comment period' }),
-        new News({ project: { name: 'Small'}, type: 'news' })
+        new News({ headline: 'Big mine', project: { name: 'Tree Mine' }, type: 'news' }),
+        new News({ headline: 'Medium', project: { name: 'Rock Mine'}, type: 'public comment period' }),
+        new News({ headline: 'Bigger mine', project: { name: 'Glass Mine'}, type: 'public comment period' }),
+        new News({ headline: 'Small', project: { name: 'Dust Mine'}, type: 'news' })
       ];
     });
 
