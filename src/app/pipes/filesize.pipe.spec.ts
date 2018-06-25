@@ -16,7 +16,6 @@ describe('FilesizePipe', () => {
   it('correctly transforms multiple values using the default settings', () => {
     const byteSizes = [15435483, 3564];
     const result = pipe.transform(byteSizes);
-    console.log(result);
     expect(result).toEqual(['14.72 MB', '3.48 KB']);
   });
 
@@ -29,7 +28,6 @@ describe('FilesizePipe', () => {
   it('correctly transforms multiple values using the provided options', () => {
     const byteSizes = [15435483, 3564];
     const result = pipe.transform(byteSizes, { bits : true});
-    console.log(result);
     expect(result).toEqual(['117.76 Mb', '27.84 Kb']);
   });
 });
