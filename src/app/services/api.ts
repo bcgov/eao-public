@@ -65,8 +65,8 @@ export class Api {
     return this.get(`document/${id}`);
   }
 
-  getCommentsByPCPCode(pcpCode: string) {
-    return this.get(`comments/period/${pcpCode}/all`);
+  getPublishedCommentsByPCPCode(pcpCode: string) {
+    return this.get(`comments/period/${pcpCode}/published`);
   }
 
   getValuedComponentsByCode(vcsCodes: any[]) {

@@ -108,15 +108,13 @@ export class CommentPeriodService {
   // get all comments associated with public comment period and map to comments attribute
   // return array of comment json objects
   private getCommentsByPCP(id) {
-    return this.api.getCommentsByPCPCode(id)
+    return this.api.getPublishedCommentsByPCPCode(id)
       .map((res: Response) => res.json())
       .map((pcpComments) => {
         pcpComments.forEach((comment, index) => {
-          if (comment.isPublished) {
-            comment = new Comment(comment);
-            this.pcp.vcs = this.pcp.vcs.concat(comment.vcs);
-            this.pcp.comments.push(comment);
-          }
+          comment = new Comment(comment);
+          this.pcp.vcs = this.pcp.vcs.concat(comment.vcs);
+          this.pcp.comments.push(comment);
           if (comment.documents.length > 0) {
             comment.documents.map((doc) => {
               return this.api.getDocumentById(doc.id)
