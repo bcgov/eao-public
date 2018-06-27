@@ -25,7 +25,11 @@ export class CommentPeriodComponent implements OnInit {
     currentPage: 1
   };
 
-  constructor( private route: ActivatedRoute, private commentPeriodService: CommentPeriodService, private api: Api ) { }
+  hideme = {};
+
+  constructor( private route: ActivatedRoute, private commentPeriodService: CommentPeriodService, private api: Api ) {
+    this.hideme = {};
+   }
 
   ngOnInit() {
     const id = this.route.snapshot.params.id;
