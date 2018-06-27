@@ -1,8 +1,10 @@
-import { Component, HostBinding, Input, Inject, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { MapConfigService } from '../core';
-import { WidgetBuilder, ZoomWidgetProperties, SearchWidgetProperties } from '../widgets/widget-builder';
+import { WidgetBuilder} from '../widgets/widget-builder';
+import * as utils from '../support/map-utils';
 
 @Component({
   selector: 'app-main-map',
@@ -17,8 +19,8 @@ export class MainMapComponent implements OnInit {
   geocoderProperties: any;
   map: __esri.Map;
   mapView: __esri.MapView;
-  search: __esri.Search;
-  zoom: __esri.Zoom;
+  pointLayerTitle: string;
+  pointLayer: __esri.FeatureLayer;
 
   @Input() animate = true;
 
@@ -26,6 +28,7 @@ export class MainMapComponent implements OnInit {
 
   // private fields
   private selectedId: string;
+  private sub: Subscription;
 
   constructor(
     private config: MapConfigService,
@@ -35,6 +38,7 @@ export class MainMapComponent implements OnInit {
 
   ngOnInit() {
     const props = this.config.get();
+    this.pointLayerTitle = props.mainMap.pointLayerTitle;
     this.webMapProperties = props.mainMap.webmap;
     this.mapViewProperties = props.mainMap.mapView;
     this.popupProperties = props.mainMap.popup;
@@ -43,237 +47,59 @@ export class MainMapComponent implements OnInit {
   }
 
   onMapInit(mapInfo: { map: __esri.Map, mapView: __esri.MapView }): void {
-    const args = {
-      ...mapInfo,
-      popupProperties: this.popupProperties,
-      mouseoverProperties: this.mouseoverProperties,
-      featureLayer: <__esri.FeatureLayer>null,
-      search: <__esri.Search>null,
-      zoom: <__esri.Zoom>null
-    };
+    const map = mapInfo.map;
+    const view = mapInfo.mapView;
+    const widgetBuilder = this.widgetBuilder;
+    const popupProperties = this.popupProperties;
+    const mouseoverProperties = this.mouseoverProperties;
+    const geocoder = this.geocoderProperties;
 
-    Promise.resolve(args)
-      // store local references to map and view
-      .then(obj => {
-        this.map = obj.map;
-        this.mapView = obj.mapView;
-        return obj;
-      })
-      // create zoom widget instance
-      .then(obj => {
-        return this.widgetBuilder.createWidget('zoom', { view: obj.mapView })
-          .then(zoom => this.zoom = obj.zoom = zoom)
-          .then(() => obj);
-      })
-      // find the feature layer with `project` data
-      .then(obj => {
-        const { map } = obj;  // es6 destructuring
-        obj.featureLayer = this.findFeatureLayer(map);
-        return obj;
-      })
-      // set map popup to match app styling
-      .then(obj => {
-        const { featureLayer, popupProperties } = obj;
-        return this.setPopupTemplateForLayer(featureLayer, this.mapView, popupProperties)
-          .then(() => obj);
-      })
-      // set map mouseovers to match app styling
-      .then(obj => {
-        const { featureLayer, mouseoverProperties, popupProperties } = obj;
-        return this.setMouseoversForMapview(featureLayer, this.mapView, mouseoverProperties, popupProperties)
-          .then(() => obj);
-      })
-      // create search widget instance, then add it to the map
-      .then(obj => {
-        const props: SearchWidgetProperties = {
-          view: obj.mapView,
-          featureLayer: obj.featureLayer,
-          geocoder: this.geocoderProperties
-        };
-        return this.widgetBuilder.createWidget('search', props)
-          .then(search => this.search = obj.search = search)
-          .then(() => obj);
-      })
-      // position the interactive widgets (i.e. zoom, search) on the map
-      .then(obj => {
-        const { mapView, search, zoom } = obj;
-        mapView.ui.add(zoom, 'bottom-right');
-        mapView.ui.add(search, 'top-left');
-        return obj;
-      })
-      // automatically show project popup on the map when coming from project details page
-      .then(obj => {
-        this.route.paramMap.subscribe((params: ParamMap) => {
-          const { featureLayer, mapView } = obj;  // es6 destructuring
-          let targetMine: __esri.Graphic;
+    // find the feature layer with `project` data.
+    const layerTitle = this.pointLayerTitle;
+    const featureLayer = <__esri.FeatureLayer>utils.findLayerByTitle(map, layerTitle);
 
-          // fetch the project Id from URL/route params (if any)
-          this.selectedId = params.get('project');
+    // store local references to map and view
+    this.map = map;
+    this.mapView = view;
+    this.pointLayer = featureLayer;
 
-          if (this.selectedId) {
-            this.queryMapLayer(featureLayer, this.selectedId)
-              .then((response: __esri.FeatureSet) => {
-                targetMine = response && response.features && response.features.length ? response.features[0] : null;
-              })
-              .then(() => this.zoomToMine(mapView, targetMine, this.animate))
-              .then(() => this.showMapPopup(mapView, targetMine));
-          }
-        });
+    // 1- wait for layers to load
+    // 2- set map popup to match our custom styling
+    // 3- set map mouseovers to match our custom styling
+    // 4- create interactive map controls (e.g. zoom, search widgets)
+    // 5- automatically show project popup on the map when coming from project details page
+    utils.whenLayersReady([featureLayer])
+      .then(() => utils.setPopupTemplate(featureLayer, view, popupProperties))
+      .then(() => utils.setMouseoverTemplate(featureLayer, view, mouseoverProperties, popupProperties))
+      .then(() => utils.addWidgets(view, widgetBuilder, { search: { featureLayer, geocoder } }))
+      .then(() => {
+        // grabbing route parameters (the Observable way)
+        this.sub = this.route.paramMap.subscribe(
+          (params: ParamMap) => this.onRouteChange(params),
+          () => this.sub.unsubscribe(),
+          () => this.sub.unsubscribe(),
+        );
       });
   }
 
-  private findFeatureLayer(map: __esri.Map): __esri.FeatureLayer {
-    // need to cast the layer as FeatureLayer to make TypeScript happy
-    return map.layers.find(lyr => lyr.type === 'feature') as __esri.FeatureLayer;
-  }
+  private onRouteChange(params: ParamMap) {
+    // fetch the project Id from URL/route params (if any)
+    this.selectedId = params.get('project');
 
-  private setPopupTemplateForLayer(featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
-    popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
-      const self = this;
-      return new Promise<void>((resolve, reject) => {
-      // the `esri/layers/FeatureLayer` instance is promise-based...
-      // call the .when() method to execute code once the layer is ready
-      return mapView.when(
-        (mv: __esri.MapView) => {
-          // we need the mapview to access the mouseover event, which is now called pointer-move in esri 4.7
-          mv.whenLayerView(featureLayer).then(function(lv) {
-            mv.on('click', self.onClickHandler(featureLayer, mv, popupTemplate));
-          });
-        })
-        .then(() => resolve())
-        .catch(reject) &&
-        featureLayer.when(
-        (fl: __esri.FeatureLayer) => {
-
-          if (popupTemplate) {
-            fl.popupTemplate.title = popupTemplate.title;
-            fl.popupTemplate.content = popupTemplate.content;
-          }
-        })
-        .then(() => resolve())
-        .catch(reject);
-    });
-  }
-
-  private setMouseoversForMapview(
-    featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
-     mouseoverTemplate: __esri.PopupTemplateProperties, popupTemplate: __esri.PopupTemplateProperties): Promise<void> {
-    const self = this;
-    return new Promise<void>((resolve, reject) => {
-      // the `esri/MapView` instance is promise-based...
-      // call the .when() method to execute code once the mapView is ready
-      return mapView.when(
-        (mv: __esri.MapView) => {
-          // we need the mapview to access the mouseover event, which is now called pointer-move in esri 4.7
-          mv.whenLayerView(featureLayer).then(function(lv) {
-            mv.on('pointer-move', self.onMouseoverHandler(featureLayer, mv, mouseoverTemplate, popupTemplate));
-          });
-        })
-        .then(() => resolve())
-        .catch(reject);
-    });
-  }
-
-  public onClickHandler(featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
-    popupTemplate: __esri.PopupTemplateProperties) {
-    const self = this;
-    return function() {
-      self.resetToPopupStyle(featureLayer, mapView, popupTemplate);
-    };
-  }
-
-  public resetToPopupStyle(featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
-   popupTemplate: __esri.PopupTemplateProperties) {
-    if (null !== mapView.popup.title) {
-      const currentPopupTitle = String(mapView.popup.title.toString());
-
-      if (currentPopupTitle.includes('moTitle') || 0 === currentPopupTitle.length) {
-        mapView.popup.close();
-      }
+    // automatically show project popup on the map when coming from project details page
+    if (this.selectedId && this.mapView && this.pointLayer) {
+      this.navigateToProject(this.selectedId, this.mapView, this.pointLayer, this.animate);
     }
-    if (popupTemplate) {
-      featureLayer.popupTemplate.title = popupTemplate.title;
-      featureLayer.popupTemplate.content = popupTemplate.content;
-    }
-    mapView.popup.dockOptions = {
-      buttonEnabled: true
-    };
   }
 
-  public onMouseoverHandler(featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
-   mouseoverTemplate: __esri.PopupTemplateProperties, popupTemplate: __esri.PopupTemplateProperties) {
-    const self = this;
-    return function(args) {
-      self.resetToPopupStyle(featureLayer, mapView, popupTemplate);
-
-      // only proceed if we're over the pin on the map
-      mapView.hitTest(args).then(function(evt) {
-        if (null !== evt.results[0].graphic) {
-          // if there is an open popup, do nothing unless it's closed
-          if ((null !== mapView.popup.visible) && (mapView.popup.visible)) {
-            if (null !== mapView.popup.title) {
-              const currentPopupTitle = String(mapView.popup.title.toString());
-              if (!currentPopupTitle.includes('moTitle')) {
-                if (0 === mapView.popup.title.length) {
-                  mapView.popup.close();
-                }
-                return;
-              }
-            }
-          }
-          // set the look and feel for the popup we are using as a mouseover
-          if (mouseoverTemplate) {
-            featureLayer.popupTemplate.title = mouseoverTemplate.title;
-            featureLayer.popupTemplate.content = mouseoverTemplate.content;
-          }
-          mapView.popup.dockOptions = {
-            // Disable dock button
-            buttonEnabled: false
-          };
-          mapView.popup.open({
-            location: evt.results[0].mapPoint,
-            title: '<div id="moTitle">' + evt.results[0].graphic.attributes.name + '</div>'
-          });
-        }
-      });
-    };
-  }
-
-  private queryMapLayer(featureLayer: __esri.FeatureLayer, projectId: string): Promise<__esri.FeatureSet> {
-    return new Promise((resolve, reject) => {
-      // construct a query object that matches the layer's current configuration
-      const query = featureLayer.createQuery();
-      query.where = `code = '${projectId}'`;
-
-      // query the layer with the modified params object
-      // then set the popup's features which will populate popup content and title
-      return featureLayer.queryFeatures(query)
-        .then(results => resolve(results))
-        .catch(reject);
-    });
-  }
-
-  private zoomToMine(view: __esri.MapView, targetMine: __esri.Graphic, animate: boolean = false): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      const opts: __esri.MapViewGoToOptions = {
-        animate: animate
-      };
-
-      // the `goTo` function returns a promise which resolves as soon as the new view has been set to the target.
-      return view.goTo(
-        {
-          target: targetMine,
-          zoom: 9
-        }, opts)
-        .then(() => resolve())
-        .catch(reject);
-    });
-  }
-
-  private showMapPopup(view: __esri.MapView, targetMine: __esri.Graphic): void {
-    view.popup.open({
-      features: [targetMine],
-      updateLocationEnabled: true  // updates the location of popup based on selected feature's geometry
-    });
+  private navigateToProject(id: string, view: __esri.MapView, featureLayer: __esri.FeatureLayer, animate = this.animate) {
+    let target: __esri.Graphic;
+    return utils
+      .findProjectById(featureLayer, id)
+      .then((response: __esri.FeatureSet) => {
+        target = response && response.features && response.features.length ? response.features[0] : null;
+      })
+      .then(() => utils.zoomToLocation(view, target, animate))
+      .then(() => utils.showMapPopup(view, target));
   }
 }
