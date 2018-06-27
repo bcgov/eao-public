@@ -28,9 +28,11 @@ const webmaps = {
 export interface MapConfig {
   arcgis?: ILoadScriptOptions;
   mainMap?: {
+    pointLayerTitle?: string;
     webmap?: __esri.WebMapProperties,
     mapView?: __esri.MapViewProperties,
     popup?: __esri.PopupTemplateProperties,
+    mouseover?: __esri.PopupTemplateProperties,
     geocoder?: GeocoderSettings;
   };
 }
@@ -65,6 +67,7 @@ export class MapConfigService {
     return {
       arcgis: loadScriptOptions,
       mainMap: {
+        pointLayerTitle: 'EAO Projects',
         webmap: {
           portalItem: { id: webmapId }
         },
@@ -78,6 +81,7 @@ export class MapConfigService {
           }
         },
         popup: this.defaultPopupTemplate,
+        mouseover: this.defaultMouseoverTemplate,
         geocoder: geocoderOptions
       }
     };
@@ -95,12 +99,19 @@ export class MapConfigService {
               </ul>
               <div class="map-popup-desc" *ngIf="description">{description}</div>
               <div class="map-popup-btns">
-                <a class="btn btn-sm slide-r-btn inverted" title="View additional information about {name}" 
+                <a class="btn btn-sm slide-r-btn inverted" title="View additional information about {name}"
                   href="${this.projectUrl('{code}')}">
                   <span>Project Info</span><i class="material-icons">arrow_forward</i>
                 </a>
               <div>
             </div>`
+    };
+  }
+
+  get defaultMouseoverTemplate(): __esri.PopupTemplateProperties {
+    return {
+      title: '{name}',
+      content: `<div class="map-mouseover-hidden-description-content"></div>`
     };
   }
 
