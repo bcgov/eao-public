@@ -116,8 +116,8 @@ ng g module admin --routing
 
 ### Unit tests
 
-Set up via [Karma](https://karma-runner.github.io), [Jasmine](https://jasmine.github.io/).
-1. Run `ng test` to execute the unit tests.
+The tests use [Karma](https://karma-runner.github.io), [Jasmine](https://jasmine.github.io/).
+1. Run `npm test` to execute the unit tests.
 
 ### End-to-end functional tests
 
