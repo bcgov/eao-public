@@ -168,3 +168,28 @@
     }
   }
 }
+
+// PROPONENT RESPONSE PROTOTYPE
+.response {
+  &__info {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 1rem;
+    border-left: 3px solid #0275d8;
+    background: #fff;
+    font-size: 0.9375rem;
+  }
+
+  &__org {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  &__toggle {
+    margin-top: 0.75rem;
+    padding: 0.1rem;
+    border-radius: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+}
