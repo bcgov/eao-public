@@ -15,7 +15,6 @@ export class MainMapComponent implements OnInit {
   webMapProperties: __esri.WebMapProperties;
   mapViewProperties: __esri.MapViewProperties;
   popupProperties: __esri.PopupTemplateProperties;
-  mouseoverProperties: __esri.PopupTemplateProperties;
   geocoderProperties: any;
   map: __esri.Map;
   mapView: __esri.MapView;
@@ -42,7 +41,6 @@ export class MainMapComponent implements OnInit {
     this.webMapProperties = props.mainMap.webmap;
     this.mapViewProperties = props.mainMap.mapView;
     this.popupProperties = props.mainMap.popup;
-    this.mouseoverProperties = props.mainMap.mouseover;
     this.geocoderProperties = props.mainMap.geocoder;
   }
 
@@ -51,7 +49,6 @@ export class MainMapComponent implements OnInit {
     const view = mapInfo.mapView;
     const widgetBuilder = this.widgetBuilder;
     const popupProperties = this.popupProperties;
-    const mouseoverProperties = this.mouseoverProperties;
     const geocoder = this.geocoderProperties;
 
     // find the feature layer with `project` data.
@@ -64,7 +61,7 @@ export class MainMapComponent implements OnInit {
     this.pointLayer = featureLayer;
 
     this.mapView.on('click', utils.onClickHandler(featureLayer, view, popupProperties));
-    this.mapView.on('pointer-move', utils.onMouseoverHandler(featureLayer, view, mouseoverProperties, popupProperties));
+    this.mapView.on('pointer-move', utils.onMouseoverHandler(featureLayer, view, popupProperties));
 
     // 1- wait for layers to load
     // 2- set map popup to match our custom styling

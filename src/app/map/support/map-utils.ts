@@ -112,7 +112,7 @@ export function resetToPopupStyle(featureLayer: __esri.FeatureLayer, mapView: __
  * Displays the pin name in the popup title and hides the popup content.
  */
 export function onMouseoverHandler(featureLayer: __esri.FeatureLayer, mapView: __esri.MapView,
- mouseoverTemplate: __esri.PopupTemplateProperties, popupTemplate: __esri.PopupTemplateProperties) {
+ popupTemplate: __esri.PopupTemplateProperties) {
   return function(args) {
     resetToPopupStyle(featureLayer, mapView, popupTemplate);
 
@@ -130,11 +130,6 @@ export function onMouseoverHandler(featureLayer: __esri.FeatureLayer, mapView: _
               return;
             }
           }
-        }
-        // set the look and feel for the popup we are using as a mouseover
-        if (mouseoverTemplate) {
-          featureLayer.popupTemplate.title = mouseoverTemplate.title;
-          featureLayer.popupTemplate.content = mouseoverTemplate.content;
         }
         mapView.popup.dockOptions = {
           // Disable dock button
