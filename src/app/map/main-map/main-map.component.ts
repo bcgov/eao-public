@@ -15,7 +15,6 @@ export class MainMapComponent implements OnInit {
   webMapProperties: __esri.WebMapProperties;
   mapViewProperties: __esri.MapViewProperties;
   popupProperties: __esri.PopupTemplateProperties;
-  mouseoverProperties: __esri.PopupTemplateProperties;
   geocoderProperties: any;
   map: __esri.Map;
   mapView: __esri.MapView;
@@ -42,7 +41,6 @@ export class MainMapComponent implements OnInit {
     this.webMapProperties = props.mainMap.webmap;
     this.mapViewProperties = props.mainMap.mapView;
     this.popupProperties = props.mainMap.popup;
-    this.mouseoverProperties = props.mainMap.mouseover;
     this.geocoderProperties = props.mainMap.geocoder;
   }
 
