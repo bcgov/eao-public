@@ -4,7 +4,7 @@ import { NewsService } from '../services/news.service';
 import { PaginationInstance } from 'ngx-pagination';
 import { Api } from '../services/api';
 import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
-import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import { NewsMultifieldFilterPipe } from '../pipes/news-multifield-filter.pipe';
 
 @Component({
   selector: 'app-news',
@@ -16,7 +16,7 @@ export class NewsComponent implements OnInit {
   results: Array<News>;
   public loading: boolean;
   public showFilters: boolean;
-  public newsHeadlineFilter: boolean;
+  public newsMultifieldFilter: boolean;
   public filter = '';
   public filterType = '';
   public NewsTypeFilter = '';
@@ -31,11 +31,11 @@ export class NewsComponent implements OnInit {
   };
   hostname: string;
   NewsTypeFilterPipe: NewsTypeFilterPipe;
-  NewsHeadlineFilterPipe: NewsHeadlineFilterPipe;
+  NewsMultifieldFilterPipe: NewsMultifieldFilterPipe;
 
   constructor(private newsService: NewsService, private _changeDetectionRef: ChangeDetectorRef, private api: Api) {
     this.NewsTypeFilterPipe = new NewsTypeFilterPipe();
-    this.NewsHeadlineFilterPipe = new NewsHeadlineFilterPipe();
+    this.NewsMultifieldFilterPipe = new NewsMultifieldFilterPipe();
   }
 
   ngOnInit() {
@@ -89,7 +89,7 @@ export class NewsComponent implements OnInit {
     let message = '';
     let items = this.results;
     if (this.filter) {
-      items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
+      items = this.NewsMultifieldFilterPipe.transform(items, this.filter);
     }
     if (this.filterType) {
       items = this.NewsTypeFilterPipe.transform(items, this.filterType);
