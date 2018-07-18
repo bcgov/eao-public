@@ -11,7 +11,7 @@ import { News } from '../models/news';
 import { Api } from '../services/api';
 import { OrderByPipe } from '../pipes/order-by.pipe';
 import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
-import { NewsHeadlineFilterPipe } from '../pipes/news-headline-filter.pipe';
+import { NewsMultifieldFilterPipe } from '../pipes/news-multifield-filter.pipe';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -43,7 +43,7 @@ describe('NewsComponent', () => {
           NewsComponent,
           OrderByPipe,
           NewsTypeFilterPipe,
-          NewsHeadlineFilterPipe
+          NewsMultifieldFilterPipe
         ]
       }).compileComponents();
     })
@@ -236,8 +236,8 @@ describe('NewsComponent', () => {
       component.filterType = 'news';
       component.filter = 'mine';
       const result = component.getDisplayedElementCountMessage(1);
-      expect(result).toBe('Viewing <strong>1-1</strong> of <strong>1</strong> Results');
-      expect(component.filteredResults).toBe(1);
+      expect(result).toBe('Viewing <strong>1-2</strong> of <strong>2</strong> Results');
+      expect(component.filteredResults).toBe(2);
     });
 
     it('flexes correctly based on the number of items per page', () => {

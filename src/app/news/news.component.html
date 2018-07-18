@@ -20,7 +20,7 @@
       <label for="projectName">Find Project Activities & Updates</label>
       <div class="filter-input-row filters-basic">
         <div class="form-group">
-          <input class="form-control" placeholder="Type an Activity Name" type="text" [(ngModel)]="filter" (ngModelChange)="config.currentPage = 1">
+          <input class="form-control" placeholder="Type an Activity or Project Name" type="text" [(ngModel)]="filter" (ngModelChange)="config.currentPage = 1">
         </div>
         <button class="toggle-filter-btn btn btn-default btn-sm" title="{{showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
           [ngClass]="{'show-filters': showFilters}"
@@ -73,7 +73,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let item of results | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+          <ng-container *ngFor="let item of results | newsMultifieldFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
             <tr class="activity-feed__item" *ngIf="item.active == true">
               <td colspan="2">
                 <div class="title-container">

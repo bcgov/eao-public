@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FileSizePipe } from '../pipes/filesize.pipe';
 import { FilterPCPPipe } from 'app/pipes/filter-pcp.pipe';
 import { NewsHeadlineFilterPipe } from 'app/pipes/news-headline-filter.pipe';
+import { NewsMultifieldFilterPipe } from 'app/pipes/news-multifield-filter.pipe';
 import { NewsTypeFilterPipe } from 'app/pipes/news-type-filter.pipe';
 import { ObjectFilterPipe } from 'app/pipes/object-filter.pipe';
 import { OrderByPipe } from 'app/pipes/order-by.pipe';
@@ -28,6 +29,7 @@ import { ProperCasePipe } from '../pipes/proper-case.pipe';
     FileSizePipe,
     FilterPCPPipe,
     NewsHeadlineFilterPipe,
+    NewsMultifieldFilterPipe,
     NewsTypeFilterPipe,
     ObjectFilterPipe,
     OrderByPipe,
@@ -45,6 +47,7 @@ import { ProperCasePipe } from '../pipes/proper-case.pipe';
     FileSizePipe,
     FilterPCPPipe,
     NewsHeadlineFilterPipe,
+    NewsMultifieldFilterPipe,
     NewsTypeFilterPipe,
     ObjectFilterPipe,
     OrderByPipe,

@@ -103,7 +103,7 @@ export class CommentPeriodComponent implements OnInit {
     if (dayDiff) {
       return dayDiff;
     }
-    console.log(dayDiff);
+
     return 'TBD';
   }
 }
