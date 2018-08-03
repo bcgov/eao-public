@@ -16,16 +16,18 @@
   }
 
   span {
-    &.name,
     &.value {
       float: left;
       display: block;
-      width: 50%;
+      width: 60%;
     }
 
     &.name {
-      padding-right: 1rem;
+      float: left;
+      display: block;
+      padding-right: 0.75rem;
       font-weight: 600;
+      width: 40%;
     }
 
     &.value {
