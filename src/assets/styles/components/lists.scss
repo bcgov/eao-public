@@ -34,11 +34,17 @@
       ul {
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: visible;
         list-style-type: none;
 
         li {
-          word-break: break-all;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        li:hover {
+            overflow: visible;
         }
       }
     }
