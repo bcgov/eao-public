@@ -307,11 +307,25 @@ describe('CommentPeriodComponent', () => {
         expect(result).toBe('TBD');
       });
 
-      it('returns the correct date duration for two dates', () => {
-        component.commentPeriod.dateStarted = new Date(2018, 5, 14);
-        component.commentPeriod.dateCompleted = new Date(2018, 5, 21);
+      it('returns the correct date duration for two dates a week apart with earlier end time case', () => {
+        component.commentPeriod.dateStarted = new Date(2018, 5, 14, 9);
+        component.commentPeriod.dateCompleted = new Date(2018, 5, 21, 8);
         const result = component.calculateDateRange();
         expect(result).toBe(7);
+      });
+
+      it('returns the correct date duration for two dates a week apart with day zero rules', () => {
+        component.commentPeriod.dateStarted = new Date(2018, 5, 14, 9);
+        component.commentPeriod.dateCompleted = new Date(2018, 5, 21, 9);
+        const result = component.calculateDateRange();
+        expect(result).toBe(7);
+      });
+
+      it('returns the correct date duration for two dates 33 calendar days apart with day zero rules', () => {
+        component.commentPeriod.dateStarted = new Date(2018, 8, 6);
+        component.commentPeriod.dateCompleted = new Date(2018, 9, 9);
+        const result = component.calculateDateRange();
+        expect(result).toBe(33);
       });
 
       it('returns TBD if one date is empty', () => {
