@@ -38,7 +38,10 @@
         list-style-type: none;
 
         li {
-          word-break: break-all;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          display: inherit;
         }
       }
     }
