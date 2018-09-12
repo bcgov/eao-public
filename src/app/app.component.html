@@ -24,6 +24,9 @@
 						</a>
 						<a class="dropdown-item" href="/map" [routerLink]="['/map']" tabindex="6">
 							<strong>Find Projects by Map</strong>
+            </a>
+            <a class="dropdown-item" href="/project;commentPeriodStatus=Open;showFilters=true" [routerLink]="['/project' , {commentPeriodStatus: 'Open', showFilters: 'true'}]" tabindex="7">
+							<strong>View Open Public Comment Periods</strong>
 						</a>
 					</div>
 				</li>
