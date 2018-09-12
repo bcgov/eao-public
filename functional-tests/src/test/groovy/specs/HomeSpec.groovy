@@ -39,7 +39,7 @@ class HomeSpec extends GebReportingSpec {
       [ text : "THE EA PROCESS" ]       | [ text : "Process & Procedures" ]  || ProcessPage
       [ text : "THE EA PROCESS" ]       | [ text : "Compliance Oversight" ]  || CompliancePage
       [ text : "CONTACT" ]              | null                               || ContactPage
-      [ text : "SIGN IN" ]              | null                               || new ExternalLinkPage("EAO Project Information and Collaboration (EPIC)", "/authentication/local/signin")
+      [ text : "SIGN IN" ]              | null                               || new ExternalLinkPage("EPIC Admin", "/authentication/local/signin")
   }
 
   /*
@@ -87,9 +87,9 @@ class HomeSpec extends GebReportingSpec {
       "copyRightLink"           || new ExternalLinkPage("Copyright - Province of British Columbia", "gov.bc.ca/gov/content/home/copyright")
       "disclaimerLink"          || new ExternalLinkPage("Disclaimer - Province of British Columbia", "gov.bc.ca/gov/content/home/disclaimer")
       "accessibilityLink"       || new ExternalLinkPage("Web Accessibility - Province of British Columbia", "gov.bc.ca/gov/content/home/accessibility")
-      "signinLink"              || new ExternalLinkPage("EAO Project Information and Collaboration (EPIC)", "/authentication/local/signin")
-      "facebookConnect"         || FacebookPage
-      "twitterConnect"          || TwitterPage
-      "gplusConnect"            || GooglePlusPage
+      "signinLink"              || new ExternalLinkPage("EPIC Admin", "/authentication/local/signin")
+      "facebookConnect"         || new ExternalLinkPage("Facebook", "www.facebook.com")
+      "twitterConnect"          || new ExternalLinkPage("Share a link on Twitter", "twitter.com")
+      // "gplusConnect"            || new ExternalLinkPage("Sign In - Google Accounts", "google.com") // gplus opens a popup window, will require different handling
   }
 }
