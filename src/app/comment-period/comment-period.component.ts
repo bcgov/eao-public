@@ -96,8 +96,10 @@ export class CommentPeriodComponent implements OnInit {
     if (this.commentPeriod.dateCompleted && this.commentPeriod.dateStarted) {
       const dCompleted = new Date(this.commentPeriod.dateCompleted);
       const dStarted = new Date(this.commentPeriod.dateStarted);
+      dStarted.setHours(0, 0, 0);
+      dCompleted.setHours(0, 0, 0);
       const timeDiff = Math.abs(dCompleted.getTime() - dStarted.getTime());
-      dayDiff = Math.ceil( timeDiff / (1000 * 3600 * 24));
+      dayDiff = timeDiff / (1000 * 3600 * 24);
     }
 
     if (dayDiff) {
