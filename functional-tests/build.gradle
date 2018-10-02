@@ -21,8 +21,8 @@ ext {
         edgeDriverVersion = '3.11.0'
         safariDriverVersion = '3.11.0'
         spockCoreVersion = '1.1-groovy-2.4'
-        spockReportsVersion = '1.6.0'
-        slf4jApiVersion = '1.7.25'
+        spockReportsVersion = '1.4.0'
+        slf4jApiVersion = '1.7.13'
     }
 }
 
