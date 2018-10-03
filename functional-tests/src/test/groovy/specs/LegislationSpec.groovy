@@ -45,7 +45,7 @@ class LegislationSpec extends GebReportingSpec {
     where:
       SectionSelector                                     | ItemSelector                                            || AssertPage
       [ tag : "h3", text : "2016 Exemption Regulation" ]  | [ text : "Exemption Regulation" ]                       || new ExternalLinkPage("Exemption Regulation", "http://www.bclaws.ca/civix/document/id/complete/statreg/120_2016")
-      [ tag : "h3", text : "2016 Exemption Regulation" ]  | [ text : "Coastal First Nations v. British Columbia" ]  || new ExternalLinkPage("2016 BCSC 34 Coastal First Nations v. British Columbia (Environment)", "http://www.courts.gov.bc.ca/jdb-txt/sc/16/00/2016BCSC0034cor1.htm")
+      [ tag : "h3", text : "2016 Exemption Regulation" ]  | [ text : "Coastal First Nations v. British Columbia" ]  || new ExternalLinkPage("2016 BCSC 34 Coastal First Nations v. British Columbia (Environment)", "https://www.courts.gov.bc.ca/jdb-txt/sc/16/00/2016BCSC0034cor1.htm")
       [ tag : "h3", text : "2016 Exemption Regulation" ]  | [ text : "BC Gov News" ]                                || new ExternalLinkPage("New exemption regulation under the Environmental Assessment Act | BC Gov News", "https://news.gov.bc.ca/releases/2016ENV0028-000821")
   }
 }
