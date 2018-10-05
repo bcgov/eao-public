@@ -25,17 +25,9 @@
             <input class="form-control" placeholder="Enter a Project Name" type="text" id="projectName" [(ngModel)]="savedFilters.keyword"
               name="keyword">
           </div>
-          <button class="toggle-filter-btn btn btn-default btn-sm" title="{{savedFilters.showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}}"
-            [ngClass]="{'show-filters': savedFilters.showFilters}" (click)="savedFilters.showFilters = !savedFilters.showFilters"
-            type="button">
-            <span class="btn-txt">{{savedFilters.showFilters ? 'Hide Filters' : 'Show Filters'}}</span>
-            <i class="material-icons">
-              {{savedFilters.showFilters ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
-            </i>
-          </button>
         </div>
 
-        <div class="filter-input-row filters-advanced" *ngIf="savedFilters.showFilters">
+        <div class="filter-input-row filters-advanced">
           <div class="col-md-2">
             <label>Comment Period</label>
             <!-- TODO: Populate Dynamically -->

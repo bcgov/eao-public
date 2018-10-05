@@ -38,18 +38,8 @@
                       <div class="form-group">
                         <input class="form-control" placeholder="Type an Activity Name" type="text" [(ngModel)]="filter" (ngModelChange)="config.currentPage = 1">
                       </div>
-                      <button class="toggle-filter-btn btn btn-default btn-sm" [ngClass]="{'show-filters': showFilters}" (click)="showFilters = !showFilters">
-                        <span class="show-filter-txt">
-                          <span class="btn-txt">Filter</span>
-                          <i class="material-icons">keyboard_arrow_down</i>
-                        </span>
-                        <span class="hide-filter-txt">
-                          <span class="btn-txt">Filter</span>
-                          <i class="material-icons">keyboard_arrow_up</i>
-                        </span>
-                      </button>
                     </div>
-                    <div class="filter-input-row filters-advanced" *ngIf="showFilters">
+                    <div class="filter-input-row filters-advanced">
                       <div class="col-md-12">
                         <div class="toggle-btn">
                           <input class="form-check-input" type="radio" name="newsTypeFilter" id="all" [(ngModel)]="filterType" value="" [checked]="!filterType"
