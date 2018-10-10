@@ -81,30 +81,32 @@
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr class="activity-feed__item" *ngFor="let item of news | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
-                          <td colspan="2">
-                            <div class="title-container">
-                              <h3 class="title-container__title">{{item.headline}}</h3>
-                              <span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
-                            </div>
-                            <div class="activity-feed__content readmore">
-                              <div class="readmore__content" [innerHTML]="item.content" *ngIf="item.readmore || item.content.length <= 280">
-                              </div>
-                              <div class="readmore__content" [innerHTML]="(item.content | slice:0:280) + '...'" *ngIf="!item.readmore && item.content.length > 280">
-                              </div>
-                              <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.content.length > 280"
-                                (click)="readmore(item)">
-                                [{{item.readmore ? 'Show Less' : 'Show More'}}]
-                              </button>
-                            </div>
-                            <div class="activity-feed__actions" *ngIf="item.contentUrl || item.documentUrl">
-                              <a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}">Submit/View Comments</a>
-                              <a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Document(s)</a>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
+                        <tbody >
+                          <ng-container *ngFor="let item of news | newsHeadlineFilter: filter | newsTypeFilter: filterType | orderBy: {property: column, direction: direction} | paginate: config">
+                            <tr class="activity-feed__item" *ngIf="item.active == true">
+                              <td colspan="2">
+                                <div class="title-container">
+                                  <h3 class="title-container__title">{{item.headline}}</h3>
+                                  <span class="title-container__date">{{item.dateAdded | date:'longDate'}}</span>
+                                </div>
+                                <div class="activity-feed__content readmore">
+                                  <div class="readmore__content" [innerHTML]="item.content" *ngIf="item.readmore || item.content.length <= 280">
+                                  </div>
+                                  <div class="readmore__content" [innerHTML]="(item.content | slice:0:280) + '...'" *ngIf="!item.readmore && item.content.length > 280">
+                                  </div>
+                                  <button class="btn btn-link readmore__link" title="{{item.readmore ? 'Show Less' : 'Show More'}}" *ngIf="item.content.length > 280"
+                                    (click)="readmore(item)">
+                                    [{{item.readmore ? 'Show Less' : 'Show More'}}]
+                                  </button>
+                                </div>
+                                <div class="activity-feed__actions" *ngIf="item.contentUrl || item.documentUrl">
+                                  <a class="btn btn-sm content-btn-alt" *ngIf="item.contentUrl" href="{{item.contentUrl}}">Submit/View Comments</a>
+                                  <a class="btn btn-sm content-btn-alt" *ngIf="item.documentUrl" href="{{item.documentUrl}}" target="_blank">View Document(s)</a>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
                     </table>
                     <pagination-template class="pagination--bottom" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
                       <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>

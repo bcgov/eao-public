@@ -118,6 +118,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   getDisplayedElementCountMessage(pageNumber) {
+    // TODO: fix counting of non-visible items
     let message = '';
     let items = this.news;
     if (this.filter) {
