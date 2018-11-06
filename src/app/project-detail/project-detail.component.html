@@ -64,6 +64,12 @@
                     </div>
                   </div>
                   <ng-container>
+                    <section class="card">
+                      <div class="card-body">
+                        <p class="mb-0">Looking for more detailed information?
+                          <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
+                      </div>
+                    </section>
                     <pagination-template class="pagination--top mb-2" #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
                       <span [hidden]="filteredResults <= 0" class="pagination__result-count" [innerHTML]="getDisplayedElementCountMessage(p.getCurrent())"></span>
                       <span [hidden]="filteredResults > 0" class="pagination__result-count">No results found</span>
@@ -128,6 +134,12 @@
                         </li>
                       </ul>
                     </pagination-template>
+                    <section class="card">
+                      <div class="card-body">
+                        <p class="mb-0">Looking for more detailed information?
+                          <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
+                      </div>
+                    </section>
                   </ng-container>
                 </div>
               </div>
@@ -215,12 +227,6 @@
                 </span>
               </li>
             </ul>
-          </div>
-        </section>
-        <section class="card">
-          <div class="card-body">
-            <p class="mb-0">Looking for more detailed information?
-              <a href="{{getDocumentManagerUrl()}}" target="_blank">Browse all documentation</a> for this project.</p>
           </div>
         </section>
       </aside>
