@@ -25,6 +25,15 @@
           <div class="project-activities">
             <section>
               <h2 class="overview">Activities & Updates</h2>
+              <div *ngFor="let item of pcps">
+                <section class="card">
+                  <div class="card-popup popup-body" *ngIf="item.status==='Open' || item.status === 'Pending'">
+                      <i class="fa fa-exclamation-circle popup-item"></i>
+                      <p class="mb-0 popup-item"> The public is invited to obtain infromation about and comment on this application. You can participate in this consultation by clicking
+                      <a class="popup-link" href="{{getPCPMangerUrl()}}" target="_blank">here.</a> Public commenting will be open from {{item.dateStarted | date:'longDate'}} to {{item.dateCompleted | date:'longDate'}}.</p>
+                  </div>
+                </section>
+              </div>
               <div class="activity-feed">
                 <div class="spinner-container relative mt-4" [hidden]="!loading">
                   <div class="spinner-new--sm rotating"></div>
