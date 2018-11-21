@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 import { Api } from './api';
 import { News } from '../models/news';
+import { CommentPeriod } from '../models/commentperiod';
 
 @Injectable()
 export class NewsService {
@@ -53,4 +54,10 @@ export class NewsService {
     return this.api.get(`recentactivity/byproject/${projectCode}`)
       .map((res: Response) => res.json());
   }
+
+  getByComments(projectID): Observable<CommentPeriod[]> {
+    return this.api.get(`recentactivity/getPublishedCommentPeriodsForProject/${projectID}`)
+      .map((res: Response) => res.json());
+  }
+
 }

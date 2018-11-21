@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,15 +11,18 @@ import { NewsTypeFilterPipe } from '../pipes/news-type-filter.pipe';
 import { Api } from '../services/api';
 import { NewsService } from '../services/news.service';
 import { ProjectService } from '../services/project.service';
+import { CommentPeriod } from '../models/commentperiod';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
   project: Project;
   news: News[];
+  pcps: CommentPeriod[];
+  activeCommentPeriod: CommentPeriod;
   public loading: boolean;
   public isDesc: boolean;
   public column: string;
@@ -30,6 +33,8 @@ export class ProjectDetailComponent implements OnInit {
   public NewsTypeFilter = '';
   public filterType = '';
   public filteredResults: number;
+  private newsSubscription: Subscription;
+  private pcpsSubscription: Subscription;
 
   public config: PaginationInstance = {
     id: 'custom',
@@ -58,7 +63,7 @@ export class ProjectDetailComponent implements OnInit {
     this.loading = true;
 
     // get project data
-    this.projectService
+    this.newsSubscription = this.projectService
       .getByCode(projectCode)
       .mergeMap((project: Project) => {
         this.project = new Project(project);
@@ -76,6 +81,55 @@ export class ProjectDetailComponent implements OnInit {
         this.filteredResults = this.news.length;
         this.loading = false;
       });
+
+      this.pcpsSubscription = this.projectService
+      .getByCode(projectCode)
+      .mergeMap((project: Project) => {
+        this.project = new Project(project);
+        if (!this.project.proponent) {
+          this.project.proponent = new Proponent({ name: '' });
+        }
+        this.column = 'dateAdded';
+        this.direction = -1;
+        return this.newsService.getByComments(this.project._id);
+      })
+      .subscribe(data => {
+        this.pcps = data;
+        this.setBanner(this.pcps);
+        this.filteredResults = this.news.length;
+        this.loading = false;
+      });
+  }
+
+  setBanner(pcps) {
+    // checks public pcps for a project, if 'open' or 'pending' exists make it active for banner item.
+    // (Note: A banner appears for each active period. But there should never be more than one pcp 'active at a time for a project)
+    pcps.forEach(item => {
+      this.checkActiveDate(item);
+      if (item.status === 'Open' || item.status === 'Pending') {
+        this.activeCommentPeriod = item;
+      }
+    });
+  }
+
+  checkActiveDate(item) {
+    const start = new Date(item.dateStarted);
+    const end = new Date(item.dateCompleted);
+    const curr = new Date();
+    const weekAgo = new Date(start.getDate() - 7);
+    // a public comment period is in a pending state when the date is a week before it opens
+    if ( curr < start && curr >= weekAgo ) {
+      item.status = 'Pending';
+    } else if ( curr > end ) {
+      item.status = 'Closed';
+    } else {
+      item.status = 'Open';
+    }
+  }
+
+  public getPCPMangerUrl() {
+    // Get the contentUrl for the active PCP
+    return `/p/${this.project.code}/commentperiod/${this.activeCommentPeriod._id}`;
   }
 
   setDocumentUrl(news) {
@@ -134,5 +188,11 @@ export class ProjectDetailComponent implements OnInit {
     }
     this.filteredResults = items.length;
     return message;
+  }
+
+  ngOnDestroy() {
+    // TODO: Look into using async instead for handling
+    this.newsSubscription.unsubscribe();
+    this.pcpsSubscription.unsubscribe();
   }
 }

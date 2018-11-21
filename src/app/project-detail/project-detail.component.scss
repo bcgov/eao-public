@@ -1,7 +1,7 @@
 @import "~assets/styles/base.scss";
 @import "~assets/styles/components/activity-feed.scss";
 
-// Project Hero Banner 
+// Project Hero Banner
 .hero-banner {
   .ea-project-title {
     display: block;
@@ -12,6 +12,19 @@
     padding-bottom: 0.25rem;
     vertical-align: top;
   }
+}
+
+.popup-link {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.popup-body {
+    display: flex;
+}
+
+.popup-item {
+    padding: 0.5rem;
 }
 
 @media (min-width: 768px) {
@@ -40,7 +53,7 @@
       display: block;
       padding: 0.2rem;
       height: 150px;
-  
+
       img {
         width: 100%;
       }
