@@ -29,8 +29,10 @@
                 <section class="card">
                   <div class="card-popup popup-body" *ngIf="item.status==='Open' || item.status === 'Pending'">
                       <i class="fa fa-exclamation-circle popup-item"></i>
-                      <p class="mb-0 popup-item"> The public is invited to obtain infromation about and comment on this application. You can participate in this consultation by clicking
-                      <a class="popup-link" href="{{getPCPMangerUrl()}}" target="_blank">here.</a> Public commenting will be open from {{item.dateStarted | date:'longDate'}} to {{item.dateCompleted | date:'longDate'}}.</p>
+                      <p class="mb-0 popup-item"> The public is invited to obtain infromation about and comment on the {{item.informationLabel}}. You can participate in this consultation by clicking
+                      <a class="popup-link" href="{{getPCPMangerUrl()}}" target="_blank">here.</a>
+                      <br/>&nbsp;<br/>
+                      Public commenting will be open from {{item.dateStarted | date:'longDate'}} to {{item.dateCompleted | date:'longDate'}}.</p>
                   </div>
                 </section>
               </div>
