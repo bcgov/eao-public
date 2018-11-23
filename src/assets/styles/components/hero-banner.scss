@@ -58,6 +58,7 @@
         text-transform: uppercase;
         font-size: 0.85rem;
         font-weight: 700;
+        margin: 0.5rem;
 
         + span {
           @include flex(0 0 auto);
@@ -67,6 +68,19 @@
       }
     }
   }
+}
+
+@media (max-width: 566px) {
+    .hero-banner {
+    &__actions {
+        &-buttons {
+            flex-direction: column;
+          .btn {
+            @include flex(0 0 auto);
+          }
+        }
+      }
+    }
 }
 
 @media (min-width: 567px) {
