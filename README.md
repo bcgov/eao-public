@@ -33,15 +33,27 @@ npm i -g yarn
 ## Fork, Build, and Deployment
 
 1. After installing Node and Yarn, you can fork or straight download a copy of this application to start your own app.
-1. First download all the dependencies with `yarn install`
-1. Run `npm start` to start the webpack server to run the application on port 3300
+2. First download all the dependencies with `yarn install`
+3. Please set your PATH, MINIO_HOST, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, and             MONGODB_DATABASE variables before running.
+
+  
+ - export MONGODB_DATABASE=“mean-dev”
+ 
+ - export MINIO_HOST="minio-esm-dev-esm-dev.pathfinder.gov.bc.<i></i>ca"
+ 
+ - export PATH="[you path here]"
+
+ - export MINIO_ACCESS_KEY="[access key here]"
+
+ - export MINIO_SECRET="[secret key here]"
+4. Run `npm start` to start the webpack server to run the application on port 3300
 
     Navigate to `http://localhost:3300` to verify that the application is running
 
     :bulb: To change the default port, open `.angular-cli.json`, change the value on `defaults.serve.port`
 
-1. Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build, like so: `ng serve --prod` to run in production mode.
-1. Run `npm run lint` to lint your app code using `TSLint`
+5. Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build, like so: `ng serve --prod` to run in production mode.
+6. Run `npm run lint` to lint your app code using `TSLint`
 
 ## Code scaffolding
 
