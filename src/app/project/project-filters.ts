@@ -46,6 +46,7 @@ export class ProjectFilters {
       params['type'] = this.type;
     }
     if (this.decision) {
+      alert(this.decision);
       params['decision'] = this.decision;
     }
     if (this.phase) {

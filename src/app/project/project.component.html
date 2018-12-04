@@ -10,6 +10,13 @@
   </div>
 </div>
 
+<select class="form-control" [(ngModel)]="savedFilters.commentPeriodStatus" name="commentPeriodStatus">
+    <option value="" selected>All</option>
+    <option value="Pending">Pending</option>
+    <option value="Completed">Completed</option>
+    <option value="Open">Open</option>
+  </select>
+
 <section class="projects-list-section">
   <div class="container" id="anchor-point">
 
@@ -31,56 +38,44 @@
           <div class="col-md-2">
             <label>Comment Period</label>
             <!-- TODO: Populate Dynamically -->
-            <select class="form-control" [(ngModel)]="savedFilters.commentPeriodStatus" name="commentPeriodStatus">
-              <option value="" selected>All</option>
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
-              <option value="Open">Open</option>
-            </select>
+            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.commentPeriodStatus" name="commentPeriodStatus"
+              [placeholder]="'All'"
+              [data]="commentPeriodStatuses"
+              [settings]="dropdownSettings"
+            >
+            </ng-multiselect-dropdown>
           </div>
 
           <div class="col-md-2">
-            <label>Proponent</label>
-            <select class="form-control" name="selectproponent" [(ngModel)]="savedFilters.proponent" name="proponent">
-              <option value="" selected>All</option>
-              <option *ngFor="let proponentName of distinctSortedProponentNames" [ngValue]="proponentName">{{proponentName}}</option>
-            </select>
-          </div>
+              <label>Proponent</label>
+              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.proponent" name="proponent"
+                [placeholder]="'All'"
+                [data]="distinctSortedProponentNames"
+                [settings]="dropdownSettings"
+              >
+              </ng-multiselect-dropdown>
+            </div>
 
           <div class="col-md-2">
             <label>Type</label>
             <!-- TODO: Populate Dynamically -->
-            <select class="form-control" [(ngModel)]="savedFilters.type" name="type">
-              <option value="">All</option>
-              <option value="Energy-Electricity">Energy-Electricity</option>
-              <option value="Energy-Petroleum & Natural Gas">Energy-Petroleum & Natural Gas</option>
-              <option value="Food Processing">Food Processing</option>
-              <option value="Industrial">Industrial</option>
-              <option value="Mines">Mines</option>
-              <option value="Other">Other</option>
-              <option value="Tourist Destination Resorts">Tourist Destination Resorts</option>
-              <option value="Transportation">Transportation</option>
-              <option value="Waste Disposal">Waste Disposal</option>
-              <option value="Water Management">Water Management</option>
-            </select>
+            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.type" name="type"
+              [placeholder]="'All'"
+              [data]="projectTypes"
+              [settings]="dropdownSettings"
+            >
+            </ng-multiselect-dropdown>
           </div>
 
           <div class="col-md-2">
             <label>EA Decision</label>
             <!-- TODO: Populate Dynamically -->
-            <select class="form-control" [(ngModel)]="savedFilters.decision" name="decision">
-              <option value="" selected>All</option>
-              <option label="In Progress" value="In Progress">In Progress</option>
-              <option label="Certificate Issued" value="Certificate Issued">Certificate Issued</option>
-              <option label="Certificate Refused" value="Certificate Refused">Certificate Refused</option>
-              <option label="Further Assessment Required" value="Further Assessment Required">Further Assessment Required</option>
-              <option label="Certificate Not Required" value="Certificate Not Required">Certificate Not Required</option>
-              <option label="Certificate Expired" value="Certificate Expired">Certificate Expired</option>
-              <option label="Withdrawn" value="Withdrawn">Withdrawn</option>
-              <option label="Terminated" value="Terminated">Terminated</option>
-              <option label="Pre-EA Act Approval" value="Pre-EA Act Approval">Pre-EA Act Approval</option>
-              <option label="Not Designated Reviewable" value="Not Designated Reviewable">Not Designated Reviewable</option>
-            </select>
+            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.decision" name="decision"
+              [placeholder]="'All'"
+              [data]="EADecisions"
+              [settings]="dropdownSettings"
+            >
+            </ng-multiselect-dropdown>
           </div>
 
           <div class="col-md-2">
@@ -96,14 +91,27 @@
               <option label="Post-Certification" value="Post-Certification">Post-Certification</option>
             </select>
           </div>
-
+<!--
           <div class="col-md-2">
-            <label>Region</label>
-            <select class="form-control" [(ngModel)]="savedFilters.region" name="region">
-              <option value="" selected>All</option>
-              <option *ngFor="let region of distinctSortedRegions" [ngValue]="region">{{region}}</option>
-            </select>
-          </div>
+              <label>Current Phase</label>
+              <!-- TODO: Populate Dynamically -->
+<!--              <ng-multiselect-dropdown class="form-control" [(ngModel)]="savedFilters.phase" name="phase"
+                [placeholder]="'All'"
+                [data]="projectPhases"
+                [settings]="dropdownSettings"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+          -->
+          <div class="col-md-2">
+              <label>Region</label>
+              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.region" name="region"
+                [placeholder]="'All'"
+                [data]="distinctSortedRegions"
+                [settings]="dropdownSettings"
+              >
+              </ng-multiselect-dropdown>
+            </div>
         </div>
 
         <div class="button-row">

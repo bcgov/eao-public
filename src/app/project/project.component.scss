@@ -1,7 +1,12 @@
 @import "~assets/styles/base.scss";
 
+.project-dropdown{
+    padding:0px;
+    border:none;
+}
+
 @media (max-width: 760px) {
-  .project-table {
+    .project-table {
     thead {
       display: none;
     }

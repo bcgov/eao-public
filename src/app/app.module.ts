@@ -22,6 +22,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectComponent } from './project/project.component';
 import { ProjectService } from './services/project.service';
 import { SharedModule } from './shared/shared.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { SharedModule } from './shared/shared.module';
     NgbModule,
     NgxPaginationModule,
     MapModule,
-    SharedModule
+    SharedModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [NewsComponent, ProjectService],
   bootstrap: [AppComponent]

@@ -20,6 +20,7 @@ import { ProjectFilters } from './project-filters';
   styleUrls: ['./project.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ProjectComponent implements OnInit {
   results: Array<Project>;
 
@@ -30,6 +31,12 @@ export class ProjectComponent implements OnInit {
   filterPCP: FilterPCPPipe;
   projectPhaseFilter: PhaseFilterPipe;
   projectRegionFilter: ProjectRegionFilterPipe;
+
+  commentPeriodStatuses = [];
+  projectTypes = [];
+  EADecisions = [];
+  projectPhases =[];
+  dropdownSettings = {};
 
   public loading: boolean;
   public savedFilters: ProjectFilters; // The search filters chosen by the user
@@ -62,6 +69,59 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+
+    this.commentPeriodStatuses = [
+      { item_id: 'Pending', item_text: 'Pending' },
+      { item_id: 'Completed', item_text: 'Completed' },
+      { item_id: 'Open', item_text: 'Open' }
+    ];
+
+    this.projectTypes = [
+      { item_id: 'Energy-Electricity', item_text: 'Energy-Electricity' },
+      { item_id: 'Energy-Petroleum & Natural Gas', item_text: 'Energy-Petroleum & Natural Gas' },
+      { item_id: 'Food Processing', item_text: 'Food Processing' },
+      { item_id: 'Industrial', item_text: 'Industrial' },
+      { item_id: 'Mines', item_text: 'Mines' },
+      { item_id: 'Other', item_text: 'Other' },
+      { item_id: 'Tourist Destination Resorts', item_text: 'Tourist Destination Resorts' },
+      { item_id: 'Transportation', item_text: 'Transportation' },
+      { item_id: 'Waste Disposal', item_text: 'Waste Disposal' },
+      { item_id: 'Water Management', item_text: 'Water Management' }
+    ];
+
+    this.EADecisions = [
+      { item_id: 'In Progress', item_text: 'In Progress' },
+      { item_id: 'Certificate Issued', item_text: 'Certificate Issued' },
+      { item_id: 'Certificate Refused', item_text: 'Certificate Refused' },
+      { item_id: 'Further Assessment Required', item_text: 'Further Assessment Required' },
+      { item_id: 'Certificate Not Required', item_text: 'Certificate Not Required' },
+      { item_id: 'Certificate Expired', item_text: 'Certificate Expired' },
+      { item_id: 'Withdrawn', item_text: 'Withdrawn' },
+      { item_id: 'Terminated', item_text: 'Terminated' },
+      { item_id: 'Pre-EA Act Approval', item_text: 'Pre-EA Act Approval' },
+      { item_id: 'Not Designated Reviewable', item_text: 'Not Designated Reviewable' }
+    ];
+
+    this.projectPhases = [
+      { item_id: 'Intake', item_text: 'Intake' },
+      { item_id: 'Determination', item_text: 'Determination' },
+      { item_id: 'Scope', item_text: 'Scope' },
+      { item_id: 'Evaluation', item_text: 'Evaluation' },
+      { item_id: 'Review', item_text: 'Review' },
+      { item_id: 'Decision', item_text: 'Decision' },
+      { item_id: 'Post-Certification', item_text: 'Post-Certification' }
+    ];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      enableCheckAll: false,
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 0,
+      allowSearchFilter: false
+    };
 
     this.route.params
       .mergeMap((params: Params) => {
@@ -131,7 +191,6 @@ export class ProjectComponent implements OnInit {
   applyProjectFilters() {
     this.router.navigate(['project', this.savedFilters.getParams()]);
   }
-
   /**
    * Resets all search filters to their unset defaults.
    * Resets the pagination page to 1.
