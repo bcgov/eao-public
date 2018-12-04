@@ -11,6 +11,7 @@ export class News {
   dateUpdated: string;
   contentUrl: string;
   documentUrl: string;
+  active: boolean;
   constructor(obj?: any) {
     this._id = obj && obj._id || null;
     this.headline = obj && obj.headline || null;
@@ -22,5 +23,6 @@ export class News {
     this.dateUpdated = obj && obj.dateUpdated || null;
     this.contentUrl = obj && obj.contentUrl || null;
     this.documentUrl = obj && obj.documentUrl || null;
+    this.active = obj && obj.active || false;
   }
 }
