@@ -10,13 +10,6 @@
   </div>
 </div>
 
-<select class="form-control" [(ngModel)]="savedFilters.commentPeriodStatus" name="commentPeriodStatus">
-    <option value="" selected>All</option>
-    <option value="Pending">Pending</option>
-    <option value="Completed">Completed</option>
-    <option value="Open">Open</option>
-  </select>
-
 <section class="projects-list-section">
   <div class="container" id="anchor-point">
 
@@ -79,30 +72,16 @@
           </div>
 
           <div class="col-md-2">
-            <label>Current Phase</label>
-            <select class="form-control" [(ngModel)]="savedFilters.phase" name="phase">
-              <option value="" selected>All</option>
-              <option label="Intake" value="Intake">Intake</option>
-              <option label="Determination" value="Determination">Determination</option>
-              <option label="Scope" value="Scope">Scope</option>
-              <option label="Evaluation" value="Evaluation">Evaluation</option>
-              <option label="Review" value="Review">Review</option>
-              <option label="Decision" value="Decision">Decision</option>
-              <option label="Post-Certification" value="Post-Certification">Post-Certification</option>
-            </select>
-          </div>
-<!--
-          <div class="col-md-2">
               <label>Current Phase</label>
               <!-- TODO: Populate Dynamically -->
-<!--              <ng-multiselect-dropdown class="form-control" [(ngModel)]="savedFilters.phase" name="phase"
+              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.phase" name="phase"
                 [placeholder]="'All'"
                 [data]="projectPhases"
                 [settings]="dropdownSettings"
               >
               </ng-multiselect-dropdown>
             </div>
-          -->
+
           <div class="col-md-2">
               <label>Region</label>
               <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.region" name="region"

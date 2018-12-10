@@ -35,7 +35,7 @@ export class ProjectComponent implements OnInit {
   commentPeriodStatuses = [];
   projectTypes = [];
   EADecisions = [];
-  projectPhases =[];
+  projectPhases = [];
   dropdownSettings = {};
 
   public loading: boolean;
@@ -131,6 +131,7 @@ export class ProjectComponent implements OnInit {
       })
       .subscribe(
         data => {
+          // look up merge map
           this.results = data;
           this.distinctSortedProponentNames = this.getDistinctSortedProponentNames(this.results);
           this.distinctSortedRegions = this.getDistinctSortedRegions(this.results);
@@ -222,7 +223,11 @@ export class ProjectComponent implements OnInit {
         items = this.projectTypeFilter.transform(items, this.appliedFilters.type);
       }
       if (this.appliedFilters.decision) {
-        items = this.projectDecisionFilter.transform(items, this.appliedFilters.decision);
+         const myArr = this.appliedFilters.decision.split(',');
+        // alert("hi \'" + myArr[0] + "\'");
+        // items = this.projectDecisionFilter.transform(items, this.appliedFilters.decision);
+         items = this.projectDecisionFilter.transform(items, myArr[0]);
+        // items.concat(this.projectDecisionFilter.transform(items, myArr[1]));
       }
       if (this.appliedFilters.commentPeriodStatus) {
         items = this.filterPCP.transform(items, this.appliedFilters.commentPeriodStatus);
