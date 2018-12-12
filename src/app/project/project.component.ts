@@ -41,6 +41,7 @@ export class ProjectComponent implements OnInit {
   public loading: boolean;
   public savedFilters: ProjectFilters; // The search filters chosen by the user
   public appliedFilters: ProjectFilters; // The search filters actually being applied to the results
+  public decisionMultiFilter: Array<string>;
   public distinctSortedProponentNames: Array<string>;
   public distinctSortedRegions: Array<string>;
   public pagination: PaginationInstance = {
@@ -124,15 +125,16 @@ export class ProjectComponent implements OnInit {
     };
 
     this.route.params
-      .mergeMap((params: Params) => {
-        this.savedFilters = new ProjectFilters(params);
-        this.appliedFilters = new ProjectFilters(params);
-        return this.projectService.getAll();
-      })
-      .subscribe(
+      .mergeMap(
+        (params: Params) => {
+          this.savedFilters = new ProjectFilters(params);
+          this.appliedFilters = new ProjectFilters(params);
+          return this.projectService.getAll();
+        }
+      ).subscribe(
         data => {
-          // look up merge map
           this.results = data;
+          // alert(data.toString());
           this.distinctSortedProponentNames = this.getDistinctSortedProponentNames(this.results);
           this.distinctSortedRegions = this.getDistinctSortedRegions(this.results);
           this.loading = false;
@@ -223,11 +225,7 @@ export class ProjectComponent implements OnInit {
         items = this.projectTypeFilter.transform(items, this.appliedFilters.type);
       }
       if (this.appliedFilters.decision) {
-         const myArr = this.appliedFilters.decision.split(',');
-        // alert("hi \'" + myArr[0] + "\'");
-        // items = this.projectDecisionFilter.transform(items, this.appliedFilters.decision);
-         items = this.projectDecisionFilter.transform(items, myArr[0]);
-        // items.concat(this.projectDecisionFilter.transform(items, myArr[1]));
+        items = this.projectDecisionFilter.transform(items, this.appliedFilters.decision);
       }
       if (this.appliedFilters.commentPeriodStatus) {
         items = this.filterPCP.transform(items, this.appliedFilters.commentPeriodStatus);

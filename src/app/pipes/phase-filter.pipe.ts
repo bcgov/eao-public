@@ -9,6 +9,18 @@ export class PhaseFilterPipe implements PipeTransform {
     if (!q) {
       return value;
     }
-    return value.filter(item => -1 < item.currentPhase.name.toLowerCase().indexOf(q.toLowerCase()));
+    const filterList = q.split(',');
+    const completeList = value;
+    value = value.filter(item => -1 < item.currentPhase.name.toLowerCase().indexOf(filterList[0].toLowerCase()));
+    filterList.forEach(function(currentFilter){
+      if (currentFilter !== filterList[0]) {
+        let temp = completeList;
+        temp = temp.filter(item => -1 < item.currentPhase.name.toLowerCase().indexOf(currentFilter.toLowerCase()));
+        temp.forEach(function(currentProject){
+          value.push(currentProject);
+        });
+      }
+    });
+    return value;
   }
 }
