@@ -86,28 +86,32 @@ describe('ProjectDetailComponent', () => {
           type: 'news',
           content: 'My news',
           dateAdded: '2017-12-14T17:00:00.000Z',
-          documentUrl: ''
+          documentUrl: '',
+          active: true
         }),
         new News({
           headline: 'Medium',
           type: 'public comment period',
           content: 'Your news',
           dateAdded: '2017-11-10T15:00:00.000Z',
-          documentUrl: 'http://www.test.com'
+          documentUrl: 'http://www.test.com',
+          active: true
         }),
         new News({
           headline: 'Bigger mine',
           type: 'public comment period',
           content: 'Greatest news',
           dateAdded: '2017-06-01T11:00:00.000Z',
-          documentUrl: '/blarg'
+          documentUrl: '/blarg',
+          active: true
         }),
         new News({
           headline: 'Small',
           type: 'news',
           content: 'Greatest news',
           dateAdded: '2017-06-01T11:00:00.000Z',
-          documentUrl: '/blarg'
+          documentUrl: '/blarg',
+          active: true
         })
       ])
     );

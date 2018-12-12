@@ -33,6 +33,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   public NewsTypeFilter = '';
   public filterType = '';
   public filteredResults: number;
+  public activeItems: number;
   private newsSubscription: Subscription;
   private pcpsSubscription: Subscription;
 
@@ -175,6 +176,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     // TODO: fix counting of non-visible items
     let message = '';
     let items = this.news;
+    this.activeItems = 0;
     if (this.filter) {
       items = this.NewsHeadlineFilterPipe.transform(items, this.filter);
     }
@@ -182,11 +184,17 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       items = this.NewsTypeFilterPipe.transform(items, this.filterType);
     }
     if (items.length > 0) {
-      const startRange = (pageNumber - 1) * this.config.itemsPerPage + (items.length === 0 ? 0 : 1);
-      const endRange = Math.min((pageNumber - 1) * this.config.itemsPerPage + this.config.itemsPerPage, items.length);
-      message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${items.length}</strong> Results`;
+      // checks for active pcps to only count visible to public pcps
+      for (let i = 0; i < items.length; i++) {
+        if ( (items[i] as any).active === true ) {
+          this.activeItems++;
+        }
+      }
+      const startRange = (pageNumber - 1) * this.config.itemsPerPage + (this.activeItems === 0 ? 0 : 1);
+      const endRange = Math.min((pageNumber - 1) * this.config.itemsPerPage + this.config.itemsPerPage, this.activeItems);
+      message = `Viewing <strong>${startRange}-${endRange}</strong> of <strong>${this.activeItems}</strong> Results`;
     }
-    this.filteredResults = items.length;
+    this.filteredResults = this.activeItems;
     return message;
   }
 
