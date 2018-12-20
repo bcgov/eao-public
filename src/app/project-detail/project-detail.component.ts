@@ -106,6 +106,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     // checks public pcps for a project, if 'open' or 'pending' exists make it active for banner item.
     // (Note: A banner appears for each active period. But there should never be more than one pcp 'active at a time for a project)
     pcps.forEach(item => {
+      alert(Object.keys(item));
       this.checkActiveDate(item);
       if (item.status === 'Open' || item.status === 'Pending') {
         this.activeCommentPeriod = item;
