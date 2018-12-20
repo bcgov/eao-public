@@ -213,7 +213,7 @@ def bddPodLabel = "eao-bdd-${UUID.randomUUID().toString()}"
 podTemplate(label: bddPodLabel, name: bddPodLabel, serviceAccount: 'jenkins', cloud: 'openshift', containers: [
   containerTemplate(
     name: 'jnlp',
-    image: '172.50.0.2:5000/openshift/jenkins-slave-bddstack',
+    image: 'docker-registry.default.svc:5000/bcgov/jenkins-slave-bddstack:v1-stable',
     resourceRequestCpu: '500m',
     resourceLimitCpu: '1000m',
     resourceRequestMemory: '1Gi',

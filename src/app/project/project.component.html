@@ -31,7 +31,11 @@
           <div class="col-md-2">
             <label>Comment Period</label>
             <!-- TODO: Populate Dynamically -->
-            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.commentPeriodStatus" name="commentPeriodStatus"
+            <ng-multiselect-dropdown
+              class="form-control project-dropdown"
+              name="commentPeriodStatus"
+              (click) = "getDropdownFilters('commentPeriodStatus');"
+              [(ngModel)]="selectedCommentPeriodStatuses"
               [placeholder]="'All'"
               [data]="commentPeriodStatuses"
               [settings]="dropdownSettings"
@@ -41,7 +45,11 @@
 
           <div class="col-md-2">
               <label>Proponent</label>
-              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.proponent" name="proponent"
+              <ng-multiselect-dropdown
+                class="form-control project-dropdown"
+                name="proponent"
+                (click) = "getDropdownFilters('proponent');"
+                [(ngModel)]="selectedProponents"
                 [placeholder]="'All'"
                 [data]="distinctSortedProponentNames"
                 [settings]="dropdownSettings"
@@ -52,7 +60,11 @@
           <div class="col-md-2">
             <label>Type</label>
             <!-- TODO: Populate Dynamically -->
-            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.type" name="type"
+            <ng-multiselect-dropdown
+              class="form-control project-dropdown"
+              name="type"
+              (click) = "getDropdownFilters('type');"
+              [(ngModel)]="selectedTypes"
               [placeholder]="'All'"
               [data]="projectTypes"
               [settings]="dropdownSettings"
@@ -63,7 +75,11 @@
           <div class="col-md-2">
             <label>EA Decision</label>
             <!-- TODO: Populate Dynamically -->
-            <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.decision" name="decision"
+            <ng-multiselect-dropdown
+              class="form-control project-dropdown"
+              name="decision"
+              (click) = "getDropdownFilters('decision');"
+              [(ngModel)]="selectedDecisions"
               [placeholder]="'All'"
               [data]="EADecisions"
               [settings]="dropdownSettings"
@@ -74,7 +90,11 @@
           <div class="col-md-2">
               <label>Current Phase</label>
               <!-- TODO: Populate Dynamically -->
-              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.phase" name="phase"
+              <ng-multiselect-dropdown
+                class="form-control project-dropdown"
+                name="phase"
+                (click) = "getDropdownFilters('phase');"
+                [(ngModel)]="selectedPhases"
                 [placeholder]="'All'"
                 [data]="projectPhases"
                 [settings]="dropdownSettings"
@@ -84,7 +104,11 @@
 
           <div class="col-md-2">
               <label>Region</label>
-              <ng-multiselect-dropdown class="form-control project-dropdown" [(ngModel)]="savedFilters.region" name="region"
+              <ng-multiselect-dropdown
+                class="form-control project-dropdown"
+                name="region"
+                (click) = "getDropdownFilters('region');"
+                [(ngModel)]="selectedRegions"
                 [placeholder]="'All'"
                 [data]="distinctSortedRegions"
                 [settings]="dropdownSettings"

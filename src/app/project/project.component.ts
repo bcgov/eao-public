@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
 import 'rxjs/add/operator/mergeMap';
@@ -13,6 +13,7 @@ import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ProjectService } from '../services/project.service';
 import { StringHelper } from '../utils/string-helper';
 import { ProjectFilters } from './project-filters';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-project',
@@ -36,6 +37,14 @@ export class ProjectComponent implements OnInit {
   projectTypes = [];
   EADecisions = [];
   projectPhases = [];
+
+  selectedCommentPeriodStatuses = [];
+  selectedProponents = [];
+  selectedTypes = [];
+  selectedDecisions = [];
+  selectedPhases = [];
+  selectedRegions = [];
+
   dropdownSettings = {};
 
   public loading: boolean;
@@ -57,7 +66,8 @@ export class ProjectComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private _changeDetectionRef: ChangeDetectorRef
+    private _changeDetectionRef: ChangeDetectorRef,
+    private location: PlatformLocation
   ) {
     this.objectFilter = new ObjectFilterPipe();
     this.proponentFilter = new ProponentFilterPipe();
@@ -66,8 +76,12 @@ export class ProjectComponent implements OnInit {
     this.filterPCP = new FilterPCPPipe();
     this.projectPhaseFilter = new PhaseFilterPipe();
     this.projectRegionFilter = new ProjectRegionFilterPipe();
-  }
 
+    location.onPopState(() => {
+      // Need to refresh on back button press to update the filter dropdowns in the front end
+      window.location.reload();
+    });
+  }
   ngOnInit() {
     this.loading = true;
 
@@ -129,12 +143,12 @@ export class ProjectComponent implements OnInit {
         (params: Params) => {
           this.savedFilters = new ProjectFilters(params);
           this.appliedFilters = new ProjectFilters(params);
+          this.setDropdownFilters();
           return this.projectService.getAll();
         }
       ).subscribe(
         data => {
           this.results = data;
-          // alert(data.toString());
           this.distinctSortedProponentNames = this.getDistinctSortedProponentNames(this.results);
           this.distinctSortedRegions = this.getDistinctSortedRegions(this.results);
           this.loading = false;
@@ -193,7 +207,108 @@ export class ProjectComponent implements OnInit {
    */
   applyProjectFilters() {
     this.router.navigate(['project', this.savedFilters.getParams()]);
+    this.setDropdownFilters();
   }
+
+  /**
+   * Gets the selected values from the ng-multiselect-dropdown filter dropdowns, and
+   * Stores them savedFilters string for use in the backend
+   * @memberof ProjectComponent
+   */
+  getDropdownFilters (filterType) {
+    switch (filterType) {
+      case 'commentPeriodStatus':
+        this.savedFilters.commentPeriodStatus = this.selectedCommentPeriodStatuses.toString();
+      break;
+      case 'proponent':
+        this.savedFilters.proponent = this.selectedProponents.toString();
+      break;
+      case 'type':
+        this.savedFilters.type = this.selectedTypes.toString();
+      break;
+      case 'decision':
+        this.savedFilters.decision = this.selectedDecisions.toString();
+      break;
+      case 'phase':
+        this.savedFilters.phase = this.selectedPhases.toString();
+      break;
+      case 'region':
+        this.savedFilters.region = this.selectedRegions.toString();
+      break;
+    }
+  }
+
+  /**
+   * Gets the data from the savedFilters string
+   * formats it into an array of hashes, which is compatible with the ng-multiselect-dropdown module
+   * updates the filter dropdowns
+   * @memberof ProjectComponent
+   */
+  setDropdownFilters () {
+    let filterStringArray;
+    let dropdownFilterHash;
+
+    if (!this.savedFilters.commentPeriodStatus) {
+      this.selectedCommentPeriodStatuses = [];
+    } else {
+      filterStringArray = this.savedFilters.commentPeriodStatus.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedCommentPeriodStatuses.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.proponent) {
+      this.selectedProponents = [];
+    } else {
+      filterStringArray = this.savedFilters.proponent.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedProponents.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.type) {
+      this.selectedTypes = [];
+    } else {
+      filterStringArray = this.savedFilters.type.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedTypes.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.decision) {
+      this.selectedDecisions = [];
+    } else {
+      filterStringArray = this.savedFilters.decision.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedDecisions.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.phase) {
+      this.selectedPhases = [];
+    } else {
+      filterStringArray = this.savedFilters.phase.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedPhases.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.region) {
+      this.selectedRegions = [];
+    } else {
+      filterStringArray = this.savedFilters.region.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedRegions.push(dropdownFilterHash);
+      });
+    }
+  }
+
   /**
    * Resets all search filters to their unset defaults.
    * Resets the pagination page to 1.
@@ -201,6 +316,7 @@ export class ProjectComponent implements OnInit {
    */
   clearAllProjectFilters() {
     this.savedFilters.clear();
+    this.setDropdownFilters();
     this.pagination.currentPage = 1;
   }
 

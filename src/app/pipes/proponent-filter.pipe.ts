@@ -16,7 +16,7 @@ export class ProponentFilterPipe implements PipeTransform {
         return -1 < item.proponent.name.toLowerCase().indexOf(filterList[0].toLowerCase());
       }
     });
-    filterList.forEach(function(currentFilter){
+    filterList.forEach(currentFilter => {
       if (currentFilter !== filterList[0]) {
         let temp = completeList;
         temp = temp.filter(item => {
@@ -24,7 +24,7 @@ export class ProponentFilterPipe implements PipeTransform {
             return -1 < item.proponent.name.toLowerCase().indexOf(currentFilter.toLowerCase());
           }
         });
-        temp.forEach(function(currentProject){
+        temp.forEach(currentProject => {
           value.push(currentProject);
         });
       }
