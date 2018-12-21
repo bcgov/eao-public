@@ -26,6 +26,7 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "assets/js/utils.js"
       ],
       "environmentSource": "environments/environment.ts",

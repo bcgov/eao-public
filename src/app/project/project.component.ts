@@ -34,9 +34,9 @@ export class ProjectComponent implements OnInit {
   projectRegionFilter: ProjectRegionFilterPipe;
 
   commentPeriodStatuses = [];
-  projectTypes = [];
-  EADecisions = [];
-  projectPhases = [];
+  types = [];
+  decisions = [];
+  phases = [];
 
   selectedCommentPeriodStatuses = [];
   selectedProponents = [];
@@ -91,7 +91,7 @@ export class ProjectComponent implements OnInit {
       { item_id: 'Open', item_text: 'Open' }
     ];
 
-    this.projectTypes = [
+    this.types = [
       { item_id: 'Energy-Electricity', item_text: 'Energy-Electricity' },
       { item_id: 'Energy-Petroleum & Natural Gas', item_text: 'Energy-Petroleum & Natural Gas' },
       { item_id: 'Food Processing', item_text: 'Food Processing' },
@@ -104,7 +104,7 @@ export class ProjectComponent implements OnInit {
       { item_id: 'Water Management', item_text: 'Water Management' }
     ];
 
-    this.EADecisions = [
+    this.decisions = [
       { item_id: 'In Progress', item_text: 'In Progress' },
       { item_id: 'Certificate Issued', item_text: 'Certificate Issued' },
       { item_id: 'Certificate Refused', item_text: 'Certificate Refused' },
@@ -117,7 +117,7 @@ export class ProjectComponent implements OnInit {
       { item_id: 'Not Designated Reviewable', item_text: 'Not Designated Reviewable' }
     ];
 
-    this.projectPhases = [
+    this.phases = [
       { item_id: 'Intake', item_text: 'Intake' },
       { item_id: 'Determination', item_text: 'Determination' },
       { item_id: 'Scope', item_text: 'Scope' },
