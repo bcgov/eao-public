@@ -20,6 +20,7 @@ import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ProjectService } from '../services/project.service';
 import { ProjectFilters } from './project-filters';
 import { ProjectComponent } from './project.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -44,7 +45,7 @@ describe('ProjectComponent', () => {
         { provide: Router, useValue: routerSpy },
         ChangeDetectorRef
       ],
-      imports: [FormsModule, NgxPaginationModule, HttpModule, RouterTestingModule],
+      imports: [FormsModule, NgxPaginationModule, HttpModule, RouterTestingModule, NgMultiSelectDropDownModule.forRoot()],
       declarations: [
         ProjectComponent,
         OrderByPipe,
