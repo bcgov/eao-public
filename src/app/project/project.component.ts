@@ -50,7 +50,6 @@ export class ProjectComponent implements OnInit {
   public loading: boolean;
   public savedFilters: ProjectFilters; // The search filters chosen by the user
   public appliedFilters: ProjectFilters; // The search filters actually being applied to the results
-  public decisionMultiFilter: Array<string>;
   public distinctSortedProponentNames: Array<string>;
   public distinctSortedRegions: Array<string>;
   public pagination: PaginationInstance = {
