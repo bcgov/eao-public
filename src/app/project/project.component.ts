@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
 import 'rxjs/add/operator/mergeMap';
@@ -13,6 +13,7 @@ import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
 import { ProjectService } from '../services/project.service';
 import { StringHelper } from '../utils/string-helper';
 import { ProjectFilters } from './project-filters';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-project',
@@ -20,6 +21,7 @@ import { ProjectFilters } from './project-filters';
   styleUrls: ['./project.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ProjectComponent implements OnInit {
   results: Array<Project>;
 
@@ -30,6 +32,20 @@ export class ProjectComponent implements OnInit {
   filterPCP: FilterPCPPipe;
   projectPhaseFilter: PhaseFilterPipe;
   projectRegionFilter: ProjectRegionFilterPipe;
+
+  commentPeriodStatuses = [];
+  types = [];
+  decisions = [];
+  phases = [];
+
+  selectedCommentPeriodStatuses = [];
+  selectedProponents = [];
+  selectedTypes = [];
+  selectedDecisions = [];
+  selectedPhases = [];
+  selectedRegions = [];
+
+  dropdownSettings = {};
 
   public loading: boolean;
   public savedFilters: ProjectFilters; // The search filters chosen by the user
@@ -49,7 +65,8 @@ export class ProjectComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
-    private _changeDetectionRef: ChangeDetectorRef
+    private _changeDetectionRef: ChangeDetectorRef,
+    private location: PlatformLocation
   ) {
     this.objectFilter = new ObjectFilterPipe();
     this.proponentFilter = new ProponentFilterPipe();
@@ -58,18 +75,77 @@ export class ProjectComponent implements OnInit {
     this.filterPCP = new FilterPCPPipe();
     this.projectPhaseFilter = new PhaseFilterPipe();
     this.projectRegionFilter = new ProjectRegionFilterPipe();
-  }
 
+    location.onPopState(() => {
+      // Need to refresh on back button press to update the filter dropdowns in the front end
+      window.location.reload();
+    });
+  }
   ngOnInit() {
     this.loading = true;
 
+    this.commentPeriodStatuses = [
+      { item_id: 'Pending', item_text: 'Pending' },
+      { item_id: 'Completed', item_text: 'Completed' },
+      { item_id: 'Open', item_text: 'Open' }
+    ];
+
+    this.types = [
+      { item_id: 'Energy-Electricity', item_text: 'Energy-Electricity' },
+      { item_id: 'Energy-Petroleum & Natural Gas', item_text: 'Energy-Petroleum & Natural Gas' },
+      { item_id: 'Food Processing', item_text: 'Food Processing' },
+      { item_id: 'Industrial', item_text: 'Industrial' },
+      { item_id: 'Mines', item_text: 'Mines' },
+      { item_id: 'Other', item_text: 'Other' },
+      { item_id: 'Tourist Destination Resorts', item_text: 'Tourist Destination Resorts' },
+      { item_id: 'Transportation', item_text: 'Transportation' },
+      { item_id: 'Waste Disposal', item_text: 'Waste Disposal' },
+      { item_id: 'Water Management', item_text: 'Water Management' }
+    ];
+
+    this.decisions = [
+      { item_id: 'In Progress', item_text: 'In Progress' },
+      { item_id: 'Certificate Issued', item_text: 'Certificate Issued' },
+      { item_id: 'Certificate Refused', item_text: 'Certificate Refused' },
+      { item_id: 'Further Assessment Required', item_text: 'Further Assessment Required' },
+      { item_id: 'Certificate Not Required', item_text: 'Certificate Not Required' },
+      { item_id: 'Certificate Expired', item_text: 'Certificate Expired' },
+      { item_id: 'Withdrawn', item_text: 'Withdrawn' },
+      { item_id: 'Terminated', item_text: 'Terminated' },
+      { item_id: 'Pre-EA Act Approval', item_text: 'Pre-EA Act Approval' },
+      { item_id: 'Not Designated Reviewable', item_text: 'Not Designated Reviewable' }
+    ];
+
+    this.phases = [
+      { item_id: 'Intake', item_text: 'Intake' },
+      { item_id: 'Determination', item_text: 'Determination' },
+      { item_id: 'Scope', item_text: 'Scope' },
+      { item_id: 'Evaluation', item_text: 'Evaluation' },
+      { item_id: 'Review', item_text: 'Review' },
+      { item_id: 'Decision', item_text: 'Decision' },
+      { item_id: 'Post-Certification', item_text: 'Post-Certification' }
+    ];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      enableCheckAll: false,
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 0,
+      allowSearchFilter: false
+    };
+
     this.route.params
-      .mergeMap((params: Params) => {
-        this.savedFilters = new ProjectFilters(params);
-        this.appliedFilters = new ProjectFilters(params);
-        return this.projectService.getAll();
-      })
-      .subscribe(
+      .mergeMap(
+        (params: Params) => {
+          this.savedFilters = new ProjectFilters(params);
+          this.appliedFilters = new ProjectFilters(params);
+          this.setDropdownFilters();
+          return this.projectService.getAll();
+        }
+      ).subscribe(
         data => {
           this.results = data;
           this.distinctSortedProponentNames = this.getDistinctSortedProponentNames(this.results);
@@ -130,6 +206,106 @@ export class ProjectComponent implements OnInit {
    */
   applyProjectFilters() {
     this.router.navigate(['project', this.savedFilters.getParams()]);
+    this.setDropdownFilters();
+  }
+
+  /**
+   * Gets the selected values from the ng-multiselect-dropdown filter dropdowns, and
+   * Stores them savedFilters string for use in the backend
+   * @memberof ProjectComponent
+   */
+  getDropdownFilters (filterType) {
+    switch (filterType) {
+      case 'commentPeriodStatus':
+        this.savedFilters.commentPeriodStatus = this.selectedCommentPeriodStatuses.toString();
+      break;
+      case 'proponent':
+        this.savedFilters.proponent = this.selectedProponents.toString();
+      break;
+      case 'type':
+        this.savedFilters.type = this.selectedTypes.toString();
+      break;
+      case 'decision':
+        this.savedFilters.decision = this.selectedDecisions.toString();
+      break;
+      case 'phase':
+        this.savedFilters.phase = this.selectedPhases.toString();
+      break;
+      case 'region':
+        this.savedFilters.region = this.selectedRegions.toString();
+      break;
+    }
+  }
+
+  /**
+   * Gets the data from the savedFilters string
+   * formats it into an array of hashes, which is compatible with the ng-multiselect-dropdown module
+   * updates the filter dropdowns
+   * @memberof ProjectComponent
+   */
+  setDropdownFilters () {
+    let filterStringArray;
+    let dropdownFilterHash;
+
+    if (!this.savedFilters.commentPeriodStatus) {
+      this.selectedCommentPeriodStatuses = [];
+    } else {
+      filterStringArray = this.savedFilters.commentPeriodStatus.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedCommentPeriodStatuses.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.proponent) {
+      this.selectedProponents = [];
+    } else {
+      filterStringArray = this.savedFilters.proponent.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedProponents.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.type) {
+      this.selectedTypes = [];
+    } else {
+      filterStringArray = this.savedFilters.type.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedTypes.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.decision) {
+      this.selectedDecisions = [];
+    } else {
+      filterStringArray = this.savedFilters.decision.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedDecisions.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.phase) {
+      this.selectedPhases = [];
+    } else {
+      filterStringArray = this.savedFilters.phase.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedPhases.push(dropdownFilterHash);
+      });
+    }
+
+    if (!this.savedFilters.region) {
+      this.selectedRegions = [];
+    } else {
+      filterStringArray = this.savedFilters.region.split(',');
+      filterStringArray.forEach( currentFilterString => {
+        dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
+        this.selectedRegions.push(dropdownFilterHash);
+      });
+    }
   }
 
   /**
@@ -139,6 +315,7 @@ export class ProjectComponent implements OnInit {
    */
   clearAllProjectFilters() {
     this.savedFilters.clear();
+    this.setDropdownFilters();
     this.pagination.currentPage = 1;
   }
 

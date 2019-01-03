@@ -9,6 +9,18 @@ export class ProjectDecisionFilterPipe implements PipeTransform {
     if (!q) {
       return value;
     }
-    return value.filter(item => -1 < item.eacDecision.toLowerCase().indexOf(q.toLowerCase()));
+    const filterList = q.split(',');
+    const completeList = value;
+    value = value.filter(item => -1 < item.eacDecision.toLowerCase().indexOf(filterList[0].toLowerCase()));
+    filterList.forEach(currentFilter => {
+      if (currentFilter !== filterList[0]) {
+        let temp = completeList;
+        temp = temp.filter(item => -1 < item.eacDecision.toLowerCase().indexOf(currentFilter.toLowerCase()));
+        temp.forEach(currentProject => {
+          value.push(currentProject);
+        });
+      }
+    });
+    return value;
   }
 }

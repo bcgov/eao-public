@@ -9,11 +9,26 @@ export class ProponentFilterPipe implements PipeTransform {
     if (!q) {
       return value;
     }
-    return value.filter(item => {
+    const filterList = q.split(',');
+    const completeList = value;
+    value = value.filter(item => {
       if (item.proponent && item.proponent.name) {
-        return item.proponent.name.toLowerCase().indexOf(q.toLowerCase()) > -1;
+        return -1 < item.proponent.name.toLowerCase().indexOf(filterList[0].toLowerCase());
       }
-      return false;
     });
+    filterList.forEach(currentFilter => {
+      if (currentFilter !== filterList[0]) {
+        let temp = completeList;
+        temp = temp.filter(item => {
+          if (item.proponent && item.proponent.name) {
+            return -1 < item.proponent.name.toLowerCase().indexOf(currentFilter.toLowerCase());
+          }
+        });
+        temp.forEach(currentProject => {
+          value.push(currentProject);
+        });
+      }
+    });
+    return value;
   }
 }

@@ -31,7 +31,7 @@ export class OrderByPipe implements PipeTransform {
         bCompare = bCompare.name;
       }
 
-      if (typeof aCompare === 'string') {
+      if (typeof aCompare === 'string' && bCompare === 'string') {
         aCompare = aCompare.toLowerCase();
         bCompare = bCompare.toLowerCase();
       }

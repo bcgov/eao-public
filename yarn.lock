@@ -2420,6 +2420,11 @@ follow-redirects@^1.0.0:
   dependencies:
     debug "^3.1.0"
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -4332,6 +4337,13 @@ netmask@^1.0.6:
 next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
+
+ng-multiselect-dropdown@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/ng-multiselect-dropdown/-/ng-multiselect-dropdown-0.2.3.tgz#32f18b1f01fba7854524496c1639183adaeb6fa8"
+  integrity sha512-xY//BPXxiApzhGxVTDaSKiiW245GKBuZFCka7W9mG/2sWWIi3Geie7k0XtZv+1ItclFL+OxFZATHBYW5QULgvg==
+  dependencies:
+    tslib "^1.7.1"
 
 ngx-filesize@1.1.2:
   version "1.1.2"
