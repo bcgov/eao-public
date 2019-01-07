@@ -36,11 +36,11 @@ npm i -g yarn
 2. First download all the dependencies with `yarn install`
 3. Please set your PATH, MINIO_HOST, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, and             MONGODB_DATABASE variables before running.
 
-  
+
  - export MONGODB_DATABASE=“mean-dev”
- 
+
  - export MINIO_HOST="minio-esm-dev-esm-dev.pathfinder.gov.bc.<i></i>ca"
- 
+
  - export PATH="[you path here]"
 
  - export MINIO_ACCESS_KEY="[access key here]"
@@ -172,6 +172,10 @@ ng new my-app --routing --style scss
 # Build and Deployment
 
 For dev, test, and production builds on OpenShift/Jenkins see [openshift/README.md](https://github.com/bcgov/eao-public/blob/master/openshift/README.md) for detailed instructions on how to setup in an OpenShift environment using nginx.
+
+# Visual Studio Code
+
+To use our Visual Studio Code extensions copy the contents of vscodeextensions.txt in the root directory and paste it into bash. If it doesnt work, make sure you have the Code CLI installed `code --version` and if it's not insatlled open the command palette (shift + command + p) and run `Shell Command: install 'code' command in PATH`.
 
 # How to Contribute
 
