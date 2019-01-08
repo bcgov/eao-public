@@ -175,7 +175,7 @@ For dev, test, and production builds on OpenShift/Jenkins see [openshift/README.
 
 # Visual Studio Code
 
-To use our Visual Studio Code extensions copy the contents of vscodeextensions.txt in the root directory and paste it into bash. If it doesnt work, make sure you have the Code CLI installed `code --version` and if it's not insatlled open the command palette (shift + command + p) and run `Shell Command: install 'code' command in PATH`.
+To use our Visual Studio Code extensions copy the contents of vscodeextensions.txt in the root directory and paste it into bash. If it doesnt work, make sure you have the Code CLI installed `code --version` and if it's not installed open the command palette (shift + command + p) and run `Shell Command: install 'code' command in PATH`.
 
 # How to Contribute
 
