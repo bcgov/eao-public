@@ -40,6 +40,7 @@
   &.btn-secondary {
     border: 2px solid #eee;
     background: #eee;
+    color: #212529;
 
     &:focus,
     &:hover {
@@ -72,7 +73,7 @@ main {
   transition: all ease-out 0.2s;
 
   i, span {
-    transition: all ease-out 0.2s; 
+    transition: all ease-out 0.2s;
   }
 
   i {
@@ -174,7 +175,7 @@ main {
   }
 }
 
-// Scroll Top Button 
+// Scroll Top Button
 .scroll-top-btn {
   position: fixed;
   bottom: 1rem;
@@ -222,15 +223,15 @@ main {
       &:hover {
         color: $toggle-btn-active-color;
         border-color: $toggle-btn-active-bg;
-        background-color: $toggle-btn-active-bg; 
+        background-color: $toggle-btn-active-bg;
       }
-    }     
+    }
 
     &:checked {
       + label {
         color: $toggle-btn-active-color;
         border-color: $toggle-btn-active-bg;
-        background-color: $toggle-btn-active-bg; 
+        background-color: $toggle-btn-active-bg;
       }
     }
   }
