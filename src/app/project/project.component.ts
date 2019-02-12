@@ -5,8 +5,8 @@ import 'rxjs/add/operator/mergeMap';
 import { Project } from '../models/project';
 import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
 import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
-import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
 import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
+import { ProjectDecisionDateFilterPipe } from '../pipes/project-decision-date-filter.pipe';
 import { ProjectRegionFilterPipe } from '../pipes/project-region-filter.pipe';
 import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
 import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
@@ -29,20 +29,19 @@ export class ProjectComponent implements OnInit {
   proponentFilter: ProponentFilterPipe;
   projectTypeFilter: ProjectTypeFilterPipe;
   projectDecisionFilter: ProjectDecisionFilterPipe;
+  projectDecisionDateFilter: ProjectDecisionDateFilterPipe;
   filterPCP: FilterPCPPipe;
-  projectPhaseFilter: PhaseFilterPipe;
   projectRegionFilter: ProjectRegionFilterPipe;
 
   commentPeriodStatuses = [];
   types = [];
   decisions = [];
-  phases = [];
 
   selectedCommentPeriodStatuses = [];
   selectedProponents = [];
   selectedTypes = [];
   selectedDecisions = [];
-  selectedPhases = [];
+  selectedDecisionDates = [];
   selectedRegions = [];
 
   dropdownSettings = {};
@@ -52,6 +51,7 @@ export class ProjectComponent implements OnInit {
   public appliedFilters: ProjectFilters; // The search filters actually being applied to the results
   public distinctSortedProponentNames: Array<string>;
   public distinctSortedRegions: Array<string>;
+  public distinctSortedDecisionDates: Array<string>;
   public pagination: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 25,
@@ -72,8 +72,8 @@ export class ProjectComponent implements OnInit {
     this.proponentFilter = new ProponentFilterPipe();
     this.projectTypeFilter = new ProjectTypeFilterPipe();
     this.projectDecisionFilter = new ProjectDecisionFilterPipe();
+    this.projectDecisionDateFilter = new ProjectDecisionDateFilterPipe();
     this.filterPCP = new FilterPCPPipe();
-    this.projectPhaseFilter = new PhaseFilterPipe();
     this.projectRegionFilter = new ProjectRegionFilterPipe();
 
     location.onPopState(() => {
@@ -116,16 +116,6 @@ export class ProjectComponent implements OnInit {
       { item_id: 'Not Designated Reviewable', item_text: 'Not Designated Reviewable' }
     ];
 
-    this.phases = [
-      { item_id: 'Intake', item_text: 'Intake' },
-      { item_id: 'Determination', item_text: 'Determination' },
-      { item_id: 'Scope', item_text: 'Scope' },
-      { item_id: 'Evaluation', item_text: 'Evaluation' },
-      { item_id: 'Review', item_text: 'Review' },
-      { item_id: 'Decision', item_text: 'Decision' },
-      { item_id: 'Post-Certification', item_text: 'Post-Certification' }
-    ];
-
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -150,6 +140,7 @@ export class ProjectComponent implements OnInit {
           this.results = data;
           this.distinctSortedProponentNames = this.getDistinctSortedProponentNames(this.results);
           this.distinctSortedRegions = this.getDistinctSortedRegions(this.results);
+          this.distinctSortedDecisionDates = this.getDistinctSortedDates(this.results);
           this.loading = false;
           // Needed in development mode - not required in prod.
           this._changeDetectionRef.detectChanges();
@@ -190,6 +181,18 @@ export class ProjectComponent implements OnInit {
     return Array.from(new Set(regions)).sort();
   }
 
+  getDistinctSortedDates(projects: Array<Project>): Array<string> {
+    const dates: Array<string> = [];
+    let yearString = '';
+    projects.forEach(project => {
+      if (project.decisionDate) {
+        yearString = project.decisionDate.toString().split('-')[0];
+        dates.push(StringHelper.toProperCase(yearString));
+      }
+    });
+    return Array.from(new Set(dates)).sort().reverse();
+  }
+
   /**
    * Sorts the page data by the specified column.
    * @param {any} columnName the name of the column to sort by.
@@ -228,8 +231,8 @@ export class ProjectComponent implements OnInit {
       case 'decision':
         this.savedFilters.decision = this.selectedDecisions.toString();
       break;
-      case 'phase':
-        this.savedFilters.phase = this.selectedPhases.toString();
+      case 'decisionDate':
+        this.savedFilters.decisionDate = this.selectedDecisionDates.toString();
       break;
       case 'region':
         this.savedFilters.region = this.selectedRegions.toString();
@@ -287,13 +290,13 @@ export class ProjectComponent implements OnInit {
       });
     }
 
-    if (!this.savedFilters.phase) {
-      this.selectedPhases = [];
+    if (!this.savedFilters.decisionDate) {
+      this.selectedDecisionDates = [];
     } else {
-      filterStringArray = this.savedFilters.phase.split(',');
+      filterStringArray = this.savedFilters.decisionDate.split(',');
       filterStringArray.forEach( currentFilterString => {
         dropdownFilterHash = { item_id: currentFilterString, item_text: currentFilterString };
-        this.selectedPhases.push(dropdownFilterHash);
+        this.selectedDecisionDates.push(dropdownFilterHash);
       });
     }
 
@@ -345,8 +348,8 @@ export class ProjectComponent implements OnInit {
       if (this.appliedFilters.commentPeriodStatus) {
         items = this.filterPCP.transform(items, this.appliedFilters.commentPeriodStatus);
       }
-      if (this.appliedFilters.phase) {
-        items = this.projectPhaseFilter.transform(items, this.appliedFilters.phase);
+      if (this.appliedFilters.decisionDate) {
+        items = this.projectDecisionDateFilter.transform(items, this.appliedFilters.decisionDate);
       }
       if (this.appliedFilters.region) {
         items = this.projectRegionFilter.transform(items, this.appliedFilters.region);
