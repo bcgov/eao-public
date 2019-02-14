@@ -1,8 +1,60 @@
 import { ProjectDecisionDateFilterPipe } from './project-decision-date-filter.pipe';
 import { Project } from '../models/project';
 
-describe('ProjectDecisionDatePipe', () => {
-  const string = 'Peace';
+// describe('ProjectDecisionDatePipe', () => {
+//   const string = 'Peace';
+//   let value: Array<Project>;
+//   let expectedResponse: Array<Project>;
+//   const pipe = new ProjectDecisionDateFilterPipe();
+
+//   describe('given a valid array', () => {
+//     describe('of unique items', () => {
+//       it('returns 1 item', () => {
+//         value = [new Project({ region: 'Peace' })];
+//         expectedResponse = pipe.transform(value, string);
+//         expect(expectedResponse.length).toBe(1);
+//       });
+
+//       it('returns n items that are the same', () => {
+//         value = [
+//           new Project({ region: 'Peace' }),
+//           new Project({ region: 'Peace' }),
+//           new Project({ region: 'Peace' }),
+//           new Project({ region: 'Peace' })
+//         ];
+//         expectedResponse = pipe.transform(value, string);
+//         expect(expectedResponse.length).toBe(4);
+//       });
+//     });
+//     describe('of non-unique items', () => {
+//       beforeEach(() => {
+//         value = [
+//           new Project({ region: 'Peace' }),
+//           new Project({ region: 'Lower Mainland' }),
+//           new Project({ region: 'Peace' }),
+//           new Project({ region: 'Lower Mainland' })
+//         ];
+//         expectedResponse = pipe.transform(value, string);
+//       });
+
+//       it('returns 2 items', () => {
+//         expect(expectedResponse.length).toBe(2);
+//       });
+
+//       it('that have the same region value as the value passed in', () => {
+//         expect(JSON.stringify(pipe.transform(value, string)[0].region)).toBe(
+//           JSON.stringify(expectedResponse[0].region)
+//         );
+//         expect(JSON.stringify(pipe.transform(value, string)[1].region)).toBe(
+//           JSON.stringify(expectedResponse[1].region)
+//         );
+//       });
+//     });
+//   });
+// });
+
+describe('ProjectDecisionDateFilterPipe', () => {
+  const string = '1990';
   let value: Array<Project>;
   let expectedResponse: Array<Project>;
   const pipe = new ProjectDecisionDateFilterPipe();
@@ -10,17 +62,17 @@ describe('ProjectDecisionDatePipe', () => {
   describe('given a valid array', () => {
     describe('of unique items', () => {
       it('returns 1 item', () => {
-        value = [new Project({ region: 'Peace' })];
+        value = [new Project({ decisionDate: '1990' })];
         expectedResponse = pipe.transform(value, string);
         expect(expectedResponse.length).toBe(1);
       });
 
       it('returns n items that are the same', () => {
         value = [
-          new Project({ region: 'Peace' }),
-          new Project({ region: 'Peace' }),
-          new Project({ region: 'Peace' }),
-          new Project({ region: 'Peace' })
+          new Project({ decisionDate: '1990' }),
+          new Project({ decisionDate: '1990' }),
+          new Project({ decisionDate: '1990' }),
+          new Project({ decisionDate: '1990' })
         ];
         expectedResponse = pipe.transform(value, string);
         expect(expectedResponse.length).toBe(4);
@@ -29,10 +81,10 @@ describe('ProjectDecisionDatePipe', () => {
     describe('of non-unique items', () => {
       beforeEach(() => {
         value = [
-          new Project({ region: 'Peace' }),
-          new Project({ region: 'Lower Mainland' }),
-          new Project({ region: 'Peace' }),
-          new Project({ region: 'Lower Mainland' })
+          new Project({ decisionDate: '1990' }),
+          new Project({ decisionDate: '1991' }),
+          new Project({ decisionDate: '1990' }),
+          new Project({ decisionDate: '1991' })
         ];
         expectedResponse = pipe.transform(value, string);
       });
@@ -42,11 +94,11 @@ describe('ProjectDecisionDatePipe', () => {
       });
 
       it('that have the same region value as the value passed in', () => {
-        expect(JSON.stringify(pipe.transform(value, string)[0].region)).toBe(
-          JSON.stringify(expectedResponse[0].region)
+        expect(JSON.stringify(pipe.transform(value, string)[0].decisionDate)).toBe(
+          JSON.stringify(expectedResponse[0].decisionDate)
         );
-        expect(JSON.stringify(pipe.transform(value, string)[1].region)).toBe(
-          JSON.stringify(expectedResponse[1].region)
+        expect(JSON.stringify(pipe.transform(value, string)[1].decisionDate)).toBe(
+          JSON.stringify(expectedResponse[1].decisionDate)
         );
       });
     });
