@@ -8,8 +8,8 @@ export class ProjectFilters {
   public commentPeriodStatus: string;
   public proponent: string;
   public type: string;
-  public phase: string;
   public decision: string;
+  public decisionDate: string;
   public region: string;
 
   public showFilters: boolean;
@@ -20,7 +20,7 @@ export class ProjectFilters {
     this.proponent = (obj && obj.proponent) || '';
     this.type = (obj && obj.type) || '';
     this.decision = (obj && obj.decision) || '';
-    this.phase = (obj && obj.phase) || '';
+    this.decisionDate = (obj && obj.decisionDate) || '';
     this.region = (obj && obj.region) || '';
     this.showFilters = (obj && obj.showFilters) || false;
   }
@@ -48,8 +48,8 @@ export class ProjectFilters {
     if (this.decision) {
       params['decision'] = this.decision;
     }
-    if (this.phase) {
-      params['phase'] = this.phase;
+    if (this.decisionDate) {
+      params['decisionDate'] = this.decisionDate;
     }
     if (this.region) {
       params['region'] = this.region;
@@ -71,7 +71,7 @@ export class ProjectFilters {
     this.proponent = '';
     this.type = '';
     this.decision = '';
-    this.phase = '';
+    this.decisionDate = '';
     this.region = '';
   }
 }
