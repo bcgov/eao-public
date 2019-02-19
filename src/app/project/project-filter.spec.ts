@@ -11,7 +11,7 @@ describe('ProjectFilter', () => {
         proponent: undefined,
         type: null,
         // decision: '5'
-        phase: '',
+        decisionDate: '',
         region: '',
         showFilters: true
       });
@@ -33,8 +33,8 @@ describe('ProjectFilter', () => {
       expect(projectFilter.decision).toBe('');
     });
 
-    it('should set phase to empty string', () => {
-      expect(projectFilter.phase).toBe('');
+    it('should set decisionDate to empty string', () => {
+      expect(projectFilter.decisionDate).toBe('');
     });
 
     it('should set region to empty string', () => {
@@ -55,7 +55,7 @@ describe('ProjectFilter', () => {
         proponent: undefined,
         type: null,
         // decision: '5'
-        phase: '',
+        decisionDate: '',
         region: '',
         showFilters: true
       });
@@ -94,9 +94,9 @@ describe('ProjectFilter', () => {
       });
     });
 
-    describe('phase', () => {
+    describe('decisionDate', () => {
       it('should not exist', () => {
-        expect(_.has(params, 'phase')).toBeFalsy();
+        expect(_.has(params, 'decisionDate')).toBeFalsy();
       });
     });
 
@@ -127,7 +127,7 @@ describe('ProjectFilter', () => {
           proponent: '3',
           type: '4',
           decision: '5',
-          phase: '6',
+          decisionDate: '6',
           region: '',
           showFilters: true
         });
@@ -154,8 +154,8 @@ describe('ProjectFilter', () => {
         expect(projectFilter.decision).toBe('');
       });
 
-      it('should set phase to be empty string', () => {
-        expect(projectFilter.phase).toBe('');
+      it('should set decisionDate to be empty string', () => {
+        expect(projectFilter.decisionDate).toBe('');
       });
 
       it('should set region to be empty string', () => {
@@ -171,7 +171,7 @@ describe('ProjectFilter', () => {
           proponent: '3',
           type: '4',
           decision: '5',
-          phase: '6',
+          decisionDate: '6',
           region: '',
           showFilters: true
         });
@@ -186,7 +186,7 @@ describe('ProjectFilter', () => {
           proponent: '3',
           type: '4',
           decision: '5',
-          phase: '6',
+          decisionDate: '6',
           region: '',
           showFilters: false
         });
