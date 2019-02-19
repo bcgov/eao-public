@@ -12,8 +12,8 @@ import { Proponent } from '../models/proponent';
 import { FilterPCPPipe } from '../pipes/filter-pcp.pipe';
 import { ObjectFilterPipe } from '../pipes/object-filter.pipe';
 import { OrderByPipe } from '../pipes/order-by.pipe';
-import { PhaseFilterPipe } from '../pipes/phase-filter.pipe';
 import { ProjectDecisionFilterPipe } from '../pipes/project-decision-filter.pipe';
+import { ProjectDecisionDateFilterPipe } from '../pipes/project-decision-date-filter.pipe';
 import { ProjectRegionFilterPipe } from '../pipes/project-region-filter.pipe';
 import { ProjectTypeFilterPipe } from '../pipes/project-type-filter.pipe';
 import { ProponentFilterPipe } from '../pipes/proponent-filter.pipe';
@@ -49,9 +49,9 @@ describe('ProjectComponent', () => {
       declarations: [
         ProjectComponent,
         OrderByPipe,
-        PhaseFilterPipe,
         FilterPCPPipe,
         ProjectDecisionFilterPipe,
+        ProjectDecisionDateFilterPipe,
         ProjectTypeFilterPipe,
         ProponentFilterPipe,
         ObjectFilterPipe,
@@ -254,7 +254,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'y',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop1' }
             }),
             new Project({
@@ -263,7 +263,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'y',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop2' }
             }),
             new Project({
@@ -272,7 +272,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'y',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop3' }
             }),
             new Project({
@@ -281,7 +281,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'y',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop4' }
             }),
             new Project({
@@ -290,7 +290,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'y',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop1' }
             }),
             new Project({
@@ -299,7 +299,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'n',
               openCommentPeriod: 'open',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop6' }
             }),
             new Project({
@@ -308,7 +308,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'n',
               openCommentPeriod: 'closed',
               region: 'r2',
-              currentPhase: { name: 'p1' },
+              decisionDate: '1998',
               proponent: { name: 'prop2' }
             }),
             new Project({
@@ -317,7 +317,7 @@ describe('ProjectComponent', () => {
               eacDecision: 'n',
               openCommentPeriod: 'closed',
               region: 'r2',
-              currentPhase: { name: 'p2' },
+              decisionDate: '1999',
               proponent: { name: 'prop3' }
             })
           );
@@ -360,8 +360,8 @@ describe('ProjectComponent', () => {
           expect(message).toBe(`Viewing <strong>${4}-${6}</strong> of <strong>${6}</strong> Results`);
         });
 
-        it('returns the item count for the results with matching phase', () => {
-          component.appliedFilters = new ProjectFilters({ phase: 'p1' });
+        it('returns the item count for the results with matching decisionDate', () => {
+          component.appliedFilters = new ProjectFilters({ decisionDate: '1998'});
           const message = component.getDisplayedElementCountMessage(3);
           expect(message).toBe(`Viewing <strong>${7}-${7}</strong> of <strong>${7}</strong> Results`);
         });
@@ -379,7 +379,7 @@ describe('ProjectComponent', () => {
             type: 't1',
             decision: 'n',
             commentPeriodStatus: 'closed',
-            phase: 'p1',
+            decisionDate: '1998',
             region: 'r2'
           });
           const message = component.getDisplayedElementCountMessage(1);
