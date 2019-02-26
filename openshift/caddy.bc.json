@@ -10,7 +10,7 @@
                 "displayName": "Name",
                 "description": "The suffix for all created objects",
                 "required": false,
-                "value": "proxy-caddy"
+                "value": "eao-proxy-caddy"
             },
             {
                 "name": "GIT_REPO",
@@ -24,7 +24,7 @@
                 "displayName": "GIT_BRANCH",
                 "description": "Branch related to GitHub repo",
                 "required": false,
-                "value": "master"
+                "value": "EM-29"
             },
             {
                 "name": "IMG_SRC",
