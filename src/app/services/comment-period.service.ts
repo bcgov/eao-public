@@ -121,7 +121,8 @@ export class CommentPeriodService {
                 .map((res: Response) => res.json())
                 .subscribe(( trueDoc ) => {
                   doc.displayName = trueDoc.internalOriginalName;
-                  doc.link = this.api.hostnameEPIC + '/api/document/' + doc.id + '/fetch';
+                  const safeName = doc.displayName.replace(/ /g, '_');
+                  doc.link = this.api.hostnameEPIC + '/api/document/' + doc.id + '/fetch/' + safeName;
                 });
             });
           }
