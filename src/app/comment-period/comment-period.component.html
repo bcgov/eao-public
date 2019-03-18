@@ -210,7 +210,7 @@
         <div class="modal-body">
           <ul class="file__list anchor-list">
             <li class="file__list-item" *ngFor="let relDoc of commentPeriod.relatedDocuments">
-              <a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch' }}" target="_blank">
+              <a href="{{ hostname + '/api/document/' + relDoc._id + '/fetch/' + relDoc.displayName.split(' ').join('_')}}" target="_blank">
                 <span class="file__list-item-icon">
                   <i class="material-icons md-18">&#xE24D;</i>
                 </span>

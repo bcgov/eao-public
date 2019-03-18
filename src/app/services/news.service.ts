@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Api } from './api';
 import { News } from '../models/news';
 import { CommentPeriod } from '../models/commentperiod';
+import { Document } from '../models/document';
 
 @Injectable()
 export class NewsService {
@@ -60,4 +61,7 @@ export class NewsService {
       .map((res: Response) => res.json());
   }
 
+  getDocument(documentID) {
+    return this.api.get(`query/document?_id=${documentID}`).map((res: Response) => res.json());
+  }
 }
