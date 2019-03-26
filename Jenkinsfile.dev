@@ -196,10 +196,9 @@ node('master'){
   SLACK_HOOK = sh(script: "cat webhook", returnStdout: true)
   DEPLOY_CHANNEL = sh(script: "cat deploy-channel", returnStdout: true)
   sh("oc extract secret/rocket-chat-secrets --to=${env.WORKSPACE} --confirm")
-  ROCKET_QA_WEBHOOK = sh(script: "cat rocket-qa-webhook", returnStdout: true)
   ROCKET_DEPLOY_WEBHOOK = sh(script: "cat rocket-deploy-webhook", returnStdout: true)
 
-  withEnv(["SLACK_HOOK=${SLACK_HOOK}", "DEPLOY_CHANNEL=${DEPLOY_CHANNEL}",  "ROCKET_QA_WEBHOOK=${ROCKET_QA_WEBHOOK}", "ROCKET_DEPLOY_WEBHOOK=${ROCKET_DEPLOY_WEBHOOK}"]){
+  withEnv(["SLACK_HOOK=${SLACK_HOOK}", "DEPLOY_CHANNEL=${DEPLOY_CHANNEL}", "ROCKET_DEPLOY_WEBHOOK=${ROCKET_DEPLOY_WEBHOOK}"]){
     stage('Deploy to Dev'){
       try {
         echo "Deploying to dev..."
@@ -209,7 +208,7 @@ node('master'){
         echo ">>>> Deployment Complete"
 
         notifyRocketChat(
-          "A new version of eao-public is now in Dev. \n Changes: \n ${CHANGELOG}",
+          "A new version of eao-public-dev is now in Dev. \n Changes: \n ${CHANGELOG}",
           ROCKET_DEPLOY_WEBHOOK
         )
 
