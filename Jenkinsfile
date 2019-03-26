@@ -19,6 +19,31 @@ def notifySlack(text, url, channel, attachments) {
 }
 
 /*
+ * Sends a rocket chat notification
+ */
+def notifyRocketChat(text, url, attachments) {
+    def rocketChatURL = url
+    def title = ""
+    if (attachments != null){
+      def title = "Commits"
+    }
+    def payload = JsonOutput.toJson([
+      "username":"Jenkins",
+      "icon_url":"https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
+      "text": text
+      "attachments":[{
+        "title": title,
+        "title_link":"https://github.com/bcgov/eao-public/commits/dev",
+        "text": attachments,
+        "color":"#764FA5"
+        }]
+    ])
+
+    def encodedReq = URLEncoder.encode(payload, "UTF-8")
+    sh("curl -X POST -H 'Content-Type: application/json' --data \'${encodedReq}\' ${rocketChatURL}")
+}
+
+/*
  * Updates the global pastBuilds array: it will iterate recursively
  * and add all the builds prior to the current one that had a result
  * different than 'SUCCESS'.
@@ -110,8 +135,11 @@ node('master') {
   SLACK_HOOK = sh(script: "cat webhook", returnStdout: true)
   DEPLOY_CHANNEL = sh(script: "cat deploy-channel", returnStdout: true)
   QA_CHANNEL = sh(script: "cat qa-channel", returnStdout: true)
+  sh("oc extract secret/rocket-chat-secrets --to=${env.WORKSPACE} --confirm")
+  ROCKET_QA_WEBHOOK = sh(script: "cat rocket-qa-webhook", returnStdout: true)
+  ROCKET_DEPLOY_WEBHOOK = sh(script: "cat rocket-deploy-webhook", returnStdout: true)
 
-  withEnv(["SLACK_HOOK=${SLACK_HOOK}", "DEPLOY_CHANNEL=${DEPLOY_CHANNEL}", "QA_CHANNEL=${QA_CHANNEL}"]){
+  withEnv(["SLACK_HOOK=${SLACK_HOOK}", "DEPLOY_CHANNEL=${DEPLOY_CHANNEL}", "QA_CHANNEL=${QA_CHANNEL}", "ROCKET_QA_WEBHOOK=${ROCKET_QA_WEBHOOK}", "ROCKET_DEPLOY_WEBHOOK=${ROCKET_DEPLOY_WEBHOOK}"]){
     stage('Deploy to Test'){
       try {
         echo "Deploying to test..."
@@ -120,11 +148,23 @@ node('master') {
         openshiftVerifyDeployment depCfg: 'esm-test', namespace: 'esm-test', replicaCount: 1, verbose: 'false', verifyReplicaCount: 'false', waitTime: 600000
         echo ">>>> Deployment Complete"
 
+        notifyRocketChat(
+            "A new version of eao-public is now in Test.",
+            ROCKET_DEPLOY_WEBHOOK,
+            CHANGELOG
+        )
+
         notifySlack(
             "A new version of eao-public is now in Test. \n Changes: \n ${CHANGELOG}",
             SLACK_HOOK,
             DEPLOY_CHANNEL,
             []
+        )
+
+        notifyRocketChat(
+            "A new version of eao-public is now in Test and ready for QA.",
+            ROCKET_QA_WEBHOOK,
+            CHANGELOG
         )
 
         notifySlack(
@@ -134,6 +174,11 @@ node('master') {
             []
         )
       } catch (error) {
+        notifyRocketChat(
+            "The latest deployment of eao-public to Test seems to have failed\n'${error.message}",
+            ROCKET_DEPLOY_WEBHOOK
+        )
+
         notifySlack(
           "The latest deployment of eao-public to Test seems to have failed\n'${error.message}'",
           SLACK_HOOK,
