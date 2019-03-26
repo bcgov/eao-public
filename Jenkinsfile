@@ -30,7 +30,7 @@ def notifyRocketChat(text, url, attachments) {
     def payload = JsonOutput.toJson([
       "username":"Jenkins",
       "icon_url":"https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
-      "text": text
+      "text": text,
       "attachments":[{
         "title": title,
         "title_link":"https://github.com/bcgov/eao-public/commits/dev",
