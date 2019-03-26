@@ -30,7 +30,7 @@ def notifyRocketChat(text, url, attachments) {
     def payload = JsonOutput.toJson([
       "username":"Jenkins",
       "icon_url":"https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
-      "text": text
+      "text": text,
       "attachments":[{
         "title": title,
         "title_link":"https://github.com/bcgov/eao-public/commits/dev",
@@ -39,8 +39,7 @@ def notifyRocketChat(text, url, attachments) {
         }]
     ])
 
-    def encodedReq = URLEncoder.encode(payload, "UTF-8")
-    sh("curl -X POST -H 'Content-Type: application/json' --data \'${encodedReq}\' ${rocketChatURL}")
+    sh("curl -X POST -H 'Content-Type: application/json' --data \'${payload}\' ${rocketChatURL}")
 }
 
 /*
