@@ -23,16 +23,12 @@ def notifySlack(text, url, channel, attachments) {
  */
 def notifyRocketChat(text, url, attachments) {
     def rocketChatURL = url
-    def title = ""
-    if (attachments != null){
-      def title = "Commits"
-    }
     def payload = JsonOutput.toJson([
       "username":"Jenkins",
       "icon_url":"https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
       "text": text,
       "attachments":[{
-        "title": title,
+        "title": "Commits",
         "title_link":"https://github.com/bcgov/eao-public/commits/dev",
         "text": attachments,
         "color":"#764FA5"
@@ -176,7 +172,7 @@ node('master') {
         notifyRocketChat(
             "The latest deployment of eao-public to Test seems to have failed\n'${error.message}",
             ROCKET_DEPLOY_WEBHOOK,
-            ""
+            CHANGELOG
         )
 
         notifySlack(
