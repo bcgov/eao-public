@@ -39,8 +39,7 @@ def notifyRocketChat(text, url, attachments) {
         }]
     ])
 
-    def encodedReq = URLEncoder.encode(payload, "UTF-8")
-    sh("curl -X POST -H 'Content-Type: application/json' --data \'${encodedReq}\' ${rocketChatURL}")
+    sh("curl -X POST -H 'Content-Type: application/json' --data \'${payload}\' ${rocketChatURL}")
 }
 
 /*
