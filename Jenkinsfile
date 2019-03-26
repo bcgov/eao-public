@@ -175,7 +175,8 @@ node('master') {
       } catch (error) {
         notifyRocketChat(
             "The latest deployment of eao-public to Test seems to have failed\n'${error.message}",
-            ROCKET_DEPLOY_WEBHOOK
+            ROCKET_DEPLOY_WEBHOOK,
+            ""
         )
 
         notifySlack(
