@@ -21,18 +21,12 @@ def notifySlack(text, url, channel, attachments) {
 /*
  * Sends a rocket chat notification
  */
-def notifyRocketChat(text, url, attachments) {
+def notifyRocketChat(text, url) {
     def rocketChatURL = url
     def payload = JsonOutput.toJson([
       "username":"Jenkins",
       "icon_url":"https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
-      "text": text,
-      "attachments":[{
-        "title": "Commits",
-        "title_link":"https://github.com/bcgov/eao-public/commits/dev",
-        "text": attachments,
-        "color":"#764FA5"
-        }]
+      "text": text
     ])
 
     sh("curl -X POST -H 'Content-Type: application/json' --data \'${payload}\' ${rocketChatURL}")
@@ -144,9 +138,8 @@ node('master') {
         echo ">>>> Deployment Complete"
 
         notifyRocketChat(
-            "A new version of eao-public is now in Test.",
-            ROCKET_DEPLOY_WEBHOOK,
-            CHANGELOG
+            "A new version of eao-public is now in Test. \n Changes: \n ${CHANGELOG}",
+            ROCKET_DEPLOY_WEBHOOK
         )
 
         notifySlack(
@@ -157,9 +150,8 @@ node('master') {
         )
 
         notifyRocketChat(
-            "A new version of eao-public is now in Test and ready for QA.",
-            ROCKET_QA_WEBHOOK,
-            CHANGELOG
+            "A new version of eao-public is now in Test and ready for QA. \n Changes: \n ${CHANGELOG}",
+            ROCKET_QA_WEBHOOK
         )
 
         notifySlack(
@@ -171,8 +163,7 @@ node('master') {
       } catch (error) {
         notifyRocketChat(
             "The latest deployment of eao-public to Test seems to have failed\n'${error.message}",
-            ROCKET_DEPLOY_WEBHOOK,
-            CHANGELOG
+            ROCKET_DEPLOY_WEBHOOK
         )
 
         notifySlack(
