@@ -150,7 +150,7 @@ node('master') {
         )
 
         notifyRocketChat(
-            "A new version of eao-public is now in Test and ready for QA. \n Changes: \n ${CHANGELOG}",
+            "A new version of eao-public is now in Test and ready for QA. \n Changes to test: \n ${CHANGELOG}",
             ROCKET_QA_WEBHOOK
         )
 
