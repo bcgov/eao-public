@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
         const id = tail[0];
         this.newsService.getDocument(id).subscribe(
           doc => {
-          const safeName = doc[0].documentFileName.replace(/ /g, '_');
+          const safeName = doc[0].documentFileName.replace(/ |\//g, '_');
           activity.documentUrl = `${activity.documentUrl}/${safeName}`;
           }
         );
