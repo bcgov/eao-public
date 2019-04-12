@@ -32,7 +32,7 @@
     "esri-loader": "2.2.0",
     "filesize": "3.6.1",
     "font-awesome": "^4.7.0",
-    "jquery": "3.3.1",
+    "jquery": "3.4.0",
     "lodash": "4.17.11",
     "mygovbc-bootstrap-theme": "0.4.1",
     "ng-multiselect-dropdown": "0.1.4",
